@@ -1,0 +1,6783 @@
+[
+ {
+  "id": "acces-a-l-emploi-a-1-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 1 mois",
+  "noms_techniques": [
+   "Y1F021"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 1 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 1 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-1-mois-x9f022",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 1 mois",
+  "noms_techniques": [
+   "X9F022"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 1 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 1 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-12-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 12 mois",
+  "noms_techniques": [
+   "X9F021"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 12 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 12 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-2-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 2 mois",
+  "noms_techniques": [
+   "Y1F020"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 2 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 2 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-2-mois-x9f036",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 2 mois",
+  "noms_techniques": [
+   "X9F036"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 2 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 2 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-3-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 3 mois",
+  "noms_techniques": [
+   "Y1F019"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 3 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 3 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-3-mois-x9f020",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 3 mois",
+  "noms_techniques": [
+   "X9F020"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 3 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 3 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-4-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 4 mois",
+  "noms_techniques": [
+   "Y1F018"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 4 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 4 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-4-mois-x9f035",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 4 mois",
+  "noms_techniques": [
+   "X9F035"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 4 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 4 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-5-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 5 mois",
+  "noms_techniques": [
+   "Y1F017"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 5 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 5 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-5-mois-x9f034",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 5 mois",
+  "noms_techniques": [
+   "X9F034"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 5 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 5 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-6-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 6 mois",
+  "noms_techniques": [
+   "Y1F016"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 6 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 6 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-a-6-mois-x9f019",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi à 6 mois",
+  "noms_techniques": [
+   "X9F019"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi 6 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 6 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-durable-a-1-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi durable à 1 mois",
+  "noms_techniques": [
+   "X9F026"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi durable 1 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 1 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-durable-a-12-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi durable à 12 mois",
+  "noms_techniques": [
+   "X9F025"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi durable 12 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 12 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-durable-a-3-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi durable à 3 mois",
+  "noms_techniques": [
+   "X9F024"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi durable 3 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 3 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-a-l-emploi-durable-a-6-mois",
+  "type": "mesure",
+  "libelle": "Accès à l'emploi durable à 6 mois",
+  "noms_techniques": [
+   "X9F023"
+  ],
+  "definition": "Nombre de personnes ayant accédé à un emploi durable 6 mois après la sortie observée (sortie de formation ou sortie des listes selon la base), utilisé comme numérateur du taux d'accès à l'emploi à 6 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "anciennete",
+  "type": "dimension",
+  "libelle": "Ancienneté",
+  "noms_techniques": [
+   "C_LBLANCIENNETE"
+  ],
+  "definition": "Ancienneté d'inscription du demandeur d'emploi sur les listes, regroupée par tranches.",
+  "modalites": [
+   {
+    "valeur": "< 12 mois",
+    "regle": "C_LBLANCIENNETEMOISNIV3  égal à  '< 12 mois'"
+   },
+   {
+    "valeur": ">= 12 et < 24 mois",
+    "regle": "C_LBLANCIENNETEMOISNIV3  égal à  '< 24 mois'"
+   },
+   {
+    "valeur": ">= 24 mois",
+    "regle": "C_LBLANCIENNETEMOISNIV3  égal à  '24 mois et +'"
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": "C_LBLANCIENNETEMOISNIV3  égal à  'Valeurs absentes'"
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": "LBLANCIENNETEMOISNIV3 égal à 'Valeurs erronées'"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "anciennete-du-diagnostic-mois",
+  "type": "dimension",
+  "libelle": "Ancienneté du diagnostic (mois)",
+  "noms_techniques": [
+   "N_ANCIENNETEDIAGNISTIC"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Ancienneté du diagnostic (mois).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "categorie-juridique",
+  "type": "dimension",
+  "libelle": "Catégorie juridique",
+  "noms_techniques": [
+   "C_LBLCATEGORIEJURIDIQUE"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Catégorie juridique.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": "",
+  "hierarchie": {
+   "sup_id": "categorie-juridique-niv1",
+   "inf_id": null
+  }
+ },
+ {
+  "id": "categorie-juridique-niv1",
+  "type": "dimension",
+  "libelle": "Catégorie juridique niv1",
+  "noms_techniques": [
+   "C_LBLCATEGORIEJURIDIQUENIV1"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Catégorie juridique niv1.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": "",
+  "hierarchie": {
+   "sup_id": "categorie-juridique-niv2",
+   "inf_id": "categorie-juridique"
+  }
+ },
+ {
+  "id": "categorie-juridique-niv2",
+  "type": "dimension",
+  "libelle": "Catégorie juridique niv2",
+  "noms_techniques": [
+   "C_LBLCATEGORIEJURIDIQUENIV2"
+  ],
+  "definition": "Catégorie juridique de l'établissement, niveau intermédiaire (ex. société commerciale, entrepreneur individuel...).",
+  "modalites": [
+   {
+    "valeur": "Entrepreneur individuel",
+    "regle": ""
+   },
+   {
+    "valeur": "Groupement de droit privé non doté de la personnalité morale",
+    "regle": ""
+   },
+   {
+    "valeur": "Personne morale de droit étranger",
+    "regle": ""
+   },
+   {
+    "valeur": "Personne morale de droit public soumise au droit commercial",
+    "regle": ""
+   },
+   {
+    "valeur": "Société commerciale",
+    "regle": ""
+   },
+   {
+    "valeur": "Autre personne morale immatriculée au RCS",
+    "regle": ""
+   },
+   {
+    "valeur": "Personne morale et organisme soumis au droit administratif",
+    "regle": ""
+   },
+   {
+    "valeur": "Organisme privé spécialisé",
+    "regle": ""
+   },
+   {
+    "valeur": "Groupement de droit privé",
+    "regle": ""
+   },
+   {
+    "valeur": "Autres",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": "",
+  "hierarchie": {
+   "sup_id": "categorie-juridique-niv3",
+   "inf_id": "categorie-juridique-niv1"
+  }
+ },
+ {
+  "id": "categorie-juridique-niv3",
+  "type": "dimension",
+  "libelle": "Catégorie juridique niv3",
+  "noms_techniques": [
+   "C_LBLCATEGORIEJURIDIQUENIV3"
+  ],
+  "definition": "Catégorie juridique de l'établissement, niveau agrégé le plus lisible (ex. société commerciale, personne morale...).",
+  "modalites": [
+   {
+    "valeur": "Entrepreneur individuel",
+    "regle": "C_LBLCATEGORIEJURIDIQUENIV2  égal à  Entrepreneur individuel"
+   },
+   {
+    "valeur": "Groupement de droit privé",
+    "regle": "C_LBLCATEGORIEJURIDIQUENIV2 parmi (Groupement de droit privé non doté de la personnalité morale, Groupement de droit privé)"
+   },
+   {
+    "valeur": "Organisme privé spécialisé",
+    "regle": "C_LBLCATEGORIEJURIDIQUENIV2  égal à  Organisme privé spécialisé"
+   },
+   {
+    "valeur": "Personne morale",
+    "regle": "C_LBLCATEGORIEJURIDIQUENIV2 parmi (Personne morale de droit étranger, Personne morale de droit public soumise au droit commercial, Autre personne morale immatriculée au RCS, Personne morale et organisme soumis au droit administratif)"
+   },
+   {
+    "valeur": "Société commerciale",
+    "regle": "C_LBLCATEGORIEJURIDIQUENIV2  égal à  Société commerciale"
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": "C_LBLCATEGORIEJURIDIQUENIV2  égal à  Autres"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": "",
+  "hierarchie": {
+   "sup_id": null,
+   "inf_id": "categorie-juridique-niv2"
+  }
+ },
+ {
+  "id": "categorie-stat",
+  "type": "dimension",
+  "libelle": "Catégorie STAT",
+  "noms_techniques": [
+   "C_CATEGORIESTATALPHANUM"
+  ],
+  "definition": "Catégorie statistique du demandeur d'emploi (A, B, C, D, E, F ou G), selon sa disponibilité et son activité.",
+  "modalites": [
+   {
+    "valeur": "A",
+    "regle": ""
+   },
+   {
+    "valeur": "B",
+    "regle": ""
+   },
+   {
+    "valeur": "C",
+    "regle": ""
+   },
+   {
+    "valeur": "D",
+    "regle": ""
+   },
+   {
+    "valeur": "E",
+    "regle": ""
+   },
+   {
+    "valeur": "F",
+    "regle": ""
+   },
+   {
+    "valeur": "G",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "champs-semantique",
+  "type": "dimension",
+  "libelle": "Champs sémantique",
+  "noms_techniques": [
+   "C_LBLDOMAINEFORMATIONNIV1"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Champs sémantique.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "classe",
+  "type": "dimension",
+  "libelle": "Classe",
+  "noms_techniques": [
+   "C_LBLNAFNIV1"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Classe.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "code-commune",
+  "type": "dimension",
+  "libelle": "Code commune",
+  "noms_techniques": [
+   "C_COMMUNE_ID"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "code-departement",
+  "type": "dimension",
+  "libelle": "Code département",
+  "noms_techniques": [
+   "C_DEPARTEMENT_ID"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "code-region",
+  "type": "dimension",
+  "libelle": "Code région",
+  "noms_techniques": [
+   "C_REGION_ID"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "code-territoire",
+  "type": "dimension",
+  "libelle": "Code territoire",
+  "noms_techniques": [
+   "C_TERRITOIRE_ID"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "contrat-aide-cui-s",
+  "type": "mesure",
+  "libelle": "Contrat aidé (CUI) (s)",
+  "noms_techniques": [
+   "Y5S006"
+  ],
+  "definition": "Décompte du nombre d'établissements ayant eu recours au service ou dispositif : Contrat aidé (CUI) (s).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "date-d-entree-en-formation",
+  "type": "dimension",
+  "libelle": "Date d'entrée en formation",
+  "noms_techniques": [
+   "D_DATEFPRIO"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Entrants en formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-d-observation",
+  "type": "dimension",
+  "libelle": "Date d'observation",
+  "noms_techniques": [
+   "D_DATEFTAE",
+   "D_DATETAETPED",
+   "D_DATESATISACCO"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-de-cloture-de-l-offre",
+  "type": "dimension",
+  "libelle": "Date de clôture de l'offre",
+  "noms_techniques": [
+   "D_DATETPODPO"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-de-mise-a-jour",
+  "type": "dimension",
+  "libelle": "Date de mise à jour",
+  "noms_techniques": [
+   "DATMAJ"
+  ],
+  "definition": "Date de dernière mise à jour de la base de données.",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-de-sortie-de-formation",
+  "type": "dimension",
+  "libelle": "Date de sortie de formation",
+  "noms_techniques": [
+   "D_DATESORTIE"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-defm",
+  "type": "dimension",
+  "libelle": "Date DEFM",
+  "noms_techniques": [
+   "D_DATEDESCPUBLIC",
+   "D_DATEDEFM"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Accès / Présence en emploi"
+  ],
+  "bases": [
+   "Description des publics",
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-defm-a-1",
+  "type": "dimension",
+  "libelle": "Date DEFM A-1",
+  "noms_techniques": [
+   "D_DATEDESCPUBLIC_AM1"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-fonctionnelle",
+  "type": "dimension",
+  "libelle": "Date fonctionnelle",
+  "noms_techniques": [
+   "D_DATEENT"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "date-fonctionnelle-annee-1",
+  "type": "dimension",
+  "libelle": "Date fonctionnelle Année-1",
+  "noms_techniques": [
+   "D_DATEENTA-1"
+  ],
+  "definition": "Date de référence utilisée pour situer l'observation dans le temps.",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "delai-de-pourvoi-des-postes-num-dpo",
+  "type": "mesure",
+  "libelle": "Délai de pourvoi des postes (Num DPO)",
+  "noms_techniques": [
+   "X7F012"
+  ],
+  "definition": "Somme des délais (en jours) entre le dépôt et la clôture des offres, utilisée pour calculer le délai moyen de pourvoi.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "delais-d-acces",
+  "type": "dimension",
+  "libelle": "Délais d'accès",
+  "noms_techniques": [
+   "N_DELAIACCES"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : 1, 2, 3, 4, 5, 6.…",
+  "modalites": [
+   {
+    "valeur": "1",
+    "regle": "N_NBACCESM1  égal à  1"
+   },
+   {
+    "valeur": "2",
+    "regle": "N_NBACCESM1 différent de 1 et N_NBACCESM2  égal à  1"
+   },
+   {
+    "valeur": "3",
+    "regle": "N_NBACCESM1 différent de 1 et N_NBACCESM2 différent de 1 et N_NBACCESM3  égal à  1"
+   },
+   {
+    "valeur": "4",
+    "regle": "N_NBACCESM1 différent de 1 et N_NBACCESM2 différent de 1 et N_NBACCESM3 différent de 1 et N_NBACCESM4  égal à  1"
+   },
+   {
+    "valeur": "5",
+    "regle": "N_NBACCESM1 différent de 1 et N_NBACCESM2 différent de 1 et N_NBACCESM3 différent de 1 et N_NBACCESM4 différent de 1 et N_NBACCESM5  égal à  1"
+   },
+   {
+    "valeur": "6",
+    "regle": "N_NBACCESM1 différent de 1 et N_NBACCESM2 différent de 1 et N_NBACCESM3 différent de 1 et N_NBACCESM4 différent de 1 et N_NBACCESM5 différent de 1 et N_NBACCESM6  égal à  1"
+   },
+   {
+    "valeur": "Null",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "division",
+  "type": "dimension",
+  "libelle": "Division",
+  "noms_techniques": [
+   "C_LBLNAFNIV3"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Division.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "domaine-de-formation",
+  "type": "dimension",
+  "libelle": "Domaine de formation",
+  "noms_techniques": [
+   "C_LBLDOMAINEFORMATIONNIV2"
+  ],
+  "definition": "Grand domaine thématique de la formation suivie.",
+  "modalites": [
+   {
+    "valeur": "Développement des compétences",
+    "regle": ""
+   },
+   {
+    "valeur": "Sciences humaines, économie, droit, langues",
+    "regle": ""
+   },
+   {
+    "valeur": "Sciences",
+    "regle": ""
+   },
+   {
+    "valeur": "Technologies de l'information et de la communication, arts",
+    "regle": ""
+   },
+   {
+    "valeur": "Production industrielle, transport, logistique",
+    "regle": ""
+   },
+   {
+    "valeur": "Agriculture, environnement",
+    "regle": ""
+   },
+   {
+    "valeur": "Transformation matière produit",
+    "regle": ""
+   },
+   {
+    "valeur": "Génie civil, construction",
+    "regle": ""
+   },
+   {
+    "valeur": "Mécanique, électronique",
+    "regle": ""
+   },
+   {
+    "valeur": "Vie et gestion des organisations",
+    "regle": ""
+   },
+   {
+    "valeur": "Commerce, marketing, finance",
+    "regle": ""
+   },
+   {
+    "valeur": "Santé, social, sécurité",
+    "regle": ""
+   },
+   {
+    "valeur": "Sport, loisirs, tourisme",
+    "regle": ""
+   },
+   {
+    "valeur": "Énergie, électricité",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes ou erronées",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "domaine-professionnel",
+  "type": "dimension",
+  "libelle": "Domaine professionnel",
+  "noms_techniques": [
+   "C_LBLAPPELATIONROMEV3NIV3",
+   "C_LBLROMENIV2"
+  ],
+  "definition": "Domaine professionnel du métier recherché (nomenclature ROME).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "dpae-de-1-mois-et-plus-s",
+  "type": "mesure",
+  "libelle": "DPAE de 1 mois et plus (s)",
+  "noms_techniques": [
+   "Y5S009"
+  ],
+  "definition": "Décompte du nombre d'établissements ayant eu recours au service ou dispositif : DPAE de 1 mois et plus (s).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "dpae-de-6-mois-et-plus-s",
+  "type": "mesure",
+  "libelle": "DPAE de 6 mois et plus (s)",
+  "noms_techniques": [
+   "Y5S010"
+  ],
+  "definition": "Décompte du nombre d'établissements ayant eu recours au service ou dispositif : DPAE de 6 mois et plus (s).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "duree-de-formation",
+  "type": "dimension",
+  "libelle": "Durée de formation",
+  "noms_techniques": [
+   "C_LBLDUREEFORMATION"
+  ],
+  "definition": "Durée prévisionnelle de la formation suivie, regroupée par tranches horaires.",
+  "modalites": [
+   {
+    "valeur": "De 0h à 25h",
+    "regle": "N_DUREEHORAIREPLAN entre 0 et 24"
+   },
+   {
+    "valeur": "De 25h à 40h",
+    "regle": "N_DUREEHORAIREPLAN entre 25 et 39"
+   },
+   {
+    "valeur": "De 40h à 120h",
+    "regle": "N_DUREEHORAIREPLAN entre 40 et 119"
+   },
+   {
+    "valeur": "De 120h à 400h",
+    "regle": "N_DUREEHORAIREPLAN entre 120 et 399"
+   },
+   {
+    "valeur": "De 400h à 800h",
+    "regle": "N_DUREEHORAIREPLAN entre 400 et 799"
+   },
+   {
+    "valeur": "800h et +",
+    "regle": "N_DUREEHORAIREPLAN supérieur ou égal à 800"
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "La durée de la formation est inséparable du coût de la formation. Ainsi, on peut être plus exigeant en matière de “retour sur investissement” après une formation de longue durée."
+ },
+ {
+  "id": "etablissement-ayant-recours-a-france-travail-a-1-num",
+  "type": "dimension",
+  "libelle": "Etablissement ayant recours à France Travail A-1 (Num)",
+  "noms_techniques": [
+   "N_NBNUMERATEUR1"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Etablissement ayant recours à France Travail A-1 (Num).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "etablissement-ayant-recours-a-france-travail-num",
+  "type": "dimension",
+  "libelle": "Etablissement ayant recours à France Travail (Num)",
+  "noms_techniques": [
+   "N_NBNUMERATEUR"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Etablissement ayant recours à France Travail (Num).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "etablissement-public-prive",
+  "type": "dimension",
+  "libelle": "Etablissement public / privé",
+  "noms_techniques": [
+   "C_LBLTYPEETABLISSEMENT"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Public, Privé..",
+  "modalites": [
+   {
+    "valeur": "Public",
+    "regle": "SUBSTR(C_SIRETETABLISSEMENT,1,1) parmi (1, 2)"
+   },
+   {
+    "valeur": "Privé",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "etablissement-recrutant-denom",
+  "type": "dimension",
+  "libelle": "Etablissement recrutant (Denom)",
+  "noms_techniques": [
+   "N_NBDENOMINATEUR"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Etablissement recrutant (Denom).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "etrangers-primo-arrivants",
+  "type": "dimension",
+  "libelle": "Etrangers primo arrivants",
+  "noms_techniques": [
+   "C_LBLCIR"
+  ],
+  "definition": "Situation de la personne au regard du Contrat d'intégration républicaine (CIR) signé par les étrangers primo-arrivants : non concerné, CIR de moins d'un an, ou CIR entre 1 et 5 ans.",
+  "modalites": [
+   {
+    "valeur": "Non concerné",
+    "regle": "C_TOP_EPA_ID égal à 0"
+   },
+   {
+    "valeur": "CIR de moins de 1 an",
+    "regle": "C_TOP_EPA_ID égal à 1 et D_DATESIGNATURECIR > D_DATE - 1 an"
+   },
+   {
+    "valeur": "CIR entre 1 et 5 ans",
+    "regle": "C_TOP_EPA_ID égal à 1 et D_DATESIGNATURECIR inférieur ou égal à D_DATE - 1 an"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "formacode",
+  "type": "dimension",
+  "libelle": "Formacode",
+  "noms_techniques": [
+   "C_LBLDOMAINEFORMATION"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Formacode.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "formation-a-distance",
+  "type": "dimension",
+  "libelle": "Formation à distance",
+  "noms_techniques": [
+   "C_LBLTOP_FORMATIONADISTANCE"
+  ],
+  "definition": "Modalité pédagogique de la formation : en centre, à distance, ou mixte.",
+  "modalites": [
+   {
+    "valeur": "Formation en centre",
+    "regle": "C_LBLFOAD  égal à  'Formation en centre'"
+   },
+   {
+    "valeur": "Formation en centre et à distance",
+    "regle": "C_LBLFOAD  égal à  'Formation en centre et à distance'"
+   },
+   {
+    "valeur": "Formation à distance",
+    "regle": "C_LBLFOAD  égal à  'Formation à distance'"
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": "C_LBLFOAD parmi ('Non defini', 'NULL')"
+   }
+  ],
+  "pages": [
+   "Entrants en formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "grand-domaine",
+  "type": "dimension",
+  "libelle": "Grand domaine",
+  "noms_techniques": [
+   "C_LBLROMENIV4"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Grand domaine.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Offres d'emploi France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "grand-domaine-pro",
+  "type": "dimension",
+  "libelle": "Grand domaine pro",
+  "noms_techniques": [
+   "C_LBLAPPELATIONROMEV3NIV5"
+  ],
+  "definition": "Grand domaine professionnel du métier recherché (nomenclature ROME, niveau le plus agrégé).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "groupe",
+  "type": "dimension",
+  "libelle": "Groupe",
+  "noms_techniques": [
+   "C_LBLNAFNIV2"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Groupe.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "id-de-l-enquete",
+  "type": "dimension",
+  "libelle": "ID de l'enquête",
+  "noms_techniques": [
+   "C_ENQUETE_ID"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : ID de l'enquête.",
+  "modalites": null,
+  "pages": [
+   "Satisfaction DE",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-administration",
+  "type": "dimension",
+  "libelle": "Impact contrainte Administration",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_ADMINJUR"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_ADMINJUR_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_ADMINJUR_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_ADMINJUR_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-famille",
+  "type": "dimension",
+  "libelle": "Impact contrainte Famille",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_FAMILLE"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_FAMILLE_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_FAMILLE_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_FAMILLE_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-finance",
+  "type": "dimension",
+  "libelle": "Impact contrainte Finance",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_FINANCE"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_FINANCE_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_FINANCE_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_FINANCE_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-logement",
+  "type": "dimension",
+  "libelle": "Impact contrainte Logement",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_LOGEMENT"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_LOGEMENT_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_LOGEMENT_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_LOGEMENT_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-mobilite",
+  "type": "dimension",
+  "libelle": "Impact contrainte Mobilité",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_MOBILITE"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_MOBILITE_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_MOBILITE_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_MOBILITE_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-numerique",
+  "type": "dimension",
+  "libelle": "Impact contrainte Numérique",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_NUMERIQ"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_NUMERIQ_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_NUMERIQ_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_NUMERIQ_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-sante",
+  "type": "dimension",
+  "libelle": "Impact contrainte Santé",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_SANTE"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_SANTE_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_SANTE_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_SANTE_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "impact-contrainte-savoir-de-bases",
+  "type": "dimension",
+  "libelle": "Impact contrainte Savoir de bases",
+  "noms_techniques": [
+   "C_LBLIMPACTCONTRAINTE_SAVOIR"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Fort, Moyen, Faible, Non renseigné..",
+  "modalites": [
+   {
+    "valeur": "Fort",
+    "regle": "C_IMPACTCONTRAINTE_SAVOIR_ID  égal à  FORT"
+   },
+   {
+    "valeur": "Moyen",
+    "regle": "C_IMPACTCONTRAINTE_SAVOIR_ID  égal à  MOYEN"
+   },
+   {
+    "valeur": "Faible",
+    "regle": "C_IMPACTCONTRAINTE_SAVOIR_ID  égal à  FAIBLE"
+   },
+   {
+    "valeur": "Non renseigné",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "individus-sortis-de-formation-denom",
+  "type": "mesure",
+  "libelle": "Individus sortis de formation - Dénom",
+  "noms_techniques": [
+   "Y1F027"
+  ],
+  "definition": "Effectif total des sortants de formation observés, utilisé comme dénominateur des taux d'accès et de présence en emploi des sortants de formation.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "libelle-commune",
+  "type": "dimension",
+  "libelle": "Libelle commune",
+  "noms_techniques": [
+   "C_LBLCOMMUNE"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "libelle-departement",
+  "type": "dimension",
+  "libelle": "Libelle département",
+  "noms_techniques": [
+   "C_LBLDEPARTEMENT"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "libelle-region",
+  "type": "dimension",
+  "libelle": "Libelle région",
+  "noms_techniques": [
+   "C_LBLREGION"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "libelle-territoire",
+  "type": "dimension",
+  "libelle": "Libelle territoire",
+  "noms_techniques": [
+   "C_LBLTERRITOIRE"
+  ],
+  "definition": "Rattachement géographique de la donnée (commune, unité territoriale/CLPE, département ou région).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "metier-recherche",
+  "type": "dimension",
+  "libelle": "Métier recherché",
+  "noms_techniques": [
+   "C_LBLAPPELATIONROMEV3NIV2",
+   "C_LBLROMENIV1"
+  ],
+  "definition": "Métier recherché par le demandeur d'emploi (nomenclature ROME).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "naf",
+  "type": "dimension",
+  "libelle": "NAF",
+  "noms_techniques": [
+   "C_LBLNAF"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : NAF.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "nb-de-fin-de-mois",
+  "type": "mesure",
+  "libelle": "Nb DE fin de mois",
+  "noms_techniques": [
+   "A7S001"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Nb DE fin de mois.",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "niveau-de-formation",
+  "type": "dimension",
+  "libelle": "Niveau de formation",
+  "noms_techniques": [
+   "C_LBLNIVEAUFORMATIONNIV2"
+  ],
+  "definition": "Niveau de formation ou de diplôme le plus élevé atteint, regroupé en grandes catégories (du 'Peu ou pas diplômé' à 'BAC+3 et plus').",
+  "modalites": [
+   {
+    "valeur": "Peu ou pas diplômé",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('CFG','AFS','CP4')"
+   },
+   {
+    "valeur": "Brevet des collèges jusqu'à la 1ere",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('C3A','C12') ou (C_NIVEAUFORMATION_ID  égal à  'NIV4' et C_DIPLOME_FORMATIONATTEINT_ID différent de 'D')"
+   },
+   {
+    "valeur": "CAP-BEP",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('NV5')"
+   },
+   {
+    "valeur": "BAC",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('NV4') et C_DIPLOME_FORMATIONATTEINT_ID  égal à  'D'"
+   },
+   {
+    "valeur": "BAC+2",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('NV3')"
+   },
+   {
+    "valeur": "BAC+3 et plus",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('NV1','NV2')"
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('YYYY')"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "nombre-d-entrants-en-formation",
+  "type": "mesure",
+  "libelle": "Nombre d'entrants en formation",
+  "noms_techniques": [
+   "X8F002"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Nombre d'entrants en formation.",
+  "modalites": null,
+  "pages": [
+   "Entrants en formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "nombre-de-contraintes-actives-mesure",
+  "type": "dimension",
+  "libelle": "Nombre de contraintes actives (mesure)",
+  "noms_techniques": [
+   "N_NBCONTRAINTESACTIVES"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Nombre de contraintes actives (mesure).",
+  "modalites": null,
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "nombre-de-contraintes-dimension",
+  "type": "dimension",
+  "libelle": "Nombre de contraintes (dimension)",
+  "noms_techniques": [
+   "N_CONTRAINTESACTIVES"
+  ],
+  "definition": "Nombre de freins périphériques à l'emploi identifiés lors du diagnostic (mobilité, santé, logement, savoirs de base...).",
+  "modalites": [
+   {
+    "valeur": "Pas ou plus de contraintes",
+    "regle": ""
+   },
+   {
+    "valeur": "1",
+    "regle": "N_NBCONTRAINTESACTIVES  égal à  1"
+   },
+   {
+    "valeur": "2",
+    "regle": "N_NBCONTRAINTESACTIVES  égal à  2"
+   },
+   {
+    "valeur": "3",
+    "regle": "N_NBCONTRAINTESACTIVES  égal à  3"
+   },
+   {
+    "valeur": "4",
+    "regle": "N_NBCONTRAINTESACTIVES  égal à  4"
+   },
+   {
+    "valeur": "5",
+    "regle": "N_NBCONTRAINTESACTIVES  égal à  5"
+   },
+   {
+    "valeur": "6",
+    "regle": "N_NBCONTRAINTESACTIVES  égal à  6"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "nombre-de-repondants",
+  "type": "mesure",
+  "libelle": "Nombre de répondants",
+  "noms_techniques": [
+   "I5F006"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Nombre de répondants.",
+  "modalites": null,
+  "pages": [
+   "Satisfaction DE",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "nombre-de-repondants-ponderes",
+  "type": "mesure",
+  "libelle": "Nombre de répondants pondérés",
+  "noms_techniques": [
+   "I5F007"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Nombre de répondants pondérés.",
+  "modalites": null,
+  "pages": [
+   "Satisfaction DE",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "objectif-de-formation",
+  "type": "dimension",
+  "libelle": "Objectif de formation",
+  "noms_techniques": [
+   "C_LBLOBJECTIFFORMATION"
+  ],
+  "definition": "Finalité recherchée par la formation suivie (qualification, perfectionnement, remise à niveau, création d'entreprise...).",
+  "modalites": [
+   {
+    "valeur": "Non concerné",
+    "regle": ""
+   },
+   {
+    "valeur": "Qualification",
+    "regle": ""
+   },
+   {
+    "valeur": "Perfectionnement",
+    "regle": ""
+   },
+   {
+    "valeur": "Elargissement des compétences",
+    "regle": ""
+   },
+   {
+    "valeur": "Création d'entreprise",
+    "regle": ""
+   },
+   {
+    "valeur": "Remise à niveau",
+    "regle": ""
+   },
+   {
+    "valeur": "Mobilisation sur un projet",
+    "regle": ""
+   },
+   {
+    "valeur": "Préqualification",
+    "regle": ""
+   },
+   {
+    "valeur": "Non precisé",
+    "regle": ""
+   },
+   {
+    "valeur": "Divers",
+    "regle": ""
+   },
+   {
+    "valeur": "Certification",
+    "regle": ""
+   },
+   {
+    "valeur": "Professionnalisation",
+    "regle": ""
+   },
+   {
+    "valeur": "Préparation à la qualification",
+    "regle": ""
+   },
+   {
+    "valeur": "Remise à niveau, maîtrise des savoirs de base, initiation",
+    "regle": ""
+   },
+   {
+    "valeur": "(Re)mobilisation, aide à l'élaboration de projet professionnel",
+    "regle": ""
+   },
+   {
+    "valeur": "Perfectionnement, élargissement des compétences",
+    "regle": ""
+   },
+   {
+    "valeur": "Création d'entreprise",
+    "regle": ""
+   },
+   {
+    "valeur": "Adaptation poste travail AFPR",
+    "regle": ""
+   },
+   {
+    "valeur": "Adaptation poste travail POE",
+    "regle": ""
+   },
+   {
+    "valeur": "Non precisé",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Non concerné",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "offre-de-1-mois-et-plus-s",
+  "type": "mesure",
+  "libelle": "Offre de 1 mois et plus (s)",
+  "noms_techniques": [
+   "Y5S004"
+  ],
+  "definition": "Décompte du nombre d'établissements ayant eu recours au service ou dispositif : Offre de 1 mois et plus (s).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "offre-de-6-mois-et-plus-6",
+  "type": "mesure",
+  "libelle": "Offre de 6 mois et plus (6)",
+  "noms_techniques": [
+   "Y5S005"
+  ],
+  "definition": "Décompte du nombre d'établissements ayant eu recours au service ou dispositif : Offre de 6 mois et plus (6).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "ordre-taille",
+  "type": "dimension",
+  "libelle": "Ordre taille",
+  "noms_techniques": [
+   "C_ORDRE_TAILLE"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : 1, 2, 3, 4, 5..",
+  "modalites": [
+   {
+    "valeur": "1",
+    "regle": "Moins de 10 salariés"
+   },
+   {
+    "valeur": "2",
+    "regle": "10 à 49 salariés"
+   },
+   {
+    "valeur": "3",
+    "regle": "50 à 99 salariés"
+   },
+   {
+    "valeur": "4",
+    "regle": "100 à 199 salariés"
+   },
+   {
+    "valeur": "5",
+    "regle": "Plus de 200 salariés"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "organisme-accompagnateur",
+  "type": "dimension",
+  "libelle": "Organisme accompagnateur",
+  "noms_techniques": [
+   "C_LBLTYPEORGANISMEACCOMPAGNATEUR"
+  ],
+  "definition": "Structure qui assure l'accompagnement du demandeur d'emploi (France Travail, Mission locale, Cap emploi, Conseil départemental, ou sans référent).",
+  "modalites": [
+   {
+    "valeur": "Conseil départemental",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR parmi ('CD', 'DCD', 'CAF')"
+   },
+   {
+    "valeur": "Cap emploi",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR  égal à  'CE'"
+   },
+   {
+    "valeur": "France travail",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR parmi ('FT', 'FTTE', 'FRANCE_TRAVAIL')"
+   },
+   {
+    "valeur": "Mission locale",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR  égal à  'ML'"
+   },
+   {
+    "valeur": "Sans référent",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR  égal à  'YYYY'"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "organisme-de-formation",
+  "type": "dimension",
+  "libelle": "Organisme de formation",
+  "noms_techniques": [
+   "C_LBLORGANISME"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Organisme de formation.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "population",
+  "type": "dimension",
+  "libelle": "Population",
+  "noms_techniques": [
+   "C_TYPEMESURE"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Inscrit / stat publique, Inscrit / hors stat publique..",
+  "modalites": [
+   {
+    "valeur": "Inscrit / stat publique",
+    "regle": ""
+   },
+   {
+    "valeur": "Inscrit / hors stat publique",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "postes-pourvus-denom-dpo",
+  "type": "mesure",
+  "libelle": "Postes pourvus (Dénom DPO)",
+  "noms_techniques": [
+   "X7F013"
+  ],
+  "definition": "Décompte d'offres d'emploi (postes pourvus ou clôturés), utilisé pour calculer le taux ou le délai de pourvoi des offres.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "postes-pourvus-num-tpo",
+  "type": "mesure",
+  "libelle": "Postes pourvus (Num TPO)",
+  "noms_techniques": [
+   "X7F011"
+  ],
+  "definition": "Décompte d'offres d'emploi (postes pourvus ou clôturés), utilisé pour calculer le taux ou le délai de pourvoi des offres.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "postes-sortis-denom-tpo",
+  "type": "mesure",
+  "libelle": "Postes sortis (Denom TPO)",
+  "noms_techniques": [
+   "X7F007"
+  ],
+  "definition": "Décompte d'offres d'emploi (postes pourvus ou clôturés), utilisé pour calculer le taux ou le délai de pourvoi des offres.",
+  "modalites": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "preparation-operationnelle-a-l-emploi-individuelle-poei-s",
+  "type": "mesure",
+  "libelle": "Préparation opérationnelle à l'emploi individuelle (POEI) (s)",
+  "noms_techniques": [
+   "Y5S008"
+  ],
+  "definition": "Décompte du nombre d'établissements ayant eu recours au service ou dispositif : Préparation opérationnelle à l'emploi individuelle (POEI) (s).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "presence-en-emploi-a-1-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 1 mois",
+  "noms_techniques": [
+   "Y1F009"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 1e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 1 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-1-mois-x9f013",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 1 mois",
+  "noms_techniques": [
+   "X9F013"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 1e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 1 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-12-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 12 mois",
+  "noms_techniques": [
+   "X9F012"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 12e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 12 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-2-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 2 mois",
+  "noms_techniques": [
+   "Y1F008"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 2e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 2 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-2-mois-x9f011",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 2 mois",
+  "noms_techniques": [
+   "X9F011"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 2e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 2 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-3-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 3 mois",
+  "noms_techniques": [
+   "Y1F007"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 3e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 3 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-3-mois-x9f010",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 3 mois",
+  "noms_techniques": [
+   "X9F010"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 3e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 3 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-4-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 4 mois",
+  "noms_techniques": [
+   "Y1F006"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 4e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 4 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-4-mois-x9f009",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 4 mois",
+  "noms_techniques": [
+   "X9F009"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 4e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 4 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-5-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 5 mois",
+  "noms_techniques": [
+   "Y1F005"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 5e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 5 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-5-mois-x9f008",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 5 mois",
+  "noms_techniques": [
+   "X9F008"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 5e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 5 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-6-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 6 mois",
+  "noms_techniques": [
+   "Y1F004"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 6e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 6 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-a-6-mois-x9f007",
+  "type": "mesure",
+  "libelle": "Présence en emploi à 6 mois",
+  "noms_techniques": [
+   "X9F007"
+  ],
+  "definition": "Nombre de personnes en emploi au cours du 6e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 6 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-1-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 1 mois",
+  "noms_techniques": [
+   "Y1F015"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 1e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 1 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-1-mois-x9f017",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 1 mois",
+  "noms_techniques": [
+   "X9F017"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 1e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 1 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-12-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 12 mois",
+  "noms_techniques": [
+   "X9F016"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 12e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 12 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-2-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 2 mois",
+  "noms_techniques": [
+   "Y1F014"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 2e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 2 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-3-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 3 mois",
+  "noms_techniques": [
+   "Y1F013"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 3e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 3 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-3-mois-x9f015",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 3 mois",
+  "noms_techniques": [
+   "X9F015"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 3e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 3 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-4-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 4 mois",
+  "noms_techniques": [
+   "Y1F012"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 4e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 4 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-5-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 5 mois",
+  "noms_techniques": [
+   "Y1F011"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 5e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 5 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-5-mois-y1f010",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 5 mois",
+  "noms_techniques": [
+   "Y1F010"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 5e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 5 mois.",
+  "modalites": null,
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "presence-en-emploi-durable-a-6-mois",
+  "type": "mesure",
+  "libelle": "Présence en emploi durable à 6 mois",
+  "noms_techniques": [
+   "X9F014"
+  ],
+  "definition": "Nombre de personnes en emploi durable au cours du 6e mois suivant la sortie observée, utilisé comme numérateur du taux de présence en emploi à 6 mois.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": "",
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "professions-et-categories-socioprofessionnelles",
+  "type": "dimension",
+  "libelle": "Professions et catégories socioprofessionnelles",
+  "noms_techniques": [
+   "C_LBLPCSM6"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Professions et catégories socioprofessionnelles.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "promotion-de-profils-pdp-s",
+  "type": "mesure",
+  "libelle": "Promotion de profils (PDP) (s)",
+  "noms_techniques": [
+   "Y5S007"
+  ],
+  "definition": "Décompte du nombre d'établissements ayant eu recours au service ou dispositif : Promotion de profils (PDP) (s).",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "qualification",
+  "type": "dimension",
+  "libelle": "Qualification",
+  "noms_techniques": [
+   "C_LBLQUALIFICATION"
+  ],
+  "definition": "Niveau de qualification du poste proposé dans l'offre d'emploi.",
+  "modalites": [
+   {
+    "valeur": "Non precise",
+    "regle": ""
+   },
+   {
+    "valeur": "Manoeuvre",
+    "regle": ""
+   },
+   {
+    "valeur": "Ouvrier spécialisé",
+    "regle": ""
+   },
+   {
+    "valeur": "Ouvrier qualifié (p1,p2)",
+    "regle": ""
+   },
+   {
+    "valeur": "Ouvrier qualifié (p3,p4,ohq)",
+    "regle": ""
+   },
+   {
+    "valeur": "Employé non qualifié",
+    "regle": ""
+   },
+   {
+    "valeur": "Employé qualifié",
+    "regle": ""
+   },
+   {
+    "valeur": "Technicien",
+    "regle": ""
+   },
+   {
+    "valeur": "Agent de maîtrise",
+    "regle": ""
+   },
+   {
+    "valeur": "Cadre",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "question",
+  "type": "dimension",
+  "libelle": "Question",
+  "noms_techniques": [
+   "C_QUESTION"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Question.",
+  "modalites": null,
+  "pages": [
+   "Satisfaction DE",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "referent-d-accompagnement",
+  "type": "dimension",
+  "libelle": "Référent d'accompagnement",
+  "noms_techniques": [
+   "C_LBLREFERENTACCOMPAGNEMENT"
+  ],
+  "definition": "Structure qui assure l'accompagnement du demandeur d'emploi (France Travail, Mission locale, Cap emploi, Conseil départemental, ou sans référent).",
+  "modalites": [
+   {
+    "valeur": "Conseil départemental",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR parmi ('CD', 'DCD', 'CAF')"
+   },
+   {
+    "valeur": "Cap emploi",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR  égal à  'CE'"
+   },
+   {
+    "valeur": "France travail",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR parmi ('FT', 'FTTE', 'FRANCE_TRAVAIL')"
+   },
+   {
+    "valeur": "Mission locale",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR  égal à  'ML'"
+   },
+   {
+    "valeur": "Sans référent",
+    "regle": "C_TYPEORGANISMEACCOMPAGNATEUR  égal à  'YYYY'"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "reponse",
+  "type": "dimension",
+  "libelle": "Réponse",
+  "noms_techniques": [
+   "C_REPONSE"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Pas du tout satisfait(e), Peu satisfait(e), Assez satisfait(e), Très satisfait(e)..",
+  "modalites": [
+   {
+    "valeur": "Pas du tout satisfait(e)",
+    "regle": ""
+   },
+   {
+    "valeur": "Peu satisfait(e)",
+    "regle": ""
+   },
+   {
+    "valeur": "Assez satisfait(e)",
+    "regle": ""
+   },
+   {
+    "valeur": "Très satisfait(e)",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Satisfaction DE",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "reponses-aux-questions-ponderes",
+  "type": "mesure",
+  "libelle": "Réponses aux questions pondérés",
+  "noms_techniques": [
+   "I5F009"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Réponses aux questions pondérés.",
+  "modalites": null,
+  "pages": [
+   "Satisfaction DE",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "secteur",
+  "type": "dimension",
+  "libelle": "Secteur",
+  "noms_techniques": [
+   "C_LBLNAFNIV5"
+  ],
+  "definition": "Secteur d'activité de l'établissement, en 4 grandes familles (Agriculture, Industrie, BTP, Tertiaire).",
+  "modalites": [
+   {
+    "valeur": "01 AGRICULTURE",
+    "regle": ""
+   },
+   {
+    "valeur": "02 INDUSTRIE",
+    "regle": ""
+   },
+   {
+    "valeur": "03 B.T.P",
+    "regle": ""
+   },
+   {
+    "valeur": "04 TERTIAIRE",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "section",
+  "type": "dimension",
+  "libelle": "Section",
+  "noms_techniques": [
+   "C_LBLNAFNIV4"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : Section.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "sexe",
+  "type": "dimension",
+  "libelle": "Sexe",
+  "noms_techniques": [
+   "C_LBLSEXE"
+  ],
+  "definition": "Sexe de la personne : Femme ou Homme.",
+  "modalites": [
+   {
+    "valeur": "Femmes",
+    "regle": "C_SEXE_ID  égal à  2"
+   },
+   {
+    "valeur": "Hommes",
+    "regle": "C_SEXE_ID  égal à  1"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "siret",
+  "type": "dimension",
+  "libelle": "SIRET",
+  "noms_techniques": [
+   "C_SIRETETABLISSEMENT"
+  ],
+  "definition": "Variable d'analyse (dimension) du tableau de bord RPE : SIRET.",
+  "modalites": null,
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "structure-de-decision-de-l-orientation",
+  "type": "dimension",
+  "libelle": "Structure de décision de l'orientation",
+  "noms_techniques": [
+   "C_LBLSTRUCTUREDECISIONORIENTATION"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Conseil départemental, Cap emploi, France travail, Mission locale, Sans référent..",
+  "modalites": [
+   {
+    "valeur": "Conseil départemental",
+    "regle": "C_ORIGINEORIENTATION parmi ('INSCRIPTION_AUTO_CAF','INSCRIPTION_CONSEILLER_CD','INSCRIPTION_AUTO_MSA')"
+   },
+   {
+    "valeur": "Cap emploi",
+    "regle": ".C_ORIGINEORIENTATION égal à 'INSCRIPTION_CONSEILLER_CE'"
+   },
+   {
+    "valeur": "France travail",
+    "regle": "C_ORIGINEORIENTATION parmi ('INSCRIPTION_CONSEILLER_FT','INSCRIPTION_VOLONTAIRE')"
+   },
+   {
+    "valeur": "Mission locale",
+    "regle": "C_ORIGINEORIENTATION égal à 'INSCRIPTION_AUTO_MILO'"
+   },
+   {
+    "valeur": "Sans référent",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "taille-de-l-etablissement",
+  "type": "dimension",
+  "libelle": "Taille de l'établissement",
+  "noms_techniques": [
+   "C_TAILLE"
+  ],
+  "definition": "Tranche d'effectif salarié de l'établissement.",
+  "modalites": [
+   {
+    "valeur": "Moins de 10 salariés",
+    "regle": "C_LBLTRANCHEEFFECTIFNIV1 parmi (0 salarié, 1 à 2 salariés, 3 à 5 salariés, 6 à 9 salariés)"
+   },
+   {
+    "valeur": "10 à 49 salariés",
+    "regle": "C_LBLTRANCHEEFFECTIFNIV1 parmi (10 à 19 salariés, 20 à 49 salariés)"
+   },
+   {
+    "valeur": "50 à 99 salariés",
+    "regle": "C_LBLTRANCHEEFFECTIFNIV1  égal à  50 à 99 salariés"
+   },
+   {
+    "valeur": "100 à 199 salariés",
+    "regle": "C_LBLTRANCHEEFFECTIFNIV1  égal à  100 à 199 salariés"
+   },
+   {
+    "valeur": "Plus de 200 salariés",
+    "regle": "C_LBLTRANCHEEFFECTIFNIV1 parmi (200 à 249 salariés, 250 à 499 salariés, 500 à 999 salariés, 1000 à 1999 salariés, 2000 à 4999 salariés, 5000 salariés et plus )"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "taux-d-acces-a-l-emploi-de-l-ensemble-des-demandeurs-d-emploi-pour-rpe-denom",
+  "type": "mesure",
+  "libelle": "Taux d'accès à l'emploi de l'ensemble des demandeurs d'emploi pour RPE - Dénom",
+  "noms_techniques": [
+   "X9F027"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Taux d'accès à l'emploi de l'ensemble des demandeurs d'emploi pour RPE - Dénom.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "L'analyse conjointe de l'accès et de la présence en emploi permet de mieux mesurer l'impact des formations à court et à plus long terme. En comparant l'accès à l'emploi de l'ensemble des demandeurs d'emploi avec l'accès à l'emploi des sortants de formation, on mesure l'impact de la formation sur l'accès à l'emploi.",
+  "periode_calcul": ""
+ },
+ {
+  "id": "taux-d-acces-a-l-emploi-de-l-ensemble-des-demandeurs-d-emploi-pour-rpe-num",
+  "type": "mesure",
+  "libelle": "Taux d'accès à l'emploi de l'ensemble des demandeurs d'emploi pour RPE - Num",
+  "noms_techniques": [
+   "X9F030"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Taux d'accès à l'emploi de l'ensemble des demandeurs d'emploi pour RPE - Num.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "L'analyse conjointe de l'accès et de la présence en emploi permet de mieux mesurer l'impact des formations à court et à plus long terme. En comparant l'accès à l'emploi de l'ensemble des demandeurs d'emploi avec l'accès à l'emploi des sortants de formation, on mesure l'impact de la formation sur l'accès à l'emploi.",
+  "periode_calcul": ""
+ },
+ {
+  "id": "taux-de-presence-en-emploi-pour-rpe-num",
+  "type": "mesure",
+  "libelle": "Taux de présence en emploi pour RPE - Num",
+  "noms_techniques": [
+   "X9F028"
+  ],
+  "definition": "Mesure chiffrée du tableau de bord RPE utilisée dans le calcul d'un indicateur (numérateur, dénominateur ou décompte) autour de : Taux de présence en emploi pour RPE - Num.",
+  "modalites": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": "",
+  "periode_calcul": ""
+ },
+ {
+  "id": "top-26-ans-jusqu-a-bac-2",
+  "type": "dimension",
+  "libelle": "Top -26 ans jusqu'à BAC+2",
+  "noms_techniques": [
+   "C_LBLTOP_MOINS26"
+  ],
+  "definition": "Indique si la personne a moins de 26 ans et un niveau de formation jusqu'à BAC+2.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "(C_NIVEAUFORMATION_ID parmi ('CFG','C12','AFS','CP4','NV5','C3A', 'NIV4') ou (C_NIVEAUFORMATION_ID  égal à  'NIV3' et C_DIPLOME_FORMATIONATTEINT_ID différent de 'D')) et N_AGE_ID<26"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-50-ans-et",
+  "type": "dimension",
+  "libelle": "Top 50 ans et +",
+  "noms_techniques": [
+   "C_LBLTOP_50PLUS"
+  ],
+  "definition": "Indique si la personne est âgée de 50 ans ou plus.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "N_AGE_IDsupérieur ou égal à50"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-55-ans-et",
+  "type": "dimension",
+  "libelle": "Top 55 ans et +",
+  "noms_techniques": [
+   "C_LBLTOP_55PLUS"
+  ],
+  "definition": "Indique si la personne est âgée de 55 ans ou plus.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "N_AGE_IDsupérieur ou égal à55"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-abandon",
+  "type": "dimension",
+  "libelle": "Top abandon",
+  "noms_techniques": [
+   "C_LBLTOP_ABANDON"
+  ],
+  "definition": "Indique si la personne a abandonné sa formation avant son terme.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-cadre",
+  "type": "dimension",
+  "libelle": "Top cadre",
+  "noms_techniques": [
+   "C_LBLTOP_CADRE"
+  ],
+  "definition": "Indique si la personne recherche un poste de niveau cadre.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_QUALIFICATION_ID égal à 9"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte",
+  "type": "dimension",
+  "libelle": "Top contrainte",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTENUMERIQUE_ID  égal à  'O' ou C_TOP_CONTRAINTEMOBILITE_ID  égal à  'O' ou C_TOP_CONTRAINTEFAMILIALE_ID  égal à  'O' ou C_TOP_CONTRAINTESANTE_ID  égal à  'O' ou C_TOP_CONTRAINTESAVOIR_ID  égal à  'O' ou C_TOP_CONTRAINTELOGEMENT_ID  égal à  'O' ou C_TOP_CONTRAINTEFINANCIERE_ID  égal à  'O' ou C_TOP_CONTRAINTEADMINJURID_ID  égal à  'O'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-administration",
+  "type": "dimension",
+  "libelle": "Top contrainte Administration",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEADMINJURID"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Administration.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTEADMINJURID_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-familiale",
+  "type": "dimension",
+  "libelle": "Top contrainte Familiale",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEFAMILIALE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Familiale.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTEFAMILIALE_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-financiere",
+  "type": "dimension",
+  "libelle": "Top contrainte Financière",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEFINANCIERE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Financière.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTEFINANCIERE_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-logement",
+  "type": "dimension",
+  "libelle": "Top contrainte Logement",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTELOGEMENT"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Logement.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTELOGEMENT_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-mobilite",
+  "type": "dimension",
+  "libelle": "Top contrainte Mobilité",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEMOBILITE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Mobilité.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTEMOBILITE_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-numerique",
+  "type": "dimension",
+  "libelle": "Top contrainte Numérique",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTENUMERIQUE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Numérique.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTENUMERIQUE_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-sante",
+  "type": "dimension",
+  "libelle": "Top contrainte Santé",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTESANTE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Santé.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTESANTE_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contrainte-savoir-de-base",
+  "type": "dimension",
+  "libelle": "Top contrainte Savoir de base",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTESAVOIR"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contrainte Savoir de base.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_CONTRAINTESAVOIR_ID  égal à  O"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-contraintes-actives",
+  "type": "dimension",
+  "libelle": "Top contraintes actives",
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTESACTIVES"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : contraintes actives.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "N_NBCONTRAINTESACTIVES supérieur ou égal à 1"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-cpf-autonome",
+  "type": "dimension",
+  "libelle": "Top CPF autonome",
+  "noms_techniques": [
+   "C_LBLTOP_CPFAUTONOME"
+  ],
+  "definition": "Indique si la formation a été financée par le Compte personnel de formation (CPF) mobilisé de manière autonome par la personne.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-cpf-libelle",
+  "type": "dimension",
+  "libelle": "Top CPF libellé",
+  "noms_techniques": [
+   "C_LBLTOP_CPF"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : CPF libellé.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Entrants en formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-delai-15-jours",
+  "type": "dimension",
+  "libelle": "Top délai 15 jours",
+  "noms_techniques": [
+   "C_DELAIPOSTE15JOURS"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : délai 15 jours.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ".N_DELAIPOSTEPOURVU inférieur ou égal à 15"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-deld",
+  "type": "dimension",
+  "libelle": "Top DELD",
+  "noms_techniques": [
+   "C_LBLTOP_DELD"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : DELD.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Entrants en formation",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Entrants en formation",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-depot-d-offre-internet",
+  "type": "dimension",
+  "libelle": "Top dépôt d'offre internet",
+  "noms_techniques": [
+   "C_LBLTOP_DEPOTINTERNET"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : dépôt d'offre internet.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-detld",
+  "type": "dimension",
+  "libelle": "Top DETLD",
+  "noms_techniques": [
+   "C_LBLTOP_DETLD"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : DETLD.",
+  "modalites": null,
+  "pages": [
+   "Satisfaction DE",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-diagnostic",
+  "type": "dimension",
+  "libelle": "Top diagnostic",
+  "noms_techniques": [
+   "C_LBLTOP_DIAGNOSTIC"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : diagnostic.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-diagnostic-de-moins-de-6-mois",
+  "type": "dimension",
+  "libelle": "Top diagnostic de moins de 6 mois",
+  "noms_techniques": [
+   "C LBLTOP_DIAGNOSTICMOINS6MOIS"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : diagnostic de moins de 6 mois.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "N_ANCIENNETEDIAGNISTIC < 6"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-difficulte-de-recrutement",
+  "type": "dimension",
+  "libelle": "Top difficulté de recrutement",
+  "noms_techniques": [
+   "C_LBLTOP_DIFFICULTERECRUTEMENT"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : difficulté de recrutement.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_DEPARTEMENT_ID différent de \"\""
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-diplome-obtenu",
+  "type": "dimension",
+  "libelle": "Top diplôme obtenu",
+  "noms_techniques": [
+   "C_LBLTOP_DIPLOMEOBTENU"
+  ],
+  "definition": "Indique si la personne est allée au bout de sa formation et a obtenu le diplôme ou titre visé.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_DIPLOME_FORMATIONATTEINT_ID  égal à  'D'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-entreprise-adaptee",
+  "type": "dimension",
+  "libelle": "Top entreprise adaptée",
+  "noms_techniques": [
+   "C_LBLTOP_ENTREPRISEADAPTEE"
+  ],
+  "definition": "Indique si l'établissement est une entreprise adaptée, employant des travailleurs en situation de handicap.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLTOP_ENTREPRISEADAPTEE  égal à  'Oui'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-epa",
+  "type": "dimension",
+  "libelle": "Top EPA",
+  "noms_techniques": [
+   "C_LBLTOP_EPA"
+  ],
+  "definition": "Indique si la personne est un étranger primo-arrivant (EPA), c'est-à-dire récemment installé en France dans le cadre de son parcours d'intégration.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_TOP_EPA_ID  égal à  1"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Accès / Présence en emploi"
+  ],
+  "bases": [
+   "Description des publics",
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-etablissement-en-zfu",
+  "type": "dimension",
+  "libelle": "Top établissement en ZFU",
+  "noms_techniques": [
+   "C_LBLTOP_ETABLISSEMENTZFU"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : établissement en ZFU.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLTOP_ETABLISSEMENTZFU  égal à  'Oui'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-etablissement-organisme-de-formation",
+  "type": "dimension",
+  "libelle": "Top établissement organisme de formation",
+  "noms_techniques": [
+   "C_LBLTOP_ORGANISMEFORMATION"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : établissement organisme de formation.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLTOP_ORGANISMEFORMATION  égal à  'Oui'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-formation-a-distance",
+  "type": "dimension",
+  "libelle": "Top formation à distance",
+  "noms_techniques": [
+   "C_LBLFOAD"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : formation à distance.",
+  "modalites": [
+   {
+    "valeur": "Formation en centre",
+    "regle": ""
+   },
+   {
+    "valeur": "Formation en centre et à distance",
+    "regle": ""
+   },
+   {
+    "valeur": "Formation à distance",
+    "regle": ""
+   },
+   {
+    "valeur": "Non défini",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-formation-a-visee-emploi-direct",
+  "type": "dimension",
+  "libelle": "Top formation à visée emploi direct",
+  "noms_techniques": [
+   "C_LBLTOP_FORMEMPLDIRECT"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : formation à visée emploi direct.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-formation-certifiante",
+  "type": "dimension",
+  "libelle": "Top formation certifiante",
+  "noms_techniques": [
+   "C_LBLTOP_CERTIFIANTE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : formation certifiante.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLOBJECTIFFORMATION  égal à  'Certification'"
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Entrants en formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-ftae-recul-6",
+  "type": "dimension",
+  "libelle": "Top FTAE (Recul=6)",
+  "noms_techniques": [
+   "C_LBLTOP_FTAE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : FTAE (Recul=6).",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeur absente",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-interim",
+  "type": "dimension",
+  "libelle": "Top intérim",
+  "noms_techniques": [
+   "C_LBLTOP_INTERIM"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : intérim.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_NAF_ID  égal à  '7820Z'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-metier-en-tension",
+  "type": "dimension",
+  "libelle": "Top métier en tension",
+  "noms_techniques": [
+   "C_LBLTOPMETIERENTENSION"
+  ],
+  "definition": "Indique si le métier recherché ou visé fait partie des métiers en tension (difficultés de recrutement identifiées).",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "REFD_METIERENTENSIONFORMACODE_RPE  égal à 'O'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas (Donnée absente de la table REFD_METIERENTENSIONFORMACODE_RPE)"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-niveau-inferieur-au-bac",
+  "type": "dimension",
+  "libelle": "Top niveau inférieur au BAC",
+  "noms_techniques": [
+   "C_LBLTOP_INFRABAC"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : niveau inférieur au BAC.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_NIVEAUFORMATION_ID parmi ('CFG','C12','AFS','CP4','NV5','C3A') ou (C_NIVEAUFORMATION_ID  égal à  'NIV4' et C_DIPLOME_FORMATIONATTEINT_ID différent de 'D')"
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-nouveau-recours",
+  "type": "dimension",
+  "libelle": "Top nouveau recours",
+  "noms_techniques": [
+   "C_LBLTOP_NOUVEAURECOURS"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : nouveau recours.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "N_NBNUMERATEUR  égal à  1 et N_NBNUMERATEUR1  égal à  1"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-obligation-d-emploi",
+  "type": "dimension",
+  "libelle": "Top obligation d'emploi",
+  "noms_techniques": [
+   "C_LBLTOP_BOE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : obligation d'emploi.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "dans tous les autres cas"
+   },
+   {
+    "valeur": "Non",
+    "regle": "C_OBLIGATIONEMPLOI_CALC_ID  égal à  0"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-poste-sortis",
+  "type": "dimension",
+  "libelle": "Top poste sortis",
+  "noms_techniques": [
+   "C_X7F007SUP1"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : poste sortis.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "X7F007 > 1"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-public-prioritaire",
+  "type": "dimension",
+  "libelle": "Top public prioritaire",
+  "noms_techniques": [
+   "C_LBLTOP_PUBLICPRIO",
+   "C_LBLTOP_PIC"
+  ],
+  "definition": "Indique si la personne appartient à un public prioritaire des politiques de l'emploi (jeunes, seniors, BRSA, BOE, infra BAC...).",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "Top -26 ans jusqu'à BAC+2  égal à  'Oui' ou Top 55 ans et +  égal à  'Oui' ou Top Infra BAC  égal à  'Oui' ou Top BOE  égal à  'Oui' ou Top RSA  égal à  'Oui'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-qpv",
+  "type": "dimension",
+  "libelle": "Top QPV",
+  "noms_techniques": [
+   "C_LBLTOP_QPV"
+  ],
+  "definition": "Indique si la personne réside dans un Quartier prioritaire de la politique de la ville (QPV).",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLQPVNIV1 égal à 'En zone QPV'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recours-a-1",
+  "type": "dimension",
+  "libelle": "Top recours A-1",
+  "noms_techniques": [
+   "C_LBLTOP_RECOURS_AM1"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recours A-1.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "N_NBNUMERATEUR1  égal à  1"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recours-contrat-aide",
+  "type": "dimension",
+  "libelle": "Top recours contrat aidé",
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSCONTRATAIDE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recours contrat aidé.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "Y5S006>0"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recours-offre",
+  "type": "dimension",
+  "libelle": "Top recours offre",
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSOFFRE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recours offre.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "Y5S004>0"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recours-poei",
+  "type": "dimension",
+  "libelle": "Top recours POEI",
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSPOEI"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recours POEI.",
+  "modalites": [
+   {
+    "valeur": "Oui :",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recours-promotion-de-profil",
+  "type": "dimension",
+  "libelle": "Top recours promotion de profil",
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSPDP"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recours promotion de profil.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "Y5S007>0"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recrutements-multiples",
+  "type": "dimension",
+  "libelle": "Top recrutements multiples",
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEMENTSMULTIPLES"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recrutements multiples.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "Y5S009>1"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recruteur",
+  "type": "dimension",
+  "libelle": "Top recruteur",
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEUR"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recruteur.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "Y5S009>0"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recruteur-emploi-durable",
+  "type": "dimension",
+  "libelle": "Top recruteur emploi durable",
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEUREMPLOIDURABLE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recruteur emploi durable.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "Y5S010>0"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux de recours",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-recruteur-recurent",
+  "type": "dimension",
+  "libelle": "Top recruteur récurent",
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEURRECURENT"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : recruteur récurent.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-rsa",
+  "type": "dimension",
+  "libelle": "Top RSA",
+  "noms_techniques": [
+   "C_LBLTOP_BRSA"
+  ],
+  "definition": "Indique si la personne est bénéficiaire du Revenu de solidarité active (RSA), au titre du droit réel et payable.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLTYPEDROITRSA égal à 'REEL, PAYABLE'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Satisfaction DE"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Satisfaction DE"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-secteur-en-tension",
+  "type": "dimension",
+  "libelle": "Top secteur en tension",
+  "noms_techniques": [
+   "C_LBLTOPSECTEURENTENSION"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : secteur en tension.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_DEPARTEMENT_ID différent de \"\""
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-service-adaptation",
+  "type": "dimension",
+  "libelle": "Top service adaptation",
+  "noms_techniques": [
+   "C_LBLTOP_ADAPTATION"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : service adaptation.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-service-conseil-en-recrutement",
+  "type": "dimension",
+  "libelle": "Top service conseil en recrutement",
+  "noms_techniques": [
+   "C_LBLTOP_CONSEILRECRUTEMENT"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : service conseil en recrutement.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-service-mrs",
+  "type": "dimension",
+  "libelle": "Top service MRS",
+  "noms_techniques": [
+   "C_LBLTOP_MRS"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : service MRS.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-service-pmsmp",
+  "type": "dimension",
+  "libelle": "Top service PMSMP",
+  "noms_techniques": [
+   "C_LBLTOP_PMSMP"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : service PMSMP.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-service-preselection",
+  "type": "dimension",
+  "libelle": "Top service preselection",
+  "noms_techniques": [
+   "C_LBLTOP_PRESELECTION"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : service preselection.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-service-redaction-de-l-offre",
+  "type": "dimension",
+  "libelle": "Top service rédaction de l'offre",
+  "noms_techniques": [
+   "C_LBLTOP_REDACTIONOFFRE"
+  ],
+  "definition": "Indicateur Oui/Non signalant si la situation suivante s'applique : service rédaction de l'offre.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-siege-social",
+  "type": "dimension",
+  "libelle": "Top siège social",
+  "noms_techniques": [
+   "C_LBLTOP_SIEGESOCIAL"
+  ],
+  "definition": "Indique si l'établissement est le siège social de l'entreprise.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLTOP_C_LBLTOP_SIEGESOCIAL  égal à  'Oui'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-structure-iae",
+  "type": "dimension",
+  "libelle": "Top structure IAE",
+  "noms_techniques": [
+   "C_LBLTOP_STRUCTUREIAE"
+  ],
+  "definition": "Indique si l'établissement est une structure de l'Insertion par l'activité économique (IAE).",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_LBLTOP_STRUCTUREIAE  égal à  'Oui'"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière",
+   "Taux de recours"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "top-zfrr",
+  "type": "dimension",
+  "libelle": "Top ZFRR",
+  "noms_techniques": [
+   "C_LBLTOP_ZFRR"
+  ],
+  "definition": "Indique si la commune de résidence est classée en Zone France Ruralités Revitalisation (ZFRR), zone rurale bénéficiant d'un soutien renforcé.",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": "C_COMMUNEFRRNIV1_ID parmi ('FRR socle', 'FRR+', 'FRR bénéficiaire', 'FRR bénéficiaire partiellement', 'Classé FRR partiellement')"
+   },
+   {
+    "valeur": "Non",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "tranche-d-age",
+  "type": "dimension",
+  "libelle": "Tranche d'âge",
+  "noms_techniques": [
+   "C_LBLCATEGORIEAGE",
+   "C_LBLTRANCHEAGE"
+  ],
+  "definition": "Regroupement de l'âge de la personne par tranches, utilisé pour les analyses par public.",
+  "modalites": [
+   {
+    "valeur": "Moins de 26 ans",
+    "regle": "N_AGE_ID<26"
+   },
+   {
+    "valeur": "De 26 à 39 ans",
+    "regle": "N_AGE_IDsupérieur ou égal à26 et N_AGE_IDinférieur ou égal à39"
+   },
+   {
+    "valeur": "De 40 à 54 ans",
+    "regle": "N_AGE_IDsupérieur ou égal à40 et N_AGE_IDinférieur ou égal à54"
+   },
+   {
+    "valeur": "55 ans et plus",
+    "regle": "N_AGE_IDsupérieur ou égal à55"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE",
+   "Sortants de formation"
+  ],
+  "bases": [
+   "Description des publics",
+   "Entrants en formation",
+   "Accès / Présence en emploi",
+   "Satisfaction DE",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "tranche-d-age-analyse-par-public",
+  "type": "dimension",
+  "libelle": "Tranche d'âge (Analyse par public)",
+  "noms_techniques": [
+   "C_LBLCATEGORIEAGEDESCPUBLIC"
+  ],
+  "definition": "Regroupement de l'âge en 3 tranches (Moins de 26 ans / De 26 à 49 ans / 50 ans et plus), spécifique aux pages 'Analyse par public'.",
+  "modalites": [
+   {
+    "valeur": "Moins de 26 ans",
+    "regle": "N_AGE_ID<26"
+   },
+   {
+    "valeur": "De 26 à 49 ans",
+    "regle": "N_AGE_IDsupérieur ou égal à26 et N_AGE_IDinférieur ou égal à49"
+   },
+   {
+    "valeur": "50 ans et plus",
+    "regle": "N_AGE_IDsupérieur ou égal à50"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "bases": [
+   "Description des publics",
+   "Sortants de formation",
+   "Entrants en formation",
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "tranche-d-anciennete-du-diagnostic",
+  "type": "dimension",
+  "libelle": "Tranche d'ancienneté du diagnostic",
+  "noms_techniques": [
+   "C_LBLANCIENNETEDIAGNOSTIC"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Moins de 1 mois, Entre 1 et 3 mois, Entre 4 et 6 mois, Entre 7 et 12 mois, Plus de 12 mois, Valeurs absentes..",
+  "modalites": [
+   {
+    "valeur": "Moins de 1 mois",
+    "regle": "N_ANCIENNETEDIAGNISTIC < 1"
+   },
+   {
+    "valeur": "Entre 1 et 3 mois",
+    "regle": "N_ANCIENNETEDIAGNISTIC supérieur ou égal à 1 et N_ANCIENNETEDIAGNISTIC inférieur ou égal à 3"
+   },
+   {
+    "valeur": "Entre 4 et 6 mois",
+    "regle": "N_ANCIENNETEDIAGNISTIC supérieur ou égal à 4 et N_ANCIENNETEDIAGNISTIC inférieur ou égal à 6"
+   },
+   {
+    "valeur": "Entre 7 et 12 mois",
+    "regle": "N_ANCIENNETEDIAGNISTIC supérieur ou égal à 7 et N_ANCIENNETEDIAGNISTIC inférieur ou égal à 12"
+   },
+   {
+    "valeur": "Plus de 12 mois",
+    "regle": "N_ANCIENNETEDIAGNISTIC > 12"
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "type-activite-reduite",
+  "type": "dimension",
+  "libelle": "Type activité réduite",
+  "noms_techniques": [
+   "C_LBLTYPEACTIVITEREDUITE"
+  ],
+  "definition": "Volume d'activité réduite (heures travaillées dans le mois) déclaré par le demandeur d'emploi.",
+  "modalites": [
+   {
+    "valeur": "Inférieure ou égale à 78 heures",
+    "regle": ""
+   },
+   {
+    "valeur": "Plus de 78 heures",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "type-de-formation",
+  "type": "dimension",
+  "libelle": "Type de formation",
+  "noms_techniques": [
+   "C_LBLTYPEFORMATION_2",
+   "C_LBLTYPEFORMATIONNIV2"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : AFC, AIF, Autres financeurs (Etat, Ministères, Collectivités, Agefiph, partenaires…), Bénéficiaire de l'action, Conseil Régional, POE collective.…",
+  "modalites": [
+   {
+    "valeur": "AFC",
+    "regle": "DC_TYPEFORMATION  égal à  'AFC'"
+   },
+   {
+    "valeur": "AIF",
+    "regle": "DC_TYPEFORMATION  égal à  'AIF'"
+   },
+   {
+    "valeur": "Autres financeurs (Etat, Ministères, Collectivités, Agefiph, partenaires…)",
+    "regle": ""
+   },
+   {
+    "valeur": "Bénéficiaire de l'action",
+    "regle": "DC_TYPEFORMATION IN  égal à  'Bénéficiaire'"
+   },
+   {
+    "valeur": "Conseil Régional",
+    "regle": "DC_TYPEFORMATION  égal à  'Conseil Régional'"
+   },
+   {
+    "valeur": "POE collective",
+    "regle": "C_TYPEFORMATION parmi ('Formation POEC HOPE','POEC Numérique PIC','POEC PIC Appel à projet','POEC_OPCA')"
+   },
+   {
+    "valeur": "POEI",
+    "regle": "DC_TYPEFORMATION parmi ('AFPR','POEI_COF','POEI_MONO')"
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": "WHEN DC_TYPEFORMATION IS NULL"
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "type-l-offre",
+  "type": "dimension",
+  "libelle": "Type l'offre",
+  "noms_techniques": [
+   "C_LBLTYPEOFFRENIV2"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Emploi durable, Emploi temporaire, Emploi occasionnel, Non salarié, Valeurs absentes ou erronées..",
+  "modalites": [
+   {
+    "valeur": "Emploi durable",
+    "regle": ""
+   },
+   {
+    "valeur": "Emploi temporaire",
+    "regle": ""
+   },
+   {
+    "valeur": "Emploi occasionnel",
+    "regle": ""
+   },
+   {
+    "valeur": "Non salarié",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes ou erronées",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "type-parcours",
+  "type": "dimension",
+  "libelle": "Type parcours",
+  "noms_techniques": [
+   "C_TYPEPARCOURSORIENTATION_ID",
+   "C_LBLTYPEPARCOURS",
+   "C_LBLTYPEPARCOURSORIENTATION"
+  ],
+  "definition": "Type de parcours d'accompagnement proposé au demandeur d'emploi : social, socio-professionnel, professionnel ou indéterminé.",
+  "modalites": [
+   {
+    "valeur": "Social",
+    "regle": "C_TYPEPARCOURSORIENTATION_ID  égal à  'PSO'"
+   },
+   {
+    "valeur": "Socio-professionnel",
+    "regle": "C_TYPEPARCOURSORIENTATION_ID  égal à  'PSP'"
+   },
+   {
+    "valeur": "Professionnel",
+    "regle": "C_TYPEPARCOURSORIENTATION_ID  égal à  'PED'"
+   },
+   {
+    "valeur": "Indéterminé",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Description des publics",
+   "Analyse par public",
+   "Accès / Présence en emploi",
+   "Satisfaction DE",
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "bases": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Satisfaction DE",
+   "Sortants de formation",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "type-recrutement",
+  "type": "dimension",
+  "libelle": "Type recrutement",
+  "noms_techniques": [
+   "C_LBLTYPERECRUTEMENT"
+  ],
+  "definition": "Modalité d'accompagnement de France Travail sur l'offre : dépôt autonome, avec appui d'un conseiller, ou service délivré par un conseiller.",
+  "modalites": [
+   {
+    "valeur": "Service auto délivré sans conseiller et/ou aide rédaction",
+    "regle": ""
+   },
+   {
+    "valeur": "Service délivré par un conseiller",
+    "regle": ""
+   },
+   {
+    "valeur": "Service auto délivré avec conseiller et/ou aide rédaction",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Analyse par filière"
+  ],
+  "bases": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ },
+ {
+  "id": "url-siret",
+  "type": "dimension",
+  "libelle": "URL SIRET",
+  "noms_techniques": [
+   "C_URLSIRET"
+  ],
+  "definition": "Variable catégorielle qui classe la donnée selon les modalités suivantes : Valeurs non-dfinies, <Siret>, <Organismes de formation> - <Siret>..",
+  "modalites": [
+   {
+    "valeur": "Valeurs non-dfinies",
+    "regle": "C_SIRETORGANISME  égal à  NULL"
+   },
+   {
+    "valeur": "<Siret>",
+    "regle": "REFM_ORGANISMEFORMATION.C_LBLORGANISME  égal à  'YYYY"
+   },
+   {
+    "valeur": "<Organismes de formation> - <Siret>",
+    "regle": "dans tous les autres cas"
+   }
+  ],
+  "pages": [
+   "Sortants de formation",
+   "Analyse par public"
+  ],
+  "bases": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "cas_usage": ""
+ }
+]
