@@ -595,6 +595,12 @@ function currentMode(){
   return {mode:'lettre', lettre: currentLetter};
 }
 
+function itemLetters(item){
+  var letters = [item.libelle.charAt(0).toUpperCase()];
+  if (item.alias_lettre && letters.indexOf(item.alias_lettre) === -1) letters.push(item.alias_lettre);
+  return letters;
+}
+
 function filteredItems(mode){
   var typeFilter = document.getElementById('typeFilter').value;
   var base = mode.mode === 'recherche' ? searchResults(mode.q) : displayItems;
@@ -602,7 +608,7 @@ function filteredItems(mode){
     if (typeFilter !== 'tous' && item.type !== typeFilter) return false;
     if (mode.mode === 'recherche') return true;
     if (mode.mode === 'page') return (item.pages||[]).indexOf(mode.page) > -1;
-    return item.libelle.charAt(0).toUpperCase() === mode.lettre;
+    return itemLetters(item).indexOf(mode.lettre) > -1;
   });
 }
 
@@ -639,7 +645,7 @@ function buildAzBar(mode){
   bar.className = 'azbar';
   var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   var counts = {};
-  displayItems.forEach(function(e){ var l = e.libelle.charAt(0).toUpperCase(); counts[l] = (counts[l]||0)+1; });
+  displayItems.forEach(function(e){ itemLetters(e).forEach(function(l){ counts[l] = (counts[l]||0)+1; }); });
   letters.forEach(function(l){
     var b = document.createElement('button');
     var n = counts[l] || 0;
