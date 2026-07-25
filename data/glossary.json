@@ -1000,7 +1000,8 @@
    "Attestations d'Entrée en Stage (AES) - France Travail",
    "Compte personnel de formation (CPF) - Caisse des Dépôts"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "E"
  },
  {
   "id": "date-d-observation",
@@ -1032,7 +1033,8 @@
    "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "O"
  },
  {
   "id": "date-de-cloture-de-l-offre",
@@ -1054,7 +1056,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "date-de-mise-a-jour",
@@ -1096,7 +1099,8 @@
    "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "M"
  },
  {
   "id": "date-de-sortie-de-formation",
@@ -1120,7 +1124,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "date-defm",
@@ -1194,7 +1199,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "date-fonctionnelle-annee-1",
@@ -1218,7 +1224,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "delai-de-pourvoi-des-postes-num-dpo",
@@ -4184,7 +4191,8 @@
    "Autres données France Travail"
   ],
   "cas_usage": "L'analyse conjointe de l'accès et de la présence en emploi permet de mieux mesurer l'impact des formations à court et à plus long terme. En comparant l'accès à l'emploi de l'ensemble des demandeurs d'emploi avec l'accès à l'emploi des sortants de formation, on mesure l'impact de la formation sur l'accès à l'emploi.",
-  "periode_calcul": ""
+  "periode_calcul": "",
+  "alias_lettre": "A"
  },
  {
   "id": "taux-d-acces-a-l-emploi-de-l-ensemble-des-demandeurs-d-emploi-pour-rpe-num",
@@ -4208,7 +4216,8 @@
    "Autres données France Travail"
   ],
   "cas_usage": "L'analyse conjointe de l'accès et de la présence en emploi permet de mieux mesurer l'impact des formations à court et à plus long terme. En comparant l'accès à l'emploi de l'ensemble des demandeurs d'emploi avec l'accès à l'emploi des sortants de formation, on mesure l'impact de la formation sur l'accès à l'emploi.",
-  "periode_calcul": ""
+  "periode_calcul": "",
+  "alias_lettre": "A"
  },
  {
   "id": "taux-de-presence-en-emploi-pour-rpe-num",
@@ -4232,7 +4241,8 @@
    "Autres données France Travail"
   ],
   "cas_usage": "",
-  "periode_calcul": ""
+  "periode_calcul": "",
+  "alias_lettre": "P"
  },
  {
   "id": "top-26-ans-jusqu-a-bac-2",
@@ -4280,7 +4290,8 @@
    "Offres d'emploi France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "A"
  },
  {
   "id": "top-50-ans-et",
@@ -4325,7 +4336,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Offres d'emploi France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "A"
  },
  {
   "id": "top-55-ans-et",
@@ -4373,7 +4385,8 @@
    "Offres d'emploi France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "A"
  },
  {
   "id": "top-abandon",
@@ -4406,7 +4419,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "A"
  },
  {
   "id": "top-cadre",
@@ -4438,7 +4452,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte",
@@ -4470,7 +4485,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-administration",
@@ -4502,7 +4518,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-familiale",
@@ -4534,7 +4551,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-financiere",
@@ -4566,7 +4584,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-logement",
@@ -4598,7 +4617,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-mobilite",
@@ -4630,7 +4650,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-numerique",
@@ -4662,7 +4683,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-sante",
@@ -4694,7 +4716,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contrainte-savoir-de-base",
@@ -4726,7 +4749,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-contraintes-actives",
@@ -4758,7 +4782,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-cpf-autonome",
@@ -4791,7 +4816,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-cpf-libelle",
@@ -4822,7 +4848,8 @@
    "Attestations d'Entrée en Stage (AES) - France Travail",
    "Compte personnel de formation (CPF) - Caisse des Dépôts"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "top-delai-15-jours",
@@ -4853,7 +4880,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-deld",
@@ -4891,7 +4919,8 @@
    "Autres données France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-depot-d-offre-internet",
@@ -4922,7 +4951,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-detld",
@@ -4944,7 +4974,8 @@
    "Enquête IPSOS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-diagnostic",
@@ -4976,7 +5007,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-diagnostic-de-moins-de-6-mois",
@@ -5008,7 +5040,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-difficulte-de-recrutement",
@@ -5039,7 +5072,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-diplome-obtenu",
@@ -5080,7 +5114,8 @@
    "Compte personnel de formation (CPF) - Caisse des Dépôts",
    "Déclaration Sociale Nominative (DSN) - GIP-MDS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "D"
  },
  {
   "id": "top-entreprise-adaptee",
@@ -5113,7 +5148,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "E"
  },
  {
   "id": "top-epa",
@@ -5148,7 +5184,8 @@
    "Autres données France Travail",
    "Déclaration Sociale Nominative (DSN) - GIP-MDS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "E"
  },
  {
   "id": "top-etablissement-en-zfu",
@@ -5181,7 +5218,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "E"
  },
  {
   "id": "top-etablissement-organisme-de-formation",
@@ -5214,7 +5252,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "E"
  },
  {
   "id": "top-formation-a-distance",
@@ -5259,7 +5298,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "top-formation-a-visee-emploi-direct",
@@ -5292,7 +5332,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "top-formation-certifiante",
@@ -5323,7 +5364,8 @@
    "Attestations d'Entrée en Stage (AES) - France Travail",
    "Compte personnel de formation (CPF) - Caisse des Dépôts"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "top-ftae-recul-6",
@@ -5360,7 +5402,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "top-interim",
@@ -5393,7 +5436,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "I"
  },
  {
   "id": "top-metier-en-tension",
@@ -5432,7 +5476,8 @@
    "Compte personnel de formation (CPF) - Caisse des Dépôts",
    "Déclaration Sociale Nominative (DSN) - GIP-MDS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "M"
  },
  {
   "id": "top-niveau-inferieur-au-bac",
@@ -5476,7 +5521,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "N"
  },
  {
   "id": "top-nouveau-recours",
@@ -5509,7 +5555,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "N"
  },
  {
   "id": "top-obligation-d-emploi",
@@ -5557,7 +5604,8 @@
    "Offres d'emploi France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "O"
  },
  {
   "id": "top-poste-sortis",
@@ -5588,7 +5636,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "P"
  },
  {
   "id": "top-public-prioritaire",
@@ -5630,7 +5679,8 @@
    "Compte personnel de formation (CPF) - Caisse des Dépôts",
    "Déclaration Sociale Nominative (DSN) - GIP-MDS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "P"
  },
  {
   "id": "top-qpv",
@@ -5678,7 +5728,8 @@
    "Offres d'emploi France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "Q"
  },
  {
   "id": "top-recours-a-1",
@@ -5711,7 +5762,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recours-contrat-aide",
@@ -5744,7 +5796,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recours-offre",
@@ -5777,7 +5830,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recours-poei",
@@ -5810,7 +5864,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recours-promotion-de-profil",
@@ -5843,7 +5898,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recrutements-multiples",
@@ -5876,7 +5932,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recruteur",
@@ -5909,7 +5966,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recruteur-emploi-durable",
@@ -5942,7 +6000,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-recruteur-recurent",
@@ -5973,7 +6032,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-rsa",
@@ -6021,7 +6081,8 @@
    "Offres d'emploi France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "top-secteur-en-tension",
@@ -6056,7 +6117,8 @@
    "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
    "Déclaration Sociale Nominative (DSN) - GIP-MDS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-service-adaptation",
@@ -6087,7 +6149,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-service-conseil-en-recrutement",
@@ -6118,7 +6181,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-service-mrs",
@@ -6149,7 +6213,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-service-pmsmp",
@@ -6180,7 +6245,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-service-preselection",
@@ -6211,7 +6277,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-service-redaction-de-l-offre",
@@ -6242,7 +6309,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-siege-social",
@@ -6277,7 +6345,8 @@
    "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
    "Déclaration Sociale Nominative (DSN) - GIP-MDS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-structure-iae",
@@ -6312,7 +6381,8 @@
    "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
    "Déclaration Sociale Nominative (DSN) - GIP-MDS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "top-zfrr",
@@ -6355,7 +6425,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Offres d'emploi France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "Z"
  },
  {
   "id": "tranche-d-age",
@@ -6541,7 +6612,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "A"
  },
  {
   "id": "type-de-formation",
@@ -6601,7 +6673,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "type-l-offre",
@@ -6644,7 +6717,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "O"
  },
  {
   "id": "type-parcours",
@@ -6698,7 +6772,8 @@
    "Attestations d'Entrée en Stage (AES) - France Travail",
    "Compte personnel de formation (CPF) - Caisse des Dépôts"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "P"
  },
  {
   "id": "type-recrutement",
@@ -6741,7 +6816,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "url-siret",
