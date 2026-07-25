@@ -331,7 +331,7 @@ records.sort(key=lambda r: (norm_key(r['libelle'])))
 # Top X / Taux X / Part X : la variable doit aussi etre trouvable a la lettre
 # du premier mot important du nom (on ignore "de"/"d'"/"des"/"du"/"l'"/"la"/"le"/"les"/"a").
 STOPWORDS_ALIAS = {'de', 'des', 'du', 'la', 'le', 'les', 'a', 'au', 'aux', 'en', 'et', 'un', 'une'}
-ALIAS_PREFIX_RE = re.compile(r"^(Top|Taux|Part)\s+(.*)$", re.IGNORECASE)
+ALIAS_PREFIX_RE = re.compile(r"^(Top|Taux|Part|Type|Date)\s+(.*)$", re.IGNORECASE)
 ELISION_RE = re.compile(r"^(d|l|qu)'(.+)$", re.IGNORECASE)
 
 def strip_accents(s):

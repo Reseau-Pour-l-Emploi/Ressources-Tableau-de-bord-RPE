@@ -1000,7 +1000,8 @@
    "Attestations d'Entrée en Stage (AES) - France Travail",
    "Compte personnel de formation (CPF) - Caisse des Dépôts"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "E"
  },
  {
   "id": "date-d-observation",
@@ -1032,7 +1033,8 @@
    "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "O"
  },
  {
   "id": "date-de-cloture-de-l-offre",
@@ -1054,7 +1056,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "C"
  },
  {
   "id": "date-de-mise-a-jour",
@@ -1096,7 +1099,8 @@
    "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
    "Enquête IPSOS"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "M"
  },
  {
   "id": "date-de-sortie-de-formation",
@@ -1120,7 +1124,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "S"
  },
  {
   "id": "date-defm",
@@ -1194,7 +1199,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "date-fonctionnelle-annee-1",
@@ -1218,7 +1224,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "delai-de-pourvoi-des-postes-num-dpo",
@@ -6605,7 +6612,8 @@
    "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "A"
  },
  {
   "id": "type-de-formation",
@@ -6665,7 +6673,8 @@
    "Déclaration Sociale Nominative (DSN) - GIP-MDS",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "F"
  },
  {
   "id": "type-l-offre",
@@ -6708,7 +6717,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "O"
  },
  {
   "id": "type-parcours",
@@ -6762,7 +6772,8 @@
    "Attestations d'Entrée en Stage (AES) - France Travail",
    "Compte personnel de formation (CPF) - Caisse des Dépôts"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "P"
  },
  {
   "id": "type-recrutement",
@@ -6805,7 +6816,8 @@
    "Offres d'emploi France Travail",
    "Autres données France Travail"
   ],
-  "cas_usage": ""
+  "cas_usage": "",
+  "alias_lettre": "R"
  },
  {
   "id": "url-siret",
