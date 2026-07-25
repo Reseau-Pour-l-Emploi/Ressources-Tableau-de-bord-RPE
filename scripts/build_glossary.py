@@ -328,6 +328,41 @@ for chain in HIER_CHAINS:
 
 records.sort(key=lambda r: (norm_key(r['libelle'])))
 
+# Top X / Taux X / Part X : la variable doit aussi etre trouvable a la lettre
+# du premier mot important du nom (on ignore "de"/"d'"/"des"/"du"/"l'"/"la"/"le"/"les"/"a").
+STOPWORDS_ALIAS = {'de', 'des', 'du', 'la', 'le', 'les', 'a', 'au', 'aux', 'en', 'et', 'un', 'une'}
+ALIAS_PREFIX_RE = re.compile(r"^(Top|Taux|Part)\s+(.*)$", re.IGNORECASE)
+ELISION_RE = re.compile(r"^(d|l|qu)'(.+)$", re.IGNORECASE)
+
+def strip_accents(s):
+    return ''.join(c for c in unicodedata.normalize('NFKD', s) if not unicodedata.combining(c))
+
+def alias_letter(libelle):
+    m = ALIAS_PREFIX_RE.match(libelle)
+    if not m:
+        return None
+    for tok in m.group(2).split():
+        el = ELISION_RE.match(tok)
+        if el:
+            word = el.group(2)
+            if word:
+                tok = word
+            else:
+                continue
+        elif strip_accents(tok).lower() in STOPWORDS_ALIAS:
+            continue
+        letters = [c for c in tok if c.isalpha()]
+        if not letters:
+            continue
+        return strip_accents(letters[0]).upper()
+    return None
+
+for rec in records:
+    al = alias_letter(rec['libelle'])
+    first_letter = strip_accents(rec['libelle'][0]).upper()
+    if al and al != first_letter:
+        rec['alias_lettre'] = al
+
 json.dump(records, open('../data/glossary.json','w'), ensure_ascii=False, indent=1)
 print('Ecrit: data/glossary.json ->', len(records), 'entrées')
 
