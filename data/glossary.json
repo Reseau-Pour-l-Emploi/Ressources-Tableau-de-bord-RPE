@@ -1,0 +1,6982 @@
+[
+ {
+  "id": "description-des-publics--50-ans-et-plus",
+  "libelle": "50 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Agés de 50 ans et plus",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--50-ans-et-plus",
+  "libelle": "50 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de 50 ans et plus, inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--50-ans-et-plus--part-demandeurs-emploi-ans",
+  "libelle": "50 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de 50 ans et plus, inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--50-ans-et-plus",
+  "libelle": "50 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des séniors (50 ans et +) dans les entrants en formation.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--50-ans-et-plus",
+  "libelle": "50 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de 50 ans et plus, sortis de formation au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--50-ans-et-plus--part-demandeurs-emploi-ans",
+  "libelle": "50 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de 50 ans et plus, sortis de formation au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "satisfaction-de--55-ans-et-plus",
+  "libelle": "55 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de 55 ans et plus, assez ou très satisfaits du service reçu dans le cadre de leur accompagnement.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--55-ans-et-plus",
+  "libelle": "55 ans et plus",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des séniors (55 ans et +) dans les entrants en formation.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--acces-a-l-emploi-a-1-mois",
+  "libelle": "Accès à l'emploi à 1 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) au cours du mois M+1",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F021",
+   "X9F022"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--acces-a-l-emploi-a-1-mois",
+  "libelle": "Accès à l'emploi à 1 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F021",
+   "X9F022"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "mesure--sortants-de-formation--acces-a-l-emploi-a-1-mois",
+  "libelle": "Accès à l'emploi à 1 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F021",
+   "X9F022"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-presence-en-emploi--acces-a-l-emploi-a-3-mois",
+  "libelle": "Accès à l'emploi à 3 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+3",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F019",
+   "X9F020"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--acces-a-l-emploi-a-3-mois",
+  "libelle": "Accès à l'emploi à 3 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F019",
+   "X9F020"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "mesure--sortants-de-formation--acces-a-l-emploi-a-3-mois",
+  "libelle": "Accès à l'emploi à 3 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F019",
+   "X9F020"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-presence-en-emploi--acces-a-l-emploi-a-6-mois",
+  "libelle": "Accès à l'emploi à 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F016",
+   "X9F019"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "sortants-de-formation--acces-a-l-emploi-a-6-mois",
+  "libelle": "Accès à l'emploi à 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi sortis de formation au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F016",
+   "X9F019"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--acces-a-l-emploi-a-6-mois",
+  "libelle": "Accès à l'emploi à 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F016",
+   "X9F019"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "mesure--sortants-de-formation--acces-a-l-emploi-a-6-mois",
+  "libelle": "Accès à l'emploi à 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F016",
+   "X9F019"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "acces-presence-en-emploi--acces-a-l-emploi-durable-a-6-mois",
+  "libelle": "Accès à l'emploi durable à 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et ayant accédé à l’emploi durable (CDI ou contrat de 6 mois ou plus) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "X9F023"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--acces-a-l-emploi-durable-a-6-mois",
+  "libelle": "Accès à l'emploi durable à 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "X9F023"
+  ],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "sortants-de-formation--acces-a-l-emploi-suite-a-formation-sur-un-metier-en-tension",
+  "libelle": "Accès à l'emploi suite à formation sur un métier en tension",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi sortis de formation portant sur un métier en tension au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "groupe": "Accès à l'emploi"
+ },
+ {
+  "id": "page--acces-presence-en-emploi",
+  "libelle": "Accès / Présence en emploi",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "L’accès à l’emploi et la présence en emploi sont des indicateurs phares pour mesurer l’impact des actions engagées..",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "page--accueil",
+  "libelle": "Accueil",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Principales caractéristiques de la demande d’emploi permettant d’identifier les axes prioritaires de la feuille de route territoriale.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--actions-en-attente-de-validation-avec-date-de-validation-ctpe",
+  "libelle": "Actions en attente de validation avec date de validation CTPE",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Fiche action dont le statut est en attente de validation par le CTPE",
+  "cas_usage": "Pensez à mettre à jour le statut.",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--actions-non-terminees-dont-la-date-de-fin-est-depassee",
+  "libelle": "Actions non terminées dont la date de fin est dépassée",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Actions non terminées ou abandonnées dont la date de fin est dépassée",
+  "cas_usage": "Pensez à actualiser le statut ou à modifier la date de fin prévisionnelle.",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--actions-non-terminees-non-mises-a-jour-depuis-plus-d-un-mois",
+  "libelle": "Actions non terminées non mises à jour depuis plus d'un mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Actions non terminées ou abandonnées dont la dernière actualisation de la fiche remonte à plus de 30 jours",
+  "cas_usage": "Pensez à faire des points réguliers pour assurer le suivi de votre action.",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--actions-saisies",
+  "libelle": "Actions saisies",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre total d'actions saisies quel que soit le statut.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--activite-reduite",
+  "libelle": "Activité réduite",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--anciennete",
+  "libelle": "Ancienneté",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Variable catégorielle avec les modalités suivantes : < 12 mois, >= 12 et < 24 mois, >= 24 mois, Valeurs absentes, Valeurs erronées.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "< 12 mois",
+    "regle": ""
+   },
+   {
+    "valeur": ">= 12 et < 24 mois",
+    "regle": ""
+   },
+   {
+    "valeur": ">= 24 mois",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLANCIENNETE"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "description-des-publics--anciennete-moyenne-des-diagnostics",
+  "libelle": "Ancienneté moyenne des diagnostics",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai moyen d’actualisation du diagnostic (en mois) entre le mois d’observation de la cohorte et la dernière mise à jour, parmi les diagnostics existants.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--beneficiaires-de-l-obligation-d-emploi",
+  "libelle": "Bénéficiaires de l'obligation d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Bénéficiaires de l'obligation d'emploi des travailleurs handicapés",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--beneficiaires-de-l-obligation-d-emploi",
+  "libelle": "Bénéficiaires de l'obligation d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de l’obligation d’emploi (BOETH), inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--beneficiaires-de-l-obligation-d-emploi--part-demandeurs-emploi-obligation",
+  "libelle": "Bénéficiaires de l'obligation d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de l’obligation d’emploi (BOETH), inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--beneficiaires-de-l-obligation-d-emploi",
+  "libelle": "Bénéficiaires de l'obligation d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des bénéficiaires de l'obligation d'emploi dans les entrants en formation.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--beneficiaires-de-l-obligation-d-emploi",
+  "libelle": "Bénéficiaires de l'obligation d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi bénéficiaires de l'obligation d'emploi, sortis de formation au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--beneficiaires-de-l-obligation-d-emploi--part-demandeurs-emploi-beneficiaires",
+  "libelle": "Bénéficiaires de l'obligation d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi bénéficiaires de l'obligation d'emploi, sortis de formation au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "satisfaction-de--beneficiaires-du-rsa",
+  "libelle": "Bénéficiaires du RSA",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi bénéficiaires du Revenu de solidarité active (RSA), assez ou très satisfaits du service reçu dans le cadre de leur accompagnement.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--beneficiaires-du-rsa",
+  "libelle": "Bénéficiaires du RSA",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des bénéficiaires du Revenu de solidarité active (RSA) dans les entrants en formation.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--beneficiaires-du-rsa",
+  "libelle": "Bénéficiaires du RSA",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi bénéficiaires du RSA, sortis de formation au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--beneficiaires-du-rsa--part-demandeurs-emploi-beneficiaires",
+  "libelle": "Bénéficiaires du RSA",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi bénéficiaires du RSA, sortis de formation au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--brsa",
+  "libelle": "BRSA",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Bénéficiaires du Revenu de solidarité active (RSA)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--brsa",
+  "libelle": "BRSA",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi bénéficiaires du Revenu de solidarité active (RSA), inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--brsa--part-demandeurs-emploi-beneficiaires",
+  "libelle": "BRSA",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi bénéficiaires du Revenu de solidarité active (RSA), inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--cadres",
+  "libelle": "Cadres",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Dont la qualification (lorsqu'elle est connue de France Travail) correspond au niveau cadre",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--categorie",
+  "libelle": "Catégorie",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--categorie-juridique",
+  "libelle": "Catégorie juridique",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLCATEGORIEJURIDIQUE"
+  ],
+  "hierarchie": {
+   "nom": "Catégorie juridique",
+   "niveau": 0
+  }
+ },
+ {
+  "id": "champ--categorie-juridique-niv1",
+  "libelle": "Catégorie juridique - Hiérarchie / Catégorie juridique niv1",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Catégorie juridique",
+   "niveau": 1
+  }
+ },
+ {
+  "id": "champ--categorie-juridique-niv2",
+  "libelle": "Catégorie juridique - Hiérarchie / Catégorie juridique niv2",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Catégorie juridique",
+   "niveau": 2
+  }
+ },
+ {
+  "id": "champ--date-d-entree-en-formation",
+  "libelle": "Date d'entrée en formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "noms_techniques": [
+   "D_DATEFPRIO"
+  ],
+  "hierarchie": {
+   "nom": "Date d'entrée en formation",
+   "niveau": 0
+  },
+  "alias_lettre": "E"
+ },
+ {
+  "id": "champ--date-d-entree-en-formation-niv2",
+  "libelle": "Date d'entrée en formation - Mois Année / Année",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Date d'entrée en formation",
+   "niveau": 2
+  },
+  "alias_lettre": "E"
+ },
+ {
+  "id": "champ--date-d-entree-en-formation-niv1",
+  "libelle": "Date d'entrée en formation - Mois Année / Mois",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Date d'entrée en formation",
+   "niveau": 1
+  },
+  "alias_lettre": "E"
+ },
+ {
+  "id": "champ--date-d-observation",
+  "libelle": "Date d'observation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "D_DATEFTAE",
+   "D_DATETAETPED",
+   "D_DATESATISACCO"
+  ],
+  "hierarchie": {
+   "nom": "Date d'observation",
+   "niveau": 0
+  },
+  "alias_lettre": "O"
+ },
+ {
+  "id": "champ--date-d-observation-niv2",
+  "libelle": "Date d'observation - Mois Année / Année",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Date d'observation",
+   "niveau": 2
+  },
+  "alias_lettre": "O"
+ },
+ {
+  "id": "champ--date-d-observation-niv3",
+  "libelle": "Date d'observation - Mois Année / Jour",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Date d'observation",
+   "niveau": 3
+  },
+  "alias_lettre": "O"
+ },
+ {
+  "id": "champ--date-d-observation-niv1",
+  "libelle": "Date d'observation - Mois Année / Mois",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Date d'observation",
+   "niveau": 1
+  },
+  "alias_lettre": "O"
+ },
+ {
+  "id": "champ--date-d-observation-niv4",
+  "libelle": "Date d'observation - Mois Année / Trimestre",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "2. Date",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Date d'observation",
+   "niveau": 4
+  },
+  "alias_lettre": "O"
+ },
+ {
+  "id": "accueil--delai-de-pourvoi-des-offres",
+  "libelle": "Délai de pourvoi des offres",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Délai de pourvoi des offres : L'accélération des recrutements est un objectif qui permet de réduire le chômage : un délai de recrutement plus court d’un jour, c’est un jour de chômage évité.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi",
+  "libelle": "Délai de pourvoi des offres d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Délai calculé entre la date de clôture et la date de validation de l'offre d'emploi. Seules les offres d'emploi de plus 30 jours pourvues au moment de la clôture sont prises en compte.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi",
+  "libelle": "Délai de pourvoi des offres d'emploi",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi-dans-des-secteurs-en-tension",
+  "libelle": "Délai de pourvoi des offres d'emploi dans des secteurs en tension",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai calculé entre la date de clôture et la date de validation de l'offre d'emploi. Seules les sur les offres d'emploi de plus 30 jours pourvues au moment de la clôture et concernant des secteurs en tension sont prises en compte .",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi-deposees-par-internet",
+  "libelle": "Délai de pourvoi des offres d'emploi déposées par internet",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai calculé entre la date de clôture et la date de validation de l'offre d'emploi. Seules les offres d'emploi de plus 30 jours déposées par internet pourvues au moment de la clôture sont prises en compte.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi-des-recruteurs-recurrents",
+  "libelle": "Délai de pourvoi des offres d'emploi des recruteurs récurrents",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai calculé entre la date de clôture et la date de validation de l'offre d'emploi. Seules les sur les offres d'emploi de plus 30 jours pourvues au moment de la clôture et concernant des employeurs ayant déposé plusieurs offres au cours des 12 derniers mois sont prises en compte.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi-durables",
+  "libelle": "Délai de pourvoi des offres d'emploi durables",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai calculé entre la date de clôture et la date de validation de l'offre d'emploi. Seules les offres d'emploi durables pourvues au moment de la clôture sont prises en compte.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi-en-interim",
+  "libelle": "Délai de pourvoi des offres d'emploi en intérim",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai calculé entre la date de clôture et la date de validation de l'offre d'emploi. Seules les offres d'emploi de plus 30 jours en intérim pourvues au moment de la clôture sont prises en compte.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--delai-de-pourvoi-des-offres-d-emploi-multi-poste",
+  "libelle": "Délai de pourvoi des offres d'emploi multi-poste",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai calculé entre la date de clôture et la date de validation de l'offre d'emploi. Seules les offres d'emploi de plus 30 jours pourvues au moment de la clôture sont prises en compte.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "accueil--delai-entre-l-inscription-et-le-demarrage-de-l-accompagnement",
+  "libelle": "Délai entre l'inscription et le démarrage de l'accompagnement",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Délai entre l'inscription et le démarrage de l'accompagnement : Le démarrage rapide d’un accompagnement adapté aux besoins des demandeurs d’emploi permet d’accélérer le retour à l’emploi. Pour cela, une bonne coordination des acteurs est nécessaire.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--delai-moyen-d-acces-a-l-emploi",
+  "libelle": "Délai moyen d'accès à l'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai moyen (en mois) entre le mois d’observation de la cohorte et l’accès à l’emploi, pour les inscrits ayant trouvé un emploi dans les 6 mois.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--delai-moyen-d-acces-a-l-emploi",
+  "libelle": "Délai moyen d'accès à l'emploi",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--delai-moyen-d-acces-a-l-emploi-des-sortants-de-formation",
+  "libelle": "Délai moyen d'accès à l'emploi des sortants de formation",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Délai moyen observé entre la sortie de formation et l’accès à l’emploi (toujours < à 6 mois et calculé uniquement pour les personnes ayant accédé à l'emploi)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--sortants-de-formation--delai-moyen-d-acces-a-l-emploi-des-sortants-de-formation",
+  "libelle": "Délai moyen d'accès à l'emploi des sortants de formation",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "satisfaction-de--delta-sat",
+  "libelle": "Delta Sat",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Cet indicateur s’inspire de la définition du « Net Promoter Score » et mesure l’écart entre la proportion de répondants très satisfaits et celle des répondants insatisfaits du service reçu dans le cadre de leur accompagnement.\nInterprétation :\nDelta Sat < 0 (Négatif) : Situation préoccupante. Le nombre d'insatisfaits est supérieur à celui des très satisfaits. Cela nécessite une analyse des causes (qualité du service, accueil, délais) pour engager des actions correctrices sur le parcours usager.\nDelta Sat > 0 (Positif) : Résultat satisfaisant. La majorité des usagers est très satisfaite et susceptible de valoriser le service rendu.\nDelta Sat > 50 (Excellent) : Objectif de performance. Ce score témoigne d'une haute qualité de service, renforçant la confiance des usagers et l'efficacité de l'action.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "page--description-des-publics",
+  "libelle": "Description des publics",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Principales caractéristiques de la demande d’emploi permettant d’identifier les axes prioritaires de la feuille de route territoriale.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--duree-de-formation",
+  "libelle": "Durée de formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "Variable catégorielle avec les modalités suivantes : De 0h à 25h, De 25h à 40h, De 40h à 120h, De 120h à 400h, De 400h à 800h, 800h et +.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "De 0h à 25h",
+    "regle": ""
+   },
+   {
+    "valeur": "De 25h à 40h",
+    "regle": ""
+   },
+   {
+    "valeur": "De 40h à 120h",
+    "regle": ""
+   },
+   {
+    "valeur": "De 120h à 400h",
+    "regle": ""
+   },
+   {
+    "valeur": "De 400h à 800h",
+    "regle": ""
+   },
+   {
+    "valeur": "800h et +",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLDUREEFORMATION"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "description-des-publics--en-parcours",
+  "libelle": "En parcours",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Inscrits dans un parcours d'accompagnement : professionnel, socio-professionnel ou social.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--en-recherche-d-emploi-sur-un-metier-en-tension",
+  "libelle": "En recherche d'emploi sur un métier en tension",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Dont le métier recherché (lorsqu'il est connu de France Travail) est considéré comme en tension (calcul à partir du ratio offres d'emploi / demande d'emploi, du taux d'écoulement de la demande d'emploi et de la part des recrutements jugés difficiles par les employeurs).",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--description-des-publics--ensemble-des-inscrits",
+  "libelle": "Ensemble des inscrits",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "page--entrants-en-formation",
+  "libelle": "Entrants en formation",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Les évaluations du plan d'investissement dans les compétences ont montré que ce sont pour les publics prioritaires que la valeur ajoutée de la formation sur l'accès à l'emploi est la plus grande. Cibler davantage les formations sur les demandeurs d'emploi qui en ont le plus besoin permettra ainsi d'améliorer l'efficacité des formations.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--entrants-en-formation",
+  "libelle": "Entrants en formation",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre total d'entrants en formation (dénominateur de l'indicateur principal).\nToutes entrées en formation de demandeurs d'emploi inscrits à France Travail sauf CPF autonome.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--etablissement-public-prive",
+  "libelle": "Etablissement public / privé",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "Variable catégorielle avec les modalités suivantes : Public, Privé.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Public",
+    "regle": ""
+   },
+   {
+    "valeur": "Privé",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTYPEETABLISSEMENT"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--etrangers-primo-arrivants",
+  "libelle": "Etrangers Primo Arrivants",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Variable catégorielle avec les modalités suivantes : Non concerné, CIR de moins de 1 an, CIR entre 1 et 5 ans.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Non concerné",
+    "regle": ""
+   },
+   {
+    "valeur": "CIR de moins de 1 an",
+    "regle": ""
+   },
+   {
+    "valeur": "CIR entre 1 et 5 ans",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLCIR"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "page--fiches-action",
+  "libelle": "Fiches action",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "La fiche action est la solution opérationnelle permettant d’apporter une réponse concrète à une problématique locale.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "accueil--fiches-action-saisies",
+  "libelle": "Fiches action saisies",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Fiches action : La fiche action est la solution opérationnelle permettant d’apporter une réponse concrète à une problématique locale.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--formacode",
+  "libelle": "Formacode",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLDOMAINEFORMATION"
+  ],
+  "hierarchie": {
+   "nom": "Formacode",
+   "niveau": 0
+  }
+ },
+ {
+  "id": "champ--formacode-niv1",
+  "libelle": "Formacode - Hiérarchie / Champ sémantique",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Formacode",
+   "niveau": 1
+  }
+ },
+ {
+  "id": "champ--formacode-niv2",
+  "libelle": "Formacode - Hiérarchie / Domaine de formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Formacode",
+   "niveau": 2
+  }
+ },
+ {
+  "id": "champ--formation-a-distance",
+  "libelle": "Formation à distance",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "Variable catégorielle avec les modalités suivantes : Formation en centre, Formation en centre et à distance, Formation à distance, Valeurs absentes.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Formation en centre",
+    "regle": ""
+   },
+   {
+    "valeur": "Formation en centre et à distance",
+    "regle": ""
+   },
+   {
+    "valeur": "Formation à distance",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_FORMATIONADISTANCE"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--formation-a-visee-emploi-direct",
+  "libelle": "Formation à visée emploi direct",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null
+ },
+ {
+  "id": "entrants-en-formation--formation-aux-metiers-en-tension",
+  "libelle": "Formation aux métiers en tension",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des formations pouvant déboucher sur un métier en tension dans le bassin d'emploi.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--description-des-publics--inscrits-actualisation-hybride",
+  "libelle": "Inscrits / Actualisation hybride",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--inscrits-depuis-plus-de-12-mois",
+  "libelle": "Inscrits depuis plus de 12 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Dont l'ancienneté d'inscription en continu en catégorie ABC est supérieure ou égale à 12 mois",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--inscrits-depuis-plus-de-24-mois",
+  "libelle": "Inscrits depuis plus de 24 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Dont l'ancienneté d'inscription en continu en catégorie ABC est supérieure ou égale à 24 mois",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--description-des-publics--inscrits-hors-actualisation-hybride",
+  "libelle": "Inscrits / Hors actualisation hybride",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--metier-recherche",
+  "libelle": "Métier recherché",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLAPPELATIONROMEV3NIV2",
+   "C_LBLROMENIV1"
+  ],
+  "hierarchie": {
+   "nom": "Métier recherché",
+   "niveau": 0
+  }
+ },
+ {
+  "id": "champ--metier-recherche-niv1",
+  "libelle": "Métier recherché - Hiérarchie / Domaine professionnel",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Métier recherché",
+   "niveau": 1
+  }
+ },
+ {
+  "id": "champ--metier-recherche-niv2",
+  "libelle": "Métier recherché - Hiérarchie / Grand domaine pro",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Métier recherché",
+   "niveau": 2
+  }
+ },
+ {
+  "id": "champ--metier-recherche-niv3",
+  "libelle": "Métier recherché - ROME / Domaine professionnel",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Métier recherché",
+   "niveau": 3
+  }
+ },
+ {
+  "id": "champ--metier-recherche-niv4",
+  "libelle": "Métier recherché - ROME / Grand domaine",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Métier recherché",
+   "niveau": 4
+  }
+ },
+ {
+  "id": "champ--metier-recherche-niv5",
+  "libelle": "Métier recherché - ROME / Grand domaine pro",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Métier recherché",
+   "niveau": 5
+  }
+ },
+ {
+  "id": "description-des-publics--moins-de-26-ans-et-jusqu-a-bac-2",
+  "libelle": "Moins de 26 ans et jusqu'à BAC+2",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Agés de moins de 26 ans et dont le niveau de formation est inférieur au niveau du baccalauréat + 2 ans (diplôme non obtenu)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--moins-de-26-ans-et-jusqu-a-bac-2",
+  "libelle": "Moins de 26 ans et jusqu'à BAC+2",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de moins de 26 ans et de niveau inférieur à BAC+2, inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--moins-de-26-ans-et-jusqu-a-bac-2--part-demandeurs-emploi-moins",
+  "libelle": "Moins de 26 ans et jusqu'à BAC+2",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de moins de 26 ans et de niveau inférieur à BAC+2, inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "satisfaction-de--moins-de-26-ans-et-jusqu-a-bac-2",
+  "libelle": "Moins de 26 ans et jusqu'à BAC+2",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de moins de 26 ans et de niveau inférieur à BAC+2, assez ou très satisfaits du service reçu dans le cadre de leur accompagnement.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--moins-de-26-ans-et-jusqu-a-bac-2",
+  "libelle": "Moins de 26 ans et jusqu'à BAC+2",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des jeunes (moins de 26 ans) de niveau de formation inférieur ou égal au Bac+2 dans les entrants en formation.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--moins-de-26-ans-et-jusqu-a-bac-2",
+  "libelle": "Moins de 26 ans et jusqu'à BAC+2",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de moins de 26 ans et de niveau inférieur à BAC+2, sortis de formation au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--moins-de-26-ans-et-jusqu-a-bac-2--part-demandeurs-emploi-moins",
+  "libelle": "Moins de 26 ans et jusqu'à BAC+2",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de moins de 26 ans et de niveau inférieur à BAC+2, sortis de formation au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--naf",
+  "libelle": "NAF",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Offres d'emploi France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA"
+  ],
+  "noms_techniques": [
+   "C_LBLNAF"
+  ],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 0
+  }
+ },
+ {
+  "id": "champ--naf-niv5",
+  "libelle": "NAF - Hiérarchie / Division",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 5
+  }
+ },
+ {
+  "id": "champ--naf-niv4",
+  "libelle": "NAF - Hiérarchie / Groupe",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 4
+  }
+ },
+ {
+  "id": "champ--naf-niv7",
+  "libelle": "NAF - Hiérarchie / Secteur",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 7
+  }
+ },
+ {
+  "id": "champ--naf-niv6",
+  "libelle": "NAF - Hiérarchie / Section",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 6
+  }
+ },
+ {
+  "id": "champ--naf-niv2",
+  "libelle": "NAF - NAF / Division",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 2
+  }
+ },
+ {
+  "id": "champ--naf-niv1",
+  "libelle": "NAF - NAF / Groupe",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 1
+  }
+ },
+ {
+  "id": "champ--naf-niv3",
+  "libelle": "NAF - NAF / Section",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "NAF",
+   "niveau": 3
+  }
+ },
+ {
+  "id": "champ--niveau-de-formation",
+  "libelle": "Niveau de formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Variable catégorielle avec les modalités suivantes : Peu ou pas diplômé, Brevet des collèges jusqu'à la 1ere, CAP-BEP, BAC, BAC+2, BAC+3 et plus….",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Peu ou pas diplômé",
+    "regle": ""
+   },
+   {
+    "valeur": "Brevet des collèges jusqu'à la 1ere",
+    "regle": ""
+   },
+   {
+    "valeur": "CAP-BEP",
+    "regle": ""
+   },
+   {
+    "valeur": "BAC",
+    "regle": ""
+   },
+   {
+    "valeur": "BAC+2",
+    "regle": ""
+   },
+   {
+    "valeur": "BAC+3 et plus",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLNIVEAUFORMATIONNIV2"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "description-des-publics--niveau-inferieur-au-bac",
+  "libelle": "Niveau inférieur au BAC",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Dont le niveau de formation est inférieur au niveau du baccalauréat (diplôme non obtenu)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--niveau-inferieur-au-bac",
+  "libelle": "Niveau inférieur au BAC",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de niveau inférieur au baccalauréat, inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--niveau-inferieur-au-bac--part-demandeurs-emploi-niveau",
+  "libelle": "Niveau inférieur au BAC",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de niveau inférieur au baccalauréat, inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "satisfaction-de--niveau-inferieur-au-bac",
+  "libelle": "Niveau inférieur au BAC",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de niveau inférieur au baccalauréat, assez ou très satisfaits du service reçu dans le cadre de leur accompagnement.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--niveau-inferieur-au-bac",
+  "libelle": "Niveau inférieur au BAC",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des publics de niveau de formation inférieur ou égal au Bac dans les entrants en formation.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--niveau-inferieur-au-bac",
+  "libelle": "Niveau inférieur au BAC",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de niveau inférieur au baccalauréat, sortis de formation au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--niveau-inferieur-au-bac--part-demandeurs-emploi-niveau",
+  "libelle": "Niveau inférieur au BAC",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi de niveau inférieur au baccalauréat, sortis de formation au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-acces-a-un-emploi-apres-1-mois",
+  "libelle": "Nombre d'accès à un emploi après 1 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-acces-a-un-emploi-apres-3-mois",
+  "libelle": "Nombre d'accès à un emploi après 3 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-acces-a-un-emploi-apres-6-mois",
+  "libelle": "Nombre d'accès à un emploi après 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-acces-a-un-emploi-durable-apres-6-mois",
+  "libelle": "Nombre d'accès à un emploi durable après 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--entrants-en-formation--nombre-d-entrees-en-formation",
+  "libelle": "Nombre d'entrées en formation",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--nombre-d-etablissements",
+  "libelle": "Nombre d'établissements",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre détablissements ayant recruté sur une période de 12 mois",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--taux-de-recours--nombre-d-etablissements",
+  "libelle": "Nombre d'établissements",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-individus-en-emploi-apres-1-mois",
+  "libelle": "Nombre d'individus en emploi après 1 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-individus-en-emploi-apres-3-mois",
+  "libelle": "Nombre d'individus en emploi après 3 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--nombre-d-individus-en-emploi-apres-6-mois",
+  "libelle": "Nombre d'individus en emploi après 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-individus-en-emploi-apres-6-mois",
+  "libelle": "Nombre d'individus en emploi après 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-d-individus-en-emploi-durable-apres-6-mois",
+  "libelle": "Nombre d'individus en emploi durable après 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "accueil--nombre-d-inscrits-a-france-travail",
+  "libelle": "Nombre d'inscrits à France Travail",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Description des publics : Principales caractéristiques de la demande d’emploi permettant d’identifier les axes prioritaires de la feuille de route territoriale.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--nombre-d-inscrits-a-france-travail",
+  "libelle": "Nombre d'inscrits à France Travail",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Depuis la mise en place de la loi pour le plein emploi, l’inscription à France travail devient systématique pour tous les publics à la recherche d’un emploi (dont les bénéficiaires du RSA, les jeunes en recherche d’emploi suivis par les missions locales…).",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--nombre-d-offre-d-emplois-cloturees",
+  "libelle": "Nombre d'offre d'emplois clôturées",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre d'offres d'emploi de plus 30 jours déposées.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-delai-de-pourvoi--nombre-d-offre-d-emplois-cloturees--nombre-offres-emploi-plus",
+  "libelle": "Nombre d'offre d'emplois clôturées",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre d'offres d'emploi de plus 30 jours déposées.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--taux-delai-de-pourvoi--nombre-d-offre-d-emplois-cloturees",
+  "libelle": "Nombre d'offre d'emplois cloturées",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--nombre-de-contraintes",
+  "libelle": "Nombre de contraintes",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--nombre-de-demandeurs-d-emploi-en-fin-de-mois",
+  "libelle": "Nombre de demandeurs d'emploi en fin de mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--nombre-de-recours",
+  "libelle": "Nombre de recours",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre d’établissements ayant eu recours au réseau pour l’emploi sur une période de 12 mois",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--taux-de-recours--nombre-de-recours",
+  "libelle": "Nombre de recours",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--nombre-de-sortants-de-formation",
+  "libelle": "Nombre de sortants de formation",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre de demandeurs d’emploi sortis de formation au mois M (toutes formations confondues y compris CPF)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--sortants-de-formation--nombre-de-sortants-de-formation",
+  "libelle": "Nombre de sortants de formation",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--nombre-moyen-d-acteurs-associes",
+  "libelle": "Nombre moyen d'acteurs associés",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Moyenne du nombre d'acteurs mobilisés dans les actions saisies",
+  "cas_usage": "Ne notez que les acteurs ayant un rôle autre que consultatif.",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--nombre-moyen-d-etapes-renseignees",
+  "libelle": "Nombre moyen d’étapes renseignées",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre d'étapes complétées dans la fiche",
+  "cas_usage": "Pensez à noter la date de la prochaine étape au fur et à mesure de l'avancement de l'action.",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--nombre-moyen-de-contraintes-par-diagnostic",
+  "libelle": "Nombre moyen de contraintes par diagnostic",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Moyenne du nombre de contraintes parmi les diagnostics avec au moins une contrainte.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--nombre-moyen-de-publics-cibles",
+  "libelle": "Nombre moyen de publics ciblés",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Moyenne du nombre de publics ciblés par les actions saisies",
+  "cas_usage": "Une action ciblée ne traite en général pas plus de 4 typologies de public. Si pas de public cible, utilisez \"Demandeurs d'emploi ( tous )\" ou \"Entreprises ( toutes )\".",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--nombre-moyen-de-solutions-mobilisees",
+  "libelle": "Nombre moyen de solutions mobilisées",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Moyenne du nombre de solutions mobilisées dans les actions saisies",
+  "cas_usage": "Une action ciblée ne mobilise en général pas plus de 4 solutions. Si votre action recense un nombre important de plus petites actions, pensez à saisir plusieurs fiches pour gagner en lisibilité et assurer un meilleur suivi.",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "fiches-action--nombre-moyen-de-thematiques-traitees",
+  "libelle": "Nombre moyen de thématiques traitées",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Moyenne du nombre de thématiques traitées dans les actions saisies",
+  "cas_usage": "Une action ciblée ne traite en général pas plus de 4 thématiques.",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Fiches action"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--nouveau-recours",
+  "libelle": "Nouveau recours",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des établissements n'ayant pas eu recours sur l'année A-1 et ayant eu recours sur l'année A",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--objectif-de-formation",
+  "libelle": "Objectif de formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "Variable catégorielle avec les modalités suivantes : Non concerné, Qualification, Perfectionnement, Elargissement des compétences, Création d'entreprise, Remise à niveau….",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Non concerné",
+    "regle": ""
+   },
+   {
+    "valeur": "Qualification",
+    "regle": ""
+   },
+   {
+    "valeur": "Perfectionnement",
+    "regle": ""
+   },
+   {
+    "valeur": "Elargissement des compétences",
+    "regle": ""
+   },
+   {
+    "valeur": "Création d'entreprise",
+    "regle": ""
+   },
+   {
+    "valeur": "Remise à niveau",
+    "regle": ""
+   },
+   {
+    "valeur": "Mobilisation sur un projet",
+    "regle": ""
+   },
+   {
+    "valeur": "Préqualification",
+    "regle": ""
+   },
+   {
+    "valeur": "Non precisé",
+    "regle": ""
+   },
+   {
+    "valeur": "Divers",
+    "regle": ""
+   },
+   {
+    "valeur": "Certification",
+    "regle": ""
+   },
+   {
+    "valeur": "Professionnalisation",
+    "regle": ""
+   },
+   {
+    "valeur": "Préparation à la qualification",
+    "regle": ""
+   },
+   {
+    "valeur": "Remise à niveau, maîtrise des savoirs de base, initiation",
+    "regle": ""
+   },
+   {
+    "valeur": "(Re)mobilisation, aide à l'élaboration de projet professionnel",
+    "regle": ""
+   },
+   {
+    "valeur": "Perfectionnement, élargissement des compétences",
+    "regle": ""
+   },
+   {
+    "valeur": "Création d'entreprise",
+    "regle": ""
+   },
+   {
+    "valeur": "Adaptation poste travail AFPR",
+    "regle": ""
+   },
+   {
+    "valeur": "Adaptation poste travail POE",
+    "regle": ""
+   },
+   {
+    "valeur": "Non precisé",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Non concerné",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLOBJECTIFFORMATION"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--organisme-de-formation",
+  "libelle": "Organisme de formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLORGANISME"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "taux-delai-de-pourvoi--part-des-offres-d-emploi-pourvues-dans-les-15-jours",
+  "libelle": "Part des offres d'emploi pourvues dans les 15 jours",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des offres d'emploi pourvues dans les 15 jours",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "O"
+ },
+ {
+  "id": "accueil--part-des-publics-prioritaires-dans-les-entrants-en-formation",
+  "libelle": "Part des publics prioritaires dans les entrants en formation",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Part des publics prioritaires dans les entrants en formation : Les évaluations du plan d'investissement dans les compétences ont montré que ce sont pour les publics prioritaires que la valeur ajoutée de la formation sur l'accès à l'emploi est la plus grande. Cibler davantage les formations sur les demandeurs d'emploi qui en ont le plus besoin permettra ainsi d'améliorer l'efficacité des formations.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--pertes-de-clients-recruteurs",
+  "libelle": "Pertes de clients recruteurs",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des établissements ayant eu recours sur l'année A-1 et n'ayant pas eu recours sur l'année A bien qu'ayant recruté",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "mesure--taux-de-recours--pertes-de-clients-recruteurs",
+  "libelle": "Pertes de clients recruteurs",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--presence-en-emploi-a-1-mois",
+  "libelle": "Présence en emploi à 1 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+1",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F009",
+   "X9F013"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--presence-en-emploi-a-1-mois",
+  "libelle": "Présence en emploi à 1 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F009",
+   "X9F013"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--sortants-de-formation--presence-en-emploi-a-1-mois",
+  "libelle": "Présence en emploi à 1 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F009",
+   "X9F013"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "acces-presence-en-emploi--presence-en-emploi-a-3-mois",
+  "libelle": "Présence en emploi à 3 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+3",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F007",
+   "X9F010"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--presence-en-emploi-a-3-mois",
+  "libelle": "Présence en emploi à 3 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F007",
+   "X9F010"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--sortants-de-formation--presence-en-emploi-a-3-mois",
+  "libelle": "Présence en emploi à 3 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F007",
+   "X9F010"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "acces-presence-en-emploi--presence-en-emploi-a-6-mois",
+  "libelle": "Présence en emploi à 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F004",
+   "X9F007"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "sortants-de-formation--presence-en-emploi-a-6-mois",
+  "libelle": "Présence en emploi à 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi sortis de formation au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F004",
+   "X9F007"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--presence-en-emploi-a-6-mois",
+  "libelle": "Présence en emploi à 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F004",
+   "X9F007"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--sortants-de-formation--presence-en-emploi-a-6-mois",
+  "libelle": "Présence en emploi à 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail"
+  ],
+  "noms_techniques": [
+   "Y1F004",
+   "X9F007"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "acces-presence-en-emploi--presence-en-emploi-dans-les-6-mois",
+  "libelle": "Présence en emploi dans les 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Moyenne du nombre de mois de présence en emploi entre M+1 et M+6 pour la cohorte du mois M.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "sortants-de-formation--presence-en-emploi-dans-les-6-mois",
+  "libelle": "Présence en emploi dans les 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Nombre moyen de mois de présence en emploi sur la période comprise entre le mois M+1 et le mois M+6 après une sortie de formation au mois M",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--presence-en-emploi-dans-les-6-mois",
+  "libelle": "Présence en emploi dans les 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--sortants-de-formation--presence-en-emploi-dans-les-6-mois",
+  "libelle": "Présence en emploi dans les 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "acces-presence-en-emploi--presence-en-emploi-durable-a-6-mois",
+  "libelle": "Présence en emploi durable à 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi inscrits à la fin du mois M et présents en emploi durable (CDI ou contrat de 6 mois ou plus) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "X9F014"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "sortants-de-formation--presence-en-emploi-durable-a-6-mois",
+  "libelle": "Présence en emploi durable à 6 mois",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi sortis de formation au mois M et présents en emploi durable (CDI ou contrat de 6 mois ou plus) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "X9F014"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "mesure--acces-presence-en-emploi--presence-en-emploi-durable-a-6-mois",
+  "libelle": "Présence en emploi durable à 6 mois",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "X9F014"
+  ],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "sortants-de-formation--presence-en-emploi-suite-a-une-formation-sur-un-metier-en-tension",
+  "libelle": "Présence en emploi suite à une formation sur un métier en tension",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi sortis de formation portant sur un métier en tension au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "groupe": "Présence en emploi"
+ },
+ {
+  "id": "champ--professions-et-categories-socioprofessionnelles",
+  "libelle": "Professions et catégories socioprofessionnelles",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Accès à l'emploi à 6 mois",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLPCSM6"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "mesure--entrants-en-formation--publics-prioritaires",
+  "libelle": "Publics prioritaires",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--publics-prioritaires-dans-les-entrants-en-formation",
+  "libelle": "Publics prioritaires dans les entrants en formation",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Part des publics prioritaires dans les entrants en formation.\n\nBénéficiaires du RSA\nBénéficiaires de l'obligation d'emploi\nSéniors (55 ans et +) \nJeunes (moins de 26 ans) de niveau de formation inférieur ou égal au Bac+2\nPersonnes inscrites de niveau de formation inférieur ou égal au Bac",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--qualification",
+  "libelle": "Qualification",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Variable catégorielle avec les modalités suivantes : Non precise, Manoeuvre, Ouvrier spécialisé, Ouvrier qualifié (p1,p2), Ouvrier qualifié (p3,p4,ohq), Employé non qualifié….",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Non precise",
+    "regle": ""
+   },
+   {
+    "valeur": "Manoeuvre",
+    "regle": ""
+   },
+   {
+    "valeur": "Ouvrier spécialisé",
+    "regle": ""
+   },
+   {
+    "valeur": "Ouvrier qualifié (p1,p2)",
+    "regle": ""
+   },
+   {
+    "valeur": "Ouvrier qualifié (p3,p4,ohq)",
+    "regle": ""
+   },
+   {
+    "valeur": "Employé non qualifié",
+    "regle": ""
+   },
+   {
+    "valeur": "Employé qualifié",
+    "regle": ""
+   },
+   {
+    "valeur": "Technicien",
+    "regle": ""
+   },
+   {
+    "valeur": "Agent de maîtrise",
+    "regle": ""
+   },
+   {
+    "valeur": "Cadre",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLQUALIFICATION"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "taux-de-recours--recours-2-annees-consecutives",
+  "libelle": "Recours 2 années consécutives",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des établissements ayant eu recours sur l'année A-1 et l'année A (fidélisation)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--recours-des-etablissements-de-travail-temporaire",
+  "libelle": "Recours des établissements de travail temporaire",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Taux de recours au réseau pour l’emploi sur une période de 12 mois des établissements de travail temporaire",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--recours-des-secteurs-avec-des-difficultes-de-recrutement",
+  "libelle": "Recours des secteurs avec des difficultés de recrutement",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Taux de recours au réseau pour l’emploi sur une période de 12 mois dans les secteurs rencontrant le plus de difficultés de recrutement (par département, top 5 des secteurs avec le plus de difficultés de recrutement pour des embauches hors saisonniers - enquête BMO 2025)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--recours-pour-des-recrutements-multiples",
+  "libelle": "Recours pour des recrutements multiples",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Taux de recours au réseau pour l’emploi sur une période de 12 mois pour des recruteurs ayant effectué plusieurs recrutements",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "taux-de-recours--recours-sur-des-embauches-en-emploi-durable",
+  "libelle": "Recours sur des embauches en emploi durable",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Taux de recours au réseau pour l’emploi sur une période de 12 mois pour des recruteurs ayant embauché en emploi durable (CDI ou CDD>6 mois)",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--referent-d-accompagnement",
+  "libelle": "Référent d'accompagnement",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Accompagnement",
+  "definition": "Variable catégorielle avec les modalités suivantes : Conseil départemental, Cap emploi, France travail, Mission locale, Sans référent.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Conseil départemental",
+    "regle": ""
+   },
+   {
+    "valeur": "Cap emploi",
+    "regle": ""
+   },
+   {
+    "valeur": "France travail",
+    "regle": ""
+   },
+   {
+    "valeur": "Mission locale",
+    "regle": ""
+   },
+   {
+    "valeur": "Sans référent",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLREFERENTACCOMPAGNEMENT"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "description-des-publics--residents-qpv",
+  "libelle": "Résidents QPV",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Dont le lieu de résidence est situé dans une zone Quartier Prioritaire de la Ville",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--residents-qpv",
+  "libelle": "Résidents QPV",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi résidents dans un quartier prioritaire de la ville (QPV), inscrits à la fin du mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--residents-qpv--part-demandeurs-emploi-residents",
+  "libelle": "Résidents QPV",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi résidents dans un quartier prioritaire de la ville (QPV), inscrits à la fin du mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "satisfaction-de--residents-qpv",
+  "libelle": "Résidents QPV",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi résidents dans un quartier prioritaire de la ville (QPV), assez ou très satisfaits du service reçu dans le cadre de leur accompagnement.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--residents-qpv",
+  "libelle": "Résidents QPV",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d'emploi résidents dans un quartier prioritaire de la ville (QPV) dans les entrants en formation",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--residents-qpv",
+  "libelle": "Résidents QPV",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi résidents dans un quartier prioritaire de la ville (QPV), sortis de formation au mois M et ayant accédé à l’emploi (>78 heures) entre le mois M+1 et le mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--residents-qpv--part-demandeurs-emploi-residents",
+  "libelle": "Résidents QPV",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi résidents dans un quartier prioritaire de la ville (QPV), sortis de formation au mois M et présents en emploi (>78 heures) au mois M+6",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "description-des-publics--residents-zfrr",
+  "libelle": "Résidents ZFRR",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Le zonage France ruralités revitalisation (ZFRR) a été mis en place depuis le 1er juillet 2024. La plupart des communes classées auparavant en zone de revitalisation rurale (ZRR) ont intégré le nouveau zonage ZFRR. Les « ZFRR + » qui concernent les territoires les plus vulnérables sont inclus dans les ZFRR.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--residents-zfrr",
+  "libelle": "Résidents ZFRR",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Le zonage France ruralités revitalisation (ZFRR) a été mis en place depuis le 1er juillet 2024. La plupart des communes classées auparavant en zone de revitalisation rurale (ZRR) ont intégré le nouveau zonage ZFRR. Les « ZFRR + » qui concernent les territoires les plus vulnérables sont inclus dans les ZFRR.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "acces-presence-en-emploi--residents-zfrr--zonage-france-ruralites-revitalisation",
+  "libelle": "Résidents ZFRR",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Le zonage France ruralités revitalisation (ZFRR) a été mis en place depuis le 1er juillet 2024. La plupart des communes classées auparavant en zone de revitalisation rurale (ZRR) ont intégré le nouveau zonage ZFRR. Les « ZFRR + » qui concernent les territoires les plus vulnérables sont inclus dans les ZFRR.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accès / Présence en emploi"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "entrants-en-formation--residents-zfrr",
+  "libelle": "Résidents ZFRR",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d'emploi résidents dans une commune relevant du Zonage France Ruralités Revitalisation (ZFRR) dans les entrants en formation.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--residents-zfrr",
+  "libelle": "Résidents ZFRR",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Le zonage France ruralités revitalisation (ZFRR) a été mis en place depuis le 1er juillet 2024. La plupart des communes classées auparavant en zone de revitalisation rurale (ZRR) ont intégré le nouveau zonage ZFRR. Les « ZFRR + » qui concernent les territoires les plus vulnérables sont inclus dans les ZFRR.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "sortants-de-formation--residents-zfrr--zonage-france-ruralites-revitalisation",
+  "libelle": "Résidents ZFRR",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Le zonage France ruralités revitalisation (ZFRR) a été mis en place depuis le 1er juillet 2024. La plupart des communes classées auparavant en zone de revitalisation rurale (ZRR) ont intégré le nouveau zonage ZFRR. Les « ZFRR + » qui concernent les territoires les plus vulnérables sont inclus dans les ZFRR.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "page--satisfaction-de",
+  "libelle": "Satisfaction DE",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "La satisfaction des publics vis-à-vis de leur accompagnement est une mesure importante qui permet de juger de la pertinence des services proposés aux demandeurs d'emploi.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--sexe",
+  "libelle": "Sexe",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Variable catégorielle avec les modalités suivantes : Femmes, Hommes.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Femmes",
+    "regle": ""
+   },
+   {
+    "valeur": "Hommes",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLSEXE"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--siret-de-l-organisme-de-formation",
+  "libelle": "SIRET de l'organisme de formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null
+ },
+ {
+  "id": "page--sortants-de-formation",
+  "libelle": "Sortants de formation",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Prendre en compte les résultats des actions de formation passées pour proposer une offre plus en adéquation avec les besoins du territoire et mieux orienter les demandeurs d’emploi.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": []
+ },
+ {
+  "id": "champ--taille-d-etablissement",
+  "libelle": "Taille d'établissement",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Etablissement",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--taille-de-l-etablissement",
+  "libelle": "Taille de l'établissement",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "Variable catégorielle avec les modalités suivantes : Moins de 10 salariés, 10 à 49 salariés, 50 à 99 salariés, 100 à 199 salariés, Plus de 200 salariés.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Moins de 10 salariés",
+    "regle": ""
+   },
+   {
+    "valeur": "10 à 49 salariés",
+    "regle": ""
+   },
+   {
+    "valeur": "50 à 99 salariés",
+    "regle": ""
+   },
+   {
+    "valeur": "100 à 199 salariés",
+    "regle": ""
+   },
+   {
+    "valeur": "Plus de 200 salariés",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_TAILLE"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "sortants-de-formation--taux-d-abandon",
+  "libelle": "Taux d'abandon",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des demandeurs d’emploi ayant abandonné la formation qu'ils suivaient avant son terme.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "A"
+ },
+ {
+  "id": "mesure--sortants-de-formation--taux-d-abandon-de-la-formation",
+  "libelle": "Taux d'abandon de la formation",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "A"
+ },
+ {
+  "id": "accueil--taux-d-acces-a-l-emploi",
+  "libelle": "Taux d'accès à l'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux d'accès à l'emploi : L’accès à l’emploi et la présence en emploi sont des indicateurs phares pour mesurer l’impact des actions engagées.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "A"
+ },
+ {
+  "id": "accueil--taux-d-acces-a-l-emploi-des-sortants-de-formation",
+  "libelle": "Taux d'accès à l'emploi des sortants de formation",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux d'accès à l'emploi des sortants de formation : Prendre en compte les résultats des actions de formation passées pour proposer une offre plus en adéquation avec les besoins du territoire et mieux orienter les demandeurs d’emploi.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "A"
+ },
+ {
+  "id": "description-des-publics--taux-d-actualisation-des-diagnostics",
+  "libelle": "Taux d’actualisation des diagnostics",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des diagnostics mis à jour dans les 6 derniers mois, parmi les diagnostics existants.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "D"
+ },
+ {
+  "id": "description-des-publics--taux-de-couverture-des-diagnostics",
+  "libelle": "Taux de couverture des diagnostics",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des inscrits avec un diagnostic socio-professionnel renseigné (réf. Article L.5411-5-2 du Code du travail).",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "C"
+ },
+ {
+  "id": "description-des-publics--taux-de-diagnostics-avec-contraintes",
+  "libelle": "Taux de diagnostics avec contraintes",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des diagnostics socio-professionnels incluant au moins une contrainte identifiée.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "D"
+ },
+ {
+  "id": "accueil--taux-de-pourvoi-des-offres",
+  "libelle": "Taux de pourvoi des offres",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux de pourvoi des offres : Les offres non pourvues sont un potentiel de création d'emplois et donc de réduction du chômage non saisi.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi",
+  "libelle": "Taux de pourvoi des offres d'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Part des offres d'emploi de plus de 30 jours pourvues au moment de la clôture sur l'ensemble des offres déposées.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "mesure--taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi",
+  "libelle": "Taux de pourvoi des offres d'emploi",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi-dans-des-secteurs-en-tension",
+  "libelle": "Taux de pourvoi des offres d'emploi dans des secteurs en tension",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des offres d'emploi de plus de 30 jours pourvues au moment de la clôture sur l'ensemble des offres déposées dans des secteurs en tension.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi-deposees-par-internet",
+  "libelle": "Taux de pourvoi des offres d'emploi déposées par internet",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des offres d'emploi de plus de 30 jours pourvues au moment de la clôture sur l'ensemble des offres déposées par internet.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi-des-recruteurs-recurrents",
+  "libelle": "Taux de pourvoi des offres d'emploi des recruteurs récurrents",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des offres d'emploi de plus de 30 jours pourvues au moment de la clôture sur l'ensemble des offres déposées par des employeurs ayant déposé plusieurs offres au cours des 12 derniers mois.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi-durables",
+  "libelle": "Taux de pourvoi des offres d'emploi durables",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des offres d'emploi durables pourvues au moment de la clôture sur l'ensemble des offres déposées.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi-en-interim",
+  "libelle": "Taux de pourvoi des offres d'emploi en intérim",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des offres d'emploi de plus de 30 jours pourvues au moment de la clôture sur l'ensemble des offres déposées dans l'intérim.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "taux-delai-de-pourvoi--taux-de-pourvoi-des-offres-d-emploi-multi-poste",
+  "libelle": "Taux de pourvoi des offres d'emploi multi-poste",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Part des offres d'emploi de plus de 30 jours pourvues au moment de la clôture sur l'ensemble des offres déposées avec au moins 2 postes à pourvoir.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "accueil--taux-de-presence-en-emploi",
+  "libelle": "Taux de présence en emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux de présence en emploi : L’accès à l’emploi et la présence en emploi sont des indicateurs phares pour mesurer l’impact des actions engagées.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "P"
+ },
+ {
+  "id": "page--taux-de-recours",
+  "libelle": "Taux de recours",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Si le taux de recours des employeurs aux services proposés par les acteurs du réseau pour l'emploi n'est pas un objectif de résultats en soit, une amélioration de cet indicateur est la conséquence d'actions d'aller vers et de prospection à destination des employeurs, qui permettent d'augmenter le nombre de recrutements faits par les entreprises et donc, de créer des emplois.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "R"
+ },
+ {
+  "id": "mesure--taux-de-recours--taux-de-recours",
+  "libelle": "Taux de recours",
+  "type": "mesure",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "Mesures",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "R"
+ },
+ {
+  "id": "accueil--taux-de-recours-au-reseau-pour-l-emploi",
+  "libelle": "Taux de recours au réseau pour l'emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux de recours au réseau pour l'emploi : Si le taux de recours des employeurs aux services proposés par les acteurs du réseau pour l'emploi n'est pas un objectif de résultats en soit, une amélioration de cet indicateur est la conséquence d'actions d'aller vers et de prospection à destination des employeurs, qui permettent d'augmenter le nombre de recrutements faits par les entreprises et donc, de créer des emplois.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "R"
+ },
+ {
+  "id": "taux-de-recours--taux-de-recours-au-reseau-pour-l-emploi",
+  "libelle": "Taux de recours au réseau pour l’emploi",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux de recours au réseau pour l’emploi sur une période de 12 mois",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "R"
+ },
+ {
+  "id": "satisfaction-de--taux-de-satisfaction-des-demandeurs-d-emploi-pour-leur-accompagnement",
+  "libelle": "Taux de satisfaction des demandeurs d'emploi pour leur accompagnement",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Des enquêtes en ligne sont adressées chaque mois par courriel à un échantillon aléatoire de demandeurs d’emploi.\nLe taux de satisfaction correspond à la proportion de répondants se déclarant assez ou très satisfaits du service reçu dans le cadre de leur accompagnement.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Satisfaction DE"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "S"
+ },
+ {
+  "id": "accueil--taux-de-satisfaction-des-demandeurs-d-emploi-sur-leur-accompagnement",
+  "libelle": "Taux de satisfaction des demandeurs d'emploi sur leur accompagnement",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux de satisfaction des demandeurs d'emploi sur leur accompagnement : La satisfaction des publics vis-à-vis de leur accompagnement est une mesure importante qui permet de juger de la pertinence des services proposés aux demandeurs d'emploi.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "S"
+ },
+ {
+  "id": "accueil--taux-de-satisfaction-des-entreprises",
+  "libelle": "Taux de satisfaction des entreprises",
+  "type": "mesure",
+  "source": "indicateur",
+  "kpi": true,
+  "categorie": null,
+  "definition": "Taux de satisfaction des entreprises : La satisfaction des employeurs vis-à-vis de leur accompagnement est une mesure importante qui permet de juger de la pertinence des services qui leur sont proposés.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": "",
+  "pages": [
+   "Accueil"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "S"
+ },
+ {
+  "id": "page--taux-delai-de-pourvoi",
+  "libelle": "Taux / Délai de pourvoi",
+  "type": null,
+  "source": "page",
+  "kpi": false,
+  "categorie": null,
+  "definition": "Les offres non pourvues sont un potentiel de création d'emplois et donc de réduction du chômage non saisi.\nL'accélération des recrutements est un objectif qui permet de réduire le chômage : un délai de recrutement plus court d’un jour, c’est un jour de chômage évité.",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "alias_lettre": "D"
+ },
+ {
+  "id": "champ--territoire",
+  "libelle": "Territoire",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "1. Territoire",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Territoire",
+   "niveau": 0
+  }
+ },
+ {
+  "id": "champ--territoire-niv1",
+  "libelle": "Territoire - National / Département",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "1. Territoire",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Territoire",
+   "niveau": 1
+  }
+ },
+ {
+  "id": "champ--territoire-niv2",
+  "libelle": "Territoire - National / Région",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "1. Territoire",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Taux de recours",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": {
+   "nom": "Territoire",
+   "niveau": 2
+  }
+ },
+ {
+  "id": "champ--top-26-ans",
+  "libelle": "Top -26 ans",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : -26 ans.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_MOINS26"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "A"
+ },
+ {
+  "id": "champ--top-26-ans-jusqu-a-bac-2",
+  "libelle": "Top -26 ans jusqu'à BAC+2",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : -26 ans jusqu'à BAC+2.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_MOINS26"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "A"
+ },
+ {
+  "id": "champ--top-50-ans-et",
+  "libelle": "Top 50 ans et +",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : 50 ans et +.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_50PLUS"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "A"
+ },
+ {
+  "id": "champ--top-50-ans-et-plus",
+  "libelle": "Top 50 ans et plus",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null,
+  "alias_lettre": "A"
+ },
+ {
+  "id": "champ--top-55-ans-et",
+  "libelle": "Top 55 ans et +",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : 55 ans et +.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_55PLUS"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "A"
+ },
+ {
+  "id": "champ--top-55-ans-et-plus",
+  "libelle": "Top 55 ans et plus",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Public",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Sortants de formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null,
+  "alias_lettre": "A"
+ },
+ {
+  "id": "champ--top-boe",
+  "libelle": "Top BOE",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : BOE.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_BOE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "B"
+ },
+ {
+  "id": "champ--top-brsa",
+  "libelle": "Top BRSA",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : BRSA.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_BRSA"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "B"
+ },
+ {
+  "id": "champ--top-cadre",
+  "libelle": "Top cadre",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : cadre.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CADRE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte",
+  "libelle": "Top contrainte",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-administration",
+  "libelle": "Top contrainte Administration",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Administration.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEADMINJURID"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-familiale",
+  "libelle": "Top contrainte Familiale",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Familiale.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEFAMILIALE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-financiere",
+  "libelle": "Top contrainte Financière",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Financière.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEFINANCIERE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-logement",
+  "libelle": "Top contrainte Logement",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Logement.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTELOGEMENT"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-mobilite",
+  "libelle": "Top contrainte Mobilité",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Mobilité.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTEMOBILITE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-numerique",
+  "libelle": "Top contrainte Numérique",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Numérique.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTENUMERIQUE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-sante",
+  "libelle": "Top contrainte Santé",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Santé.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTESANTE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-contrainte-savoir-de-base",
+  "libelle": "Top contrainte Savoir de base",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : contrainte Savoir de base.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONTRAINTESAVOIR"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-cpf",
+  "libelle": "Top CPF",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--top-deld",
+  "libelle": "Top DELD",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : DELD.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_DELD"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "D"
+ },
+ {
+  "id": "champ--top-depot-d-offre-internet",
+  "libelle": "Top dépôt d'offre internet",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : dépôt d'offre internet.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_DEPOTINTERNET"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "D"
+ },
+ {
+  "id": "champ--top-diagnostic",
+  "libelle": "Top diagnostic",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : diagnostic.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_DIAGNOSTIC"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "D"
+ },
+ {
+  "id": "champ--top-diagnostic-de-moins-de-6-mois",
+  "libelle": "Top diagnostic de moins de 6 mois",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : diagnostic de moins de 6 mois.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C LBLTOP_DIAGNOSTICMOINS6MOIS"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "D"
+ },
+ {
+  "id": "champ--top-difficulte-de-recrutement",
+  "libelle": "Top difficulté de recrutement",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : difficulté de recrutement.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_DIFFICULTERECRUTEMENT",
+   "C_LBLTOPSECTEURENTENSION"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "D"
+ },
+ {
+  "id": "champ--top-diplome-obtenu",
+  "libelle": "Top diplôme obtenu",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : diplôme obtenu.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_DIPLOMEOBTENU"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "D"
+ },
+ {
+  "id": "champ--top-formation-a-distance",
+  "libelle": "Top formation à distance",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "Variable catégorielle avec les modalités suivantes : Formation en centre, Formation en centre et à distance, Formation à distance, Non défini, Valeurs absentes.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Formation en centre",
+    "regle": ""
+   },
+   {
+    "valeur": "Formation en centre et à distance",
+    "regle": ""
+   },
+   {
+    "valeur": "Formation à distance",
+    "regle": ""
+   },
+   {
+    "valeur": "Non défini",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLFOAD"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "F"
+ },
+ {
+  "id": "champ--top-formation-certifiante",
+  "libelle": "Top formation certifiante",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : formation certifiante.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CERTIFIANTE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "F"
+ },
+ {
+  "id": "champ--top-interim",
+  "libelle": "Top intérim",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Etablissement",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : intérim.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_INTERIM"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "I"
+ },
+ {
+  "id": "champ--top-metier-en-tension",
+  "libelle": "Top métier en tension",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : métier en tension.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOPMETIERENTENSION"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "M"
+ },
+ {
+  "id": "champ--top-niveau-inferieur-au-bac",
+  "libelle": "Top niveau inférieur au BAC",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : niveau inférieur au BAC.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_INFRABAC"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "N"
+ },
+ {
+  "id": "champ--top-nouveau-recours",
+  "libelle": "Top nouveau recours",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Recours",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : nouveau recours.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_NOUVEAURECOURS"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "N"
+ },
+ {
+  "id": "champ--top-obligation-d-emploi",
+  "libelle": "Top obligation d'emploi",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : obligation d'emploi.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_BOE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "O"
+ },
+ {
+  "id": "champ--top-public-prioritaire",
+  "libelle": "Top public prioritaire",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : public prioritaire.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_PUBLICPRIO",
+   "C_LBLTOP_PIC"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "P"
+ },
+ {
+  "id": "champ--top-qpv",
+  "libelle": "Top QPV",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : QPV.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_QPV"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "Q"
+ },
+ {
+  "id": "champ--top-recours-a-1",
+  "libelle": "Top recours A-1",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Recours",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recours A-1.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECOURS_AM1"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recours-contrat-aide",
+  "libelle": "Top recours contrat aidé",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Recours",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recours contrat aidé.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSCONTRATAIDE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recours-offre",
+  "libelle": "Top recours offre",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Recours",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recours offre.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSOFFRE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recours-poei",
+  "libelle": "Top recours POEI",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Recours",
+  "definition": "Variable catégorielle avec les modalités suivantes : Oui :, Non.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui :",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSPOEI"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recours-promotion-de-profil",
+  "libelle": "Top recours promotion de profil",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Recours",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recours promotion de profil.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECOURSPDP"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recrutements-multiples",
+  "libelle": "Top recrutements multiples",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Etablissement",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recrutements multiples.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEMENTSMULTIPLES"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recruteur",
+  "libelle": "Top recruteur",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Etablissement",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recruteur.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEUR"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recruteur-emploi-durable",
+  "libelle": "Top recruteur emploi durable",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Etablissement",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recruteur emploi durable.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux de recours"
+  ],
+  "sources": [
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEUREMPLOIDURABLE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-recruteur-recurent",
+  "libelle": "Top recruteur récurent",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : recruteur récurent.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_RECRUTEURRECURENT"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ },
+ {
+  "id": "champ--top-service-adaptation",
+  "libelle": "Top service adaptation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : service adaptation.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_ADAPTATION"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-service-conseil-en-recrutement",
+  "libelle": "Top service conseil en recrutement",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : service conseil en recrutement.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_CONSEILRECRUTEMENT"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-service-mrs",
+  "libelle": "Top service MRS",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : service MRS.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_MRS"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-service-pmsmp",
+  "libelle": "Top service PMSMP",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : service PMSMP.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_PMSMP"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-service-preselection",
+  "libelle": "Top service preselection",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : service preselection.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_PRESELECTION"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-service-redaction-de-l-offre",
+  "libelle": "Top service rédaction de l'offre",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : service rédaction de l'offre.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_REDACTIONOFFRE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-siege-social",
+  "libelle": "Top siège social",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : siège social.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi",
+   "Taux de recours"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_SIEGESOCIAL"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-structure-iae",
+  "libelle": "Top structure IAE",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Employeur",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : structure IAE.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail",
+   "Déclaration Préalable à l'Embauche (DPAE) - Urssaf / MSA",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_STRUCTUREIAE"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "S"
+ },
+ {
+  "id": "champ--top-zfrr",
+  "libelle": "Top ZFRR",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Indicateur Oui/Non précisant si la situation suivante s'applique : ZFRR.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Oui",
+    "regle": ""
+   },
+   {
+    "valeur": "Non",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Taux / Délai de pourvoi",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Offres d'emploi France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTOP_ZFRR"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "Z"
+ },
+ {
+  "id": "champ--tranche-d-age",
+  "libelle": "Tranche d'âge",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Public",
+  "definition": "Variable catégorielle avec les modalités suivantes : Moins de 26 ans, De 26 à 39 ans, De 40 à 54 ans, 55 ans et plus.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Moins de 26 ans",
+    "regle": ""
+   },
+   {
+    "valeur": "De 26 à 39 ans",
+    "regle": ""
+   },
+   {
+    "valeur": "De 40 à 54 ans",
+    "regle": ""
+   },
+   {
+    "valeur": "55 ans et plus",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail",
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Enquête IPSOS"
+  ],
+  "noms_techniques": [
+   "C_LBLCATEGORIEAGE",
+   "C_LBLTRANCHEAGE"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--tranche-d-anciennete-du-diagnostic",
+  "libelle": "Tranche d'ancienneté du diagnostic",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "5. Diagnostic",
+  "definition": "Variable catégorielle avec les modalités suivantes : Moins de 1 mois, Entre 1 et 3 mois, Entre 4 et 6 mois, Entre 7 et 12 mois, Plus de 12 mois, Valeurs absentes.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Moins de 1 mois",
+    "regle": ""
+   },
+   {
+    "valeur": "Entre 1 et 3 mois",
+    "regle": ""
+   },
+   {
+    "valeur": "Entre 4 et 6 mois",
+    "regle": ""
+   },
+   {
+    "valeur": "Entre 7 et 12 mois",
+    "regle": ""
+   },
+   {
+    "valeur": "Plus de 12 mois",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics"
+  ],
+  "sources": [
+   "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
+   "Diagnostic Socio-Professionnel (DSP) - Opérateurs du RPE",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLANCIENNETEDIAGNOSTIC"
+  ],
+  "hierarchie": null
+ },
+ {
+  "id": "champ--type-de-contrat",
+  "libelle": "Type de contrat",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "",
+  "cas_usage": "",
+  "modalites": null,
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [],
+  "noms_techniques": [],
+  "hierarchie": null,
+  "alias_lettre": "C"
+ },
+ {
+  "id": "champ--type-de-formation",
+  "libelle": "Type de formation",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "3. Formation",
+  "definition": "Variable catégorielle avec les modalités suivantes : AFC, AIF, Autres financeurs (Etat, Ministères, Collectivités, Agefiph, partenaires…), Bénéficiaire de l'action, Conseil Régional, POE collective….",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "AFC",
+    "regle": ""
+   },
+   {
+    "valeur": "AIF",
+    "regle": ""
+   },
+   {
+    "valeur": "Autres financeurs (Etat, Ministères, Collectivités, Agefiph, partenaires…)",
+    "regle": ""
+   },
+   {
+    "valeur": "Bénéficiaire de l'action",
+    "regle": ""
+   },
+   {
+    "valeur": "Conseil Régional",
+    "regle": ""
+   },
+   {
+    "valeur": "POE collective",
+    "regle": ""
+   },
+   {
+    "valeur": "POEI",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Attestations d'Entrée en Stage (AES) - France Travail",
+   "Compte personnel de formation (CPF) - Caisse des Dépôts",
+   "Déclaration Sociale Nominative (DSN) - GIP-MDS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTYPEFORMATION_2",
+   "C_LBLTYPEFORMATIONNIV2"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "F"
+ },
+ {
+  "id": "champ--type-de-parcours",
+  "libelle": "Type de parcours",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Accompagnement",
+  "definition": "Variable catégorielle avec les modalités suivantes : Social, Socio-professionnel, Professionnel, Indéterminé.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Social",
+    "regle": ""
+   },
+   {
+    "valeur": "Socio-professionnel",
+    "regle": ""
+   },
+   {
+    "valeur": "Professionnel",
+    "regle": ""
+   },
+   {
+    "valeur": "Indéterminé",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Description des publics",
+   "Accès / Présence en emploi",
+   "Entrants en formation",
+   "Sortants de formation"
+  ],
+  "sources": [
+   "Enquête IPSOS",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTYPEPARCOURS"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "P"
+ },
+ {
+  "id": "champ--type-recrutement",
+  "libelle": "Type recrutement",
+  "type": "dimension",
+  "source": "champ_tableau",
+  "kpi": false,
+  "categorie": "4. Offre d'emploi",
+  "definition": "Variable catégorielle avec les modalités suivantes : Service auto délivré sans conseiller et/ou aide rédaction, Service délivré par un conseiller, Service auto délivré avec conseiller et/ou aide rédaction, Valeurs absentes, Valeurs erronées.",
+  "cas_usage": "",
+  "modalites": [
+   {
+    "valeur": "Service auto délivré sans conseiller et/ou aide rédaction",
+    "regle": ""
+   },
+   {
+    "valeur": "Service délivré par un conseiller",
+    "regle": ""
+   },
+   {
+    "valeur": "Service auto délivré avec conseiller et/ou aide rédaction",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs absentes",
+    "regle": ""
+   },
+   {
+    "valeur": "Valeurs erronées",
+    "regle": ""
+   }
+  ],
+  "periode_calcul": null,
+  "pages": [
+   "Taux / Délai de pourvoi"
+  ],
+  "sources": [
+   "Offres d'emploi France Travail",
+   "Autres données France Travail"
+  ],
+  "noms_techniques": [
+   "C_LBLTYPERECRUTEMENT"
+  ],
+  "hierarchie": null,
+  "alias_lettre": "R"
+ }
+]
