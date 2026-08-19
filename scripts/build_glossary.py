@@ -27,7 +27,16 @@ def norm_key(s):
 
 
 def clean_champ_name(champ):
-    return champ.rstrip('.').strip()
+    c = champ.rstrip('.').strip()
+    return CHAMP_LABEL_ALIASES.get(c, c)
+
+
+# Libelles de champs quasi-identiques (variante orthographique) designant la meme donnee.
+# A completer si d'autres rapprochements de ce type sont identifies.
+CHAMP_LABEL_ALIASES = {
+    'Top 50 ans et +': 'Top 50 ans et plus',
+    'Top 55 ans et +': 'Top 55 ans et plus',
+}
 
 
 def definition_slug(definition, maxwords=4):
@@ -459,12 +468,26 @@ print('Champs de tableaux personnalises (dimensions + niveaux + mesures) :',
 GROUP_RULES = [
     (re.compile(r"^Acc[èe]s [àa] l'emploi"), "Accès à l'emploi"),
     (re.compile(r'^Pr[ée]sence en emploi'), 'Présence en emploi'),
+    (re.compile(r"^Nombre d'acc[èe]s [àa] un emploi"), "Nombre d'accès à un emploi"),
+    (re.compile(r"^Nombre d'individus en emploi"), "Nombre d'individus en emploi"),
+    (re.compile(r"^D[ée]lai moyen d'acc[èe]s [àa] l'emploi"), "Délai moyen d'accès à l'emploi"),
+    (re.compile(r'^Inscrits depuis plus de'), 'Inscrits depuis plus de X mois'),
 ]
 for rec in records:
     for rx, group_name in GROUP_RULES:
         if rx.match(rec['libelle']):
             rec['groupe'] = group_name
             break
+
+# Un "groupe" d'un seul membre n'a pas de sens (rien a regrouper) : on le retire.
+group_sizes = {}
+for rec in records:
+    if rec.get('groupe'):
+        key = (rec['groupe'], rec['source'])
+        group_sizes[key] = group_sizes.get(key, 0) + 1
+for rec in records:
+    if rec.get('groupe') and group_sizes[(rec['groupe'], rec['source'])] < 2:
+        del rec['groupe']
 
 # ---------------------------------------------------------------------------
 # 4. Lettre alias pour "Top X" / "Taux X" / "Part X" / "Type X" / "Date X"

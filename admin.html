@@ -9,6 +9,7 @@
 <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script defer src="firebase-config.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 /* ==== En-tete/pied de page : identiques a index.html, ne pas modifier ==== */
 @font-face{font-family:'Marianne';src:url('fonts/Marianne-Light.woff2') format('woff2');font-weight:300;font-display:swap}
@@ -129,6 +130,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <button class="btn btn--sm" id="btnSelectAll">Tout sélectionner</button>
         <button class="btn btn--sm" id="btnValidateSelection">Valider la sélection</button>
         <button class="btn btn--secondary btn--sm" id="btnRecalcCompteurs" title="Recalcule le nombre de demandes en attente pour chaque champ à partir des propositions réellement en attente">🔄 Réparer les compteurs</button>
+        <button class="btn btn--secondary btn--sm" id="btnExportXlsx" title="Exporte le glossaire actuellement publié (base + contributions validées) en Excel, un onglet par nature">📊 Exporter en Excel</button>
         <button class="btn btn--danger btn--sm" id="btnPurge" title="Supprime toutes les contributions (ajouts, modifications, compteurs, propositions) - à utiliser après une refonte du contenu de base">🧹 Purger la base</button>
         <button class="btn btn--sm" id="btnLogout">Se déconnecter</button>
       </div>
@@ -661,7 +663,74 @@ document.getElementById('btnRecalcCompteurs').addEventListener('click', function
   });
 });
 
-var PURGE_COLLECTIONS = ['glossaire_overrides', 'glossaire_ajouts', 'compteurs', 'propositions'];
+function formatDefinitionForExport(rec){
+  if (rec.definitions_par_page) {
+    return Object.keys(rec.definitions_par_page).map(function(ctx){
+      return ctx + ' : ' + rec.definitions_par_page[ctx];
+    }).join('\n');
+  }
+  return rec.definition || '';
+}
+
+function formatHierarchieForExport(rec){
+  if (!rec.hierarchie) return '';
+  return (rec.hierarchie.nom || '') + ' - niveau ' + (rec.hierarchie.niveau != null ? rec.hierarchie.niveau : '');
+}
+
+function exportGlossaryXlsx(){
+  var entries = Object.keys(publishedById).map(function(id){ return publishedById[id]; })
+    .filter(function(e){ return !e.supprime; });
+
+  var indicateurs = entries.filter(function(e){ return e.source === 'indicateur'; })
+    .sort(function(a,b){ return a.libelle.localeCompare(b.libelle, 'fr'); })
+    .map(function(e){
+      return {
+        'Libellé': e.libelle,
+        'KPI': e.kpi ? 'Oui' : 'Non',
+        'Pages': (e.pages || []).join(', '),
+        'Définition': formatDefinitionForExport(e),
+        "Cas d'usage": e.cas_usage || '',
+        'Groupe': e.groupe || '',
+        'Sources': (e.sources || []).join(', '),
+        'Noms techniques': (e.noms_techniques || []).join(', ')
+      };
+    });
+
+  var champs = entries.filter(function(e){ return e.source === 'champ_tableau'; })
+    .sort(function(a,b){ return a.libelle.localeCompare(b.libelle, 'fr'); })
+    .map(function(e){
+      return {
+        'Libellé': e.libelle,
+        'Type': e.type === 'mesure' ? 'Mesure' : 'Dimension',
+        'Catégorie': e.categorie || '',
+        'Pages': (e.pages || []).join(', '),
+        'Définition': formatDefinitionForExport(e),
+        'Modalités': fmt(e.modalites),
+        'Groupe': e.groupe || '',
+        'Variable hiérarchique': formatHierarchieForExport(e),
+        'Sources': (e.sources || []).join(', '),
+        'Noms techniques': (e.noms_techniques || []).join(', ')
+      };
+    });
+
+  var wb = XLSX.utils.book_new();
+  var wsIndicateurs = XLSX.utils.json_to_sheet(indicateurs);
+  var wsChamps = XLSX.utils.json_to_sheet(champs);
+  XLSX.utils.book_append_sheet(wb, wsIndicateurs, 'Indicateurs');
+  XLSX.utils.book_append_sheet(wb, wsChamps, 'Champs');
+  var dateStr = new Date().toISOString().slice(0, 10);
+  XLSX.writeFile(wb, 'glossaire-rpe-' + dateStr + '.xlsx');
+}
+
+document.getElementById('btnExportXlsx').addEventListener('click', function(){
+  var btn = this;
+  if (typeof XLSX === 'undefined') {
+    btn.textContent = '❌ Bibliothèque Excel non chargée, réessayez';
+    setTimeout(function(){ btn.textContent = '📊 Exporter en Excel'; }, 2500);
+    return;
+  }
+  exportGlossaryXlsx();
+});
 
 function countDocs(){
   return Promise.all(PURGE_COLLECTIONS.map(function(name){

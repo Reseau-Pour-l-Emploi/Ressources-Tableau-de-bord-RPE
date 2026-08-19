@@ -5,7 +5,7 @@ service cloud.firestore {
     function isAdmin() {
       return request.auth != null
         && request.auth.token.email != null
-        && request.auth.token.email in ['denis.gorce@francetravail.fr'];
+        && request.auth.token.email in ['rpe_admin@ft.fr'];
       // Cette liste doit rester identique a ADMIN_EMAILS dans firebase-config.js
     }
 

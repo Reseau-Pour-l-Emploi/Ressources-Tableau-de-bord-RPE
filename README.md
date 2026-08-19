@@ -137,6 +137,16 @@ Ordre d'affichage des étiquettes à côté d'un intitulé : **Indicateur/Champ*
 
 Un groupe (ex. "Accès à l'emploi") peut exister à la fois côté indicateurs et côté champs de tableaux, mais ce sont deux fiches "Groupe" distinctes - jamais fusionnées entre elles. `build_glossary.py` assigne `groupe` à toute fiche correspondant à la règle, quelle que soit sa nature ; c'est `index.html` (`buildDisplayItems`) qui consolide les membres par clé `(groupe, source)`, garantissant qu'un groupe ne mélange jamais indicateurs et champs.
 
+## Familles de groupes reconnues
+
+`GROUP_RULES` (en tête de `build_glossary.py`) : "Accès à l'emploi", "Présence en emploi", "Nombre d'accès à un emploi", "Nombre d'individus en emploi", "Délai moyen d'accès à l'emploi", "Inscrits depuis plus de X mois". Un groupe qui ne compterait qu'un seul membre après application des règles est automatiquement annulé (pas de groupe à un seul élément). À compléter si d'autres familles de libellés proches sont identifiées.
+
+`CHAMP_LABEL_ALIASES` : variantes orthographiques d'un même champ de tableau personnalisé (ex. "Top 50 ans et +" / "Top 50 ans et plus"), fusionnées comme `LABEL_ALIASES` pour les indicateurs.
+
+## Export Excel structuré (admin)
+
+Bouton **"📊 Exporter en Excel"** dans `admin.html` : génère un `.xlsx` à deux onglets - **Indicateurs** (Libellé, KPI, Pages, Définition, Cas d'usage, Groupe, Sources, Noms techniques) et **Champs** (Libellé, Type, Catégorie, Pages, Définition, Modalités, Groupe, Variable hiérarchique, Sources, Noms techniques) - à partir des données **réellement publiées** (base + contributions validées, fusionnées), pas seulement `data/glossary.json`. Généré côté navigateur via la bibliothèque SheetJS (CDN), aucun serveur nécessaire.
+
 ## Notes
 
 - Aucune donnée personnelle stockée côté client : l'email des contributeurs n'est lisible que par l'admin (règles Firestore).

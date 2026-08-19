@@ -931,7 +931,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Délai moyen d'accès à l'emploi"
  },
  {
   "id": "mesure--acces-presence-en-emploi--delai-moyen-d-acces-a-l-emploi",
@@ -948,7 +949,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Délai moyen d'accès à l'emploi"
  },
  {
   "id": "sortants-de-formation--delai-moyen-d-acces-a-l-emploi-des-sortants-de-formation",
@@ -965,7 +967,8 @@
    "Sortants de formation"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Délai moyen d'accès à l'emploi"
  },
  {
   "id": "mesure--sortants-de-formation--delai-moyen-d-acces-a-l-emploi-des-sortants-de-formation",
@@ -982,7 +985,8 @@
    "Sortants de formation"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Délai moyen d'accès à l'emploi"
  },
  {
   "id": "satisfaction-de--delta-sat",
@@ -1394,7 +1398,8 @@
    "Description des publics"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Inscrits depuis plus de X mois"
  },
  {
   "id": "description-des-publics--inscrits-depuis-plus-de-24-mois",
@@ -1411,7 +1416,8 @@
    "Description des publics"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Inscrits depuis plus de X mois"
  },
  {
   "id": "mesure--description-des-publics--inscrits-hors-actualisation-hybride",
@@ -1904,7 +1910,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'accès à un emploi"
  },
  {
   "id": "mesure--acces-presence-en-emploi--nombre-d-acces-a-un-emploi-apres-3-mois",
@@ -1921,7 +1928,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'accès à un emploi"
  },
  {
   "id": "mesure--acces-presence-en-emploi--nombre-d-acces-a-un-emploi-apres-6-mois",
@@ -1938,7 +1946,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'accès à un emploi"
  },
  {
   "id": "mesure--acces-presence-en-emploi--nombre-d-acces-a-un-emploi-durable-apres-6-mois",
@@ -1955,7 +1964,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'accès à un emploi"
  },
  {
   "id": "mesure--entrants-en-formation--nombre-d-entrees-en-formation",
@@ -2023,7 +2033,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'individus en emploi"
  },
  {
   "id": "mesure--acces-presence-en-emploi--nombre-d-individus-en-emploi-apres-3-mois",
@@ -2040,7 +2051,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'individus en emploi"
  },
  {
   "id": "acces-presence-en-emploi--nombre-d-individus-en-emploi-apres-6-mois",
@@ -2074,7 +2086,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'individus en emploi"
  },
  {
   "id": "mesure--acces-presence-en-emploi--nombre-d-individus-en-emploi-durable-apres-6-mois",
@@ -2091,7 +2104,8 @@
    "Accès / Présence en emploi"
   ],
   "sources": [],
-  "noms_techniques": []
+  "noms_techniques": [],
+  "groupe": "Nombre d'individus en emploi"
  },
  {
   "id": "description-des-publics--nombre-d-inscrits-a-france-travail",
@@ -3739,8 +3753,8 @@
   "alias_lettre": "A"
  },
  {
-  "id": "champ--top-50-ans-et",
-  "libelle": "Top 50 ans et +",
+  "id": "champ--top-50-ans-et-plus",
+  "libelle": "Top 50 ans et plus",
   "type": "dimension",
   "source": "champ_tableau",
   "kpi": false,
@@ -3762,7 +3776,8 @@
    "Description des publics",
    "Accès / Présence en emploi",
    "Taux / Délai de pourvoi",
-   "Entrants en formation"
+   "Entrants en formation",
+   "Sortants de formation"
   ],
   "sources": [
    "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
@@ -3780,27 +3795,8 @@
   "alias_lettre": "A"
  },
  {
-  "id": "champ--top-50-ans-et-plus",
-  "libelle": "Top 50 ans et plus",
-  "type": "dimension",
-  "source": "champ_tableau",
-  "kpi": false,
-  "categorie": "4. Public",
-  "definition": "",
-  "cas_usage": "",
-  "modalites": null,
-  "periode_calcul": null,
-  "pages": [
-   "Sortants de formation"
-  ],
-  "sources": [],
-  "noms_techniques": [],
-  "hierarchie": null,
-  "alias_lettre": "A"
- },
- {
-  "id": "champ--top-55-ans-et",
-  "libelle": "Top 55 ans et +",
+  "id": "champ--top-55-ans-et-plus",
+  "libelle": "Top 55 ans et plus",
   "type": "dimension",
   "source": "champ_tableau",
   "kpi": false,
@@ -3822,7 +3818,8 @@
    "Description des publics",
    "Accès / Présence en emploi",
    "Taux / Délai de pourvoi",
-   "Entrants en formation"
+   "Entrants en formation",
+   "Sortants de formation"
   ],
   "sources": [
    "Statistiques du Marché du Travail (STMT) - DARES / France Travail",
@@ -3837,25 +3834,6 @@
   "noms_techniques": [
    "C_LBLTOP_55PLUS"
   ],
-  "hierarchie": null,
-  "alias_lettre": "A"
- },
- {
-  "id": "champ--top-55-ans-et-plus",
-  "libelle": "Top 55 ans et plus",
-  "type": "dimension",
-  "source": "champ_tableau",
-  "kpi": false,
-  "categorie": "4. Public",
-  "definition": "",
-  "cas_usage": "",
-  "modalites": null,
-  "periode_calcul": null,
-  "pages": [
-   "Sortants de formation"
-  ],
-  "sources": [],
-  "noms_techniques": [],
   "hierarchie": null,
   "alias_lettre": "A"
  },

@@ -12,4 +12,4 @@ var FIREBASE_CONFIG = {
 
 // Email(s) autorisé(s) a se connecter comme administrateur (doit correspondre
 // a firestore.rules et aux comptes crees dans Firebase Authentication > Utilisateurs).
-var ADMIN_EMAILS = ["denis.gorce@francetravail.fr"];
+var ADMIN_EMAILS = ["rpe_admin@ft.fr"];
