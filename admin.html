@@ -80,6 +80,11 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .edit-textarea{min-height:64px;resize:vertical}
 .edit-select[multiple]{min-height:90px}
 .edit-footer{margin-top:20px;padding-top:14px;border-top:1px solid var(--ft-gray-200);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.repeater-row{border:1px solid var(--ft-gray-200);border-radius:6px;padding:12px;margin-bottom:8px;background:var(--ft-sable)}
+.repeater-row .edit-input,.repeater-row .edit-textarea{margin-bottom:6px}
+.liens-repeater{margin:8px 0;padding:8px;background:#fff;border:1px dashed var(--ft-gray-300);border-radius:4px}
+.lien-row{display:grid;grid-template-columns:1fr 2fr auto;gap:6px;margin-bottom:6px;align-items:center}
+.lien-row input{padding:6px 8px;font:inherit;font-size:12.5px;border:1px solid var(--ft-gray-200);border-radius:4px}
 .edit-result-row{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--ft-gray-200);border-radius:6px;padding:8px 12px;margin-bottom:6px;cursor:pointer;background:#fff}
 .edit-result-row:hover{border-color:var(--ft-indigo)}
 .edit-result-meta{font-size:11px;color:var(--ft-gray-500)}
@@ -108,7 +113,8 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
       <h1>Administration du glossaire RPE</h1>
       <div class="sub">Validation des propositions de contribution</div>
     </div>
-    <a class="admin-link" href="index.html">&larr; Retour au glossaire public</a>
+    <a class="admin-link" href="index.html">&larr; Accueil</a>
+    <a class="admin-link" href="glossaire.html">&larr; Glossaire public</a>
   </div>
 </header>
 
@@ -127,6 +133,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn--sm" id="tabProps">Propositions en attente</button>
         <button class="btn btn--secondary btn--sm" id="tabEdit">✏️ Mode édition</button>
+        <button class="btn btn--secondary btn--sm" id="tabSite">📄 Contenu du site</button>
         <button class="btn btn--sm" id="btnSelectAll">Tout sélectionner</button>
         <button class="btn btn--sm" id="btnValidateSelection">Valider la sélection</button>
         <button class="btn btn--secondary btn--sm" id="btnRecalcCompteurs" title="Recalcule le nombre de demandes en attente pour chaque champ à partir des propositions réellement en attente">🔄 Réparer les compteurs</button>
@@ -153,6 +160,68 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <div id="editResults" style="margin-top:12px"></div>
       </div>
       <div id="editFormHolder"></div>
+    </div>
+
+    <div id="siteSection" style="display:none">
+      <div class="card" style="max-width:900px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h3 style="margin:0">Page d'accueil (index.html)</h3>
+          <button class="btn btn--sm" id="btnSaveSite">💾 Enregistrer le contenu du site</button>
+        </div>
+        <div id="siteStatus" style="font-size:12.5px;margin:8px 0"></div>
+
+        <div class="edit-section-label">Lien du bouton "Accéder au Tableau de Bord RPE" (utilisé sur toutes les pages)</div>
+        <input class="edit-input" id="site_tdb_url">
+
+        <div class="edit-section-label">Texte d'introduction</div>
+        <textarea class="edit-textarea" id="site_intro_texte" style="min-height:90px"></textarea>
+
+        <div class="edit-section-label">Vidéos d'introduction</div>
+        <div id="rep_videos"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_videos">+ Ajouter une vidéo</button>
+
+        <div class="edit-section-label">Textes réglementaires</div>
+        <div id="rep_textes"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_textes">+ Ajouter un texte</button>
+
+        <div class="edit-section-label">Agenda</div>
+        <div id="rep_agenda"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_agenda">+ Ajouter un élément d'agenda</button>
+
+        <div class="edit-section-label">Actualités</div>
+        <div id="rep_actualites"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_actualites">+ Ajouter une actualité</button>
+
+        <div class="edit-section-label">Newsletters</div>
+        <div id="rep_newsletters"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_newsletters">+ Ajouter une newsletter</button>
+
+        <div class="edit-section-label">Webinaires</div>
+        <div id="rep_webinaires"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_webinaires">+ Ajouter un webinaire</button>
+
+        <div class="edit-section-label">Ressources complémentaires</div>
+        <div id="rep_ressources"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_ressources">+ Ajouter une ressource</button>
+
+        <div class="edit-section-label">Contact - texte</div>
+        <textarea class="edit-textarea" id="site_contact_texte"></textarea>
+        <div class="edit-section-label">Contact - lien de prise de rendez-vous</div>
+        <input class="edit-input" id="site_contact_booking">
+        <div class="edit-section-label">Contact - consignes en cas d'erreur</div>
+        <textarea class="edit-textarea" id="site_contact_consignes"></textarea>
+        <div class="edit-section-label">Contact - email support</div>
+        <input class="edit-input" id="site_contact_email">
+
+        <div class="edit-section-label">Liens en pied de page (autres outils)</div>
+        <div id="rep_footer_liens"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="add_footer_liens">+ Ajouter un lien</button>
+
+        <div class="edit-footer">
+          <button class="btn btn--sm" id="btnSaveSite2">💾 Enregistrer le contenu du site</button>
+          <span id="siteStatus2" style="font-size:12.5px"></span>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -971,15 +1040,178 @@ function setActiveTab(tab){
   document.getElementById('propList').style.display = tab === 'props' ? 'block' : 'none';
   document.getElementById('purgeConfirm').style.display = tab === 'props' ? 'block' : 'none';
   document.getElementById('editSection').style.display = tab === 'edit' ? 'block' : 'none';
+  document.getElementById('siteSection').style.display = tab === 'site' ? 'block' : 'none';
   document.getElementById('tabProps').className = 'btn btn--sm' + (tab === 'props' ? ' tab-active' : '');
   document.getElementById('tabEdit').className = 'btn btn--secondary btn--sm' + (tab === 'edit' ? ' tab-active' : '');
-  document.getElementById('panelTitle').textContent = tab === 'props' ? 'Propositions en attente' : 'Édition directe du glossaire';
-  document.querySelectorAll('#btnSelectAll,#btnValidateSelection,#btnRecalcCompteurs,#btnPurge').forEach(function(el){
+  document.getElementById('tabSite').className = 'btn btn--secondary btn--sm' + (tab === 'site' ? ' tab-active' : '');
+  document.getElementById('panelTitle').textContent =
+    tab === 'props' ? 'Propositions en attente' : (tab === 'edit' ? 'Édition directe du glossaire' : "Contenu de la page d'accueil");
+  document.querySelectorAll('#btnSelectAll,#btnValidateSelection,#btnRecalcCompteurs,#btnPurge,#btnExportXlsx,#btnImportXlsx').forEach(function(el){
     el.style.display = tab === 'props' ? 'inline-block' : 'none';
   });
+  if (tab === 'site' && !siteContentLoaded) loadSiteContent();
 }
 document.getElementById('tabProps').addEventListener('click', function(){ setActiveTab('props'); });
 document.getElementById('tabEdit').addEventListener('click', function(){ setActiveTab('edit'); document.getElementById('editFormHolder').innerHTML = ''; });
+document.getElementById('tabSite').addEventListener('click', function(){ setActiveTab('site'); });
+
+/* ==== Contenu du site (page d'accueil) : editeur generique sans code ==== */
+var siteContentLoaded = false;
+var repeaters = {};
+
+var DEFAULT_SITE_CONTENT = {
+  tdb_url: "http://pilotage-rpe.francetravail.org/rpe",
+  intro: { texte: "", videos: [], textes: [] },
+  agenda: [], actualites: [], newsletters: [], webinaires: [], ressources: [],
+  contact: { texte: "", booking_url: "", consignes_erreur: "", email_support: "" },
+  footer_liens: []
+};
+
+function createRepeater(containerId, itemsInitial, fields){
+  var container = document.getElementById(containerId);
+  var state = JSON.parse(JSON.stringify(itemsInitial || []));
+
+  function render(){
+    container.innerHTML = '';
+    state.forEach(function(item, idx){
+      var row = document.createElement('div');
+      row.className = 'repeater-row';
+      var fieldsHtml = '';
+      if (fields.indexOf('titre') > -1) fieldsHtml += '<input class="edit-input" data-field="titre" placeholder="Titre" value="' + escapeHtml(item.titre||'') + '">';
+      if (fields.indexOf('date') > -1) fieldsHtml += '<input class="edit-input" data-field="date" placeholder="Date (ex. 10-07-2026)" value="' + escapeHtml(item.date||'') + '">';
+      if (fields.indexOf('description') > -1) fieldsHtml += '<textarea class="edit-textarea" data-field="description" placeholder="Description (facultatif)">' + escapeHtml(item.description||'') + '</textarea>';
+      if (fields.indexOf('url') > -1) fieldsHtml += '<input class="edit-input" data-field="url" placeholder="Lien" value="' + escapeHtml(item.url||'') + '">';
+      row.innerHTML = fieldsHtml;
+
+      if (fields.indexOf('liens') > -1) {
+        var liensDiv = document.createElement('div');
+        liensDiv.className = 'liens-repeater';
+        (item.liens || []).forEach(function(lien, lidx){
+          var lrow = document.createElement('div');
+          lrow.className = 'lien-row';
+          lrow.innerHTML = '<input placeholder="Libellé (ex : 🎬 Replay)" data-lf="label" value="' + escapeHtml(lien.label||'') + '">' +
+            '<input placeholder="URL" data-lf="url" value="' + escapeHtml(lien.url||'') + '">' +
+            '<button type="button" class="btn--link">Retirer</button>';
+          lrow.querySelector('button').addEventListener('click', function(){ item.liens.splice(lidx,1); render(); });
+          liensDiv.appendChild(lrow);
+        });
+        var addLienBtn = document.createElement('button');
+        addLienBtn.type = 'button'; addLienBtn.className = 'btn btn--secondary btn--sm'; addLienBtn.textContent = '+ Lien';
+        addLienBtn.addEventListener('click', function(){
+          syncItemFromDom(row, item, fields);
+          item.liens = item.liens || [];
+          item.liens.push({label:'', url:''});
+          render();
+        });
+        row.appendChild(liensDiv);
+        row.appendChild(addLienBtn);
+      }
+
+      var removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'btn btn--danger btn--sm';
+      removeBtn.style.marginLeft = '8px';
+      removeBtn.textContent = '🗑️ Supprimer';
+      removeBtn.addEventListener('click', function(){ state.splice(idx,1); render(); });
+      row.appendChild(removeBtn);
+
+      container.appendChild(row);
+    });
+  }
+
+  function syncItemFromDom(row, item, flds){
+    flds.forEach(function(f){
+      if (f === 'liens') return;
+      var el = row.querySelector('[data-field="' + f + '"]');
+      if (el) item[f] = el.value.trim();
+    });
+  }
+
+  render();
+
+  return {
+    addItem: function(){ state.push({titre:'', date:'', description:'', url:'', liens: fields.indexOf('liens') > -1 ? [] : undefined}); render(); },
+    collect: function(){
+      var rows = container.querySelectorAll('.repeater-row');
+      rows.forEach(function(row, idx){
+        syncItemFromDom(row, state[idx], fields);
+        if (fields.indexOf('liens') > -1) {
+          var liens = [];
+          row.querySelectorAll('.lien-row').forEach(function(lrow){
+            var label = lrow.querySelector('[data-lf="label"]').value.trim();
+            var url = lrow.querySelector('[data-lf="url"]').value.trim();
+            if (label || url) liens.push({label: label, url: url});
+          });
+          state[idx].liens = liens;
+        }
+      });
+      return state.filter(function(it){
+        return it.titre || it.description || it.url || (it.liens && it.liens.length);
+      });
+    }
+  };
+}
+
+function loadSiteContent(){
+  db.collection('site_content').doc('homepage').get().then(function(doc){
+    var c = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : DEFAULT_SITE_CONTENT;
+    document.getElementById('site_tdb_url').value = c.tdb_url || '';
+    document.getElementById('site_intro_texte').value = (c.intro && c.intro.texte) || '';
+    document.getElementById('site_contact_texte').value = (c.contact && c.contact.texte) || '';
+    document.getElementById('site_contact_booking').value = (c.contact && c.contact.booking_url) || '';
+    document.getElementById('site_contact_consignes').value = (c.contact && c.contact.consignes_erreur) || '';
+    document.getElementById('site_contact_email').value = (c.contact && c.contact.email_support) || '';
+
+    repeaters.videos = createRepeater('rep_videos', (c.intro && c.intro.videos) || [], ['titre','url']);
+    repeaters.textes = createRepeater('rep_textes', (c.intro && c.intro.textes) || [], ['titre','url']);
+    repeaters.agenda = createRepeater('rep_agenda', c.agenda || [], ['titre','date','description','liens']);
+    repeaters.actualites = createRepeater('rep_actualites', c.actualites || [], ['titre','date','description','liens']);
+    repeaters.newsletters = createRepeater('rep_newsletters', c.newsletters || [], ['titre','liens']);
+    repeaters.webinaires = createRepeater('rep_webinaires', c.webinaires || [], ['titre','date','liens']);
+    repeaters.ressources = createRepeater('rep_ressources', c.ressources || [], ['titre','liens']);
+    repeaters.footer_liens = createRepeater('rep_footer_liens', c.footer_liens || [], ['titre','url']);
+
+    siteContentLoaded = true;
+  });
+}
+
+['videos','textes','agenda','actualites','newsletters','webinaires','ressources','footer_liens'].forEach(function(key){
+  document.getElementById('add_' + key).addEventListener('click', function(){ repeaters[key].addItem(); });
+});
+
+function saveSiteContent(){
+  var content = {
+    tdb_url: document.getElementById('site_tdb_url').value.trim(),
+    intro: {
+      texte: document.getElementById('site_intro_texte').value.trim(),
+      videos: repeaters.videos.collect(),
+      textes: repeaters.textes.collect()
+    },
+    agenda: repeaters.agenda.collect(),
+    actualites: repeaters.actualites.collect(),
+    newsletters: repeaters.newsletters.collect(),
+    webinaires: repeaters.webinaires.collect(),
+    ressources: repeaters.ressources.collect(),
+    contact: {
+      texte: document.getElementById('site_contact_texte').value.trim(),
+      booking_url: document.getElementById('site_contact_booking').value.trim(),
+      consignes_erreur: document.getElementById('site_contact_consignes').value.trim(),
+      email_support: document.getElementById('site_contact_email').value.trim()
+    },
+    footer_liens: repeaters.footer_liens.collect()
+  };
+  var s1 = document.getElementById('siteStatus');
+  var s2 = document.getElementById('siteStatus2');
+  s1.textContent = s2.textContent = 'Enregistrement...';
+  db.collection('site_content').doc('homepage').set({data: content}).then(function(){
+    s1.textContent = s2.textContent = '✅ Contenu enregistré.';
+    setTimeout(function(){ s1.textContent = s2.textContent = ''; }, 2500);
+  }).catch(function(err){
+    s1.textContent = s2.textContent = '❌ Échec : ' + (err.message || err);
+  });
+}
+document.getElementById('btnSaveSite').addEventListener('click', saveSiteContent);
+document.getElementById('btnSaveSite2').addEventListener('click', saveSiteContent);
 
 document.getElementById('editSearch').addEventListener('input', function(){
   var q = this.value.trim().toLowerCase();

@@ -28,6 +28,13 @@ service cloud.firestore {
       allow write: if request.auth != null;
     }
 
+    // Contenu editable de la page d'accueil (agenda, actualites, webinaires...) :
+    // lecture publique, ecriture reservee a l'admin (edite depuis admin.html).
+    match /site_content/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // Propositions des utilisateurs : n'importe quel visiteur (authentifie de
     // maniere anonyme) peut en creer une. Seul l'admin peut les lire (les
     // emails des contributeurs ne doivent etre visibles que par lui), les

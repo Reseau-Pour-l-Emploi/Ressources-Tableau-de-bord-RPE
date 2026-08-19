@@ -1,21 +1,25 @@
-# Glossaire du tableau de bord RPE
+# Ressources Tableau de bord RPE
 
-Glossaire consultable (recherche, A-Z, filtre par page, filtre par nature de fiche) des définitions de page, indicateurs de page et champs de tableaux personnalisés du tableau de bord RPE, avec contribution communautaire et modération admin.
+Site à trois pages : **Accueil** (actualités, agenda, webinaires, ressources, contact - éditable sans code), **Glossaire** (indicateurs et champs du tableau de bord RPE, contributif) et un bouton d'accès direct au Tableau de Bord RPE.
 
 ## Structure
 
 ```
-index.html                     page publique
-admin.html                      back-office de modération
+index.html                     Accueil (contenu éditable via l'admin, stocké dans Firestore)
+glossaire.html                  Glossaire public (ex-index.html)
+admin.html                      back-office : propositions, édition directe, contenu du site, export/import
 firebase-config.js              config Firebase + email(s) admin (A COMPLETER)
 firestore.rules                 règles de sécurité à publier dans Firebase
 data/glossary.json                  glossaire généré (ne pas éditer à la main)
 data/pages_sources.json             liste des pages, générée par le script
-sources/glossaire_source.json   source unique : une entrée par page (définition, indicateurs,
-                                 champs de tableau personnalisé), à éditer directement
+sources/glossaire_source.json   source unique du glossaire : une entrée par page, à éditer directement
 scripts/build_glossary.py       génère data/ depuis sources/glossaire_source.json
 assets/, fonts/                 identité visuelle RPE
 ```
+
+## Page d'accueil : contenu éditable sans code
+
+Tout le contenu de `index.html` (texte d'intro, vidéos, textes réglementaires, agenda, actualités, newsletters, webinaires, ressources complémentaires, contact, liens de pied de page, et l'URL du bouton "Accéder au Tableau de Bord RPE" utilisée sur toutes les pages) est stocké dans un seul document Firestore `site_content/homepage` et édité depuis l'onglet **"📄 Contenu du site"** de `admin.html` - ajout/suppression/modification d'éléments via des formulaires répétables, sans toucher au code. Si ce document n'existe pas encore (première utilisation), la page affiche un contenu par défaut identique à celui fourni à la création du site ; la première sauvegarde depuis l'admin crée le document.
 
 ## Mise en place Firebase (une fois)
 
@@ -135,7 +139,7 @@ Ordre d'affichage des étiquettes à côté d'un intitulé : **Indicateur/Champ*
 
 ## Groupes : jamais de mélange indicateur/champ
 
-Un groupe (ex. "Accès à l'emploi") peut exister à la fois côté indicateurs et côté champs de tableaux, mais ce sont deux fiches "Groupe" distinctes - jamais fusionnées entre elles. `build_glossary.py` assigne `groupe` à toute fiche correspondant à la règle, quelle que soit sa nature ; c'est `index.html` (`buildDisplayItems`) qui consolide les membres par clé `(groupe, source)`, garantissant qu'un groupe ne mélange jamais indicateurs et champs.
+Un groupe (ex. "Accès à l'emploi") peut exister à la fois côté indicateurs et côté champs de tableaux, mais ce sont deux fiches "Groupe" distinctes - jamais fusionnées entre elles. `build_glossary.py` assigne `groupe` à toute fiche correspondant à la règle, quelle que soit sa nature ; c'est `glossaire.html` (`buildDisplayItems`) qui consolide les membres par clé `(groupe, source)`, garantissant qu'un groupe ne mélange jamais indicateurs et champs.
 
 ## Familles de groupes reconnues
 
@@ -149,7 +153,7 @@ Un champ de tableau personnalisé sans définition (`""`) reprend automatiquemen
 
 ## Export Excel complet (public + admin)
 
-Bouton **"📊 Exporter en Excel"** présent aussi bien sur le site public (`index.html`, exporte le glossaire complet publié) que dans `admin.html`. Deux onglets :
+Bouton **"📊 Exporter en Excel"** présent aussi bien sur le site public (`glossaire.html`, exporte le glossaire complet publié) que dans `admin.html`. Deux onglets :
 
 - **Indicateurs** : ID, Libellé, KPI, Pages, Définition, Définitions par page (si différentes), Cas d'usage, Groupe, Période de calcul, Sources, Noms techniques.
 - **Champs** : ID, Libellé, Type, Catégorie, Pages, Définition, Définitions par page (si différentes), Modalités, Cas d'usage, Groupe, Hiérarchie - Nom, Hiérarchie - Niveau, Période de calcul, Sources, Noms techniques.
