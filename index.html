@@ -115,17 +115,17 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 /* ==== Sidebar : agenda type calendrier ==== */
 .agenda-card{background:var(--ft-white);border:1px solid var(--ft-border);border-radius:10px;padding:18px 20px;box-shadow:var(--sh-sm)}
 .agenda-card h3{margin:0 0 12px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--ft-navy)}
-.agenda-item{padding:8px 0;border-bottom:1px solid var(--ft-border)}
-.agenda-item:last-child{border-bottom:none;padding-bottom:0}
+.agenda-item{background:var(--ft-sable);border:1px solid var(--ft-border);border-radius:8px;padding:10px 12px;margin-bottom:10px}
+.agenda-item:last-child{margin-bottom:0}
 .agenda-row{display:flex;gap:11px;align-items:flex-start}
 .agenda-body{flex:1;min-width:0}
 .cal-tile{flex:none;width:46px;text-align:center;border:1px solid var(--ft-border);border-radius:5px;overflow:hidden}
 .cal-tile .cal-mois{background:var(--ft-indigo);color:#fff;font-size:9px;font-weight:700;padding:2px 0;letter-spacing:.03em}
-.cal-tile .cal-jour{font-size:16px;font-weight:700;color:var(--ft-navy);padding:2px 0}
-.cal-tile.cal-generic{display:flex;align-items:center;justify-content:center;height:38px;font-size:16px;border:none;background:var(--ft-sable)}
+.cal-tile .cal-jour{font-size:16px;font-weight:700;color:var(--ft-navy);padding:2px 0;background:#fff}
+.cal-tile.cal-generic{display:flex;align-items:center;justify-content:center;height:38px;font-size:16px;border:1px solid var(--ft-border);background:#fff}
 .agenda-body .item-titre{display:block;font-weight:700;font-size:12.5px}
 .agenda-body .item-desc{font-size:11.5px;color:var(--ft-fg-3);margin-top:2px}
-.agenda-item .tile-linkbar{margin-top:8px;border-radius:5px}
+.agenda-item .tile-linkbar{margin-top:8px;border-radius:5px;background:#fff}
 
 /* ==== Sidebar : contact flottant (sobre) ==== */
 .contact-card{background:linear-gradient(160deg,var(--ft-indigo),var(--ft-navy));color:#fff;border-radius:10px;padding:20px}
@@ -180,9 +180,8 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .section-head-row .filmstrip-filter{margin-bottom:0;max-width:220px}
 
 .tile-unit{display:flex;flex-direction:column}
-.tile-more-btn{align-self:flex-start;margin-top:8px;background:#fff;border:1px solid var(--ft-indigo);color:var(--ft-indigo);font-weight:600;font-size:11px;padding:5px 12px;border-radius:999px;cursor:pointer;font-family:inherit}
-.tile-more-btn:hover{background:var(--ft-indigo);color:#fff}
-.agenda-body .tile-more-btn{margin-top:6px;font-size:10.5px;padding:4px 10px}
+.item-titre-btn{background:none;border:none;padding:0;margin:0;font:inherit;text-align:left;cursor:pointer;color:inherit;text-decoration:underline;text-decoration-color:transparent;transition:text-decoration-color .15s}
+.item-titre-btn:hover{text-decoration-color:currentColor}
 .tile-linkbar{display:flex;border:1px solid var(--ft-border);border-radius:0 0 5px 5px;overflow:hidden;background:var(--ft-sable);flex:none}
 .tile-linkbar a{flex:1 1 0;text-align:center;padding:8px 4px;font-size:11px;font-weight:600;text-decoration:none;color:var(--ft-indigo);border-right:1px solid var(--ft-border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tile-linkbar a:last-child{border-right:none}
@@ -388,10 +387,16 @@ function escapeHtml(s){
 function tileDataAttr(obj){
   return escapeHtml(JSON.stringify(obj));
 }
-function tileMoreButtonHtml(d){
-  if (!d.desc) return '';
-  return '<div class="item-desc-clamp">' + richText(d.desc) + '</div>' +
-    '<button type="button" class="tile-more-btn" data-tile="' + tileDataAttr(d) + '">En savoir plus</button>';
+function tileTitleHtml(it, d, cls){
+  var label = richText(it.titre || '');
+  if (it.description) {
+    return '<button type="button" class="' + cls + ' item-titre-btn" data-tile="' + tileDataAttr(d) + '">' + label + '</button>';
+  }
+  return '<span class="' + cls + '">' + label + '</span>';
+}
+function tileDescPreviewHtml(it){
+  if (!it.description) return '';
+  return '<div class="item-desc-clamp">' + richText(it.description) + '</div>';
 }
 function openTileModal(d){
   document.getElementById('tileModalMeta').textContent = d.meta || '';
@@ -482,10 +487,10 @@ function renderAgenda(items){
       ? '<div class="cal-tile"><div class="cal-mois">' + MOIS_ABBR[d.getMonth()] + '</div><div class="cal-jour">' + d.getDate() + '</div></div>'
       : '<div class="cal-tile cal-generic">🗓️</div>';
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
-    var titreLigne = '<span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine;
     var data = {titre: it.titre, desc: it.description || '', liens: it.liens || []};
+    var titreLigne = tileTitleHtml(it, data, 'item-titre') + dateLine;
     return '<div class="agenda-item">' +
-      '<div class="agenda-row">' + tile + '<div class="agenda-body">' + titreLigne + tileMoreButtonHtml(data) + '</div></div>' +
+      '<div class="agenda-row">' + tile + '<div class="agenda-body">' + titreLigne + tileDescPreviewHtml(it) + '</div></div>' +
       renderLinkBar(it.liens) +
     '</div>';
   }).join('');
@@ -501,13 +506,13 @@ function renderActualites(items){
   if (!items || !items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
   var cards = items.map(function(it){
     var alerte = actuClass(it.titre) === 'actu-alerte';
+    var data = {titre: it.titre, desc: it.description || '', liens: it.liens || [], meta: it.date || ''};
     var head = '<div class="actu-head">' +
-        '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
+        tileTitleHtml(it, data, 'item-titre') +
         (it.date ? '<span class="item-date-tag">' + escapeHtml(it.date) + '</span>' : '') +
       '</div>';
-    var data = {titre: it.titre, desc: it.description || '', liens: it.liens || [], meta: it.date || ''};
     return '<div class="tile-unit">' +
-      '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + tileMoreButtonHtml(data) + '</div>' +
+      '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + tileDescPreviewHtml(it) + '</div>' +
       renderLinkBar(it.liens) +
     '</div>';
   }).join('');
@@ -539,8 +544,8 @@ function kiosqueCardHtml(it){
       (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
     '</div>' +
-    '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
-    tileMoreButtonHtml(data) +
+    tileTitleHtml(it, data, 'item-titre') +
+    tileDescPreviewHtml(it) +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -638,8 +643,8 @@ var RESSOURCES_BATCH = 3;
 function ressourceCardHtml(it){
   var data = {titre: it.titre, desc: it.description || '', liens: it.liens || []};
   return '<div class="tile-unit"><div class="res-card">' +
-    '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
-    tileMoreButtonHtml(data) +
+    tileTitleHtml(it, data, 'item-titre') +
+    tileDescPreviewHtml(it) +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
