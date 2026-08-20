@@ -140,13 +140,11 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .actu-item .item-titre{font-size:13px}
 .actu-item .item-desc{font-size:12.5px;margin-top:3px;color:var(--ft-fg-2)}
 
-/* ==== Le Kiosque : filtre + pellicule 3x2, curseur par lots ==== */
+/* ==== Le Kiosque : filtre + carrousel style SharePoint (fleches laterales + points) ==== */
 .filmstrip-filter{display:block;margin-bottom:14px;max-width:260px;padding:8px 10px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px;background:#fff}
-.filmstrip{background:#1B1F3B;border-radius:8px;padding:20px 16px;position:relative}
-.filmstrip::before,.filmstrip::after{content:'';position:absolute;left:10px;right:10px;height:9px;background-image:radial-gradient(circle,#0D1440 3px,transparent 3px);background-size:18px 9px;background-repeat:repeat-x}
-.filmstrip::before{top:6px}
-.filmstrip::after{bottom:6px}
-.filmstrip-grid{padding:16px 2px}
+.filmstrip{position:relative;padding:0 40px}
+@media (max-width:600px){.filmstrip{padding:0}}
+.filmstrip-grid{padding:2px}
 .kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .kiosque-card{border:1px solid var(--ft-border);border-radius:5px;padding:13px 15px;background:#fff;display:flex;flex-direction:column}
 .kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
@@ -155,13 +153,20 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .kiosque-card .item-titre{font-size:12.5px;display:block;margin-bottom:auto}
 .kiosque-card .item-liens{margin-top:9px}
 
-/* ==== Ressources : meme pellicule (1 rangee de 3) ==== */
+/* ==== Ressources : meme carrousel (1 rangee de 3) ==== */
 .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .res-card{border:1px solid var(--ft-border);border-radius:5px;padding:16px;background:#fff}
 .res-card .item-titre{font-size:13px;display:block;margin-bottom:8px}
 
-.filmstrip-slider{width:100%;margin-top:12px;accent-color:var(--ft-indigo);cursor:pointer}
-.filmstrip-hint{text-align:center;font-size:11px;color:var(--ft-fg-3);margin-top:4px}
+.filmstrip-btn{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:1px solid var(--ft-border);background:#fff;cursor:pointer;font-size:15px;color:var(--ft-navy);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.12);padding:0}
+.filmstrip-btn:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
+.filmstrip-btn:disabled{opacity:.35;cursor:default;pointer-events:none}
+.filmstrip-btn.prev{left:0}
+.filmstrip-btn.next{right:0}
+@media (max-width:600px){.filmstrip-btn{display:none}}
+.filmstrip-dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:16px}
+.filmstrip-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--ft-indigo);background:#fff;cursor:pointer;padding:0}
+.filmstrip-dot.active{background:var(--ft-indigo)}
 
 /* ==== Newsletter : abonnement ==== */
 .newsletter-box{border:1px dashed var(--ft-border);border-radius:5px;padding:14px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -423,6 +428,46 @@ function kiosqueCardHtml(it){
     renderLiens(it.liens) + '</div>';
 }
 
+/* Carrousel generique style SharePoint : fleches laterales + points de pagination */
+function filmstripControlsHtml(idPrefix){
+  return '<div class="filmstrip"><button type="button" class="filmstrip-btn prev" id="' + idPrefix + 'Prev" aria-label="Précédent">‹</button>' +
+    '<div class="filmstrip-grid" id="' + idPrefix + 'Grid"></div>' +
+    '<button type="button" class="filmstrip-btn next" id="' + idPrefix + 'Next" aria-label="Suivant">›</button></div>' +
+    '<div class="filmstrip-dots" id="' + idPrefix + 'Dots"></div>';
+}
+
+function bindFilmstripControls(container, idPrefix, getState, renderFn){
+  var prevBtn = container.querySelector('#' + idPrefix + 'Prev');
+  var nextBtn = container.querySelector('#' + idPrefix + 'Next');
+  if (!prevBtn) return;
+  prevBtn.addEventListener('click', function(){ getState().batch -= 1; renderFn(); });
+  nextBtn.addEventListener('click', function(){ getState().batch += 1; renderFn(); });
+}
+
+function renderFilmstripNav(idPrefix, totalBatches, currentBatch, onDotClick){
+  var prevBtn = document.getElementById(idPrefix + 'Prev');
+  var nextBtn = document.getElementById(idPrefix + 'Next');
+  var dots = document.getElementById(idPrefix + 'Dots');
+  if (totalBatches <= 1) {
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    dots.innerHTML = '';
+    return;
+  }
+  prevBtn.style.display = '';
+  nextBtn.style.display = '';
+  prevBtn.disabled = currentBatch <= 0;
+  nextBtn.disabled = currentBatch >= totalBatches - 1;
+  var dotsHtml = '';
+  for (var i = 0; i < totalBatches; i++) {
+    dotsHtml += '<button type="button" class="filmstrip-dot' + (i === currentBatch ? ' active' : '') + '" data-page="' + i + '" aria-label="Page ' + (i + 1) + '"></button>';
+  }
+  dots.innerHTML = dotsHtml;
+  dots.querySelectorAll('[data-page]').forEach(function(dot){
+    dot.addEventListener('click', function(){ onDotClick(parseInt(dot.dataset.page, 10)); });
+  });
+}
+
 function renderKiosque(items){
   kiosqueState.items = kiosquePassedItems(items);
   kiosqueState.filterType = 'tous';
@@ -434,29 +479,23 @@ function renderKiosque(items){
     '<option value="tous">Tous les événements</option>' +
     types.map(function(t){ return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + '</option>'; }).join('') +
   '</select>';
-  return filterHtml +
-    '<div class="filmstrip"><div class="filmstrip-grid kiosque-grid" id="kiosqueGrid"></div></div>' +
-    '<input type="range" class="filmstrip-slider" id="kiosqueSlider" min="0" max="0" step="1" value="0">' +
-    '<div class="filmstrip-hint" id="kiosqueHint"></div>';
+  return filterHtml + filmstripControlsHtml('kiosque');
 }
 
 function renderKiosqueGrid(){
   var grid = document.getElementById('kiosqueGrid');
   if (!grid) return;
+  grid.className = 'filmstrip-grid kiosque-grid';
   var filtered = kiosqueState.items.filter(function(it){
     return kiosqueState.filterType === 'tous' || it.type === kiosqueState.filterType;
   });
   var totalBatches = Math.max(1, Math.ceil(filtered.length / KIOSQUE_BATCH));
   if (kiosqueState.batch >= totalBatches) kiosqueState.batch = totalBatches - 1;
+  if (kiosqueState.batch < 0) kiosqueState.batch = 0;
   var start = kiosqueState.batch * KIOSQUE_BATCH;
   var pageItems = filtered.slice(start, start + KIOSQUE_BATCH);
   grid.innerHTML = pageItems.length ? pageItems.map(kiosqueCardHtml).join('') : '<div class="empty-hint">Rien à afficher pour ce filtre.</div>';
-  var slider = document.getElementById('kiosqueSlider');
-  var hint = document.getElementById('kiosqueHint');
-  slider.max = totalBatches - 1;
-  slider.value = kiosqueState.batch;
-  slider.style.display = totalBatches > 1 ? 'block' : 'none';
-  hint.textContent = totalBatches > 1 ? ('Lot ' + (kiosqueState.batch + 1) + ' / ' + totalBatches) : '';
+  renderFilmstripNav('kiosque', totalBatches, kiosqueState.batch, function(page){ kiosqueState.batch = page; renderKiosqueGrid(); });
 }
 
 function bindKiosque(container){
@@ -467,14 +506,11 @@ function bindKiosque(container){
     kiosqueState.batch = 0;
     renderKiosqueGrid();
   });
-  container.querySelector('#kiosqueSlider').addEventListener('input', function(ev){
-    kiosqueState.batch = parseInt(ev.target.value, 10);
-    renderKiosqueGrid();
-  });
+  bindFilmstripControls(container, 'kiosque', function(){ return kiosqueState; }, renderKiosqueGrid);
   renderKiosqueGrid();
 }
 
-/* ressources : veritable carrousel avec fleches prev/next */
+/* Ressources : meme carrousel style SharePoint */
 var ressourcesState = {items: [], batch: 0};
 var RESSOURCES_BATCH = 3;
 
@@ -486,34 +522,25 @@ function renderRessources(items){
   ressourcesState.items = items || [];
   ressourcesState.batch = 0;
   if (!ressourcesState.items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
-  return '<div class="filmstrip"><div class="filmstrip-grid res-grid" id="resGrid"></div></div>' +
-    '<input type="range" class="filmstrip-slider" id="resSlider" min="0" max="0" step="1" value="0">' +
-    '<div class="filmstrip-hint" id="resHint"></div>';
+  return filmstripControlsHtml('res');
 }
 
 function renderRessourcesGrid(){
   var grid = document.getElementById('resGrid');
   if (!grid) return;
+  grid.className = 'filmstrip-grid res-grid';
   var totalBatches = Math.max(1, Math.ceil(ressourcesState.items.length / RESSOURCES_BATCH));
   if (ressourcesState.batch >= totalBatches) ressourcesState.batch = totalBatches - 1;
+  if (ressourcesState.batch < 0) ressourcesState.batch = 0;
   var start = ressourcesState.batch * RESSOURCES_BATCH;
   var pageItems = ressourcesState.items.slice(start, start + RESSOURCES_BATCH);
   grid.innerHTML = pageItems.map(ressourceCardHtml).join('');
-  var slider = document.getElementById('resSlider');
-  var hint = document.getElementById('resHint');
-  slider.max = totalBatches - 1;
-  slider.value = ressourcesState.batch;
-  slider.style.display = totalBatches > 1 ? 'block' : 'none';
-  hint.textContent = totalBatches > 1 ? ('Lot ' + (ressourcesState.batch + 1) + ' / ' + totalBatches) : '';
+  renderFilmstripNav('res', totalBatches, ressourcesState.batch, function(page){ ressourcesState.batch = page; renderRessourcesGrid(); });
 }
 
 function bindRessources(container){
-  var slider = container.querySelector('#resSlider');
-  if (!slider) return;
-  slider.addEventListener('input', function(ev){
-    ressourcesState.batch = parseInt(ev.target.value, 10);
-    renderRessourcesGrid();
-  });
+  if (!container.querySelector('#resGrid')) return;
+  bindFilmstripControls(container, 'res', function(){ return ressourcesState; }, renderRessourcesGrid);
   renderRessourcesGrid();
 }
 
