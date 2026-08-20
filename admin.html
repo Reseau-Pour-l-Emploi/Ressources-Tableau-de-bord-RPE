@@ -1253,7 +1253,7 @@ function createRepeater(containerId, itemsInitial, fields){
       if (fields.indexOf('description') > -1) fieldsHtml += '<textarea class="edit-textarea" data-field="description" placeholder="Description (facultatif)">' + escapeHtml(item.description||'') + '</textarea>';
       if (fields.indexOf('url') > -1) fieldsHtml += '<input class="edit-input" data-field="url" placeholder="Lien" value="' + escapeHtml(item.url||'') + '">';
       row.innerHTML = fieldsHtml;
-      row.querySelectorAll('[data-field="titre"]').forEach(function(el){ attachFormatToolbar(el, false); });
+      row.querySelectorAll('[data-field="titre"]').forEach(function(el){ attachFormatToolbar(el, true); });
       row.querySelectorAll('[data-field="description"]').forEach(function(el){ attachFormatToolbar(el, true); });
 
       if (fields.indexOf('liens') > -1) {
