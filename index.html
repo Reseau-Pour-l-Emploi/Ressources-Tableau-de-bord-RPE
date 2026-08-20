@@ -137,48 +137,46 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .contact-note a{color:#fff}
 
 /* ==== Actualites : grille de 3 vignettes ==== */
-.actu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.actu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
 @media (max-width:760px){.actu-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.actu-grid{grid-template-columns:1fr}}
-.actu-card{position:relative;height:150px;border-top:3px solid var(--ft-bleu);border-radius:5px 5px 0 0;padding:13px 15px;background:#fff;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--sh-sm)}
+.actu-card{min-height:150px;border-top:3px solid var(--ft-bleu);border-radius:5px 5px 0 0;padding:13px 15px;background:#fff;display:flex;flex-direction:column;box-shadow:var(--sh-sm)}
 .actu-card.actu-alerte{border-top-color:var(--ft-orange)}
-.actu-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
 .actu-icon{font-size:16px;flex:none}
 .actu-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-.actu-card .item-titre{font-size:13px;font-weight:700;overflow:hidden;flex:1}
+.actu-card .item-titre{font-size:13px;font-weight:700;flex:1}
 .item-date-tag{flex:none;font-size:10px;color:var(--ft-fg-3);background:var(--ft-sable);border:1px solid var(--ft-border);border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:1px}
-.actu-card .item-desc{font-size:12px;margin-top:3px;color:var(--ft-fg-2);overflow:hidden}
+.actu-card .item-desc{font-size:12px;color:var(--ft-fg-2)}
 .actu-card .item-liens{margin-top:auto;padding-top:6px;flex:none}
-.actu-card .card-hover-full .item-titre,.actu-card .card-hover-full .item-desc{-webkit-line-clamp:unset}
 
 /* ==== Le Kiosque : filtre + carrousel style SharePoint (fleches laterales + points) ==== */
 .filmstrip-filter{display:block;margin-bottom:14px;max-width:260px;padding:8px 10px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px;background:#fff}
 .filmstrip{position:relative;padding:0 40px}
 @media (max-width:600px){.filmstrip{padding:0}}
-.filmstrip-grid{padding:2px}
-.kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.kiosque-card{position:relative;height:150px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:13px 15px;background:#fff;display:flex;flex-direction:column;overflow:hidden}
+.filmstrip-grid{padding:2px;align-items:start}
+.kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
+.kiosque-card{min-height:150px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:13px 15px;background:#fff;display:flex;flex-direction:column}
 .kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
 .kiosque-card .item-date{font-size:10.5px;color:var(--ft-fg-3);font-weight:600}
 .kiosque-type{font-size:9.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;color:var(--ft-violet);background:var(--ft-violet-light);padding:1px 7px;border-radius:3px}
-.kiosque-card .item-titre{font-size:12.5px;overflow:hidden;margin-bottom:auto}
+.kiosque-card .item-titre{font-size:12.5px;margin-bottom:auto}
 .kiosque-card .item-liens{margin-top:9px;flex:none}
-.card-hover-full{display:none;position:absolute;inset:0;background:#fff;border:1.5px solid var(--ft-indigo);border-radius:5px;padding:13px 15px;z-index:6;box-shadow:var(--sh-md);overflow-y:auto}
-.text-wrap{position:relative;overflow:hidden;flex:1;min-width:0}
-.text-hover-full{display:none;position:absolute;inset:0;background:#fff;border:1.5px solid var(--ft-indigo);border-radius:4px;padding:8px 10px;z-index:6;box-shadow:var(--sh-md);overflow-y:auto;font-size:12px}
-.text-wrap:hover .text-hover-full{display:block}
-.agenda-text-wrap{min-height:34px}
+
+/* Zone de texte qui s'agrandit au survol si le contenu depasse (au lieu d'une superposition) */
+.text-wrap{max-height:56px;overflow:hidden;transition:max-height .25s ease}
+.tile-unit:hover .text-wrap,.actu-card:hover .text-wrap,.agenda-item:hover .text-wrap{max-height:600px}
+.agenda-text-wrap{max-height:34px;margin-top:2px}
+
 .tile-unit{display:flex;flex-direction:column}
 .tile-linkbar{display:flex;border:1px solid var(--ft-border);border-radius:0 0 5px 5px;overflow:hidden;background:var(--ft-sable);flex:none}
 .tile-linkbar a{flex:1 1 0;text-align:center;padding:8px 4px;font-size:11px;font-weight:600;text-decoration:none;color:var(--ft-indigo);border-right:1px solid var(--ft-border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tile-linkbar a:last-child{border-right:none}
 .tile-linkbar a:hover{background:var(--ft-indigo-light)}
-.kiosque-card:hover .card-hover-full,.res-card:hover .card-hover-full{display:block}
 
 /* ==== Ressources : meme carrousel (1 rangee de 3) ==== */
-.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.res-card{position:relative;height:140px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:16px;background:#fff;display:flex;flex-direction:column;overflow:hidden}
-.res-card .item-titre{font-size:13px;overflow:hidden;margin-bottom:8px}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+.res-card{min-height:140px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:16px;background:#fff;display:flex;flex-direction:column}
+.res-card .item-titre{font-size:13px;margin-bottom:8px}
 
 .filmstrip-btn{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:1px solid var(--ft-border);background:#fff;cursor:pointer;font-size:15px;color:var(--ft-navy);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.12);padding:0}
 .filmstrip-btn:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
@@ -427,8 +425,7 @@ function renderAgenda(items){
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
     var titreLigne = '<span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine;
     var desc = it.description
-      ? '<div class="text-wrap agenda-text-wrap"><div class="item-desc">' + richText(it.description) + '</div>' +
-        '<div class="text-hover-full">' + richText(it.description) + '</div></div>'
+      ? '<div class="text-wrap agenda-text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div>'
       : '';
     return '<div class="agenda-item">' + tile +
       '<div class="agenda-body">' + titreLigne + desc + renderLiens(it.liens) + '</div></div>';
@@ -450,8 +447,7 @@ function renderActualites(items){
         (it.date ? '<span class="item-date-tag">' + escapeHtml(it.date) + '</span>' : '') +
       '</div>';
     var desc = it.description
-      ? '<div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div>' +
-        '<div class="text-hover-full">' + richText(it.description) + '</div></div>'
+      ? '<div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div>'
       : '';
     return '<div class="tile-unit">' +
       '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + desc + '</div>' +
@@ -485,14 +481,7 @@ function kiosqueCardHtml(it){
       (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
     '</div>' +
-    '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
-    '<div class="card-hover-full">' +
-      '<div class="kiosque-top">' +
-        (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
-        (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
-      '</div>' +
-      '<span class="item-titre" style="-webkit-line-clamp:unset">' + richText(it.titre || '') + '</span>' +
-    '</div>' +
+    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -583,8 +572,8 @@ var ressourcesState = {items: [], batch: 0};
 var RESSOURCES_BATCH = 3;
 
 function ressourceCardHtml(it){
-  return '<div class="tile-unit"><div class="res-card"><span class="item-titre">' + richText(it.titre || '') + '</span>' +
-    '<div class="card-hover-full"><span class="item-titre" style="-webkit-line-clamp:unset">' + richText(it.titre || '') + '</span></div>' +
+  return '<div class="tile-unit"><div class="res-card">' +
+    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 

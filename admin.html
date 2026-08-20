@@ -69,6 +69,8 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .tab-group{display:flex;align-items:center;gap:6px;background:var(--ft-sable);border-radius:999px;padding:5px 6px 5px 12px}
 .tab-group-label{font-size:11.5px;font-weight:700;color:var(--ft-gray-500);text-transform:uppercase;letter-spacing:.03em;margin-right:2px}
 .form-hint{font-size:12px;color:var(--ft-gray-500);font-style:italic}
+.btn-save-floating{position:fixed;top:120px;right:24px;z-index:1200;box-shadow:0 2px 10px rgba(0,0,0,.18);padding:12px 20px;font-size:13px}
+@media (max-width:900px){.btn-save-floating{top:auto;bottom:20px;right:20px}}
 .edit-card{background:#fff;border:1px solid var(--ft-gray-200);border-radius:8px;padding:24px;margin-bottom:16px}
 .edit-header{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:4px}
 .edit-title-input{flex:1;min-width:240px;font-size:19px;font-weight:700;color:var(--ft-navy);border:1px solid transparent;border-radius:4px;padding:4px 6px;font-family:inherit;background:transparent}
@@ -190,13 +192,13 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
     </div>
 
     <div id="siteSection" style="display:none">
+      <button class="btn btn--sm btn-save-floating" id="btnSaveSite">💾 Enregistrer <span id="siteStatusFloating"></span></button>
       <div class="card" style="max-width:900px">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <h3 style="margin:0">Page d'accueil (index.html)</h3>
-          <button class="btn btn--sm" id="btnSaveSite">💾 Enregistrer le contenu du site</button>
         </div>
         <div id="siteStatus" style="font-size:12.5px;margin:8px 0"></div>
-        <p class="form-hint" style="margin-top:0">Chaque bloc ci-dessous liste les éléments actuellement affichés sur la page d'accueil : modifiez-les directement dans les champs, cliquez "🗑️ Supprimer" pour en retirer un, ou "+ Ajouter" pour en créer un nouveau. N'oubliez pas d'enregistrer.</p>
+        <p class="form-hint" style="margin-top:0">Chaque bloc ci-dessous liste les éléments actuellement affichés sur la page d'accueil : modifiez-les directement dans les champs, réordonnez-les avec ▲/▼, cliquez "🗑️ Supprimer" pour en retirer un, ou "+ Ajouter" pour en créer un nouveau. N'oubliez pas d'enregistrer.</p>
         <p class="form-hint" style="margin-top:0">Mise en forme du texte des vignettes : utilisez les boutons <b>G</b>/<i>I</i>/<u>S</u> au-dessus des champs, ou tapez directement <code>**gras**</code>, <code>*italique*</code>, <code>__souligné__</code>, "<code>- </code>" en début de ligne pour une puce, et Entrée pour un saut de ligne.</p>
 
         <div class="edit-section-label">Lien du bouton "Accéder au Tableau de Bord RPE" (utilisé sur toutes les pages)</div>
@@ -1281,12 +1283,39 @@ function createRepeater(containerId, itemsInitial, fields){
         row.appendChild(addLienBtn);
       }
 
+      var moveUpBtn = document.createElement('button');
+      moveUpBtn.type = 'button';
+      moveUpBtn.className = 'btn btn--secondary btn--sm';
+      moveUpBtn.title = 'Déplacer vers le haut';
+      moveUpBtn.textContent = '▲';
+      moveUpBtn.disabled = idx === 0;
+      moveUpBtn.addEventListener('click', function(){
+        syncAllRows();
+        var tmp = state[idx - 1]; state[idx - 1] = state[idx]; state[idx] = tmp;
+        render();
+      });
+      row.appendChild(moveUpBtn);
+
+      var moveDownBtn = document.createElement('button');
+      moveDownBtn.type = 'button';
+      moveDownBtn.className = 'btn btn--secondary btn--sm';
+      moveDownBtn.style.marginLeft = '4px';
+      moveDownBtn.title = 'Déplacer vers le bas';
+      moveDownBtn.textContent = '▼';
+      moveDownBtn.disabled = idx === state.length - 1;
+      moveDownBtn.addEventListener('click', function(){
+        syncAllRows();
+        var tmp = state[idx + 1]; state[idx + 1] = state[idx]; state[idx] = tmp;
+        render();
+      });
+      row.appendChild(moveDownBtn);
+
       var removeBtn = document.createElement('button');
       removeBtn.type = 'button';
       removeBtn.className = 'btn btn--danger btn--sm';
       removeBtn.style.marginLeft = '8px';
       removeBtn.textContent = '🗑️ Supprimer';
-      removeBtn.addEventListener('click', function(){ state.splice(idx,1); render(); });
+      removeBtn.addEventListener('click', function(){ syncAllRows(); state.splice(idx,1); render(); });
       row.appendChild(removeBtn);
 
       container.appendChild(row);
@@ -1304,10 +1333,26 @@ function createRepeater(containerId, itemsInitial, fields){
     });
   }
 
+  function syncAllRows(){
+    var rows = container.querySelectorAll('.repeater-row');
+    rows.forEach(function(row, i){
+      syncItemFromDom(row, state[i], fields);
+      if (fields.indexOf('liens') > -1) {
+        var liens = [];
+        row.querySelectorAll('.lien-row').forEach(function(lrow){
+          var label = lrow.querySelector('[data-lf="label"]').value.trim();
+          var url = lrow.querySelector('[data-lf="url"]').value.trim();
+          if (label || url) liens.push({label: label, url: url});
+        });
+        state[i].liens = liens;
+      }
+    });
+  }
+
   render();
 
   return {
-    addItem: function(){ state.push({titre:'', date:'', type:'', description:'', url:'', liens: fields.indexOf('liens') > -1 ? [] : undefined}); render(); },
+    addItem: function(){ syncAllRows(); state.push({titre:'', date:'', type:'', description:'', url:'', liens: fields.indexOf('liens') > -1 ? [] : undefined}); render(); },
     collect: function(){
       var rows = container.querySelectorAll('.repeater-row');
       rows.forEach(function(row, idx){
@@ -1383,12 +1428,16 @@ function saveSiteContent(){
   };
   var s1 = document.getElementById('siteStatus');
   var s2 = document.getElementById('siteStatus2');
+  var s3 = document.getElementById('siteStatusFloating');
   s1.textContent = s2.textContent = 'Enregistrement...';
+  if (s3) s3.textContent = '⏳';
   db.collection('site_content').doc('homepage').set({data: content}).then(function(){
     s1.textContent = s2.textContent = '✅ Contenu enregistré.';
-    setTimeout(function(){ s1.textContent = s2.textContent = ''; }, 2500);
+    if (s3) s3.textContent = '✅';
+    setTimeout(function(){ s1.textContent = s2.textContent = ''; if (s3) s3.textContent = ''; }, 2500);
   }).catch(function(err){
     s1.textContent = s2.textContent = '❌ Échec : ' + (err.message || err);
+    if (s3) s3.textContent = '❌';
   });
 }
 document.getElementById('btnSaveSite').addEventListener('click', saveSiteContent);
