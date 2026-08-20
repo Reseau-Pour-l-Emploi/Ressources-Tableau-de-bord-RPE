@@ -85,6 +85,9 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .edit-select[multiple]{min-height:90px}
 .edit-footer{margin-top:20px;padding-top:14px;border-top:1px solid var(--ft-gray-200);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .repeater-row{border:1px solid var(--ft-gray-200);border-radius:6px;padding:12px;margin-bottom:8px;background:var(--ft-sable)}
+.format-toolbar{display:flex;gap:4px;margin-bottom:3px}
+.format-btn{font-family:inherit;font-size:11px;width:24px;height:22px;border:1px solid var(--ft-gray-300);background:#fff;border-radius:3px;cursor:pointer;color:var(--ft-navy);padding:0;line-height:1}
+.format-btn:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
 .repeater-row .edit-input,.repeater-row .edit-textarea{margin-bottom:6px}
 .liens-repeater{margin:8px 0;padding:8px;background:#fff;border:1px dashed var(--ft-gray-300);border-radius:4px}
 .lien-row{display:grid;grid-template-columns:1fr 2fr auto;gap:6px;margin-bottom:6px;align-items:center}
@@ -193,6 +196,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         </div>
         <div id="siteStatus" style="font-size:12.5px;margin:8px 0"></div>
         <p class="form-hint" style="margin-top:0">Chaque bloc ci-dessous liste les éléments actuellement affichés sur la page d'accueil : modifiez-les directement dans les champs, cliquez "🗑️ Supprimer" pour en retirer un, ou "+ Ajouter" pour en créer un nouveau. N'oubliez pas d'enregistrer.</p>
+        <p class="form-hint" style="margin-top:0">Mise en forme du texte des vignettes : utilisez les boutons <b>G</b>/<i>I</i>/<u>S</u> au-dessus des champs, ou tapez directement <code>**gras**</code>, <code>*italique*</code>, <code>__souligné__</code>, "<code>- </code>" en début de ligne pour une puce, et Entrée pour un saut de ligne.</p>
 
         <div class="edit-section-label">Lien du bouton "Accéder au Tableau de Bord RPE" (utilisé sur toutes les pages)</div>
         <input class="edit-input" id="site_tdb_url">
@@ -1182,6 +1186,56 @@ var DEFAULT_SITE_CONTENT = {
   ecoindex: { lettre: "A", url: "https://www.ecoindex.fr/resultat/?id=dd9168bf-d8db-462a-abc4-6154f15b0b12" }
 };
 
+/* Mini barre d'outils de mise en forme (gras/italique/souligne/saut de ligne/puce) pour les
+   champs titre/description des vignettes. Insere une syntaxe legere (**gras**, *italique*,
+   __souligne__, "- " en debut de ligne = puce) interpretee a l'affichage public (voir richText
+   dans index.html). */
+function attachFormatToolbar(fieldEl, withLineBreakAndBullet){
+  function wrapSelection(marker){
+    var start = fieldEl.selectionStart || 0;
+    var end = fieldEl.selectionEnd || 0;
+    var val = fieldEl.value;
+    var selected = val.slice(start, end) || 'texte';
+    fieldEl.value = val.slice(0, start) + marker + selected + marker + val.slice(end);
+    fieldEl.focus();
+    fieldEl.selectionStart = start + marker.length;
+    fieldEl.selectionEnd = start + marker.length + selected.length;
+  }
+  var toolbar = document.createElement('div');
+  toolbar.className = 'format-toolbar';
+  [['<b>G</b>', 'Gras', '**'], ['<i>I</i>', 'Italique', '*'], ['<u>S</u>', 'Souligné', '__']].forEach(function(b){
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'format-btn'; btn.title = b[1]; btn.innerHTML = b[0];
+    btn.addEventListener('click', function(){ wrapSelection(b[2]); });
+    toolbar.appendChild(btn);
+  });
+  if (withLineBreakAndBullet) {
+    var brBtn = document.createElement('button');
+    brBtn.type = 'button'; brBtn.className = 'format-btn'; brBtn.title = 'Saut de ligne'; brBtn.textContent = '↵';
+    brBtn.addEventListener('click', function(){
+      var start = fieldEl.selectionStart || 0;
+      var val = fieldEl.value;
+      fieldEl.value = val.slice(0, start) + '\n' + val.slice(start);
+      fieldEl.focus();
+      fieldEl.selectionStart = fieldEl.selectionEnd = start + 1;
+    });
+    toolbar.appendChild(brBtn);
+
+    var bulletBtn = document.createElement('button');
+    bulletBtn.type = 'button'; bulletBtn.className = 'format-btn'; bulletBtn.title = 'Puce'; bulletBtn.textContent = '•';
+    bulletBtn.addEventListener('click', function(){
+      var start = fieldEl.selectionStart || 0;
+      var val = fieldEl.value;
+      var lineStart = val.lastIndexOf('\n', start - 1) + 1;
+      fieldEl.value = val.slice(0, lineStart) + '- ' + val.slice(lineStart);
+      fieldEl.focus();
+      fieldEl.selectionStart = fieldEl.selectionEnd = start + 2;
+    });
+    toolbar.appendChild(bulletBtn);
+  }
+  fieldEl.parentNode.insertBefore(toolbar, fieldEl);
+}
+
 function createRepeater(containerId, itemsInitial, fields){
   var container = document.getElementById(containerId);
   var state = JSON.parse(JSON.stringify(itemsInitial || []));
@@ -1199,6 +1253,8 @@ function createRepeater(containerId, itemsInitial, fields){
       if (fields.indexOf('description') > -1) fieldsHtml += '<textarea class="edit-textarea" data-field="description" placeholder="Description (facultatif)">' + escapeHtml(item.description||'') + '</textarea>';
       if (fields.indexOf('url') > -1) fieldsHtml += '<input class="edit-input" data-field="url" placeholder="Lien" value="' + escapeHtml(item.url||'') + '">';
       row.innerHTML = fieldsHtml;
+      row.querySelectorAll('[data-field="titre"]').forEach(function(el){ attachFormatToolbar(el, false); });
+      row.querySelectorAll('[data-field="description"]').forEach(function(el){ attachFormatToolbar(el, true); });
 
       if (fields.indexOf('liens') > -1) {
         var liensDiv = document.createElement('div');

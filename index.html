@@ -354,6 +354,37 @@ function escapeHtml(s){
   });
 }
 
+/* Syntaxe legere pour le texte des vignettes : **gras**, *italique*, __souligne__,
+   saut de ligne (Entree), "- " en debut de ligne = puce. Toujours echappe avant mise en forme
+   (aucune injection HTML possible). */
+function richInline(s){
+  var esc = escapeHtml(s);
+  esc = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  esc = esc.replace(/__(.+?)__/g, '<u>$1</u>');
+  esc = esc.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  return esc;
+}
+function richText(s){
+  if (!s) return '';
+  var lines = String(s).split('\n');
+  var blocks = [];
+  var currentList = null;
+  lines.forEach(function(line){
+    var m = /^\s*-\s+(.*)$/.exec(line);
+    if (m) {
+      if (!currentList) { currentList = []; blocks.push(currentList); }
+      currentList.push(m[1]);
+    } else {
+      currentList = null;
+      blocks.push(line);
+    }
+  });
+  return blocks.map(function(b){
+    if (Array.isArray(b)) return '<ul>' + b.map(function(li){ return '<li>' + richInline(li) + '</li>'; }).join('') + '</ul>';
+    return richInline(b);
+  }).join('<br>');
+}
+
 function parseDMY(dateStr){
   var m = /^(\d{1,2})[-\/](\d{1,2})[-\/](\d{2,4})$/.exec((dateStr || '').trim());
   if (!m) return null;
@@ -397,10 +428,10 @@ function renderAgenda(items){
     var tile = d
       ? '<div class="cal-tile"><div class="cal-mois">' + MOIS_ABBR[d.getMonth()] + '</div><div class="cal-jour">' + d.getDate() + '</div></div>'
       : '<div class="cal-tile cal-generic">🗓️</div>';
-    var desc = it.description ? '<div class="item-desc">' + escapeHtml(it.description) + '</div>' : '';
+    var desc = it.description ? '<div class="item-desc">' + richText(it.description) + '</div>' : '';
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
     return '<div class="agenda-item">' + tile +
-      '<div class="agenda-body"><span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' + dateLine + desc + renderLiens(it.liens) + '</div></div>';
+      '<div class="agenda-body"><span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine + desc + renderLiens(it.liens) + '</div></div>';
   }).join('');
 }
 
@@ -422,13 +453,13 @@ function renderActualites(items){
   if (!items || !items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
   var cards = items.map(function(it){
     var alerte = actuClass(it.titre) === 'actu-alerte';
-    var desc = it.description ? '<div class="item-desc">' + escapeHtml(it.description) + '</div>' : '';
+    var desc = it.description ? '<div class="item-desc">' + richText(it.description) + '</div>' : '';
     var body =
       '<div class="kiosque-top">' +
         '<span class="actu-icon">' + actuIcon(it.titre) + '</span>' +
         (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       '</div>' +
-      '<span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' + desc;
+      '<span class="item-titre">' + richText(it.titre || '') + '</span>' + desc;
     return '<div class="tile-unit">' +
       '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + body +
         '<div class="card-hover-full">' + body + '</div>' +
@@ -462,13 +493,13 @@ function kiosqueCardHtml(it){
       (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
     '</div>' +
-    '<span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' +
+    '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
     '<div class="card-hover-full">' +
       '<div class="kiosque-top">' +
         (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
         (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
       '</div>' +
-      '<span class="item-titre" style="-webkit-line-clamp:unset">' + escapeHtml(it.titre || '') + '</span>' +
+      '<span class="item-titre" style="-webkit-line-clamp:unset">' + richText(it.titre || '') + '</span>' +
     '</div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
@@ -560,8 +591,8 @@ var ressourcesState = {items: [], batch: 0};
 var RESSOURCES_BATCH = 3;
 
 function ressourceCardHtml(it){
-  return '<div class="tile-unit"><div class="res-card"><span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' +
-    '<div class="card-hover-full"><span class="item-titre" style="-webkit-line-clamp:unset">' + escapeHtml(it.titre || '') + '</span></div>' +
+  return '<div class="tile-unit"><div class="res-card"><span class="item-titre">' + richText(it.titre || '') + '</span>' +
+    '<div class="card-hover-full"><span class="item-titre" style="-webkit-line-clamp:unset">' + richText(it.titre || '') + '</span></div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
