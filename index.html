@@ -115,7 +115,9 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 /* ==== Sidebar : agenda type calendrier ==== */
 .agenda-card{background:var(--ft-white);border:1px solid var(--ft-border);border-radius:10px;padding:18px 20px;box-shadow:var(--sh-sm)}
 .agenda-card h3{margin:0 0 12px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--ft-navy)}
-.agenda-item{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid var(--ft-border)}
+.agenda-item{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid var(--ft-border);position:relative}
+.agenda-body{position:relative;max-height:54px;overflow:hidden;flex:1;min-width:0}
+.agenda-hover-full{padding:10px 12px}
 .agenda-item:last-child{border-bottom:none;padding-bottom:0}
 .cal-tile{flex:none;width:46px;text-align:center;border:1px solid var(--ft-border);border-radius:5px;overflow:hidden}
 .cal-tile .cal-mois{background:var(--ft-indigo);color:#fff;font-size:9px;font-weight:700;padding:2px 0;letter-spacing:.03em}
@@ -168,7 +170,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .tile-linkbar a{flex:1 1 0;text-align:center;padding:8px 4px;font-size:11px;font-weight:600;text-decoration:none;color:var(--ft-indigo);border-right:1px solid var(--ft-border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tile-linkbar a:last-child{border-right:none}
 .tile-linkbar a:hover{background:var(--ft-indigo-light)}
-.kiosque-card:hover .card-hover-full,.res-card:hover .card-hover-full{display:block}
+.kiosque-card:hover .card-hover-full,.res-card:hover .card-hover-full,.actu-card:hover .card-hover-full,.agenda-body:hover .card-hover-full{display:block}
 
 /* ==== Ressources : meme carrousel (1 rangee de 3) ==== */
 .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -421,8 +423,11 @@ function renderAgenda(items){
       : '<div class="cal-tile cal-generic">🗓️</div>';
     var desc = it.description ? '<div class="item-desc">' + richText(it.description) + '</div>' : '';
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
+    var body = '<span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine + desc + renderLiens(it.liens);
     return '<div class="agenda-item">' + tile +
-      '<div class="agenda-body"><span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine + desc + renderLiens(it.liens) + '</div></div>';
+      '<div class="agenda-body">' + body +
+        '<div class="card-hover-full agenda-hover-full">' + body + '</div>' +
+      '</div></div>';
   }).join('');
 }
 
