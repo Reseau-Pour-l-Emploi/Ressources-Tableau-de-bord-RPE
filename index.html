@@ -135,13 +135,18 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .contact-note{background:rgba(255,255,255,.08);border-radius:4px;padding:10px 12px;font-size:11.5px;margin-top:14px;color:#C9CEE8}
 .contact-note a{color:#fff}
 
-/* ==== Actualites : bandeaux discrets ==== */
-.actu-item{display:flex;gap:11px;align-items:flex-start;border-radius:5px;padding:12px 15px;margin-bottom:8px;border-left:3px solid var(--ft-bleu);background:#fff}
-.actu-item:last-child{margin-bottom:0}
-.actu-item.actu-alerte{background:var(--ft-orange-light);border-left-color:var(--ft-orange)}
-.actu-icon{font-size:16px;flex:none;margin-top:1px}
-.actu-item .item-titre{font-size:13px}
-.actu-item .item-desc{font-size:12.5px;margin-top:3px;color:var(--ft-fg-2)}
+/* ==== Actualites : grille de 3 vignettes ==== */
+.actu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:760px){.actu-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.actu-grid{grid-template-columns:1fr}}
+.actu-card{position:relative;height:150px;border-top:3px solid var(--ft-bleu);border-radius:5px;padding:13px 15px;background:#fff;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--sh-sm)}
+.actu-card.actu-alerte{border-top-color:var(--ft-orange)}
+.actu-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
+.actu-icon{font-size:16px;flex:none}
+.actu-card .item-titre{font-size:13px;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.actu-card .item-desc{font-size:12px;margin-top:3px;color:var(--ft-fg-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.actu-card .item-liens{margin-top:auto;padding-top:6px;flex:none}
+.actu-card .card-hover-full .item-titre,.actu-card .card-hover-full .item-desc{-webkit-line-clamp:unset}
 
 /* ==== Le Kiosque : filtre + carrousel style SharePoint (fleches laterales + points) ==== */
 .filmstrip-filter{display:block;margin-bottom:14px;max-width:260px;padding:8px 10px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px;background:#fff}
@@ -181,11 +186,13 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .newsletter-box button:hover{opacity:.9}
 .newsletter-status{width:100%;font-size:12px;margin-top:4px}
 
-.footer-tools{background:var(--ft-indigo-light);border-radius:10px;padding:20px 24px;margin-top:4px}
-.footer-tools h3{margin:0 0 12px;font-size:14px;font-weight:700;color:var(--ft-navy)}
-.footer-tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.footer-tools-grid a{display:block;background:#fff;border-radius:8px;padding:14px 16px;font-size:13px;font-weight:600;text-decoration:none;color:var(--ft-navy);box-shadow:var(--sh-sm)}
-.footer-tools-grid a:hover{box-shadow:var(--sh-md)}
+.footer-tools{border-top:1px solid var(--ft-border);padding:24px 0 4px}
+.footer-tools-cols{display:flex;flex-wrap:wrap;gap:32px}
+.footer-tools-col{min-width:200px}
+.footer-tools-col h4{margin:0 0 10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--ft-navy)}
+.footer-tools-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.footer-tools-col a{font-size:13px;color:var(--ft-fg-2);text-decoration:none}
+.footer-tools-col a:hover{color:var(--ft-indigo);text-decoration:underline}
 /* ==== Responsive mobile / tablette ==== */
 @media (max-width:760px){
   .site-inner{padding:10px 14px;gap:10px}
@@ -326,10 +333,10 @@ var DEFAULT_CONTENT = {
     email_support: "contact-pilotage-rpe.00032@francetravail.fr"
   },
   footer_liens: [
-    {titre: "🗺️ Découvrez la carte de France des CLPE", url: "https://reseau-pour-l-emploi.github.io/carto_CLPE/"},
-    {titre: "📣 La page dédiée au tableau de bord sur francetravail.io", url: "https://francetravail.io/produits-partages/catalogue/tableau-bord-reseau-emploi"},
-    {titre: "📚 Le catalogue des applications de Mon Portail Pro", url: "https://monportailpro.francetravail.fr/catalogue-des-applications/fiche-produit/tableau-de-bord-du-reseau-pour-l-emploi"},
-    {titre: "📊 Data emploi", url: "https://dataemploi.francetravail.fr/"}
+    {titre: "Carte de France des CLPE", url: "https://reseau-pour-l-emploi.github.io/carto_CLPE/", colonne: "Réseau Pour l'Emploi"},
+    {titre: "Tableau de bord sur francetravail.io", url: "https://francetravail.io/produits-partages/catalogue/tableau-bord-reseau-emploi", colonne: "Réseau Pour l'Emploi"},
+    {titre: "Catalogue des applications Mon Portail Pro", url: "https://monportailpro.francetravail.fr/catalogue-des-applications/fiche-produit/tableau-de-bord-du-reseau-pour-l-emploi", colonne: "Données et outils"},
+    {titre: "Data emploi", url: "https://dataemploi.francetravail.fr/", colonne: "Données et outils"}
   ],
   ecoindex: { lettre: "A", url: "https://www.ecoindex.fr/resultat/?id=dd9168bf-d8db-462a-abc4-6154f15b0b12" }
 };
@@ -397,12 +404,21 @@ function actuIcon(titre){
 }
 function renderActualites(items){
   if (!items || !items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
-  return items.map(function(it){
+  var cards = items.map(function(it){
+    var alerte = actuClass(it.titre) === 'actu-alerte';
     var desc = it.description ? '<div class="item-desc">' + escapeHtml(it.description) + '</div>' : '';
-    return '<div class="actu-item ' + actuClass(it.titre) + '"><span class="actu-icon">' + actuIcon(it.titre) + '</span>' +
-      '<div><span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' +
-      (it.date ? ' <span class="item-date">' + escapeHtml(it.date) + '</span>' : '') + desc + renderLiens(it.liens) + '</div></div>';
+    var body =
+      '<div class="kiosque-top">' +
+        '<span class="actu-icon">' + actuIcon(it.titre) + '</span>' +
+        (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
+      '</div>' +
+      '<span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' + desc +
+      renderLiens(it.liens);
+    return '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + body +
+      '<div class="card-hover-full">' + body + '</div>' +
+    '</div>';
   }).join('');
+  return '<div class="actu-grid">' + cards + '</div>';
 }
 
 /* Le Kiosque : evenements passes uniquement (webinaires, newsletters, autres), tries du plus recent au plus ancien */
@@ -677,10 +693,21 @@ function renderPage(content){
 
   html += '</div>'; // /page-grid
 
-  // Footer tools (pleine largeur, sous la grille)
-  html += '<div class="footer-tools"><h3>🔗 Autres outils du Réseau Pour l\'Emploi</h3><div class="footer-tools-grid">';
+  // Footer tools : colonnes thematiques sobres (pleine largeur, sous la grille)
+  var colonnes = {};
+  var ordreColonnes = [];
   (c.footer_liens || []).forEach(function(l){
-    html += '<a href="' + escapeHtml(l.url) + '" target="_blank" rel="noopener">' + escapeHtml(l.titre) + '</a>';
+    var col = l.colonne || "Autres outils du Réseau Pour l'Emploi";
+    if (!colonnes[col]) { colonnes[col] = []; ordreColonnes.push(col); }
+    colonnes[col].push(l);
+  });
+  html += '<div class="footer-tools"><div class="footer-tools-cols">';
+  ordreColonnes.forEach(function(col){
+    html += '<div class="footer-tools-col"><h4>' + escapeHtml(col) + '</h4><ul>';
+    colonnes[col].forEach(function(l){
+      html += '<li><a href="' + escapeHtml(l.url) + '" target="_blank" rel="noopener">' + escapeHtml(l.titre) + '</a></li>';
+    });
+    html += '</ul></div>';
   });
   html += '</div></div>';
 

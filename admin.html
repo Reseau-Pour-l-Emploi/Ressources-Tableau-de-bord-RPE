@@ -1172,10 +1172,10 @@ var DEFAULT_SITE_CONTENT = {
     email_support: "contact-pilotage-rpe.00032@francetravail.fr"
   },
   footer_liens: [
-    {titre: "🗺️ Découvrez la carte de France des CLPE", url: "https://reseau-pour-l-emploi.github.io/carto_CLPE/"},
-    {titre: "📣 La page dédiée au tableau de bord sur francetravail.io", url: "https://francetravail.io/produits-partages/catalogue/tableau-bord-reseau-emploi"},
-    {titre: "📚 Le catalogue des applications de Mon Portail Pro", url: "https://monportailpro.francetravail.fr/catalogue-des-applications/fiche-produit/tableau-de-bord-du-reseau-pour-l-emploi"},
-    {titre: "📊 Data emploi", url: "https://dataemploi.francetravail.fr/"}
+    {titre: "Carte de France des CLPE", url: "https://reseau-pour-l-emploi.github.io/carto_CLPE/", colonne: "Réseau Pour l'Emploi"},
+    {titre: "Tableau de bord sur francetravail.io", url: "https://francetravail.io/produits-partages/catalogue/tableau-bord-reseau-emploi", colonne: "Réseau Pour l'Emploi"},
+    {titre: "Catalogue des applications Mon Portail Pro", url: "https://monportailpro.francetravail.fr/catalogue-des-applications/fiche-produit/tableau-de-bord-du-reseau-pour-l-emploi", colonne: "Données et outils"},
+    {titre: "Data emploi", url: "https://dataemploi.francetravail.fr/", colonne: "Données et outils"}
   ],
   ecoindex: { lettre: "A", url: "https://www.ecoindex.fr/resultat/?id=dd9168bf-d8db-462a-abc4-6154f15b0b12" }
 };
@@ -1193,6 +1193,7 @@ function createRepeater(containerId, itemsInitial, fields){
       if (fields.indexOf('titre') > -1) fieldsHtml += '<input class="edit-input" data-field="titre" placeholder="Titre" value="' + escapeHtml(item.titre||'') + '">';
       if (fields.indexOf('date') > -1) fieldsHtml += '<input class="edit-input" data-field="date" placeholder="Date (ex. 10-07-2026)" value="' + escapeHtml(item.date||'') + '">';
       if (fields.indexOf('type') > -1) fieldsHtml += '<input class="edit-input" data-field="type" placeholder="Type (ex. Webinaire, Newsletter, Article...)" value="' + escapeHtml(item.type||'') + '">';
+      if (fields.indexOf('colonne') > -1) fieldsHtml += '<input class="edit-input" data-field="colonne" placeholder="Colonne thématique (ex. Réseau Pour l\'Emploi)" value="' + escapeHtml(item.colonne||'') + '">';
       if (fields.indexOf('description') > -1) fieldsHtml += '<textarea class="edit-textarea" data-field="description" placeholder="Description (facultatif)">' + escapeHtml(item.description||'') + '</textarea>';
       if (fields.indexOf('url') > -1) fieldsHtml += '<input class="edit-input" data-field="url" placeholder="Lien" value="' + escapeHtml(item.url||'') + '">';
       row.innerHTML = fieldsHtml;
@@ -1287,7 +1288,7 @@ function loadSiteContent(){
     repeaters.actualites = createRepeater('rep_actualites', c.actualites || [], ['titre','date','description','liens']);
     repeaters.kiosque = createRepeater('rep_kiosque', c.kiosque || [], ['titre','date','type','liens']);
     repeaters.ressources = createRepeater('rep_ressources', c.ressources || [], ['titre','liens']);
-    repeaters.footer_liens = createRepeater('rep_footer_liens', c.footer_liens || [], ['titre','url']);
+    repeaters.footer_liens = createRepeater('rep_footer_liens', c.footer_liens || [], ['titre','url','colonne']);
 
     siteContentLoaded = true;
   });
