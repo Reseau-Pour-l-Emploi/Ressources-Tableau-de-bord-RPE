@@ -94,6 +94,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 /* ==== Sections generiques : sobre, sans ombre, bordure fine ==== */
 .section{background:var(--ft-white);border:1px solid var(--ft-border);border-radius:10px;padding:22px 24px;margin-bottom:22px;box-shadow:var(--sh-sm)}
+.section-tinted{background:var(--ft-indigo-light)}
 .section h3{margin:0 0 14px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--ft-navy)}
 .item-row{border:1px solid var(--ft-border);border-radius:5px;padding:11px 13px;margin-bottom:8px;background:var(--ft-sable)}
 .item-row:last-child{margin-bottom:0}
@@ -146,17 +147,19 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 @media (max-width:600px){.filmstrip{padding:0}}
 .filmstrip-grid{padding:2px}
 .kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.kiosque-card{border:1px solid var(--ft-border);border-radius:5px;padding:13px 15px;background:#fff;display:flex;flex-direction:column}
-.kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.kiosque-card{position:relative;height:150px;border:1px solid var(--ft-border);border-radius:5px;padding:13px 15px;background:#fff;display:flex;flex-direction:column;overflow:hidden}
+.kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
 .kiosque-card .item-date{font-size:10.5px;color:var(--ft-fg-3);font-weight:600}
 .kiosque-type{font-size:9.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;color:var(--ft-violet);background:var(--ft-violet-light);padding:1px 7px;border-radius:3px}
-.kiosque-card .item-titre{font-size:12.5px;display:block;margin-bottom:auto}
-.kiosque-card .item-liens{margin-top:9px}
+.kiosque-card .item-titre{font-size:12.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:auto}
+.kiosque-card .item-liens{margin-top:9px;flex:none}
+.card-hover-full{display:none;position:absolute;inset:0;background:#fff;border:1.5px solid var(--ft-indigo);border-radius:5px;padding:13px 15px;z-index:6;box-shadow:var(--sh-md);overflow-y:auto}
+.kiosque-card:hover .card-hover-full,.res-card:hover .card-hover-full{display:block}
 
 /* ==== Ressources : meme carrousel (1 rangee de 3) ==== */
 .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.res-card{border:1px solid var(--ft-border);border-radius:5px;padding:16px;background:#fff}
-.res-card .item-titre{font-size:13px;display:block;margin-bottom:8px}
+.res-card{position:relative;height:140px;border:1px solid var(--ft-border);border-radius:5px;padding:16px;background:#fff;display:flex;flex-direction:column;overflow:hidden}
+.res-card .item-titre{font-size:13px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
 
 .filmstrip-btn{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:1px solid var(--ft-border);background:#fff;cursor:pointer;font-size:15px;color:var(--ft-navy);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.12);padding:0}
 .filmstrip-btn:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
@@ -425,7 +428,16 @@ function kiosqueCardHtml(it){
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
     '</div>' +
     '<span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' +
-    renderLiens(it.liens) + '</div>';
+    renderLiens(it.liens) +
+    '<div class="card-hover-full">' +
+      '<div class="kiosque-top">' +
+        (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
+        (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
+      '</div>' +
+      '<span class="item-titre" style="-webkit-line-clamp:unset">' + escapeHtml(it.titre || '') + '</span>' +
+      renderLiens(it.liens) +
+    '</div>' +
+  '</div>';
 }
 
 /* Carrousel generique style SharePoint : fleches laterales + points de pagination */
@@ -515,7 +527,9 @@ var ressourcesState = {items: [], batch: 0};
 var RESSOURCES_BATCH = 3;
 
 function ressourceCardHtml(it){
-  return '<div class="res-card"><span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' + renderLiens(it.liens) + '</div>';
+  return '<div class="res-card"><span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' + renderLiens(it.liens) +
+    '<div class="card-hover-full"><span class="item-titre" style="-webkit-line-clamp:unset">' + escapeHtml(it.titre || '') + '</span>' + renderLiens(it.liens) + '</div>' +
+  '</div>';
 }
 
 function renderRessources(items){
@@ -634,8 +648,8 @@ function renderPage(content){
   // Colonne principale
   html += '<div class="main-col">';
   html += '<div class="section"><h3>📢 Actualités</h3>' + renderActualites(c.actualites) + '</div>';
-  html += '<div class="section" id="sec-kiosque"><h3>🗞️ Le Kiosque</h3>' + renderKiosque(c.kiosque) + '</div>';
-  html += '<div class="section"><h3>📚 Ressources complémentaires</h3>' + renderRessources(c.ressources) + '</div>';
+  html += '<div class="section section-tinted" id="sec-kiosque"><h3>🗞️ Le Kiosque</h3>' + renderKiosque(c.kiosque) + '</div>';
+  html += '<div class="section section-tinted"><h3>📚 Ressources complémentaires</h3>' + renderRessources(c.ressources) + '</div>';
   html += '</div>';
 
   // Colonne laterale flottante : agenda, abonnement newsletter, contact
