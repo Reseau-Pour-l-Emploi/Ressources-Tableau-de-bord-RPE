@@ -143,7 +143,9 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .actu-card.actu-alerte{border-top-color:var(--ft-orange)}
 .actu-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
 .actu-icon{font-size:16px;flex:none}
-.actu-card .item-titre{font-size:13px;font-weight:700;overflow:hidden}
+.actu-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.actu-card .item-titre{font-size:13px;font-weight:700;overflow:hidden;flex:1}
+.item-date-tag{flex:none;font-size:10px;color:var(--ft-fg-3);background:var(--ft-sable);border:1px solid var(--ft-border);border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:1px}
 .actu-card .item-desc{font-size:12px;margin-top:3px;color:var(--ft-fg-2);overflow:hidden}
 .actu-card .item-liens{margin-top:auto;padding-top:6px;flex:none}
 .actu-card .card-hover-full .item-titre,.actu-card .card-hover-full .item-desc{-webkit-line-clamp:unset}
@@ -436,8 +438,10 @@ function renderActualites(items){
     var alerte = actuClass(it.titre) === 'actu-alerte';
     var desc = it.description ? '<div class="item-desc">' + richText(it.description) + '</div>' : '';
     var body =
-      (it.date ? '<div class="kiosque-top"><span></span><span class="item-date">' + escapeHtml(it.date) + '</span></div>' : '') +
-      '<span class="item-titre">' + richText(it.titre || '') + '</span>' + desc;
+      '<div class="actu-head">' +
+        '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
+        (it.date ? '<span class="item-date-tag">' + escapeHtml(it.date) + '</span>' : '') +
+      '</div>' + desc;
     return '<div class="tile-unit">' +
       '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + body +
         '<div class="card-hover-full">' + body + '</div>' +
