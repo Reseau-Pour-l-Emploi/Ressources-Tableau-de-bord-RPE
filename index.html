@@ -163,7 +163,11 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .kiosque-card .item-liens{margin-top:9px;flex:none}
 
 /* Zone de texte qui s'agrandit au survol si le contenu depasse (au lieu d'une superposition) */
-.text-wrap{max-height:56px;overflow:hidden;transition:max-height .25s ease}
+.text-wrap{position:relative;max-height:76px;overflow:hidden;transition:max-height .25s ease}
+.text-wrap.has-more::after{content:'';position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff);pointer-events:none}
+.text-wrap-chevron{display:none;position:absolute;left:50%;bottom:1px;transform:translateX(-50%);font-size:11px;color:var(--ft-indigo);z-index:2;line-height:1;pointer-events:none}
+.text-wrap.has-more .text-wrap-chevron{display:block}
+.text-wrap:hover::after,.text-wrap:hover .text-wrap-chevron{display:none}
 .tile-unit:hover .text-wrap,.actu-card:hover .text-wrap,.agenda-item:hover .text-wrap{max-height:600px}
 .agenda-text-wrap{max-height:34px;margin-top:2px}
 
@@ -425,7 +429,7 @@ function renderAgenda(items){
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
     var titreLigne = '<span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine;
     var desc = it.description
-      ? '<div class="text-wrap agenda-text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div>'
+      ? '<div class="text-wrap agenda-text-wrap"><div class="item-desc">' + richText(it.description) + '</div><span class="text-wrap-chevron">▾</span></div>'
       : '';
     return '<div class="agenda-item">' + tile +
       '<div class="agenda-body">' + titreLigne + desc + renderLiens(it.liens) + '</div></div>';
@@ -447,7 +451,7 @@ function renderActualites(items){
         (it.date ? '<span class="item-date-tag">' + escapeHtml(it.date) + '</span>' : '') +
       '</div>';
     var desc = it.description
-      ? '<div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div>'
+      ? '<div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div><span class="text-wrap-chevron">▾</span></div>'
       : '';
     return '<div class="tile-unit">' +
       '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + desc + '</div>' +
@@ -481,7 +485,7 @@ function kiosqueCardHtml(it){
       (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
     '</div>' +
-    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div>' +
+    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span><span class="text-wrap-chevron">▾</span></div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -552,6 +556,7 @@ function renderKiosqueGrid(){
   var start = kiosqueState.batch * KIOSQUE_BATCH;
   var pageItems = filtered.slice(start, start + KIOSQUE_BATCH);
   grid.innerHTML = pageItems.length ? pageItems.map(kiosqueCardHtml).join('') : '<div class="empty-hint">Rien à afficher pour ce filtre.</div>';
+  markOverflowingTextWraps(grid);
   renderFilmstripNav('kiosque', totalBatches, kiosqueState.batch, function(page){ kiosqueState.batch = page; renderKiosqueGrid(); });
 }
 
@@ -573,7 +578,7 @@ var RESSOURCES_BATCH = 3;
 
 function ressourceCardHtml(it){
   return '<div class="tile-unit"><div class="res-card">' +
-    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div>' +
+    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span><span class="text-wrap-chevron">▾</span></div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -594,6 +599,7 @@ function renderRessourcesGrid(){
   var start = ressourcesState.batch * RESSOURCES_BATCH;
   var pageItems = ressourcesState.items.slice(start, start + RESSOURCES_BATCH);
   grid.innerHTML = pageItems.map(ressourceCardHtml).join('');
+  markOverflowingTextWraps(grid);
   renderFilmstripNav('res', totalBatches, ressourcesState.batch, function(page){ ressourcesState.batch = page; renderRessourcesGrid(); });
 }
 
@@ -743,6 +749,13 @@ function renderPage(content){
   bindKiosque(main);
   bindRessources(main);
   bindNewsletterForm(main);
+  markOverflowingTextWraps(main);
+}
+
+function markOverflowingTextWraps(scopeEl){
+  scopeEl.querySelectorAll('.text-wrap').forEach(function(el){
+    el.classList.toggle('has-more', el.scrollHeight > el.clientHeight + 1);
+  });
 }
 
 db.collection('site_content').doc('homepage').get().then(function(doc){
