@@ -94,7 +94,9 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 /* ==== Sections generiques : sobre, sans ombre, bordure fine ==== */
 .section{background:var(--ft-white);border:1px solid var(--ft-border);border-radius:10px;padding:22px 24px;margin-bottom:22px;box-shadow:var(--sh-sm)}
-.section-tinted{background:var(--ft-indigo-light)}
+.section-tinted-actu{background:var(--ft-bleu-light)}
+.section-tinted-kiosque{background:var(--ft-violet-light)}
+.section-tinted-res{background:var(--ft-jaune-light)}
 .section h3{margin:0 0 14px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--ft-navy)}
 .item-row{border:1px solid var(--ft-border);border-radius:5px;padding:11px 13px;margin-bottom:8px;background:var(--ft-sable)}
 .item-row:last-child{margin-bottom:0}
@@ -134,7 +136,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .contact-note a{color:#fff}
 
 /* ==== Actualites : bandeaux discrets ==== */
-.actu-item{display:flex;gap:11px;align-items:flex-start;border-radius:5px;padding:12px 15px;margin-bottom:8px;border-left:3px solid var(--ft-bleu);background:var(--ft-bleu-light)}
+.actu-item{display:flex;gap:11px;align-items:flex-start;border-radius:5px;padding:12px 15px;margin-bottom:8px;border-left:3px solid var(--ft-bleu);background:#fff}
 .actu-item:last-child{margin-bottom:0}
 .actu-item.actu-alerte{background:var(--ft-orange-light);border-left-color:var(--ft-orange)}
 .actu-icon{font-size:16px;flex:none;margin-top:1px}
@@ -647,9 +649,9 @@ function renderPage(content){
 
   // Colonne principale
   html += '<div class="main-col">';
-  html += '<div class="section"><h3>📢 Actualités</h3>' + renderActualites(c.actualites) + '</div>';
-  html += '<div class="section section-tinted" id="sec-kiosque"><h3>🗞️ Le Kiosque</h3>' + renderKiosque(c.kiosque) + '</div>';
-  html += '<div class="section section-tinted"><h3>📚 Ressources complémentaires</h3>' + renderRessources(c.ressources) + '</div>';
+  html += '<div class="section section-tinted-actu"><h3>📢 Actualités</h3>' + renderActualites(c.actualites) + '</div>';
+  html += '<div class="section section-tinted-kiosque" id="sec-kiosque"><h3>🗞️ Le Kiosque</h3>' + renderKiosque(c.kiosque) + '</div>';
+  html += '<div class="section section-tinted-res"><h3>📚 Ressources complémentaires</h3>' + renderRessources(c.ressources) + '</div>';
   html += '</div>';
 
   // Colonne laterale flottante : agenda, abonnement newsletter, contact
