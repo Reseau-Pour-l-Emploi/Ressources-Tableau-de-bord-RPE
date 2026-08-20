@@ -367,21 +367,10 @@ function richInline(s){
 function richText(s){
   if (!s) return '';
   var lines = String(s).split('\n');
-  var blocks = [];
-  var currentList = null;
-  lines.forEach(function(line){
+  return lines.map(function(line){
     var m = /^\s*-\s+(.*)$/.exec(line);
-    if (m) {
-      if (!currentList) { currentList = []; blocks.push(currentList); }
-      currentList.push(m[1]);
-    } else {
-      currentList = null;
-      blocks.push(line);
-    }
-  });
-  return blocks.map(function(b){
-    if (Array.isArray(b)) return '<ul>' + b.map(function(li){ return '<li>' + richInline(li) + '</li>'; }).join('') + '</ul>';
-    return richInline(b);
+    var out = richInline(m ? m[1] : line);
+    return m ? '&bull;&nbsp;' + out : out;
   }).join('<br>');
 }
 
