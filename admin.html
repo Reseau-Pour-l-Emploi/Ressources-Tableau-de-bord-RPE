@@ -88,6 +88,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .format-toolbar{display:flex;gap:4px;margin-bottom:3px}
 .format-btn{font-family:inherit;font-size:11px;width:24px;height:22px;border:1px solid var(--ft-gray-300);background:#fff;border-radius:3px;cursor:pointer;color:var(--ft-navy);padding:0;line-height:1}
 .format-btn:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
+.edit-titre-area{min-height:34px;resize:vertical;font-family:inherit}
 .repeater-row .edit-input,.repeater-row .edit-textarea{margin-bottom:6px}
 .liens-repeater{margin:8px 0;padding:8px;background:#fff;border:1px dashed var(--ft-gray-300);border-radius:4px}
 .lien-row{display:grid;grid-template-columns:1fr 2fr auto;gap:6px;margin-bottom:6px;align-items:center}
@@ -1246,7 +1247,7 @@ function createRepeater(containerId, itemsInitial, fields){
       var row = document.createElement('div');
       row.className = 'repeater-row';
       var fieldsHtml = '';
-      if (fields.indexOf('titre') > -1) fieldsHtml += '<input class="edit-input" data-field="titre" placeholder="Titre" value="' + escapeHtml(item.titre||'') + '">';
+      if (fields.indexOf('titre') > -1) fieldsHtml += '<textarea class="edit-input edit-titre-area" data-field="titre" placeholder="Titre" rows="1">' + escapeHtml(item.titre||'') + '</textarea>';
       if (fields.indexOf('date') > -1) fieldsHtml += '<input class="edit-input" data-field="date" placeholder="Date (ex. 10-07-2026)" value="' + escapeHtml(item.date||'') + '">';
       if (fields.indexOf('type') > -1) fieldsHtml += '<input class="edit-input" data-field="type" placeholder="Type (ex. Webinaire, Newsletter, Article...)" value="' + escapeHtml(item.type||'') + '">';
       if (fields.indexOf('colonne') > -1) fieldsHtml += '<input class="edit-input" data-field="colonne" placeholder="Colonne thématique (ex. Réseau Pour l\'Emploi)" value="' + escapeHtml(item.colonne||'') + '">';
