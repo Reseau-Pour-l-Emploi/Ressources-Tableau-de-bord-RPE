@@ -1390,8 +1390,8 @@ function loadSiteContent(){
     repeaters.textes = createRepeater('rep_textes', (c.intro && c.intro.textes) || [], ['titre','url']);
     repeaters.agenda = createRepeater('rep_agenda', c.agenda || [], ['titre','date','description','liens']);
     repeaters.actualites = createRepeater('rep_actualites', c.actualites || [], ['titre','date','description','liens']);
-    repeaters.kiosque = createRepeater('rep_kiosque', c.kiosque || [], ['titre','date','type','liens']);
-    repeaters.ressources = createRepeater('rep_ressources', c.ressources || [], ['titre','liens']);
+    repeaters.kiosque = createRepeater('rep_kiosque', c.kiosque || [], ['titre','date','type','description','liens']);
+    repeaters.ressources = createRepeater('rep_ressources', c.ressources || [], ['titre','description','liens']);
     repeaters.footer_liens = createRepeater('rep_footer_liens', c.footer_liens || [], ['titre','url','colonne']);
 
     siteContentLoaded = true;

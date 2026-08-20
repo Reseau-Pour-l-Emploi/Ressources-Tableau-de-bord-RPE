@@ -115,17 +115,17 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 /* ==== Sidebar : agenda type calendrier ==== */
 .agenda-card{background:var(--ft-white);border:1px solid var(--ft-border);border-radius:10px;padding:18px 20px;box-shadow:var(--sh-sm)}
 .agenda-card h3{margin:0 0 12px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--ft-navy)}
-.agenda-item{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid var(--ft-border);position:relative}
-.agenda-body{flex:1;min-width:0}
+.agenda-item{padding:8px 0;border-bottom:1px solid var(--ft-border)}
 .agenda-item:last-child{border-bottom:none;padding-bottom:0}
+.agenda-row{display:flex;gap:11px;align-items:flex-start}
+.agenda-body{flex:1;min-width:0}
 .cal-tile{flex:none;width:46px;text-align:center;border:1px solid var(--ft-border);border-radius:5px;overflow:hidden}
 .cal-tile .cal-mois{background:var(--ft-indigo);color:#fff;font-size:9px;font-weight:700;padding:2px 0;letter-spacing:.03em}
 .cal-tile .cal-jour{font-size:16px;font-weight:700;color:var(--ft-navy);padding:2px 0}
 .cal-tile.cal-generic{display:flex;align-items:center;justify-content:center;height:38px;font-size:16px;border:none;background:var(--ft-sable)}
 .agenda-body .item-titre{display:block;font-weight:700;font-size:12.5px}
 .agenda-body .item-desc{font-size:11.5px;color:var(--ft-fg-3);margin-top:2px}
-.agenda-body .item-liens{margin-top:4px}
-.agenda-body .item-liens a{font-size:11.5px}
+.agenda-item .tile-linkbar{margin-top:8px;border-radius:5px}
 
 /* ==== Sidebar : contact flottant (sobre) ==== */
 .contact-card{background:linear-gradient(160deg,var(--ft-indigo),var(--ft-navy));color:#fff;border-radius:10px;padding:20px}
@@ -140,7 +140,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .actu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
 @media (max-width:760px){.actu-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.actu-grid{grid-template-columns:1fr}}
-.actu-card{min-height:150px;border-top:3px solid var(--ft-bleu);border-radius:5px 5px 0 0;padding:13px 15px;background:#fff;display:flex;flex-direction:column;box-shadow:var(--sh-sm)}
+.actu-card{min-height:96px;border-top:3px solid var(--ft-bleu);border-radius:5px 5px 0 0;padding:13px 15px;background:#fff;display:flex;flex-direction:column;box-shadow:var(--sh-sm)}
 .actu-card.actu-alerte{border-top-color:var(--ft-orange)}
 .actu-icon{font-size:16px;flex:none}
 .actu-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
@@ -154,22 +154,35 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 @media (max-width:600px){.filmstrip{padding:0}}
 .filmstrip-grid{padding:2px;align-items:start}
 .kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
-.kiosque-card{min-height:150px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:13px 15px;background:#fff;display:flex;flex-direction:column}
+.kiosque-card{min-height:88px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:13px 15px;background:#fff;display:flex;flex-direction:column}
 .kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
 .kiosque-card .item-date{font-size:10.5px;color:var(--ft-fg-3);font-weight:600}
 .kiosque-type{font-size:9.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;color:var(--ft-violet);background:var(--ft-violet-light);padding:1px 7px;border-radius:3px}
 .kiosque-card .item-titre{font-size:12.5px}
 
 /* Zone de texte qui s'agrandit au survol si le contenu depasse (au lieu d'une superposition) */
-.text-block{display:flex;flex-direction:column;flex:1;min-height:0}
-.text-wrap{max-height:76px;overflow:hidden;transition:max-height .25s ease}
-.text-wrap-chevron{display:none;text-align:center;font-size:11px;color:var(--ft-indigo);margin-top:auto;padding-top:3px;line-height:1}
-.text-block.has-more .text-wrap-chevron{display:block}
-.text-block:hover .text-wrap-chevron{display:none}
-.tile-unit:hover .text-wrap,.actu-card:hover .text-wrap,.agenda-item:hover .text-wrap{max-height:600px}
-.agenda-text-wrap{max-height:34px;margin-top:2px}
+.item-desc-clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* Popup de contenu complet (au clic sur une vignette) */
+.tile-modal-overlay{display:none;position:fixed;inset:0;background:rgba(13,20,64,.55);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.tile-modal-overlay.open{display:flex}
+.tile-modal{background:#fff;border-radius:8px;padding:26px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;position:relative;box-shadow:var(--sh-md)}
+.tile-modal-close{position:absolute;top:12px;right:12px;background:none;border:none;font-size:16px;cursor:pointer;color:var(--ft-fg-3);width:28px;height:28px;border-radius:50%}
+.tile-modal-close:hover{background:var(--ft-sable);color:var(--ft-navy)}
+.tile-modal-meta{font-size:11px;color:var(--ft-fg-3);margin-bottom:6px}
+.tile-modal h4{margin:0 0 14px;font-size:16px;color:var(--ft-navy);padding-right:20px}
+.tile-modal-body-text{font-size:13.5px;color:var(--ft-fg-2);line-height:1.65}
+.tile-modal-links{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.tile-modal-links a{font-size:13px;font-weight:600;color:var(--ft-indigo);text-decoration:none;padding:9px 14px;border:1px solid var(--ft-border);border-radius:5px}
+.tile-modal-links a:hover{background:var(--ft-indigo-light)}
+
+.section-head-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.section-head-row h3{margin:0}
+.section-head-row .filmstrip-filter{margin-bottom:0;max-width:220px}
 
 .tile-unit{display:flex;flex-direction:column}
+.tile-more-btn{align-self:flex-start;margin-top:8px;background:none;border:none;color:var(--ft-indigo);font-weight:600;font-size:11.5px;padding:0;cursor:pointer;font-family:inherit;text-decoration:underline}
+.tile-more-btn:hover{color:var(--ft-indigo-dark)}
+.agenda-body .tile-more-btn{margin-top:4px;font-size:11px}
 .tile-linkbar{display:flex;border:1px solid var(--ft-border);border-radius:0 0 5px 5px;overflow:hidden;background:var(--ft-sable);flex:none}
 .tile-linkbar a{flex:1 1 0;text-align:center;padding:8px 4px;font-size:11px;font-weight:600;text-decoration:none;color:var(--ft-indigo);border-right:1px solid var(--ft-border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tile-linkbar a:last-child{border-right:none}
@@ -177,7 +190,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 /* ==== Ressources : meme carrousel (1 rangee de 3) ==== */
 .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
-.res-card{min-height:140px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:16px;background:#fff;display:flex;flex-direction:column}
+.res-card{min-height:80px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:16px;background:#fff;display:flex;flex-direction:column}
 .res-card .item-titre{font-size:13px;margin-bottom:8px}
 
 .filmstrip-btn{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:1px solid var(--ft-border);background:#fff;cursor:pointer;font-size:15px;color:var(--ft-navy);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.12);padding:0}
@@ -248,6 +261,16 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 <main id="mainContent">
   <div class="empty-hint">Chargement...</div>
 </main>
+
+<div id="tileModalOverlay" class="tile-modal-overlay">
+  <div class="tile-modal">
+    <button type="button" class="tile-modal-close" id="tileModalClose" aria-label="Fermer">✕</button>
+    <div class="tile-modal-meta" id="tileModalMeta"></div>
+    <h4 id="tileModalTitle"></h4>
+    <div class="tile-modal-body-text" id="tileModalBody"></div>
+    <div class="tile-modal-links" id="tileModalLinks"></div>
+  </div>
+</div>
 
 <footer class="site">
   <div class="inner">
@@ -361,6 +384,39 @@ function escapeHtml(s){
   });
 }
 
+/* Popup generique affichant le contenu complet d'une vignette au clic */
+function tileDataAttr(obj){
+  return escapeHtml(JSON.stringify(obj));
+}
+function tileMoreButtonHtml(d){
+  if (!d.desc) return '';
+  return '<button type="button" class="tile-more-btn" data-tile="' + tileDataAttr(d) + '">En savoir plus</button>';
+}
+function openTileModal(d){
+  document.getElementById('tileModalMeta').textContent = d.meta || '';
+  document.getElementById('tileModalMeta').style.display = d.meta ? 'block' : 'none';
+  document.getElementById('tileModalTitle').innerHTML = richText(d.titre || '');
+  document.getElementById('tileModalBody').innerHTML = d.desc ? richText(d.desc) : '';
+  var liensHtml = (d.liens || []).filter(function(l){ return l.url; }).map(function(l){
+    return '<a href="' + escapeHtml(l.url) + '" target="_blank" rel="noopener">' + escapeHtml(l.label) + ' →</a>';
+  }).join('');
+  document.getElementById('tileModalLinks').innerHTML = liensHtml;
+  document.getElementById('tileModalOverlay').classList.add('open');
+}
+function closeTileModal(){
+  document.getElementById('tileModalOverlay').classList.remove('open');
+}
+document.addEventListener('click', function(ev){
+  var closeBtn = ev.target.closest('#tileModalClose');
+  if (closeBtn) { closeTileModal(); return; }
+  if (ev.target.id === 'tileModalOverlay') { closeTileModal(); return; }
+  var tile = ev.target.closest('[data-tile]');
+  if (tile) {
+    try { openTileModal(JSON.parse(tile.getAttribute('data-tile'))); } catch(e){}
+  }
+});
+document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') closeTileModal(); });
+
 /* Syntaxe legere pour le texte des vignettes : **gras**, *italique*, __souligne__,
    saut de ligne (Entree), "- " en debut de ligne = puce. Toujours echappe avant mise en forme
    (aucune injection HTML possible). */
@@ -426,11 +482,11 @@ function renderAgenda(items){
       : '<div class="cal-tile cal-generic">🗓️</div>';
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
     var titreLigne = '<span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine;
-    var desc = it.description
-      ? '<div class="text-block agenda-text-wrap"><div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div><span class="text-wrap-chevron">▾</span></div>'
-      : '';
-    return '<div class="agenda-item">' + tile +
-      '<div class="agenda-body">' + titreLigne + desc + renderLiens(it.liens) + '</div></div>';
+    var data = {titre: it.titre, desc: it.description || '', liens: it.liens || []};
+    return '<div class="agenda-item">' +
+      '<div class="agenda-row">' + tile + '<div class="agenda-body">' + titreLigne + tileMoreButtonHtml(data) + '</div></div>' +
+      renderLinkBar(it.liens) +
+    '</div>';
   }).join('');
 }
 
@@ -448,11 +504,9 @@ function renderActualites(items){
         '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
         (it.date ? '<span class="item-date-tag">' + escapeHtml(it.date) + '</span>' : '') +
       '</div>';
-    var desc = it.description
-      ? '<div class="text-block"><div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div><span class="text-wrap-chevron">▾</span></div>'
-      : '';
+    var data = {titre: it.titre, desc: it.description || '', liens: it.liens || [], meta: it.date || ''};
     return '<div class="tile-unit">' +
-      '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + desc + '</div>' +
+      '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + tileMoreButtonHtml(data) + '</div>' +
       renderLinkBar(it.liens) +
     '</div>';
   }).join('');
@@ -478,12 +532,14 @@ function kiosquePassedItems(items){
 }
 
 function kiosqueCardHtml(it){
+  var data = {titre: it.titre, desc: it.description || '', liens: it.liens || [], meta: [it.date, it.type].filter(Boolean).join(' · ')};
   return '<div class="tile-unit"><div class="kiosque-card">' +
     '<div class="kiosque-top">' +
       (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
     '</div>' +
-    '<div class="text-block"><div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div><span class="text-wrap-chevron">▾</span></div>' +
+    '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
+    tileMoreButtonHtml(data) +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -527,18 +583,23 @@ function renderFilmstripNav(idPrefix, totalBatches, currentBatch, onDotClick){
   });
 }
 
+function renderKiosqueFilter(items){
+  var passed = kiosquePassedItems(items);
+  if (!passed.length) return '';
+  var types = [];
+  passed.forEach(function(it){ if (it.type && types.indexOf(it.type) === -1) types.push(it.type); });
+  return '<select class="filmstrip-filter" id="kiosqueFilter">' +
+    '<option value="tous">Tous les événements</option>' +
+    types.map(function(t){ return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + '</option>'; }).join('') +
+  '</select>';
+}
+
 function renderKiosque(items){
   kiosqueState.items = kiosquePassedItems(items);
   kiosqueState.filterType = 'tous';
   kiosqueState.batch = 0;
   if (!kiosqueState.items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
-  var types = [];
-  kiosqueState.items.forEach(function(it){ if (it.type && types.indexOf(it.type) === -1) types.push(it.type); });
-  var filterHtml = '<select class="filmstrip-filter" id="kiosqueFilter">' +
-    '<option value="tous">Tous les événements</option>' +
-    types.map(function(t){ return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + '</option>'; }).join('') +
-  '</select>';
-  return filterHtml + filmstripControlsHtml('kiosque');
+  return filmstripControlsHtml('kiosque');
 }
 
 function renderKiosqueGrid(){
@@ -554,7 +615,6 @@ function renderKiosqueGrid(){
   var start = kiosqueState.batch * KIOSQUE_BATCH;
   var pageItems = filtered.slice(start, start + KIOSQUE_BATCH);
   grid.innerHTML = pageItems.length ? pageItems.map(kiosqueCardHtml).join('') : '<div class="empty-hint">Rien à afficher pour ce filtre.</div>';
-  markOverflowingTextWraps(grid);
   renderFilmstripNav('kiosque', totalBatches, kiosqueState.batch, function(page){ kiosqueState.batch = page; renderKiosqueGrid(); });
 }
 
@@ -575,8 +635,10 @@ var ressourcesState = {items: [], batch: 0};
 var RESSOURCES_BATCH = 3;
 
 function ressourceCardHtml(it){
+  var data = {titre: it.titre, desc: it.description || '', liens: it.liens || []};
   return '<div class="tile-unit"><div class="res-card">' +
-    '<div class="text-block"><div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div><span class="text-wrap-chevron">▾</span></div>' +
+    '<span class="item-titre">' + richText(it.titre || '') + '</span>' +
+    tileMoreButtonHtml(data) +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -597,7 +659,6 @@ function renderRessourcesGrid(){
   var start = ressourcesState.batch * RESSOURCES_BATCH;
   var pageItems = ressourcesState.items.slice(start, start + RESSOURCES_BATCH);
   grid.innerHTML = pageItems.map(ressourceCardHtml).join('');
-  markOverflowingTextWraps(grid);
   renderFilmstripNav('res', totalBatches, ressourcesState.batch, function(page){ ressourcesState.batch = page; renderRessourcesGrid(); });
 }
 
@@ -697,7 +758,7 @@ function renderPage(content){
   // Colonne principale
   html += '<div class="main-col">';
   html += '<div class="section section-tinted-actu"><h3>📢 Actualités</h3>' + renderActualites(c.actualites) + '</div>';
-  html += '<div class="section section-tinted-kiosque" id="sec-kiosque"><h3>🗞️ Le Kiosque</h3>' + renderKiosque(c.kiosque) + '</div>';
+  html += '<div class="section section-tinted-kiosque" id="sec-kiosque"><div class="section-head-row"><h3>🗞️ Le Kiosque</h3>' + renderKiosqueFilter(c.kiosque) + '</div>' + renderKiosque(c.kiosque) + '</div>';
   html += '<div class="section section-tinted-res"><h3>📚 Ressources complémentaires</h3>' + renderRessources(c.ressources) + '</div>';
   html += '</div>';
 
@@ -747,15 +808,6 @@ function renderPage(content){
   bindKiosque(main);
   bindRessources(main);
   bindNewsletterForm(main);
-  markOverflowingTextWraps(main);
-}
-
-function markOverflowingTextWraps(scopeEl){
-  scopeEl.querySelectorAll('.text-wrap').forEach(function(el){
-    var overflowing = el.scrollHeight > el.clientHeight + 1;
-    var block = el.closest('.text-block') || el;
-    block.classList.toggle('has-more', overflowing);
-  });
 }
 
 db.collection('site_content').doc('homepage').get().then(function(doc){
