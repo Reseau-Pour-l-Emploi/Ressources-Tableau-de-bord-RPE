@@ -147,7 +147,6 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .actu-card .item-titre{font-size:13px;font-weight:700;flex:1}
 .item-date-tag{flex:none;font-size:10px;color:var(--ft-fg-3);background:var(--ft-sable);border:1px solid var(--ft-border);border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:1px}
 .actu-card .item-desc{font-size:12px;color:var(--ft-fg-2)}
-.actu-card .item-liens{margin-top:auto;padding-top:6px;flex:none}
 
 /* ==== Le Kiosque : filtre + carrousel style SharePoint (fleches laterales + points) ==== */
 .filmstrip-filter{display:block;margin-bottom:14px;max-width:260px;padding:8px 10px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px;background:#fff}
@@ -159,15 +158,14 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
 .kiosque-card .item-date{font-size:10.5px;color:var(--ft-fg-3);font-weight:600}
 .kiosque-type{font-size:9.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;color:var(--ft-violet);background:var(--ft-violet-light);padding:1px 7px;border-radius:3px}
-.kiosque-card .item-titre{font-size:12.5px;margin-bottom:auto}
-.kiosque-card .item-liens{margin-top:9px;flex:none}
+.kiosque-card .item-titre{font-size:12.5px}
 
 /* Zone de texte qui s'agrandit au survol si le contenu depasse (au lieu d'une superposition) */
-.text-wrap{position:relative;max-height:76px;overflow:hidden;transition:max-height .25s ease}
-.text-wrap.has-more::after{content:'';position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff);pointer-events:none}
-.text-wrap-chevron{display:none;position:absolute;left:50%;bottom:1px;transform:translateX(-50%);font-size:11px;color:var(--ft-indigo);z-index:2;line-height:1;pointer-events:none}
-.text-wrap.has-more .text-wrap-chevron{display:block}
-.text-wrap:hover::after,.text-wrap:hover .text-wrap-chevron{display:none}
+.text-block{display:flex;flex-direction:column;flex:1;min-height:0}
+.text-wrap{max-height:76px;overflow:hidden;transition:max-height .25s ease}
+.text-wrap-chevron{display:none;text-align:center;font-size:11px;color:var(--ft-indigo);margin-top:auto;padding-top:3px;line-height:1}
+.text-block.has-more .text-wrap-chevron{display:block}
+.text-block:hover .text-wrap-chevron{display:none}
 .tile-unit:hover .text-wrap,.actu-card:hover .text-wrap,.agenda-item:hover .text-wrap{max-height:600px}
 .agenda-text-wrap{max-height:34px;margin-top:2px}
 
@@ -429,7 +427,7 @@ function renderAgenda(items){
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
     var titreLigne = '<span class="item-titre">' + richText(it.titre || '') + '</span>' + dateLine;
     var desc = it.description
-      ? '<div class="text-wrap agenda-text-wrap"><div class="item-desc">' + richText(it.description) + '</div><span class="text-wrap-chevron">▾</span></div>'
+      ? '<div class="text-block agenda-text-wrap"><div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div><span class="text-wrap-chevron">▾</span></div>'
       : '';
     return '<div class="agenda-item">' + tile +
       '<div class="agenda-body">' + titreLigne + desc + renderLiens(it.liens) + '</div></div>';
@@ -451,7 +449,7 @@ function renderActualites(items){
         (it.date ? '<span class="item-date-tag">' + escapeHtml(it.date) + '</span>' : '') +
       '</div>';
     var desc = it.description
-      ? '<div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div><span class="text-wrap-chevron">▾</span></div>'
+      ? '<div class="text-block"><div class="text-wrap"><div class="item-desc">' + richText(it.description) + '</div></div><span class="text-wrap-chevron">▾</span></div>'
       : '';
     return '<div class="tile-unit">' +
       '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + desc + '</div>' +
@@ -485,7 +483,7 @@ function kiosqueCardHtml(it){
       (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
     '</div>' +
-    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span><span class="text-wrap-chevron">▾</span></div>' +
+    '<div class="text-block"><div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div><span class="text-wrap-chevron">▾</span></div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -578,7 +576,7 @@ var RESSOURCES_BATCH = 3;
 
 function ressourceCardHtml(it){
   return '<div class="tile-unit"><div class="res-card">' +
-    '<div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span><span class="text-wrap-chevron">▾</span></div>' +
+    '<div class="text-block"><div class="text-wrap"><span class="item-titre">' + richText(it.titre || '') + '</span></div><span class="text-wrap-chevron">▾</span></div>' +
   '</div>' + renderLinkBar(it.liens) + '</div>';
 }
 
@@ -754,7 +752,9 @@ function renderPage(content){
 
 function markOverflowingTextWraps(scopeEl){
   scopeEl.querySelectorAll('.text-wrap').forEach(function(el){
-    el.classList.toggle('has-more', el.scrollHeight > el.clientHeight + 1);
+    var overflowing = el.scrollHeight > el.clientHeight + 1;
+    var block = el.closest('.text-block') || el;
+    block.classList.toggle('has-more', overflowing);
   });
 }
 
