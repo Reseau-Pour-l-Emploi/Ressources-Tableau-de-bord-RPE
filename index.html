@@ -301,9 +301,9 @@ var DEFAULT_CONTENT = {
     {titre: "Autres rendez-vous", date: "", description: "", liens: []}
   ],
   actualites: [
-    {titre: "Information utilisateurs", date: "", description: "", liens: []},
-    {titre: "Anomalies détectées", date: "", description: "", liens: []},
-    {titre: "Backlog des évolutions", date: "", description: "Backlog actualisée des évolutions en cours et à venir.", liens: []}
+    {titre: "📌 Information utilisateurs", date: "", description: "", liens: []},
+    {titre: "⚠️ Anomalies détectées", date: "", description: "", liens: []},
+    {titre: "📋 Backlog des évolutions", date: "", description: "Backlog actualisée des évolutions en cours et à venir.", liens: []}
   ],
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -430,24 +430,13 @@ function actuClass(titre){
   if (t.indexOf('anomalie') > -1 || t.indexOf('interruption') > -1 || t.indexOf('incident') > -1) return 'actu-alerte';
   return '';
 }
-function actuIcon(titre){
-  var t = (titre || '').toLowerCase();
-  if (t.indexOf('anomalie') > -1) return '⚠️';
-  if (t.indexOf('interruption') > -1) return '🛠️';
-  if (t.indexOf('backlog') > -1) return '📋';
-  if (t.indexOf('information') > -1) return '📌';
-  return 'ℹ️';
-}
 function renderActualites(items){
   if (!items || !items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
   var cards = items.map(function(it){
     var alerte = actuClass(it.titre) === 'actu-alerte';
     var desc = it.description ? '<div class="item-desc">' + richText(it.description) + '</div>' : '';
     var body =
-      '<div class="kiosque-top">' +
-        '<span class="actu-icon">' + actuIcon(it.titre) + '</span>' +
-        (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
-      '</div>' +
+      (it.date ? '<div class="kiosque-top"><span></span><span class="item-date">' + escapeHtml(it.date) + '</span></div>' : '') +
       '<span class="item-titre">' + richText(it.titre || '') + '</span>' + desc;
     return '<div class="tile-unit">' +
       '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + body +
