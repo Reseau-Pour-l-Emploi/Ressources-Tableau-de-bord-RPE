@@ -186,13 +186,13 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .newsletter-box button:hover{opacity:.9}
 .newsletter-status{width:100%;font-size:12px;margin-top:4px}
 
-.footer-tools{border-top:1px solid var(--ft-border);padding:24px 0 4px}
-.footer-tools-cols{display:flex;flex-wrap:wrap;gap:32px}
+.footer-tools{background:var(--ft-navy);border-radius:10px;padding:28px 24px;margin-top:8px}
+.footer-tools-cols{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;text-align:left}
 .footer-tools-col{min-width:200px}
-.footer-tools-col h4{margin:0 0 10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--ft-navy)}
+.footer-tools-col h4{margin:0 0 10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:#fff}
 .footer-tools-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
-.footer-tools-col a{font-size:13px;color:var(--ft-fg-2);text-decoration:none}
-.footer-tools-col a:hover{color:var(--ft-indigo);text-decoration:underline}
+.footer-tools-col a{font-size:13px;color:#C9CEE8;text-decoration:none}
+.footer-tools-col a:hover{color:#fff;text-decoration:underline}
 /* ==== Responsive mobile / tablette ==== */
 @media (max-width:760px){
   .site-inner{padding:10px 14px;gap:10px}
@@ -334,9 +334,11 @@ var DEFAULT_CONTENT = {
   },
   footer_liens: [
     {titre: "Carte de France des CLPE", url: "https://reseau-pour-l-emploi.github.io/carto_CLPE/", colonne: "Réseau Pour l'Emploi"},
-    {titre: "Tableau de bord sur francetravail.io", url: "https://francetravail.io/produits-partages/catalogue/tableau-bord-reseau-emploi", colonne: "Réseau Pour l'Emploi"},
+    {titre: "Cockpit CLPE", url: "https://reseau-pour-l-emploi.github.io/Cockpit-CLPE/", colonne: "Réseau Pour l'Emploi"},
+    {titre: "Académie France Travail", url: "https://www.academiefrancetravail.org/", colonne: "Réseau Pour l'Emploi"},
     {titre: "Catalogue des applications Mon Portail Pro", url: "https://monportailpro.francetravail.fr/catalogue-des-applications/fiche-produit/tableau-de-bord-du-reseau-pour-l-emploi", colonne: "Données et outils"},
-    {titre: "Data emploi", url: "https://dataemploi.francetravail.fr/", colonne: "Données et outils"}
+    {titre: "Data emploi", url: "https://dataemploi.francetravail.fr/", colonne: "Données et outils"},
+    {titre: "francetravail.io", url: "https://francetravail.io/", colonne: "Données et outils"}
   ],
   ecoindex: { lettre: "A", url: "https://www.ecoindex.fr/resultat/?id=dd9168bf-d8db-462a-abc4-6154f15b0b12" }
 };
