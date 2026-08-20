@@ -50,8 +50,9 @@ header.site{background:var(--ft-white);border-bottom:1px solid var(--ft-border);
 .nav-cta:hover{background:var(--ft-indigo-dark)}
 main{max-width:1360px;margin:0 auto;padding:0 24px 56px}
 footer.site{border-top:1px solid var(--ft-border);background:var(--ft-white);margin-top:24px}
-footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12px;color:var(--ft-fg-3);display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center}
-.footer-ecoindex{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ft-fg-3);white-space:nowrap}
+footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12px;color:var(--ft-fg-3);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px}
+.footer-center{grid-column:2;display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;text-align:center}
+.footer-ecoindex{grid-column:3;justify-self:end;display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ft-fg-3);white-space:nowrap}
 .footer-ecoindex:hover{color:var(--ft-indigo)}
 .ecoindex-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:4px;background:#2E7D32;color:#fff;font-weight:700;font-size:12px}
 .footer-icon{height:26px;width:auto;flex:none}
@@ -67,6 +68,13 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .hero-text ul{margin:0 0 14px;padding-left:20px}
 .hero-text li{font-size:13.5px;color:#E3E5F1;margin-bottom:4px}
 .hero-text strong{color:#fff}
+.hero-summary{cursor:pointer}
+.hero-summary:hover{text-decoration:underline}
+.hero-full{display:none}
+.hero-text[data-expanded="1"] .hero-summary{display:none}
+.hero-text[data-expanded="1"] .hero-full{display:block}
+.hero-toggle{display:inline-block;background:none;border:none;color:#B9C0E8;font-weight:600;font-size:12.5px;padding:0 0 8px;cursor:pointer;font-family:inherit}
+.hero-toggle:hover{color:#fff;text-decoration:underline}
 .hero .hero-cta{display:inline-block;background:var(--ft-jaune);color:var(--ft-navy);font-weight:700;text-decoration:none;padding:12px 24px;border-radius:999px;font-size:14.5px;margin-top:6px}
 .hero .hero-cta:hover{background:var(--ft-jaune-dark)}
 .hero-links{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -132,30 +140,32 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .actu-item .item-titre{font-size:13px}
 .actu-item .item-desc{font-size:12.5px;margin-top:3px;color:var(--ft-fg-2)}
 
-/* ==== Le Kiosque : grille de vignettes evenements passes ==== */
-.kiosque-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.kiosque-card{border:1px solid var(--ft-border);border-radius:5px;padding:13px 15px;background:var(--ft-sable);display:flex;flex-direction:column}
+/* ==== Le Kiosque : filtre + pellicule 3x2, curseur par lots ==== */
+.filmstrip-filter{display:block;margin-bottom:14px;max-width:260px;padding:8px 10px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px;background:#fff}
+.filmstrip{background:#1B1F3B;border-radius:8px;padding:20px 16px;position:relative}
+.filmstrip::before,.filmstrip::after{content:'';position:absolute;left:10px;right:10px;height:9px;background-image:radial-gradient(circle,#0D1440 3px,transparent 3px);background-size:18px 9px;background-repeat:repeat-x}
+.filmstrip::before{top:6px}
+.filmstrip::after{bottom:6px}
+.filmstrip-grid{padding:16px 2px}
+.kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kiosque-card{border:1px solid var(--ft-border);border-radius:5px;padding:13px 15px;background:#fff;display:flex;flex-direction:column}
 .kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .kiosque-card .item-date{font-size:10.5px;color:var(--ft-fg-3);font-weight:600}
 .kiosque-type{font-size:9.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;color:var(--ft-violet);background:var(--ft-violet-light);padding:1px 7px;border-radius:3px}
 .kiosque-card .item-titre{font-size:12.5px;display:block;margin-bottom:auto}
 .kiosque-card .item-liens{margin-top:9px}
 
-/* ==== Ressources : veritable carrousel avec fleches ==== */
-.carousel-wrap{position:relative}
-.res-scroll{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none}
-.res-scroll::-webkit-scrollbar{display:none}
-.res-card{flex:0 0 260px;scroll-snap-align:start;border:1px solid var(--ft-border);border-radius:5px;padding:16px;background:var(--ft-sable)}
+/* ==== Ressources : meme pellicule (1 rangee de 3) ==== */
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.res-card{border:1px solid var(--ft-border);border-radius:5px;padding:16px;background:#fff}
 .res-card .item-titre{font-size:13px;display:block;margin-bottom:8px}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:1px solid var(--ft-border);background:#fff;cursor:pointer;font-size:15px;color:var(--ft-navy);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.12)}
-.carousel-btn:hover{background:var(--ft-indigo-light)}
-.carousel-prev{left:-16px}
-.carousel-next{right:-16px}
-@media (max-width:600px){.carousel-btn{display:none}}
+
+.filmstrip-slider{width:100%;margin-top:12px;accent-color:var(--ft-indigo);cursor:pointer}
+.filmstrip-hint{text-align:center;font-size:11px;color:var(--ft-fg-3);margin-top:4px}
 
 /* ==== Newsletter : abonnement ==== */
-.newsletter-box{border:1px dashed var(--ft-border);border-radius:5px;padding:14px 16px;margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.newsletter-box input[type=email]{flex:1;min-width:200px;padding:9px 11px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px}
+.newsletter-box{border:1px dashed var(--ft-border);border-radius:5px;padding:14px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.newsletter-box input[type=email]{flex:1;min-width:140px;padding:9px 11px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px}
 .newsletter-box button{font-family:inherit;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:4px;cursor:pointer;border:1px solid var(--ft-indigo);background:var(--ft-indigo);color:#fff}
 .newsletter-box button.btn-unsub{background:#fff;color:var(--ft-indigo)}
 .newsletter-box button:hover{opacity:.9}
@@ -180,7 +190,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
   .hero h2{font-size:19px}
   .section{padding:15px}
   .kiosque-grid{grid-template-columns:1fr 1fr}
-  .res-card{flex:0 0 200px}
+  .res-grid{grid-template-columns:1fr}
 }
 @media (max-width:480px){
   .kiosque-grid{grid-template-columns:1fr}
@@ -212,10 +222,13 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 <footer class="site">
   <div class="inner">
-    <img class="footer-icon" src="assets/tdb-rpe-icon.svg" alt="">
-    <span class="footer-title">Ressources Tableau de bord RPE</span>
-    <img class="footer-ft-logo" src="assets/logo-france-travail.svg" alt="France Travail">
-    <span class="footer-copy">© 2026 France Travail dans le cadre de sa mission d'appui au Réseau Pour l'Emploi</span>
+    <div></div>
+    <div class="footer-center">
+      <img class="footer-icon" src="assets/tdb-rpe-icon.svg" alt="">
+      <span class="footer-title">Ressources Tableau de bord RPE</span>
+      <img class="footer-ft-logo" src="assets/logo-france-travail.svg" alt="France Travail">
+      <span class="footer-copy">© 2026 France Travail dans le cadre de sa mission d'appui au Réseau Pour l'Emploi</span>
+    </div>
     <a href="https://www.ecoindex.fr/resultat/?id=dd9168bf-d8db-462a-abc4-6154f15b0b12" class="footer-ecoindex" id="footerEcoindex" target="_blank" rel="noopener">
       <span class="ecoindex-badge" id="ecoindexBadge">A</span> EcoIndex
     </a>
@@ -338,20 +351,6 @@ function renderLiens(liens){
   }).join('') + '</div>';
 }
 
-function showMoreButton(total, limit, sectionId){
-  if (!limit || total <= limit) return '';
-  return '<button type="button" class="show-more-btn" data-showmore="' + sectionId + '">Afficher plus (' + (total - limit) + ')</button>';
-}
-function bindShowMore(container){
-  container.querySelectorAll('[data-showmore]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var scope = document.getElementById(btn.dataset.showmore);
-      scope.querySelectorAll('.hidden-item').forEach(function(el){ el.classList.remove('hidden-item'); });
-      btn.remove();
-    });
-  });
-}
-
 /* agenda : presentation calendrier, les evenements passes (J+1) disparaissent */
 function renderAgenda(items){
   var todayDate = today();
@@ -397,9 +396,12 @@ function renderActualites(items){
 }
 
 /* Le Kiosque : evenements passes uniquement (webinaires, newsletters, autres), tries du plus recent au plus ancien */
-function renderKiosque(items, sectionId, limit){
+var kiosqueState = {items: [], filterType: 'tous', batch: 0};
+var KIOSQUE_BATCH = 6;
+
+function kiosquePassedItems(items){
   var todayDate = today();
-  var passes = (items || []).filter(function(it){
+  return (items || []).filter(function(it){
     var d = parseDMY(it.date);
     return !d || d <= todayDate;
   }).slice().sort(function(a, b){
@@ -409,40 +411,110 @@ function renderKiosque(items, sectionId, limit){
     if (!db) return -1;
     return db - da;
   });
-  if (!passes.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
-  var cards = passes.map(function(it, idx){
-    var hidden = (limit && idx >= limit) ? ' hidden-item' : '';
-    return '<div class="kiosque-card' + hidden + '">' +
-      '<div class="kiosque-top">' +
-        (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
-        (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
-      '</div>' +
-      '<span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' +
-      renderLiens(it.liens) + '</div>';
-  }).join('');
-  return '<div class="kiosque-grid">' + cards + '</div>' + showMoreButton(passes.length, limit, sectionId);
+}
+
+function kiosqueCardHtml(it){
+  return '<div class="kiosque-card">' +
+    '<div class="kiosque-top">' +
+      (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
+      (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
+    '</div>' +
+    '<span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' +
+    renderLiens(it.liens) + '</div>';
+}
+
+function renderKiosque(items){
+  kiosqueState.items = kiosquePassedItems(items);
+  kiosqueState.filterType = 'tous';
+  kiosqueState.batch = 0;
+  if (!kiosqueState.items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
+  var types = [];
+  kiosqueState.items.forEach(function(it){ if (it.type && types.indexOf(it.type) === -1) types.push(it.type); });
+  var filterHtml = '<select class="filmstrip-filter" id="kiosqueFilter">' +
+    '<option value="tous">Tous les événements</option>' +
+    types.map(function(t){ return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + '</option>'; }).join('') +
+  '</select>';
+  return filterHtml +
+    '<div class="filmstrip"><div class="filmstrip-grid kiosque-grid" id="kiosqueGrid"></div></div>' +
+    '<input type="range" class="filmstrip-slider" id="kiosqueSlider" min="0" max="0" step="1" value="0">' +
+    '<div class="filmstrip-hint" id="kiosqueHint"></div>';
+}
+
+function renderKiosqueGrid(){
+  var grid = document.getElementById('kiosqueGrid');
+  if (!grid) return;
+  var filtered = kiosqueState.items.filter(function(it){
+    return kiosqueState.filterType === 'tous' || it.type === kiosqueState.filterType;
+  });
+  var totalBatches = Math.max(1, Math.ceil(filtered.length / KIOSQUE_BATCH));
+  if (kiosqueState.batch >= totalBatches) kiosqueState.batch = totalBatches - 1;
+  var start = kiosqueState.batch * KIOSQUE_BATCH;
+  var pageItems = filtered.slice(start, start + KIOSQUE_BATCH);
+  grid.innerHTML = pageItems.length ? pageItems.map(kiosqueCardHtml).join('') : '<div class="empty-hint">Rien à afficher pour ce filtre.</div>';
+  var slider = document.getElementById('kiosqueSlider');
+  var hint = document.getElementById('kiosqueHint');
+  slider.max = totalBatches - 1;
+  slider.value = kiosqueState.batch;
+  slider.style.display = totalBatches > 1 ? 'block' : 'none';
+  hint.textContent = totalBatches > 1 ? ('Lot ' + (kiosqueState.batch + 1) + ' / ' + totalBatches) : '';
+}
+
+function bindKiosque(container){
+  var filterSel = container.querySelector('#kiosqueFilter');
+  if (!filterSel) return;
+  filterSel.addEventListener('change', function(){
+    kiosqueState.filterType = filterSel.value;
+    kiosqueState.batch = 0;
+    renderKiosqueGrid();
+  });
+  container.querySelector('#kiosqueSlider').addEventListener('input', function(ev){
+    kiosqueState.batch = parseInt(ev.target.value, 10);
+    renderKiosqueGrid();
+  });
+  renderKiosqueGrid();
 }
 
 /* ressources : veritable carrousel avec fleches prev/next */
-function renderRessources(items){
-  if (!items || !items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
-  var cards = items.map(function(it){
-    return '<div class="res-card"><span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' + renderLiens(it.liens) + '</div>';
-  }).join('');
-  return '<div class="carousel-wrap">' +
-    '<button type="button" class="carousel-btn carousel-prev" aria-label="Précédent">‹</button>' +
-    '<div class="res-scroll" id="resScroll">' + cards + '</div>' +
-    '<button type="button" class="carousel-btn carousel-next" aria-label="Suivant">›</button>' +
-  '</div>';
+var ressourcesState = {items: [], batch: 0};
+var RESSOURCES_BATCH = 3;
+
+function ressourceCardHtml(it){
+  return '<div class="res-card"><span class="item-titre">' + escapeHtml(it.titre || '') + '</span>' + renderLiens(it.liens) + '</div>';
 }
-function bindCarousel(container){
-  var scroller = container.querySelector('#resScroll');
-  if (!scroller) return;
-  var prev = container.querySelector('.carousel-prev');
-  var next = container.querySelector('.carousel-next');
-  var step = function(){ return (scroller.querySelector('.res-card') || {offsetWidth: 260}).offsetWidth + 14; };
-  if (prev) prev.addEventListener('click', function(){ scroller.scrollBy({left: -step(), behavior: 'smooth'}); });
-  if (next) next.addEventListener('click', function(){ scroller.scrollBy({left: step(), behavior: 'smooth'}); });
+
+function renderRessources(items){
+  ressourcesState.items = items || [];
+  ressourcesState.batch = 0;
+  if (!ressourcesState.items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
+  return '<div class="filmstrip"><div class="filmstrip-grid res-grid" id="resGrid"></div></div>' +
+    '<input type="range" class="filmstrip-slider" id="resSlider" min="0" max="0" step="1" value="0">' +
+    '<div class="filmstrip-hint" id="resHint"></div>';
+}
+
+function renderRessourcesGrid(){
+  var grid = document.getElementById('resGrid');
+  if (!grid) return;
+  var totalBatches = Math.max(1, Math.ceil(ressourcesState.items.length / RESSOURCES_BATCH));
+  if (ressourcesState.batch >= totalBatches) ressourcesState.batch = totalBatches - 1;
+  var start = ressourcesState.batch * RESSOURCES_BATCH;
+  var pageItems = ressourcesState.items.slice(start, start + RESSOURCES_BATCH);
+  grid.innerHTML = pageItems.map(ressourceCardHtml).join('');
+  var slider = document.getElementById('resSlider');
+  var hint = document.getElementById('resHint');
+  slider.max = totalBatches - 1;
+  slider.value = ressourcesState.batch;
+  slider.style.display = totalBatches > 1 ? 'block' : 'none';
+  hint.textContent = totalBatches > 1 ? ('Lot ' + (ressourcesState.batch + 1) + ' / ' + totalBatches) : '';
+}
+
+function bindRessources(container){
+  var slider = container.querySelector('#resSlider');
+  if (!slider) return;
+  slider.addEventListener('input', function(ev){
+    ressourcesState.batch = parseInt(ev.target.value, 10);
+    renderRessourcesGrid();
+  });
+  renderRessourcesGrid();
 }
 
 /* Abonnement newsletter */
@@ -492,10 +564,22 @@ function renderPage(content){
   if (eco && eco.lettre) document.getElementById('ecoindexBadge').textContent = eco.lettre;
   if (eco && eco.url) ecoLink.href = eco.url;
 
-  // Hero (pleine largeur, hors grille)
+  // Hero (pleine largeur, hors grille) - texte replie sur la 1re phrase, cliquable pour developper
+  var fullHtml = (c.intro && c.intro.texte_html) || '';
+  var tmp = document.createElement('div');
+  tmp.innerHTML = fullHtml;
+  var firstP = tmp.querySelector('p');
+  var firstText = firstP ? firstP.textContent : '';
+  var sentenceMatch = /^(.*?[.!?])(\s|$)/.exec(firstText.trim());
+  var firstSentence = sentenceMatch ? sentenceMatch[1] : firstText.trim();
+
   var hero = '<div class="hero-band"><div class="hero">';
   hero += '<div><h2>Bienvenue sur les ressources du Tableau de bord RPE</h2>';
-  hero += '<div class="hero-text">' + (c.intro && c.intro.texte_html || '') + '</div>';
+  hero += '<div class="hero-text" id="heroText" data-expanded="0">' +
+    '<p class="hero-summary">' + escapeHtml(firstSentence) + '</p>' +
+    '<div class="hero-full">' + fullHtml + '</div>' +
+    '<button type="button" class="hero-toggle" id="heroToggle">▾ En savoir plus</button>' +
+  '</div>';
   hero += '<a class="hero-cta" href="' + escapeHtml(c.tdb_url || '') + '" target="_blank" rel="noopener">Accéder au Tableau de Bord RPE →</a></div>';
   hero += '<div class="hero-links">';
   (c.intro && c.intro.videos || []).forEach(function(v){
@@ -507,26 +591,35 @@ function renderPage(content){
   hero += '</div></div></div>';
   document.getElementById('heroHolder').innerHTML = hero;
 
+  var heroTextEl = document.getElementById('heroText');
+  var heroToggleBtn = document.getElementById('heroToggle');
+  function toggleHero(){
+    var expanded = heroTextEl.dataset.expanded === '1';
+    heroTextEl.dataset.expanded = expanded ? '0' : '1';
+    heroToggleBtn.textContent = expanded ? '▾ En savoir plus' : '▴ Réduire';
+  }
+  heroToggleBtn.addEventListener('click', toggleHero);
+  heroTextEl.querySelector('.hero-summary').addEventListener('click', toggleHero);
+
   var contact = c.contact || {};
   var html = '<div class="page-grid">';
 
   // Colonne principale
   html += '<div class="main-col">';
   html += '<div class="section"><h3>📢 Actualités</h3>' + renderActualites(c.actualites) + '</div>';
-  html += '<div class="section" id="sec-kiosque"><h3>🗞️ Le Kiosque</h3>' + renderKiosque(c.kiosque, 'sec-kiosque', 5) +
-    '<div class="newsletter-box" id="newsletterBox">' +
-      '<input type="email" id="newsletterEmail" placeholder="Votre email">' +
-      '<button type="button" id="btnSub">S\'abonner à la newsletter</button>' +
-      '<button type="button" id="btnUnsub" class="btn-unsub">Se désabonner</button>' +
-      '<div class="newsletter-status" id="newsletterStatus"></div>' +
-    '</div>' +
-  '</div>';
+  html += '<div class="section" id="sec-kiosque"><h3>🗞️ Le Kiosque</h3>' + renderKiosque(c.kiosque) + '</div>';
   html += '<div class="section"><h3>📚 Ressources complémentaires</h3>' + renderRessources(c.ressources) + '</div>';
   html += '</div>';
 
-  // Colonne laterale flottante : agenda + contact
+  // Colonne laterale flottante : agenda, abonnement newsletter, contact
   html += '<div class="side-col">';
   html += '<div class="agenda-card"><h3>🗓️ Agenda</h3>' + renderAgenda(c.agenda) + '</div>';
+  html += '<div class="newsletter-box" id="newsletterBox">' +
+    '<input type="email" id="newsletterEmail" placeholder="Votre email">' +
+    '<button type="button" id="btnSub">S\'abonner à la newsletter</button>' +
+    '<button type="button" id="btnUnsub" class="btn-unsub">Se désabonner</button>' +
+    '<div class="newsletter-status" id="newsletterStatus"></div>' +
+  '</div>';
   html += '<div class="contact-card"><h3>💬 Contact &amp; assistance</h3>';
   html += '<p>' + escapeHtml(contact.texte || '') + '</p>';
   if (contact.booking_url) {
@@ -550,8 +643,8 @@ function renderPage(content){
 
   var main = document.getElementById('mainContent');
   main.innerHTML = html;
-  bindShowMore(main);
-  bindCarousel(main);
+  bindKiosque(main);
+  bindRessources(main);
   bindNewsletterForm(main);
 }
 
