@@ -192,8 +192,8 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-nav-months{display:flex;gap:4px}
 .rm-nav-month-box{flex:1;font-family:inherit;font-size:11px;font-weight:600;color:var(--ft-fg-2);background:#fff;border:1px solid var(--ft-border);border-radius:5px;padding:7px 4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rm-nav-month-box--today{background:var(--ft-jaune-light);border-color:var(--ft-jaune-dark);color:var(--ft-navy);font-weight:700}
-.rm-nav-track-row{display:flex;align-items:center;gap:12px}
-.rm-nav-track{-webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:999px;background:var(--ft-gray-300);outline:none;cursor:pointer}
+.rm-nav-toggle-row{display:flex;justify-content:flex-end}
+.rm-nav-track{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:999px;background:var(--ft-gray-300);outline:none;cursor:pointer;margin:2px 0}
 .rm-nav-track::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:var(--ft-indigo);border:2px solid #fff;box-shadow:0 0 0 1px var(--ft-indigo);cursor:pointer}
 .rm-nav-track::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:var(--ft-indigo);border:2px solid #fff;box-shadow:0 0 0 1px var(--ft-indigo);cursor:pointer}
 .rm-nav-track::-moz-range-track{height:4px;border-radius:999px;background:var(--ft-gray-300)}
@@ -1118,8 +1118,8 @@ function renderRoadmapNav(){
   var nav = document.getElementById('roadmapNav');
   nav.innerHTML =
     '<div class="rm-nav-months" id="rmNavMonths"></div>' +
-    '<div class="rm-nav-track-row">' +
-      '<input type="range" class="rm-nav-track" id="roadmapNavSlider" min="0" max="' + r.maxIdx + '" step="1" value="' + r.currentIdx + '">' +
+    '<input type="range" class="rm-nav-track" id="roadmapNavSlider" min="0" max="' + r.maxIdx + '" step="1" value="' + r.currentIdx + '">' +
+    '<div class="rm-nav-toggle-row">' +
       '<button type="button" class="btn btn--secondary btn--sm" id="roadmapWindowToggle">Vue ' + (roadmapWindowSize === 6 ? '12 mois' : '6 mois') + '</button>' +
     '</div>';
 

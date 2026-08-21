@@ -1701,7 +1701,7 @@ function rmStampUpdatedTasks(){
         var orig = roadmapAdminOriginal && roadmapAdminOriginal.epics && roadmapAdminOriginal.epics[ei] &&
           roadmapAdminOriginal.epics[ei].domaines && roadmapAdminOriginal.epics[ei].domaines[di] &&
           roadmapAdminOriginal.epics[ei].domaines[di].taches && roadmapAdminOriginal.epics[ei].domaines[di].taches[ti];
-        if (!orig || rmTacheSignature(orig) !== rmTacheSignature(t)) {
+        if (!orig || rmTacheSignature(orig) !== rmTacheSignature(t) || !t.derniereMaj) {
           t.derniereMaj = todayStr;
         } else if (orig.derniereMaj) {
           t.derniereMaj = orig.derniereMaj;
