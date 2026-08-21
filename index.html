@@ -221,6 +221,8 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 .tile-unit{display:flex;flex-direction:column}
 [data-tile]{cursor:pointer}
+.tile-roadmap-btn{align-self:flex-start;margin-top:8px;background:var(--ft-navy);border:none;color:#fff;font-weight:600;font-size:11px;padding:6px 13px;border-radius:999px;cursor:pointer;font-family:inherit}
+.tile-roadmap-btn:hover{background:var(--ft-indigo-dark)}
 [data-tile]:hover{border-color:var(--ft-indigo)}
 .tile-linkbar{display:flex;border:1px solid var(--ft-border);border-radius:0 0 5px 5px;overflow:hidden;background:var(--ft-sable);flex:none}
 .tile-linkbar a{flex:1 1 0;text-align:center;padding:8px 4px;font-size:11px;font-weight:600;text-decoration:none;color:var(--ft-indigo);border-right:1px solid var(--ft-border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -380,7 +382,7 @@ var DEFAULT_CONTENT = {
   actualites: [
     {titre: "📌 Information utilisateurs", date: "", description: "", liens: []},
     {titre: "⚠️ Anomalies détectées", date: "", description: "", liens: []},
-    {titre: "📋 Backlog des évolutions", date: "", description: "Backlog actualisée des évolutions en cours et à venir.", liens: [{label: "Voir la feuille de route", url: "#roadmap"}]}
+    {titre: "🗺️ Roadmap produit", date: "", description: "Consultez le détail des travaux en cours et à venir sur le tableau de bord RPE.", liens: []}
   ],
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -547,13 +549,12 @@ function renderLinkBar(liens){
   var l = (liens || []).filter(function(x){ return x.url; }).slice(0, 3);
   if (!l.length) return '';
   return '<div class="tile-linkbar">' + l.map(function(x){
-    if (x.url === '#roadmap') return '<a href="#" data-open-roadmap="1">' + escapeHtml(x.label) + '</a>';
     return '<a href="' + escapeHtml(x.url) + '" target="_blank" rel="noopener">' + escapeHtml(x.label) + '</a>';
   }).join('') + '</div>';
 }
 
 document.addEventListener('click', function(ev){
-  if (ev.target.closest('[data-open-roadmap]')) { ev.preventDefault(); openRoadmap(); }
+  if (ev.target.closest('[data-open-roadmap-btn]')) { openRoadmap(); }
 });
 
 /* agenda : presentation calendrier, les evenements passes (J+1) disparaissent */
@@ -585,17 +586,26 @@ function actuClass(titre){
   if (t.indexOf('anomalie') > -1 || t.indexOf('interruption') > -1 || t.indexOf('incident') > -1) return 'actu-alerte';
   return '';
 }
+function isRoadmapCard(titre){
+  var t = (titre || '').toLowerCase();
+  return t.indexOf('roadmap') > -1 || t.indexOf('backlog') > -1;
+}
 function renderActualites(items){
   if (!items || !items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
   var cards = items.map(function(it){
     var alerte = actuClass(it.titre) === 'actu-alerte';
+    var isRoadmap = isRoadmapCard(it.titre);
     var data = {titre: it.titre, desc: it.description || '', liens: it.liens || [], meta: it.date || ''};
     var head = '<div class="actu-head">' +
-        tileTitleHtml(it, data, 'item-titre') +
+        (isRoadmap ? '<span class="item-titre">' + richText(it.titre || '') + '</span>' : tileTitleHtml(it, data, 'item-titre')) +
         (it.date ? '<span class="item-date-tag">' + escapeHtml(it.date) + '</span>' : '') +
       '</div>';
+    var bodyExtra = isRoadmap
+      ? (it.description ? '<div class="item-desc-clamp">' + richText(it.description) + '</div>' : '') +
+        '<button type="button" class="tile-roadmap-btn" data-open-roadmap-btn>🗺️ Voir la roadmap</button>'
+      : tileDescPreviewHtml(it, data);
     return '<div class="tile-unit">' +
-      '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + tileDescPreviewHtml(it, data) + '</div>' +
+      '<div class="actu-card' + (alerte ? ' actu-alerte' : '') + '">' + head + bodyExtra + '</div>' +
       renderLinkBar(it.liens) +
     '</div>';
   }).join('');
