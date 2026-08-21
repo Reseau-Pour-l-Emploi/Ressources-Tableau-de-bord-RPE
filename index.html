@@ -188,13 +188,22 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .roadmap-legend-dot{width:11px;height:11px;border-radius:3px;flex:none}
 .roadmap-body{flex:1;overflow:auto;padding:16px 24px 40px}
 
-.roadmap-nav{display:flex;align-items:center;gap:12px;padding:10px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;background:var(--ft-sable)}
+.roadmap-nav{display:flex;flex-direction:column;gap:8px;padding:12px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;background:var(--ft-sable)}
+.rm-nav-months{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.rm-nav-month-box{flex:none;font-family:inherit;font-size:10.5px;font-weight:600;color:var(--ft-fg-2);background:#fff;border:1px solid var(--ft-border);border-radius:5px;padding:6px 10px;cursor:pointer;white-space:nowrap}
+.rm-nav-month-box:hover{border-color:var(--ft-indigo)}
+.rm-nav-month-box--today{border-color:var(--ft-jaune-dark);color:var(--ft-navy)}
+.rm-nav-month-box--active{background:var(--ft-indigo);border-color:var(--ft-indigo);color:#fff}
+.rm-nav-track-row{display:flex;align-items:center;gap:12px}
+.rm-nav-track{-webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:999px;background:var(--ft-gray-300);outline:none;cursor:pointer}
+.rm-nav-track::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:var(--ft-indigo);border:2px solid #fff;box-shadow:0 0 0 1px var(--ft-indigo);cursor:pointer}
+.rm-nav-track::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:var(--ft-indigo);border:2px solid #fff;box-shadow:0 0 0 1px var(--ft-indigo);cursor:pointer}
+.rm-nav-track::-moz-range-track{height:4px;border-radius:999px;background:var(--ft-gray-300)}
 .roadmap-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;flex-wrap:wrap}
 .roadmap-filter-label{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--ft-fg-2)}
 .rm-domaine-count{color:var(--ft-fg-3);font-weight:400;font-size:11.5px}
 .rm-domaine-count.rm-count-active{color:var(--ft-indigo);font-weight:700}
 .roadmap-nav input[type=range]{flex:1;max-width:420px;accent-color:var(--ft-indigo)}
-#roadmapNavLabel{font-weight:700;color:var(--ft-navy);min-width:90px}
 
 .rm-epic{border:1px solid var(--ft-border);border-radius:8px;margin-bottom:14px;overflow:hidden}
 .rm-epic-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--ft-sable);cursor:pointer;font-weight:700;color:var(--ft-navy);font-size:14.5px}
@@ -211,15 +220,17 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-domaine.collapsed .rm-domaine-body{display:none}
 .rm-domaine-body{padding-left:6px}
 
-.rm-timeline-scroll{overflow-x:auto;border:1px solid var(--ft-border);border-radius:6px;background:#fff;max-width:920px}
-.rm-timeline-months{display:flex;border-bottom:1px solid var(--ft-border);position:sticky;top:0;background:var(--ft-sable);z-index:1}
+.rm-timeline-scroll{overflow:hidden;border:1px solid var(--ft-border);border-radius:6px;background:#fff;max-width:920px;position:relative}
+.rm-timeline-inner{position:relative;transition:transform .2s ease}
+.rm-timeline-months{display:flex;border-bottom:1px solid var(--ft-border);background:var(--ft-sable)}
 .rm-timeline-month{flex:none;font-size:10.5px;font-weight:700;color:var(--ft-fg-3);text-align:center;padding:5px 0;border-right:1px solid var(--ft-border)}
 .rm-timeline-month--current{background:var(--ft-jaune-light);color:var(--ft-navy)}
 .rm-timeline-rows{position:relative}
 .rm-timeline-row{position:relative;height:34px;border-bottom:1px solid var(--ft-border)}
 .rm-timeline-row:last-child{border-bottom:none}
+.rm-month-line{position:absolute;top:0;bottom:0;width:1px;background:var(--ft-border);z-index:1;pointer-events:none}
 .rm-timeline-today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--ft-rouge);z-index:2;pointer-events:none}
-.rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;display:flex;align-items:center;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;display:flex;align-items:center;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15);z-index:2}
 .rm-bar--open{background-image:linear-gradient(to right,transparent calc(100% - 14px),rgba(255,255,255,.5) 100%)}
 .rm-bar:hover{filter:brightness(1.1)}
 .rm-no-date{font-size:12px;color:var(--ft-fg-3);padding:6px 0;font-style:italic}
@@ -1025,6 +1036,10 @@ function renderTimelineForDomaine(taches){
     return '<div class="rm-timeline-month' + (isCurrent ? ' rm-timeline-month--current' : '') + '" style="width:' + w + 'px">' + label + '</div>';
   }).join('');
 
+  var monthLinesHtml = r.monthStarts.map(function(px){
+    return '<div class="rm-month-line" style="left:' + px + 'px"></div>';
+  }).join('');
+
   var rowsHtml = withDates.map(function(t){
     var start = rmParseDMY(t.dateDebut);
     var end = rmParseDMY(t.dateFin);
@@ -1038,34 +1053,51 @@ function renderTimelineForDomaine(taches){
     return '<div class="rm-timeline-row"><div class="rm-bar' + (openEnded ? ' rm-bar--open' : '') + '" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '">' + escapeHtml((t.texte || t.typologie || '').slice(0, 60)) + '</div></div>';
   }).join('');
 
-  return '<div class="rm-timeline-scroll" data-rm-scroll><div style="width:' + r.totalWidth + 'px;position:relative">' +
+  return '<div class="rm-timeline-scroll"><div class="rm-timeline-inner" data-rm-inner style="width:' + r.totalWidth + 'px">' +
     '<div class="rm-timeline-today-line" style="left:' + r.todayOffsetPx + 'px"></div>' +
     '<div class="rm-timeline-months">' + monthsHtml + '</div>' +
-    '<div class="rm-timeline-rows">' + rowsHtml + '</div>' +
+    '<div class="rm-timeline-rows">' + monthLinesHtml + rowsHtml + '</div>' +
   '</div></div>';
 }
 
+/* Navigation temporelle globale : cases mois/annee + barre fine, panoramique de toutes les frises a la fois */
 function renderRoadmapNav(){
   var r = roadmapRange;
   var nav = document.getElementById('roadmapNav');
-  nav.innerHTML = '<span>Navigation : </span><input type="range" id="roadmapNavSlider" min="0" max="' + (r.monthStarts.length - 1) + '" step="1" value="' + r.currentIdx + '">' +
-    '<span id="roadmapNavLabel">' + r.monthLabels[r.currentIdx] + '</span>' +
-    '<button type="button" class="btn btn--secondary btn--sm" id="roadmapNavToday">Aujourd\'hui</button>';
-  document.getElementById('roadmapNavSlider').addEventListener('input', function(ev){
-    var idx = parseInt(ev.target.value, 10);
-    document.getElementById('roadmapNavLabel').textContent = r.monthLabels[idx];
+  var monthsHtml = r.monthLabels.map(function(label, i){
+    return '<button type="button" class="rm-nav-month-box' + (i === r.currentIdx ? ' rm-nav-month-box--today' : '') + '" data-rm-nav-month="' + i + '">' + label + '</button>';
+  }).join('');
+  nav.innerHTML =
+    '<div class="rm-nav-months" id="rmNavMonths">' + monthsHtml + '</div>' +
+    '<div class="rm-nav-track-row">' +
+      '<input type="range" class="rm-nav-track" id="roadmapNavSlider" min="0" max="' + (r.monthStarts.length - 1) + '" step="1" value="' + r.currentIdx + '">' +
+      '<button type="button" class="btn btn--secondary btn--sm" id="roadmapNavToday">Aujourd\'hui</button>' +
+    '</div>';
+
+  function setActiveMonthBox(idx){
+    nav.querySelectorAll('.rm-nav-month-box').forEach(function(box, i){
+      box.classList.toggle('rm-nav-month-box--active', i === idx);
+    });
+    var activeBox = nav.querySelector('.rm-nav-month-box--active');
+    if (activeBox) activeBox.scrollIntoView({inline: 'center', block: 'nearest', behavior: 'smooth'});
+  }
+  function goToIndex(idx){
+    document.getElementById('roadmapNavSlider').value = idx;
+    setActiveMonthBox(idx);
     applyRoadmapScroll(r.monthStarts[idx]);
     updateRoadmapCounters();
+  }
+  document.getElementById('roadmapNavSlider').addEventListener('input', function(ev){
+    goToIndex(parseInt(ev.target.value, 10));
   });
-  document.getElementById('roadmapNavToday').addEventListener('click', function(){
-    document.getElementById('roadmapNavSlider').value = r.currentIdx;
-    document.getElementById('roadmapNavLabel').textContent = r.monthLabels[r.currentIdx];
-    applyRoadmapScroll(r.monthStarts[r.currentIdx]);
-    updateRoadmapCounters();
+  nav.querySelectorAll('[data-rm-nav-month]').forEach(function(box){
+    box.addEventListener('click', function(){ goToIndex(parseInt(box.dataset.rmNavMonth, 10)); });
   });
+  document.getElementById('roadmapNavToday').addEventListener('click', function(){ goToIndex(r.currentIdx); });
+  setActiveMonthBox(r.currentIdx);
 }
 function applyRoadmapScroll(px){
-  document.querySelectorAll('[data-rm-scroll]').forEach(function(el){ el.scrollLeft = px; });
+  document.querySelectorAll('[data-rm-inner]').forEach(function(el){ el.style.transform = 'translateX(-' + px + 'px)'; });
 }
 
 /* Fenetre actuellement affichee a l'ecran (6 mois max, ancree sur la position du curseur) */
@@ -1113,8 +1145,14 @@ function renderRoadmapBody(){
   roadmapRange = rmComputeRange();
   renderRoadmapNav();
   var epics = (roadmapData && roadmapData.epics) || [];
+  // Par defaut : seuls les Epic > Domaine comportant au moins une tache datee (historique) sont affiches
   var html = epics.map(function(epic, ei){
+    var domainesAvecHistorique = (epic.domaines || []).filter(function(dom){
+      return (dom.taches || []).some(function(t){ return rmParseDMY(t.dateDebut); });
+    });
+    if (!domainesAvecHistorique.length) return '';
     var domainesHtml = (epic.domaines || []).map(function(dom, di){
+      if (!(dom.taches || []).some(function(t){ return rmParseDMY(t.dateDebut); })) return '';
       return '<div class="rm-domaine" data-rm-domaine="' + ei + '-' + di + '">' +
         '<div class="rm-domaine-head"><span class="rm-toggle">▾</span>' + escapeHtml(dom.nom) + ' <span class="rm-domaine-count"></span></div>' +
         '<div class="rm-domaine-body">' + renderTimelineForDomaine(dom.taches || []) + '</div>' +
@@ -1125,7 +1163,7 @@ function renderRoadmapBody(){
       '<div class="rm-epic-body">' + domainesHtml + '</div>' +
     '</div>';
   }).join('');
-  document.getElementById('roadmapBody').innerHTML = html || '<div class="empty-hint">Aucun élément dans la feuille de route.</div>';
+  document.getElementById('roadmapBody').innerHTML = html || '<div class="empty-hint">Aucun élément avec une date renseignée pour le moment.</div>';
   bindRoadmapInteractions();
   applyRoadmapScroll(roadmapRange.monthStarts[roadmapRange.currentIdx]);
   updateRoadmapCounters();
@@ -1151,10 +1189,19 @@ function bindRoadmapInteractions(){
       popup.innerHTML = '<h5>' + escapeHtml(d.titre) + '</h5>' +
         (d.texte ? '<div>' + richText(d.texte) + '</div>' : '') +
         (periodeTxt ? '<div class="rm-task-dates">' + escapeHtml(periodeTxt) + '</div>' : '');
-      var rect = bar.getBoundingClientRect();
-      popup.style.top = (rect.bottom + 8) + 'px';
-      popup.style.left = Math.min(rect.left, window.innerWidth - 340) + 'px';
       popup.classList.add('open');
+      var rect = bar.getBoundingClientRect();
+      var margin = 10;
+      var pw = popup.offsetWidth;
+      var ph = popup.offsetHeight;
+      var left = rect.left;
+      if (left + pw > window.innerWidth - margin) left = window.innerWidth - pw - margin;
+      if (left < margin) left = margin;
+      var top = rect.bottom + 8;
+      if (top + ph > window.innerHeight - margin) top = rect.top - ph - 8;
+      if (top < margin) top = margin;
+      popup.style.left = left + 'px';
+      popup.style.top = top + 'px';
     });
     bar.addEventListener('mouseleave', function(){ document.getElementById('rmTaskPopup').classList.remove('open'); });
   });
