@@ -174,6 +174,47 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .tile-modal-links a{font-size:12.5px;font-weight:600;color:var(--ft-indigo);text-decoration:none;padding:8px 12px;border:1px solid var(--ft-border);border-radius:5px}
 .tile-modal-links a:hover{background:var(--ft-indigo-light)}
 
+/* ==== Roadmap : popup plein ecran ==== */
+.roadmap-overlay{display:none;position:fixed;inset:0;background:var(--ft-white);z-index:3000;flex-direction:column}
+.roadmap-overlay.open{display:flex}
+.roadmap-header{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;border-bottom:1px solid var(--ft-border);flex:none}
+.roadmap-header h2{margin:0;font-size:18px;color:var(--ft-navy)}
+.roadmap-close{background:var(--ft-navy);color:#fff;border:none;border-radius:6px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.roadmap-close:hover{background:var(--ft-indigo-dark)}
+.roadmap-legend{display:flex;gap:14px;flex-wrap:wrap;padding:10px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:11.5px}
+.roadmap-legend-item{display:flex;align-items:center;gap:6px}
+.roadmap-legend-dot{width:11px;height:11px;border-radius:3px;flex:none}
+.roadmap-body{flex:1;overflow:auto;padding:16px 24px 40px}
+
+.rm-epic{border:1px solid var(--ft-border);border-radius:8px;margin-bottom:14px;overflow:hidden}
+.rm-epic-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--ft-sable);cursor:pointer;font-weight:700;color:var(--ft-navy);font-size:14.5px}
+.rm-epic-head .rm-toggle{transition:transform .15s;flex:none}
+.rm-epic.collapsed .rm-toggle{transform:rotate(-90deg)}
+.rm-epic.collapsed .rm-epic-body{display:none}
+.rm-epic-body{padding:12px 16px}
+
+.rm-domaine{margin-bottom:16px}
+.rm-domaine:last-child{margin-bottom:0}
+.rm-domaine-head{display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;color:var(--ft-fg-2);font-size:13px;padding:6px 0}
+.rm-domaine-head .rm-toggle{transition:transform .15s;flex:none;font-size:11px}
+.rm-domaine.collapsed .rm-toggle{transform:rotate(-90deg)}
+.rm-domaine.collapsed .rm-domaine-body{display:none}
+.rm-domaine-body{padding-left:6px}
+
+.rm-timeline-scroll{overflow-x:auto;border:1px solid var(--ft-border);border-radius:6px;background:#fff}
+.rm-timeline-months{display:flex;border-bottom:1px solid var(--ft-border);position:sticky;top:0;background:var(--ft-sable);z-index:1}
+.rm-timeline-month{flex:none;font-size:10.5px;font-weight:700;color:var(--ft-fg-3);text-align:center;padding:5px 0;border-right:1px solid var(--ft-border)}
+.rm-timeline-rows{position:relative}
+.rm-timeline-row{position:relative;height:34px;border-bottom:1px solid var(--ft-border)}
+.rm-timeline-row:last-child{border-bottom:none}
+.rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;display:flex;align-items:center;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.rm-bar:hover{filter:brightness(1.1)}
+.rm-no-date{font-size:12px;color:var(--ft-fg-3);padding:6px 0;font-style:italic}
+.rm-task-popup{display:none;position:fixed;z-index:3100;background:#fff;border:1px solid var(--ft-border);border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.2);padding:14px 16px;max-width:320px;font-size:12.5px}
+.rm-task-popup.open{display:block}
+.rm-task-popup h5{margin:0 0 6px;font-size:13.5px;color:var(--ft-navy)}
+.rm-task-popup .rm-task-dates{font-size:11px;color:var(--ft-fg-3);margin-top:8px;line-height:1.7}
+
 .section-head-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
 .section-head-row h3{margin:0}
 .section-head-row .filmstrip-filter{margin-bottom:0;max-width:220px}
@@ -267,6 +308,17 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
   <div class="tile-modal-links" id="tileModalLinks"></div>
 </div>
 
+<div id="roadmapOverlay" class="roadmap-overlay">
+  <div class="roadmap-header">
+    <h2>🗺️ Feuille de route</h2>
+    <button type="button" class="roadmap-close" id="roadmapClose" aria-label="Fermer">✕ Fermer</button>
+  </div>
+  <div class="roadmap-legend" id="roadmapLegend"></div>
+  <div class="roadmap-body" id="roadmapBody">
+    <div class="empty-hint">Chargement...</div>
+  </div>
+</div>
+
 <footer class="site">
   <div class="inner">
     <div></div>
@@ -328,7 +380,7 @@ var DEFAULT_CONTENT = {
   actualites: [
     {titre: "📌 Information utilisateurs", date: "", description: "", liens: []},
     {titre: "⚠️ Anomalies détectées", date: "", description: "", liens: []},
-    {titre: "📋 Backlog des évolutions", date: "", description: "Backlog actualisée des évolutions en cours et à venir.", liens: []}
+    {titre: "📋 Backlog des évolutions", date: "", description: "Backlog actualisée des évolutions en cours et à venir.", liens: [{label: "Voir la feuille de route", url: "#roadmap"}]}
   ],
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -495,9 +547,14 @@ function renderLinkBar(liens){
   var l = (liens || []).filter(function(x){ return x.url; }).slice(0, 3);
   if (!l.length) return '';
   return '<div class="tile-linkbar">' + l.map(function(x){
+    if (x.url === '#roadmap') return '<a href="#" data-open-roadmap="1">' + escapeHtml(x.label) + '</a>';
     return '<a href="' + escapeHtml(x.url) + '" target="_blank" rel="noopener">' + escapeHtml(x.label) + '</a>';
   }).join('') + '</div>';
 }
+
+document.addEventListener('click', function(ev){
+  if (ev.target.closest('[data-open-roadmap]')) { ev.preventDefault(); openRoadmap(); }
+});
 
 /* agenda : presentation calendrier, les evenements passes (J+1) disparaissent */
 function renderAgenda(items){
@@ -844,6 +901,184 @@ function renderPage(content){
   bindRessources(main);
   bindNewsletterForm(main);
 }
+
+/* ==== Roadmap : popup plein ecran, arborescence Epic > Domaine > Tache + frise chronologique ==== */
+var ROADMAP_TYPOLOGIES = [
+  "Cadrage / Conception",
+  "Fonctionnalité / Évolution",
+  "Interface utilisateur / Design",
+  "Données / Ingénierie",
+  "Sécurité & Droits",
+  "Accompagnement au changement"
+];
+var ROADMAP_COLORS = {
+  "Cadrage / Conception": "#7E58A0",
+  "Fonctionnalité / Évolution": "#406BDE",
+  "Interface utilisateur / Design": "#D96B00",
+  "Données / Ingénierie": "#1E7A3D",
+  "Sécurité & Droits": "#D92424",
+  "Accompagnement au changement": "#5C0F38"
+};
+
+function rmDomaine(nom){ return {nom: nom, taches: []}; }
+var DEFAULT_ROADMAP = {
+  epics: [
+    {nom: "Fiches action & Feuilles de route", domaines: [rmDomaine("Interface de saisie"), rmDomaine("Interface de consultation")]},
+    {nom: "Pilotage territorial sur mesure", domaines: [rmDomaine("Catalogue d'indicateurs"), rmDomaine("Interface de sélection")]},
+    {nom: "Socle Data & Modélisation", domaines: [rmDomaine("Acquisition & Données externes"), rmDomaine("Historisation & Volumétrie"), rmDomaine("Architecture & Règles de gestion")]},
+    {nom: "Dashboard / Vues Métiers", domaines: [
+      rmDomaine("Page : Accueil"), rmDomaine("Page : Accès / Présence en emploi"), rmDomaine("Page : Description des publics"),
+      rmDomaine("Page : Entrants en formation"), rmDomaine("Page : Fiches action"), rmDomaine("Page : Satisfaction DE"),
+      rmDomaine("Page : Sortants de formation"), rmDomaine("Page : Taux / Délai de pourvoi"), rmDomaine("Page : Taux de recours"),
+      rmDomaine("Page : Analyse par public"), rmDomaine("Cas d'usage formation")
+    ]},
+    {nom: "Ressources documentaires", domaines: [rmDomaine("Glossaire"), rmDomaine("Communication")]},
+    {nom: "Administration & Sécurité", domaines: [rmDomaine("Gestion des habilitations")]}
+  ]
+};
+
+var roadmapData = null;
+var roadmapLoaded = false;
+
+function rmParseDMY(s){
+  var m = /^(\d{1,2})[-\/](\d{1,2})[-\/](\d{2,4})$/.exec((s || '').trim());
+  if (!m) return null;
+  var y = m[3].length === 2 ? '20' + m[3] : m[3];
+  var d = new Date(parseInt(y,10), parseInt(m[2],10) - 1, parseInt(m[1],10));
+  return isNaN(d.getTime()) ? null : d;
+}
+function rmFmt(d){
+  if (!d) return '';
+  var mois = ['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
+  return d.getDate() + ' ' + mois[d.getMonth()];
+}
+
+function renderRoadmapLegend(){
+  document.getElementById('roadmapLegend').innerHTML = ROADMAP_TYPOLOGIES.map(function(t){
+    return '<div class="roadmap-legend-item"><span class="roadmap-legend-dot" style="background:' + ROADMAP_COLORS[t] + '"></span>' + escapeHtml(t) + '</div>';
+  }).join('');
+}
+
+function renderTimelineForDomaine(taches){
+  var withDates = taches.filter(function(t){ return rmParseDMY(t.devDebut) || rmParseDMY(t.recetteFin) || rmParseDMY(t.dateLivraison); });
+  if (!withDates.length) return '<div class="rm-no-date">Aucune date renseignée pour ces travaux.</div>';
+
+  var allDates = [];
+  withDates.forEach(function(t){
+    [t.devDebut, t.devFin, t.recetteDebut, t.recetteFin, t.dateLivraison].forEach(function(s){
+      var d = rmParseDMY(s);
+      if (d) allDates.push(d);
+    });
+  });
+  var minD = new Date(Math.min.apply(null, allDates));
+  var maxD = new Date(Math.max.apply(null, allDates));
+  minD = new Date(minD.getFullYear(), minD.getMonth(), 1);
+  maxD = new Date(maxD.getFullYear(), maxD.getMonth() + 1, 0);
+  var totalDays = Math.max(1, Math.round((maxD - minD) / 86400000));
+  var pxPerDay = 6;
+  var totalWidth = totalDays * pxPerDay;
+
+  var monthsHtml = '';
+  var cur = new Date(minD.getFullYear(), minD.getMonth(), 1);
+  var moisAbbr = ['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  while (cur <= maxD) {
+    var nextMonth = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+    var daysInMonth = Math.round((Math.min(nextMonth, new Date(maxD.getTime() + 86400000)) - cur) / 86400000);
+    monthsHtml += '<div class="rm-timeline-month" style="width:' + (daysInMonth * pxPerDay) + 'px">' + moisAbbr[cur.getMonth()] + ' ' + cur.getFullYear() + '</div>';
+    cur = nextMonth;
+  }
+
+  var rowsHtml = withDates.map(function(t, idx){
+    var devD = rmParseDMY(t.devDebut), devF = rmParseDMY(t.devFin);
+    var recD = rmParseDMY(t.recetteDebut), recF = rmParseDMY(t.recetteFin);
+    var livr = rmParseDMY(t.dateLivraison);
+    var segStart = devD || recD || livr;
+    var segEnd = recF || devF || livr || segStart;
+    if (!segStart) return '';
+    var left = Math.round((segStart - minD) / 86400000) * pxPerDay;
+    var width = Math.max(18, Math.round((segEnd - segStart) / 86400000) * pxPerDay + pxPerDay);
+    var color = ROADMAP_COLORS[t.typologie] || 'var(--ft-indigo)';
+    var popupData = {titre: t.typologie || 'Tâche', texte: t.texte || '', dev: [t.devDebut, t.devFin], rec: [t.recetteDebut, t.recetteFin], livr: t.dateLivraison};
+    return '<div class="rm-timeline-row"><div class="rm-bar" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '">' + escapeHtml((t.texte || t.typologie || '').slice(0, 60)) + '</div></div>';
+  }).join('');
+
+  return '<div class="rm-timeline-scroll"><div style="width:' + totalWidth + 'px">' +
+    '<div class="rm-timeline-months">' + monthsHtml + '</div>' +
+    '<div class="rm-timeline-rows">' + rowsHtml + '</div>' +
+  '</div></div>';
+}
+
+function renderRoadmapBody(){
+  var epics = (roadmapData && roadmapData.epics) || [];
+  var html = epics.map(function(epic, ei){
+    var domainesHtml = (epic.domaines || []).map(function(dom, di){
+      return '<div class="rm-domaine" data-rm-domaine="' + ei + '-' + di + '">' +
+        '<div class="rm-domaine-head"><span class="rm-toggle">▾</span>' + escapeHtml(dom.nom) + ' <span style="color:var(--ft-fg-3);font-weight:400">(' + (dom.taches||[]).length + ' travaux)</span></div>' +
+        '<div class="rm-domaine-body">' + renderTimelineForDomaine(dom.taches || []) + '</div>' +
+      '</div>';
+    }).join('');
+    return '<div class="rm-epic" data-rm-epic="' + ei + '">' +
+      '<div class="rm-epic-head"><span class="rm-toggle">▾</span>' + escapeHtml(epic.nom) + '</div>' +
+      '<div class="rm-epic-body">' + domainesHtml + '</div>' +
+    '</div>';
+  }).join('');
+  document.getElementById('roadmapBody').innerHTML = html || '<div class="empty-hint">Aucun élément dans la feuille de route.</div>';
+  bindRoadmapInteractions();
+}
+
+function bindRoadmapInteractions(){
+  document.querySelectorAll('.rm-epic-head').forEach(function(head){
+    head.addEventListener('click', function(){ head.closest('.rm-epic').classList.toggle('collapsed'); });
+  });
+  document.querySelectorAll('.rm-domaine-head').forEach(function(head){
+    head.addEventListener('click', function(){ head.closest('.rm-domaine').classList.toggle('collapsed'); });
+  });
+  document.querySelectorAll('[data-rm-task]').forEach(function(bar){
+    bar.addEventListener('mouseenter', function(){
+      var d;
+      try { d = JSON.parse(bar.getAttribute('data-rm-task')); } catch(e){ return; }
+      var popup = document.getElementById('rmTaskPopup');
+      var devTxt = d.dev[0] ? ('Dev : ' + d.dev[0] + (d.dev[1] ? ' → ' + d.dev[1] : '')) : '';
+      var recTxt = d.rec[0] ? ('Recette : ' + d.rec[0] + (d.rec[1] ? ' → ' + d.rec[1] : '')) : '';
+      var livrTxt = d.livr ? ('Livraison estimée : ' + d.livr) : '';
+      popup.innerHTML = '<h5>' + escapeHtml(d.titre) + '</h5>' +
+        (d.texte ? '<div>' + richText(d.texte) + '</div>' : '') +
+        '<div class="rm-task-dates">' + [devTxt, recTxt, livrTxt].filter(Boolean).map(escapeHtml).join('<br>') + '</div>';
+      var rect = bar.getBoundingClientRect();
+      popup.style.top = (rect.bottom + 8) + 'px';
+      popup.style.left = Math.min(rect.left, window.innerWidth - 340) + 'px';
+      popup.classList.add('open');
+    });
+    bar.addEventListener('mouseleave', function(){ document.getElementById('rmTaskPopup').classList.remove('open'); });
+  });
+}
+
+function openRoadmap(){
+  document.getElementById('roadmapOverlay').classList.add('open');
+  renderRoadmapLegend();
+  if (roadmapLoaded) { renderRoadmapBody(); return; }
+  db.collection('site_content').doc('roadmap').get().then(function(doc){
+    roadmapData = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : DEFAULT_ROADMAP;
+    roadmapLoaded = true;
+    renderRoadmapBody();
+  }).catch(function(){
+    roadmapData = DEFAULT_ROADMAP;
+    roadmapLoaded = true;
+    renderRoadmapBody();
+  });
+}
+function closeRoadmap(){
+  document.getElementById('roadmapOverlay').classList.remove('open');
+  document.getElementById('rmTaskPopup').classList.remove('open');
+}
+document.getElementById('roadmapClose').addEventListener('click', closeRoadmap);
+document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') closeRoadmap(); });
+(function(){
+  var popup = document.createElement('div');
+  popup.id = 'rmTaskPopup';
+  popup.className = 'rm-task-popup';
+  document.body.appendChild(popup);
+})();
 
 db.collection('site_content').doc('homepage').get().then(function(doc){
   var content = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : DEFAULT_CONTENT;

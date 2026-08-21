@@ -71,6 +71,15 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .form-hint{font-size:12px;color:var(--ft-gray-500);font-style:italic}
 .btn-save-floating{position:fixed;top:120px;right:24px;z-index:1200;box-shadow:0 2px 10px rgba(0,0,0,.18);padding:12px 20px;font-size:13px}
 @media (max-width:900px){.btn-save-floating{top:auto;bottom:20px;right:20px}}
+.rm-admin-epic{border:2px solid var(--ft-indigo);border-radius:8px;padding:14px;margin-bottom:14px;background:var(--ft-indigo-light)}
+.rm-admin-domaine{border:1px solid var(--ft-gray-300);border-radius:6px;padding:12px;margin:10px 0 10px 20px;background:#fff}
+.rm-admin-tache{border:1px solid var(--ft-gray-200);border-radius:5px;padding:10px;margin:8px 0 8px 20px;background:var(--ft-sable)}
+.rm-admin-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.rm-admin-row .edit-input{flex:1;margin-bottom:0}
+.rm-admin-handle{font-size:11px;font-weight:700;color:var(--ft-gray-500);text-transform:uppercase;white-space:nowrap}
+.rm-admin-tache-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px}
+.rm-admin-tache-grid input{margin-bottom:0}
+@media (max-width:700px){.rm-admin-tache-grid{grid-template-columns:1fr 1fr}}
 .edit-card{background:#fff;border:1px solid var(--ft-gray-200);border-radius:8px;padding:24px;margin-bottom:16px}
 .edit-header{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:4px}
 .edit-title-input{flex:1;min-width:240px;font-size:19px;font-weight:700;color:var(--ft-navy);border:1px solid transparent;border-radius:4px;padding:4px 6px;font-family:inherit;background:transparent}
@@ -158,6 +167,10 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
           <div class="tab-group">
             <span class="tab-group-label">🏠 Accueil</span>
             <button class="btn btn--secondary btn--sm" id="tabSite">📄 Contenu du site</button>
+          </div>
+          <div class="tab-group">
+            <span class="tab-group-label">🗺️ Roadmap</span>
+            <button class="btn btn--secondary btn--sm" id="tabRoadmap">Feuille de route</button>
           </div>
           <button class="btn btn--sm" id="btnLogout" style="margin-left:auto">Se déconnecter</button>
         </div>
@@ -266,6 +279,30 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         </div>
       </div>
     </div>
+
+    <div id="roadmapSection" style="display:none">
+      <button class="btn btn--sm btn-save-floating" id="btnSaveRoadmap">💾 Enregistrer <span id="roadmapStatusFloating"></span></button>
+      <div class="card" style="max-width:1100px">
+        <h3 style="margin:0 0 10px">Feuille de route (roadmap)</h3>
+        <p class="form-hint" style="margin-top:0">Organisée en Epics (grands domaines), chacun divisé en sous-domaines, chacun contenant les travaux (tâches) en cours. Chaque tâche affiche une barre sur la frise chronologique publique si au moins une date est renseignée (JJ-MM-AAAA). Ajoutez, modifiez, supprimez ou réordonnez (▲/▼) à tous les niveaux.</p>
+        <div id="roadmapStatus" style="font-size:12.5px;margin:8px 0"></div>
+        <div id="roadmapEditorRoot"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="btnAddEpic" style="margin-top:10px">+ Ajouter un epic</button>
+        <div class="edit-footer">
+          <button class="btn btn--sm" id="btnSaveRoadmap2">💾 Enregistrer la feuille de route</button>
+          <span id="roadmapStatus2" style="font-size:12.5px"></span>
+        </div>
+      </div>
+    </div>
+
+    <datalist id="rmTypologieList">
+      <option value="Cadrage / Conception">
+      <option value="Fonctionnalité / Évolution">
+      <option value="Interface utilisateur / Design">
+      <option value="Données / Ingénierie">
+      <option value="Sécurité &amp; Droits">
+      <option value="Accompagnement au changement">
+    </datalist>
   </div>
 </main>
 
@@ -1084,19 +1121,23 @@ function setActiveTab(tab){
   document.getElementById('purgeConfirm').style.display = tab === 'props' ? 'block' : 'none';
   document.getElementById('editSection').style.display = tab === 'edit' ? 'block' : 'none';
   document.getElementById('siteSection').style.display = tab === 'site' ? 'block' : 'none';
+  document.getElementById('roadmapSection').style.display = tab === 'roadmap' ? 'block' : 'none';
   document.getElementById('tabProps').className = 'btn btn--sm' + (tab === 'props' ? ' tab-active' : '');
   document.getElementById('tabEdit').className = 'btn btn--secondary btn--sm' + (tab === 'edit' ? ' tab-active' : '');
   document.getElementById('tabSite').className = 'btn btn--secondary btn--sm' + (tab === 'site' ? ' tab-active' : '');
+  document.getElementById('tabRoadmap').className = 'btn btn--secondary btn--sm' + (tab === 'roadmap' ? ' tab-active' : '');
   document.getElementById('panelTitle').textContent =
-    tab === 'props' ? 'Propositions en attente' : (tab === 'edit' ? 'Édition directe du glossaire' : "Contenu de la page d'accueil");
+    tab === 'props' ? 'Propositions en attente' : (tab === 'edit' ? 'Édition directe du glossaire' : (tab === 'roadmap' ? 'Feuille de route' : "Contenu de la page d'accueil"));
   document.querySelectorAll('#btnSelectAll,#btnValidateSelection,#btnRecalcCompteurs,#btnPurge,#btnExportXlsx,#btnImportXlsx').forEach(function(el){
     el.style.display = tab === 'props' ? 'inline-block' : 'none';
   });
   if (tab === 'site' && !siteContentLoaded) loadSiteContent();
+  if (tab === 'roadmap' && !roadmapAdminLoaded) loadRoadmapAdmin();
 }
 document.getElementById('tabProps').addEventListener('click', function(){ setActiveTab('props'); });
 document.getElementById('tabEdit').addEventListener('click', function(){ setActiveTab('edit'); document.getElementById('editFormHolder').innerHTML = ''; });
 document.getElementById('tabSite').addEventListener('click', function(){ setActiveTab('site'); });
+document.getElementById('tabRoadmap').addEventListener('click', function(){ setActiveTab('roadmap'); });
 
 /* ==== Contenu du site (page d'accueil) : editeur generique sans code ==== */
 var siteContentLoaded = false;
@@ -1144,7 +1185,7 @@ var DEFAULT_SITE_CONTENT = {
   actualites: [
     {titre: "📌 Information utilisateurs", date: "", description: "", liens: []},
     {titre: "⚠️ Anomalies détectées", date: "", description: "", liens: []},
-    {titre: "📋 Backlog des évolutions", date: "", description: "Backlog actualisée des évolutions en cours et à venir.", liens: []}
+    {titre: "📋 Backlog des évolutions", date: "", description: "Backlog actualisée des évolutions en cours et à venir.", liens: [{label: "Voir la feuille de route", url: "#roadmap"}]}
   ],
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -1460,6 +1501,201 @@ function saveSiteContent(){
 }
 document.getElementById('btnSaveSite').addEventListener('click', saveSiteContent);
 document.getElementById('btnSaveSite2').addEventListener('click', saveSiteContent);
+
+/* ==== Feuille de route (roadmap) : editeur imbrique Epic > Domaine > Tache ==== */
+function rmDomaine(nom){ return {nom: nom, taches: []}; }
+var DEFAULT_ROADMAP_ADMIN = {
+  epics: [
+    {nom: "Fiches action & Feuilles de route", domaines: [rmDomaine("Interface de saisie"), rmDomaine("Interface de consultation")]},
+    {nom: "Pilotage territorial sur mesure", domaines: [rmDomaine("Catalogue d'indicateurs"), rmDomaine("Interface de sélection")]},
+    {nom: "Socle Data & Modélisation", domaines: [rmDomaine("Acquisition & Données externes"), rmDomaine("Historisation & Volumétrie"), rmDomaine("Architecture & Règles de gestion")]},
+    {nom: "Dashboard / Vues Métiers", domaines: [
+      rmDomaine("Page : Accueil"), rmDomaine("Page : Accès / Présence en emploi"), rmDomaine("Page : Description des publics"),
+      rmDomaine("Page : Entrants en formation"), rmDomaine("Page : Fiches action"), rmDomaine("Page : Satisfaction DE"),
+      rmDomaine("Page : Sortants de formation"), rmDomaine("Page : Taux / Délai de pourvoi"), rmDomaine("Page : Taux de recours"),
+      rmDomaine("Page : Analyse par public"), rmDomaine("Cas d'usage formation")
+    ]},
+    {nom: "Ressources documentaires", domaines: [rmDomaine("Glossaire"), rmDomaine("Communication")]},
+    {nom: "Administration & Sécurité", domaines: [rmDomaine("Gestion des habilitations")]}
+  ]
+};
+
+var roadmapAdminState = null;
+var roadmapAdminLoaded = false;
+
+function setByPath(root, path, value){
+  var parts = path.split('.');
+  var cur = root;
+  for (var i = 0; i < parts.length - 1; i++) { cur = cur[parts[i]]; }
+  cur[parts[parts.length - 1]] = value;
+}
+function syncRoadmapDom(){
+  document.querySelectorAll('#roadmapEditorRoot [data-rpath]').forEach(function(el){
+    setByPath(roadmapAdminState.epics, el.dataset.rpath, el.value.trim());
+  });
+}
+
+function rmField(path, value, placeholder, tag){
+  if (tag === 'textarea') {
+    return '<textarea class="edit-input" data-rpath="' + path + '" placeholder="' + escapeHtml(placeholder) + '">' + escapeHtml(value || '') + '</textarea>';
+  }
+  return '<input class="edit-input" data-rpath="' + path + '" placeholder="' + escapeHtml(placeholder) + '" value="' + escapeHtml(value || '') + '">';
+}
+function rmMoveButtons(kind, pathStr, total){
+  var idx = parseInt(pathStr.split(':').pop(), 10);
+  return '<button type="button" class="btn btn--secondary btn--sm" data-rm-move="' + pathStr + '" data-rm-move-kind="' + kind + '" data-rm-move-dir="-1"' + (idx === 0 ? ' disabled' : '') + '>▲</button>' +
+    '<button type="button" class="btn btn--secondary btn--sm" data-rm-move="' + pathStr + '" data-rm-move-kind="' + kind + '" data-rm-move-dir="1"' + (idx === total - 1 ? ' disabled' : '') + '>▼</button>';
+}
+
+function renderRoadmapEditor(){
+  var root = document.getElementById('roadmapEditorRoot');
+  var html = (roadmapAdminState.epics || []).map(function(epic, ei){
+    var domainesHtml = (epic.domaines || []).map(function(dom, di){
+      var tachesHtml = (dom.taches || []).map(function(t, ti){
+        var base = ei + '.domaines.' + di + '.taches.' + ti;
+        return '<div class="rm-admin-tache">' +
+          '<div class="rm-admin-tache-grid">' +
+            '<input class="edit-input" list="rmTypologieList" data-rpath="' + base + '.typologie" placeholder="Typologie" value="' + escapeHtml(t.typologie || '') + '">' +
+            rmField(base + '.dateLivraison', t.dateLivraison, 'Livraison estimée (JJ-MM-AAAA)') +
+            rmField(base + '.devDebut', t.devDebut, 'Début dev (JJ-MM-AAAA)') +
+            rmField(base + '.devFin', t.devFin, 'Fin dev (JJ-MM-AAAA)') +
+            rmField(base + '.recetteDebut', t.recetteDebut, 'Début recette (JJ-MM-AAAA)') +
+            rmField(base + '.recetteFin', t.recetteFin, 'Fin recette (JJ-MM-AAAA)') +
+          '</div>' +
+          rmField(base + '.texte', t.texte, 'Détail libre de la tâche...', 'textarea') +
+          '<div class="rm-admin-row" style="margin-top:6px">' +
+            rmMoveButtons('tache', ei + ':' + di + ':' + ti, (dom.taches || []).length) +
+            '<button type="button" class="btn btn--danger btn--sm" data-rm-remove-tache="' + ei + ':' + di + ':' + ti + '">🗑️ Supprimer la tâche</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      return '<div class="rm-admin-domaine">' +
+        '<div class="rm-admin-row">' +
+          '<span class="rm-admin-handle">Domaine</span>' +
+          rmField(ei + '.domaines.' + di + '.nom', dom.nom, 'Nom du domaine') +
+          rmMoveButtons('dom', ei + ':' + di, (epic.domaines || []).length) +
+          '<button type="button" class="btn btn--danger btn--sm" data-rm-remove-dom="' + ei + ':' + di + '">🗑️</button>' +
+        '</div>' +
+        tachesHtml +
+        '<button type="button" class="btn btn--secondary btn--sm" data-rm-add-tache="' + ei + ':' + di + '">+ Ajouter une tâche</button>' +
+      '</div>';
+    }).join('');
+    return '<div class="rm-admin-epic">' +
+      '<div class="rm-admin-row">' +
+        '<span class="rm-admin-handle">Epic</span>' +
+        rmField(String(ei) + '.nom', epic.nom, "Nom de l'epic") +
+        rmMoveButtons('epic', String(ei), roadmapAdminState.epics.length) +
+        '<button type="button" class="btn btn--danger btn--sm" data-rm-remove-epic="' + ei + '">🗑️</button>' +
+      '</div>' +
+      domainesHtml +
+      '<button type="button" class="btn btn--secondary btn--sm" data-rm-add-dom="' + ei + '">+ Ajouter un domaine</button>' +
+    '</div>';
+  }).join('');
+  root.innerHTML = html || '<p class="form-hint">Aucun epic pour le moment - utilisez "+ Ajouter un epic" ci-dessous.</p>';
+  bindRoadmapEditorEvents(root);
+}
+
+function bindRoadmapEditorEvents(root){
+  root.querySelectorAll('[data-rm-remove-epic]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncRoadmapDom();
+      roadmapAdminState.epics.splice(parseInt(btn.dataset.rmRemoveEpic, 10), 1);
+      renderRoadmapEditor();
+    });
+  });
+  root.querySelectorAll('[data-rm-add-dom]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncRoadmapDom();
+      var ei = parseInt(btn.dataset.rmAddDom, 10);
+      roadmapAdminState.epics[ei].domaines = roadmapAdminState.epics[ei].domaines || [];
+      roadmapAdminState.epics[ei].domaines.push({nom: '', taches: []});
+      renderRoadmapEditor();
+    });
+  });
+  root.querySelectorAll('[data-rm-remove-dom]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncRoadmapDom();
+      var p = btn.dataset.rmRemoveDom.split(':').map(Number);
+      roadmapAdminState.epics[p[0]].domaines.splice(p[1], 1);
+      renderRoadmapEditor();
+    });
+  });
+  root.querySelectorAll('[data-rm-add-tache]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncRoadmapDom();
+      var p = btn.dataset.rmAddTache.split(':').map(Number);
+      var dom = roadmapAdminState.epics[p[0]].domaines[p[1]];
+      dom.taches = dom.taches || [];
+      dom.taches.push({typologie: '', texte: '', dateLivraison: '', devDebut: '', devFin: '', recetteDebut: '', recetteFin: ''});
+      renderRoadmapEditor();
+    });
+  });
+  root.querySelectorAll('[data-rm-remove-tache]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncRoadmapDom();
+      var p = btn.dataset.rmRemoveTache.split(':').map(Number);
+      roadmapAdminState.epics[p[0]].domaines[p[1]].taches.splice(p[2], 1);
+      renderRoadmapEditor();
+    });
+  });
+  root.querySelectorAll('[data-rm-move]').forEach(function(btn){
+    if (btn.disabled) return;
+    btn.addEventListener('click', function(){
+      syncRoadmapDom();
+      var kind = btn.dataset.rmMoveKind;
+      var dir = parseInt(btn.dataset.rmMoveDir, 10);
+      var p = btn.dataset.rmMove.split(':').map(Number);
+      var arr;
+      if (kind === 'epic') arr = roadmapAdminState.epics;
+      else if (kind === 'dom') arr = roadmapAdminState.epics[p[0]].domaines;
+      else arr = roadmapAdminState.epics[p[0]].domaines[p[1]].taches;
+      var idx = p[p.length - 1];
+      var swapWith = idx + dir;
+      if (swapWith < 0 || swapWith >= arr.length) return;
+      var tmp = arr[idx]; arr[idx] = arr[swapWith]; arr[swapWith] = tmp;
+      renderRoadmapEditor();
+    });
+  });
+}
+
+function loadRoadmapAdmin(){
+  db.collection('site_content').doc('roadmap').get().then(function(doc){
+    var data = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : DEFAULT_ROADMAP_ADMIN;
+    roadmapAdminState = JSON.parse(JSON.stringify(data));
+    roadmapAdminLoaded = true;
+    renderRoadmapEditor();
+  }).catch(function(){
+    roadmapAdminState = JSON.parse(JSON.stringify(DEFAULT_ROADMAP_ADMIN));
+    roadmapAdminLoaded = true;
+    renderRoadmapEditor();
+  });
+}
+
+document.getElementById('btnAddEpic').addEventListener('click', function(){
+  syncRoadmapDom();
+  roadmapAdminState.epics = roadmapAdminState.epics || [];
+  roadmapAdminState.epics.push({nom: '', domaines: []});
+  renderRoadmapEditor();
+});
+
+function saveRoadmapContent(){
+  syncRoadmapDom();
+  var s1 = document.getElementById('roadmapStatus');
+  var s2 = document.getElementById('roadmapStatus2');
+  var s3 = document.getElementById('roadmapStatusFloating');
+  s1.textContent = s2.textContent = 'Enregistrement...';
+  if (s3) s3.textContent = '⏳';
+  db.collection('site_content').doc('roadmap').set({data: roadmapAdminState}).then(function(){
+    s1.textContent = s2.textContent = '✅ Feuille de route enregistrée.';
+    if (s3) s3.textContent = '✅';
+    setTimeout(function(){ s1.textContent = s2.textContent = ''; if (s3) s3.textContent = ''; }, 2500);
+  }).catch(function(err){
+    s1.textContent = s2.textContent = '❌ Échec : ' + (err.message || err);
+    if (s3) s3.textContent = '❌';
+  });
+}
+document.getElementById('btnSaveRoadmap').addEventListener('click', saveRoadmapContent);
+document.getElementById('btnSaveRoadmap2').addEventListener('click', saveRoadmapContent);
 
 /* ==== Abonnes newsletter : export / import Excel ==== */
 document.getElementById('btnExportSubs').addEventListener('click', function(){

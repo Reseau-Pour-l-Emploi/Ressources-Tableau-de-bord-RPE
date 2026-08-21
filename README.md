@@ -186,6 +186,12 @@ Bouton "S'abonner à la newsletter" / "Se désabonner" sur la page d'accueil (da
 
 La barre d'outils admin distingue deux groupes d'onglets : **📚 Glossaire** (Propositions en attente / Mode édition) et **🏠 Accueil** (Contenu du site + Abonnés newsletter). Dans "Contenu du site", chaque bloc (agenda, actualités, Le Kiosque, ressources, liens de pied de page) affiche les **éléments existants pré-remplis** (pas seulement un formulaire d'ajout) : modifiez-les directement, supprimez-en avec "🗑️ Supprimer", ou ajoutez-en avec "+ Ajouter". Le contenu par défaut chargé dans cet éditeur avant toute sauvegarde est strictement identique à celui affiché publiquement (`DEFAULT_SITE_CONTENT` dans `admin.html` = `DEFAULT_CONTENT` dans `index.html`) : à maintenir synchronisé si l'un des deux est modifié directement dans le code.
 
+## Feuille de route (roadmap)
+
+Popup plein écran (bouton "✕ Fermer"), ouverte en cliquant sur le lien "Voir la feuille de route" de l'actualité "Backlog des évolutions". Organisée en Epics > Domaines > Tâches (arborescence repliable) ; chaque tâche affiche une barre sur une frise chronologique si au moins une date est renseignée (début/fin de dev, début/fin de recette, livraison estimée), avec défilement horizontal pour parcourir tout le calendrier. Une légende de couleurs par typologie (Cadrage/Conception, Fonctionnalité/Évolution, Interface utilisateur/Design, Données/Ingénierie, Sécurité & Droits, Accompagnement au changement) est affichée en haut.
+
+Gérée intégralement depuis l'admin (🗺️ Roadmap) : ajout/suppression/modification/réordonnancement (▲/▼) à chaque niveau (epic, domaine, tâche), stockée dans le document Firestore `site_content/roadmap` (déjà couvert par les règles existantes : lecture publique, écriture admin).
+
 ## Score EcoIndex (éco-conception)
 
 Badge lettre (A à G, fond vert) affiché en bas à droite du pied de page sur `index.html` et `glossaire.html`, lien vers le détail du résultat sur ecoindex.fr. Éditable sans code depuis l'admin (🏠 Accueil > Contenu du site > "Score EcoIndex"). Contrairement au RGAA, l'EcoIndex (GreenIT.fr) repose sur une formule publique et entièrement automatisable (nombre d'éléments DOM, poids de la page, nombre de requêtes) : à recalculer sur https://www.ecoindex.fr après toute évolution significative du site, et à mettre à jour ici avec le nouvel id de résultat.
