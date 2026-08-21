@@ -1554,6 +1554,7 @@ function renderRoadmapEditor(){
       var tachesHtml = (dom.taches || []).map(function(t, ti){
         var base = ei + '.domaines.' + di + '.taches.' + ti;
         return '<div class="rm-admin-tache">' +
+          rmField(base + '.titre', t.titre, 'Titre de la tâche (affiché sur la barre)') +
           '<div class="rm-admin-tache-grid">' +
             '<select class="edit-input" data-rpath="' + base + '.typologie">' +
               ROADMAP_TYPOLOGIES.map(function(ty){ return '<option value="' + escapeHtml(ty) + '"' + (t.typologie === ty ? ' selected' : '') + '>' + escapeHtml(ty) + '</option>'; }).join('') +
@@ -1561,7 +1562,8 @@ function renderRoadmapEditor(){
             rmField(base + '.dateDebut', t.dateDebut, 'Date de début (JJ-MM-AAAA)') +
             rmField(base + '.dateFin', t.dateFin, 'Date de fin (vide = en continu)') +
           '</div>' +
-          rmField(base + '.texte', t.texte, 'Détail libre de la tâche...', 'textarea') +
+          rmField(base + '.texte', t.texte, 'Description détaillée (visible au survol)...', 'textarea') +
+          (t.derniereMaj ? '<div class="form-hint" style="margin:0 0 6px">Dernière mise à jour : ' + escapeHtml(t.derniereMaj) + '</div>' : '') +
           '<div class="rm-admin-row" style="margin-top:6px">' +
             rmMoveButtons('tache', ei + ':' + di + ':' + ti, (dom.taches || []).length) +
             '<button type="button" class="btn btn--danger btn--sm" data-rm-remove-tache="' + ei + ':' + di + ':' + ti + '">🗑️ Supprimer la tâche</button>' +
@@ -1591,6 +1593,7 @@ function renderRoadmapEditor(){
     '</div>';
   }).join('');
   root.innerHTML = html || '<p class="form-hint">Aucun epic pour le moment - utilisez "+ Ajouter un epic" ci-dessous.</p>';
+  root.querySelectorAll('textarea[data-rpath$=".texte"]').forEach(function(el){ attachFormatToolbar(el, true); });
   bindRoadmapEditorEvents(root);
 }
 
@@ -1625,7 +1628,7 @@ function bindRoadmapEditorEvents(root){
       var p = btn.dataset.rmAddTache.split(':').map(Number);
       var dom = roadmapAdminState.epics[p[0]].domaines[p[1]];
       dom.taches = dom.taches || [];
-      dom.taches.push({typologie: ROADMAP_TYPOLOGIES[0], texte: '', dateDebut: '', dateFin: ''});
+      dom.taches.push({typologie: ROADMAP_TYPOLOGIES[0], titre: '', texte: '', dateDebut: '', dateFin: '', derniereMaj: ''});
       renderRoadmapEditor();
     });
   });
@@ -1657,14 +1660,17 @@ function bindRoadmapEditorEvents(root){
   });
 }
 
+var roadmapAdminOriginal = null;
 function loadRoadmapAdmin(){
   db.collection('site_content').doc('roadmap').get().then(function(doc){
     var data = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : DEFAULT_ROADMAP_ADMIN;
     roadmapAdminState = JSON.parse(JSON.stringify(data));
+    roadmapAdminOriginal = JSON.parse(JSON.stringify(data));
     roadmapAdminLoaded = true;
     renderRoadmapEditor();
   }).catch(function(){
     roadmapAdminState = JSON.parse(JSON.stringify(DEFAULT_ROADMAP_ADMIN));
+    roadmapAdminOriginal = JSON.parse(JSON.stringify(DEFAULT_ROADMAP_ADMIN));
     roadmapAdminLoaded = true;
     renderRoadmapEditor();
   });
@@ -1677,8 +1683,38 @@ document.getElementById('btnAddEpic').addEventListener('click', function(){
   renderRoadmapEditor();
 });
 
+function rmTodayStr(){
+  var d = new Date();
+  var pad = function(n){ return n < 10 ? '0' + n : '' + n; };
+  return pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear();
+}
+function rmTacheSignature(t){
+  return JSON.stringify({typologie: t.typologie || '', titre: t.titre || '', texte: t.texte || '', dateDebut: t.dateDebut || '', dateFin: t.dateFin || ''});
+}
+/* Horodate automatiquement chaque tache dont le contenu a change depuis le chargement
+   (comparaison par position epic/domaine/tache), sans intervention manuelle de l'admin. */
+function rmStampUpdatedTasks(){
+  var todayStr = rmTodayStr();
+  (roadmapAdminState.epics || []).forEach(function(epic, ei){
+    (epic.domaines || []).forEach(function(dom, di){
+      (dom.taches || []).forEach(function(t, ti){
+        var orig = roadmapAdminOriginal && roadmapAdminOriginal.epics && roadmapAdminOriginal.epics[ei] &&
+          roadmapAdminOriginal.epics[ei].domaines && roadmapAdminOriginal.epics[ei].domaines[di] &&
+          roadmapAdminOriginal.epics[ei].domaines[di].taches && roadmapAdminOriginal.epics[ei].domaines[di].taches[ti];
+        if (!orig || rmTacheSignature(orig) !== rmTacheSignature(t)) {
+          t.derniereMaj = todayStr;
+        } else if (orig.derniereMaj) {
+          t.derniereMaj = orig.derniereMaj;
+        }
+      });
+    });
+  });
+}
+
 function saveRoadmapContent(){
   syncRoadmapDom();
+  rmStampUpdatedTasks();
+  renderRoadmapEditor();
   var s1 = document.getElementById('roadmapStatus');
   var s2 = document.getElementById('roadmapStatus2');
   var s3 = document.getElementById('roadmapStatusFloating');
@@ -1686,6 +1722,7 @@ function saveRoadmapContent(){
   if (s3) s3.textContent = '⏳';
   db.collection('site_content').doc('roadmap').set({data: roadmapAdminState}).then(function(){
     s1.textContent = s2.textContent = '✅ Feuille de route enregistrée.';
+    roadmapAdminOriginal = JSON.parse(JSON.stringify(roadmapAdminState));
     if (s3) s3.textContent = '✅';
     setTimeout(function(){ s1.textContent = s2.textContent = ''; if (s3) s3.textContent = ''; }, 2500);
   }).catch(function(err){

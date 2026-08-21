@@ -189,11 +189,9 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .roadmap-body{flex:1;overflow:auto;padding:16px 24px 40px}
 
 .roadmap-nav{display:flex;flex-direction:column;gap:8px;padding:12px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;background:var(--ft-sable)}
-.rm-nav-months{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
-.rm-nav-month-box{flex:none;font-family:inherit;font-size:10.5px;font-weight:600;color:var(--ft-fg-2);background:#fff;border:1px solid var(--ft-border);border-radius:5px;padding:6px 10px;cursor:pointer;white-space:nowrap}
-.rm-nav-month-box:hover{border-color:var(--ft-indigo)}
-.rm-nav-month-box--today{border-color:var(--ft-jaune-dark);color:var(--ft-navy)}
-.rm-nav-month-box--active{background:var(--ft-indigo);border-color:var(--ft-indigo);color:#fff}
+.rm-nav-months{display:flex;gap:4px}
+.rm-nav-month-box{flex:1;font-family:inherit;font-size:11px;font-weight:600;color:var(--ft-fg-2);background:#fff;border:1px solid var(--ft-border);border-radius:5px;padding:7px 4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-nav-month-box--today{background:var(--ft-jaune-light);border-color:var(--ft-jaune-dark);color:var(--ft-navy);font-weight:700}
 .rm-nav-track-row{display:flex;align-items:center;gap:12px}
 .rm-nav-track{-webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:999px;background:var(--ft-gray-300);outline:none;cursor:pointer}
 .rm-nav-track::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:var(--ft-indigo);border:2px solid #fff;box-shadow:0 0 0 1px var(--ft-indigo);cursor:pointer}
@@ -222,15 +220,13 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 .rm-timeline-scroll{overflow:hidden;border:1px solid var(--ft-border);border-radius:6px;background:#fff;max-width:920px;position:relative}
 .rm-timeline-inner{position:relative;transition:transform .2s ease}
-.rm-timeline-months{display:flex;border-bottom:1px solid var(--ft-border);background:var(--ft-sable)}
-.rm-timeline-month{flex:none;font-size:10.5px;font-weight:700;color:var(--ft-fg-3);text-align:center;padding:5px 0;border-right:1px solid var(--ft-border)}
-.rm-timeline-month--current{background:var(--ft-jaune-light);color:var(--ft-navy)}
 .rm-timeline-rows{position:relative}
 .rm-timeline-row{position:relative;height:34px;border-bottom:1px solid var(--ft-border)}
 .rm-timeline-row:last-child{border-bottom:none}
 .rm-month-line{position:absolute;top:0;bottom:0;width:1px;background:var(--ft-border);z-index:1;pointer-events:none}
 .rm-timeline-today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--ft-rouge);z-index:2;pointer-events:none}
-.rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;display:flex;align-items:center;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15);z-index:2}
+.rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;overflow:hidden;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15);z-index:2}
+.rm-bar-label{display:inline-block;white-space:nowrap;padding:0 8px;line-height:24px;transition:transform .1s linear}
 .rm-bar--open{background-image:linear-gradient(to right,transparent calc(100% - 14px),rgba(255,255,255,.5) 100%)}
 .rm-bar:hover{filter:brightness(1.1)}
 .rm-no-date{font-size:12px;color:var(--ft-fg-3);padding:6px 0;font-style:italic}
@@ -238,6 +234,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-task-popup.open{display:block}
 .rm-task-popup h5{margin:0 0 6px;font-size:13.5px;color:var(--ft-navy)}
 .rm-task-popup .rm-task-dates{font-size:11px;color:var(--ft-fg-3);margin-top:8px;line-height:1.7}
+.rm-task-popup .rm-task-updated{font-size:10.5px;color:var(--ft-fg-3);font-style:italic;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--ft-border)}
 
 .section-head-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
 .section-head-row h3{margin:0}
@@ -264,8 +261,11 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .filmstrip-btn.prev{left:0}
 .filmstrip-btn.next{right:0}
 @media (max-width:600px){.filmstrip-btn{display:none}}
-.filmstrip-dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:16px}
+.filmstrip-dots-row{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:16px}
+.filmstrip-dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:0}
 .filmstrip-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--ft-indigo);background:#fff;cursor:pointer;padding:0}
+.filmstrip-autoplay-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--ft-border);background:#fff;color:var(--ft-navy);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.filmstrip-autoplay-btn:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
 .filmstrip-dot.active{background:var(--ft-indigo)}
 
 /* ==== Newsletter : abonnement ==== */
@@ -673,11 +673,14 @@ function kiosqueCardHtml(it, isLatest){
 }
 
 /* Carrousel generique style SharePoint : fleches laterales + points de pagination */
-function filmstripControlsHtml(idPrefix){
+function filmstripControlsHtml(idPrefix, withAutoplay){
   return '<div class="filmstrip"><button type="button" class="filmstrip-btn prev" id="' + idPrefix + 'Prev" aria-label="Précédent">‹</button>' +
     '<div class="filmstrip-grid" id="' + idPrefix + 'Grid"></div>' +
     '<button type="button" class="filmstrip-btn next" id="' + idPrefix + 'Next" aria-label="Suivant">›</button></div>' +
-    '<div class="filmstrip-dots" id="' + idPrefix + 'Dots"></div>';
+    '<div class="filmstrip-dots-row">' +
+      '<div class="filmstrip-dots" id="' + idPrefix + 'Dots"></div>' +
+      (withAutoplay ? '<button type="button" class="filmstrip-autoplay-btn" id="' + idPrefix + 'Autoplay" aria-label="Mettre en pause">⏸</button>' : '') +
+    '</div>';
 }
 
 function bindFilmstripControls(container, idPrefix, getState, renderFn){
@@ -777,7 +780,7 @@ function renderRessources(items){
   ressourcesState.items = items || [];
   ressourcesState.batch = 0;
   if (!ressourcesState.items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
-  return filmstripControlsHtml('res');
+  return filmstripControlsHtml('res', true);
 }
 
 function renderRessourcesGrid(){
@@ -791,12 +794,50 @@ function renderRessourcesGrid(){
   var pageItems = ressourcesState.items.slice(start, start + RESSOURCES_BATCH);
   grid.innerHTML = pageItems.map(ressourceCardHtml).join('');
   renderFilmstripNav('res', totalBatches, ressourcesState.batch, function(page){ ressourcesState.batch = page; renderRessourcesGrid(); });
+  if (ressourcesAutoplayOn) startResAutoplay();
+}
+
+/* Defilement automatique du carrousel Ressources complementaires (façon "A la une"),
+   avec pause au survol et bouton lecture/pause. */
+var ressourcesAutoplayOn = true;
+var ressourcesAutoplayTimer = null;
+function stopResAutoplay(){
+  if (ressourcesAutoplayTimer) clearInterval(ressourcesAutoplayTimer);
+  ressourcesAutoplayTimer = null;
+}
+function startResAutoplay(){
+  stopResAutoplay();
+  var totalBatches = Math.max(1, Math.ceil(ressourcesState.items.length / RESSOURCES_BATCH));
+  if (totalBatches <= 1) return;
+  ressourcesAutoplayTimer = setInterval(function(){
+    var tb = Math.max(1, Math.ceil(ressourcesState.items.length / RESSOURCES_BATCH));
+    ressourcesState.batch = (ressourcesState.batch + 1) % tb;
+    renderRessourcesGrid();
+  }, 5000);
+}
+function setupResAutoplay(){
+  var btn = document.getElementById('resAutoplay');
+  var wrap = document.getElementById('resGrid') && document.getElementById('resGrid').closest('.filmstrip');
+  if (!btn || !wrap) return;
+  function updateBtn(){
+    btn.innerHTML = ressourcesAutoplayOn ? '⏸' : '▶';
+    btn.setAttribute('aria-label', ressourcesAutoplayOn ? 'Mettre en pause' : 'Lecture');
+  }
+  updateBtn();
+  btn.addEventListener('click', function(){
+    ressourcesAutoplayOn = !ressourcesAutoplayOn;
+    updateBtn();
+    if (ressourcesAutoplayOn) startResAutoplay(); else stopResAutoplay();
+  });
+  wrap.addEventListener('mouseenter', stopResAutoplay);
+  wrap.addEventListener('mouseleave', function(){ if (ressourcesAutoplayOn) startResAutoplay(); });
 }
 
 function bindRessources(container){
   if (!container.querySelector('#resGrid')) return;
   bindFilmstripControls(container, 'res', function(){ return ressourcesState; }, renderRessourcesGrid);
   renderRessourcesGrid();
+  setupResAutoplay();
 }
 
 /* Abonnement newsletter */
@@ -993,35 +1034,50 @@ function renderRoadmapLegend(){
   }).join('');
 }
 
-var ROADMAP_PX_PER_DAY = 5;
-var roadmapRange = null; // calculee une fois par ouverture : plage fixe M-12 a M+12
+var roadmapRange = null; // plage fixe M-12 a M+12, calculee a chaque ouverture / changement de fenetre
+var roadmapWindowSize = 6; // 6 ou 12 mois visibles simultanement, occupant toute la largeur
+var roadmapCurrentPanPx = 0;
+
+function rmAvailableWidth(){
+  var ref = document.getElementById('roadmapBody');
+  return Math.max(320, (ref ? ref.clientWidth : 900) - 48);
+}
 
 function rmComputeRange(){
   var today = new Date();
   today.setHours(0,0,0,0);
   var minD = new Date(today.getFullYear(), today.getMonth() - 12, 1);
   var maxD = new Date(today.getFullYear(), today.getMonth() + 13, 0); // dernier jour du mois M+12
-  var totalDays = Math.round((maxD - minD) / 86400000) + 1;
-  var totalWidth = totalDays * ROADMAP_PX_PER_DAY;
   var moisAbbr = ['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
-  var monthStarts = [];
   var monthLabels = [];
   var monthDates = [];
+  var monthDays = [];
   var currentIdx = 12;
   var cur = new Date(minD.getFullYear(), minD.getMonth(), 1);
   var idx = 0;
   while (cur <= maxD) {
-    monthStarts.push(Math.round((cur - minD) / 86400000) * ROADMAP_PX_PER_DAY);
+    var next = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+    var daysInMonth = Math.round((Math.min(next, new Date(maxD.getTime() + 86400000)) - cur) / 86400000);
     monthLabels.push(moisAbbr[cur.getMonth()] + ' ' + cur.getFullYear());
-    monthDates.push(new Date(cur.getFullYear(), cur.getMonth(), 1));
+    monthDates.push(new Date(cur));
+    monthDays.push(daysInMonth);
     if (cur.getFullYear() === today.getFullYear() && cur.getMonth() === today.getMonth()) currentIdx = idx;
     idx++;
-    cur = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+    cur = next;
   }
+  // pxPerDay dynamique : la fenetre affichee (roadmapWindowSize mois) doit occuper toute la largeur disponible
+  var daysInWindow = monthDays.slice(currentIdx, currentIdx + roadmapWindowSize).reduce(function(a, b){ return a + b; }, 0) || (roadmapWindowSize * 30);
+  var pxPerDay = rmAvailableWidth() / daysInWindow;
+  var monthStarts = [];
+  var acc = 0;
+  monthDays.forEach(function(d){ monthStarts.push(Math.round(acc)); acc += d * pxPerDay; });
+  var totalWidth = Math.round(acc);
+  var maxIdx = Math.max(0, monthLabels.length - roadmapWindowSize);
   return {
-    today: today, minD: minD, maxD: maxD, totalWidth: totalWidth,
-    monthStarts: monthStarts, monthLabels: monthLabels, monthDates: monthDates, currentIdx: currentIdx,
-    todayOffsetPx: Math.round((today - minD) / 86400000) * ROADMAP_PX_PER_DAY
+    today: today, minD: minD, maxD: maxD, pxPerDay: pxPerDay, totalWidth: totalWidth,
+    monthStarts: monthStarts, monthDays: monthDays, monthDates: monthDates, monthLabels: monthLabels,
+    currentIdx: Math.min(currentIdx, maxIdx), maxIdx: maxIdx,
+    todayOffsetPx: Math.round((today - minD) / 86400000) * pxPerDay
   };
 }
 
@@ -1030,12 +1086,6 @@ function renderTimelineForDomaine(taches){
   if (!withDates.length) return '<div class="rm-no-date">Aucune date renseignée pour ces travaux.</div>';
 
   var r = roadmapRange;
-  var monthsHtml = r.monthLabels.map(function(label, i){
-    var w = (i < r.monthLabels.length - 1 ? r.monthStarts[i+1] : r.totalWidth) - r.monthStarts[i];
-    var isCurrent = i === r.currentIdx;
-    return '<div class="rm-timeline-month' + (isCurrent ? ' rm-timeline-month--current' : '') + '" style="width:' + w + 'px">' + label + '</div>';
-  }).join('');
-
   var monthLinesHtml = r.monthStarts.map(function(px){
     return '<div class="rm-month-line" style="left:' + px + 'px"></div>';
   }).join('');
@@ -1046,67 +1096,93 @@ function renderTimelineForDomaine(taches){
     var openEnded = !end;
     var segStart = start < r.minD ? r.minD : start;
     var segEnd = end && end < r.maxD ? end : r.maxD;
-    var left = Math.round((segStart - r.minD) / 86400000) * ROADMAP_PX_PER_DAY;
-    var width = Math.max(18, Math.round((segEnd - segStart) / 86400000) * ROADMAP_PX_PER_DAY + ROADMAP_PX_PER_DAY);
+    var left = Math.round((segStart - r.minD) / 86400000 * r.pxPerDay);
+    var width = Math.max(24, Math.round((segEnd - segStart) / 86400000 * r.pxPerDay) + Math.round(r.pxPerDay));
     var color = ROADMAP_COLORS[t.typologie] || 'var(--ft-indigo)';
-    var popupData = {titre: t.typologie || 'Tâche', texte: t.texte || '', debut: t.dateDebut || '', fin: t.dateFin || ''};
-    return '<div class="rm-timeline-row"><div class="rm-bar' + (openEnded ? ' rm-bar--open' : '') + '" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '">' + escapeHtml((t.texte || t.typologie || '').slice(0, 60)) + '</div></div>';
+    var titre = t.titre || t.typologie || 'Tâche';
+    var popupData = {titre: titre, typologie: t.typologie || '', texte: t.texte || '', debut: t.dateDebut || '', fin: t.dateFin || '', maj: t.derniereMaj || ''};
+    return '<div class="rm-timeline-row"><div class="rm-bar' + (openEnded ? ' rm-bar--open' : '') + '" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '" data-rm-bar-left="' + left + '" data-rm-bar-width="' + width + '">' +
+      '<span class="rm-bar-label">' + escapeHtml(titre.slice(0, 60)) + '</span>' +
+    '</div></div>';
   }).join('');
 
   return '<div class="rm-timeline-scroll"><div class="rm-timeline-inner" data-rm-inner style="width:' + r.totalWidth + 'px">' +
     '<div class="rm-timeline-today-line" style="left:' + r.todayOffsetPx + 'px"></div>' +
-    '<div class="rm-timeline-months">' + monthsHtml + '</div>' +
     '<div class="rm-timeline-rows">' + monthLinesHtml + rowsHtml + '</div>' +
   '</div></div>';
 }
 
-/* Navigation temporelle globale : cases mois/annee + barre fine, panoramique de toutes les frises a la fois */
+/* Navigation temporelle unique : cases mois/annee (etiquettes de la fenetre visible) + curseur en dessous */
 function renderRoadmapNav(){
   var r = roadmapRange;
   var nav = document.getElementById('roadmapNav');
-  var monthsHtml = r.monthLabels.map(function(label, i){
-    return '<button type="button" class="rm-nav-month-box' + (i === r.currentIdx ? ' rm-nav-month-box--today' : '') + '" data-rm-nav-month="' + i + '">' + label + '</button>';
-  }).join('');
   nav.innerHTML =
-    '<div class="rm-nav-months" id="rmNavMonths">' + monthsHtml + '</div>' +
+    '<div class="rm-nav-months" id="rmNavMonths"></div>' +
     '<div class="rm-nav-track-row">' +
-      '<input type="range" class="rm-nav-track" id="roadmapNavSlider" min="0" max="' + (r.monthStarts.length - 1) + '" step="1" value="' + r.currentIdx + '">' +
-      '<button type="button" class="btn btn--secondary btn--sm" id="roadmapNavToday">Aujourd\'hui</button>' +
+      '<input type="range" class="rm-nav-track" id="roadmapNavSlider" min="0" max="' + r.maxIdx + '" step="1" value="' + r.currentIdx + '">' +
+      '<button type="button" class="btn btn--secondary btn--sm" id="roadmapWindowToggle">Vue ' + (roadmapWindowSize === 6 ? '12 mois' : '6 mois') + '</button>' +
     '</div>';
 
-  function setActiveMonthBox(idx){
-    nav.querySelectorAll('.rm-nav-month-box').forEach(function(box, i){
-      box.classList.toggle('rm-nav-month-box--active', i === idx);
-    });
-    var activeBox = nav.querySelector('.rm-nav-month-box--active');
-    if (activeBox) activeBox.scrollIntoView({inline: 'center', block: 'nearest', behavior: 'smooth'});
+  function renderMonthBoxes(idx){
+    var boxesHtml = '';
+    for (var i = 0; i < roadmapWindowSize; i++) {
+      var mIdx = idx + i;
+      if (mIdx >= r.monthLabels.length) break;
+      boxesHtml += '<div class="rm-nav-month-box' + (mIdx === r.currentIdx ? ' rm-nav-month-box--today' : '') + '">' + r.monthLabels[mIdx] + '</div>';
+    }
+    document.getElementById('rmNavMonths').innerHTML = boxesHtml;
   }
   function goToIndex(idx){
     document.getElementById('roadmapNavSlider').value = idx;
-    setActiveMonthBox(idx);
+    renderMonthBoxes(idx);
     applyRoadmapScroll(r.monthStarts[idx]);
     updateRoadmapCounters();
   }
   document.getElementById('roadmapNavSlider').addEventListener('input', function(ev){
     goToIndex(parseInt(ev.target.value, 10));
   });
-  nav.querySelectorAll('[data-rm-nav-month]').forEach(function(box){
-    box.addEventListener('click', function(){ goToIndex(parseInt(box.dataset.rmNavMonth, 10)); });
+  document.getElementById('roadmapWindowToggle').addEventListener('click', function(){
+    roadmapWindowSize = roadmapWindowSize === 6 ? 12 : 6;
+    renderRoadmapBody();
   });
-  document.getElementById('roadmapNavToday').addEventListener('click', function(){ goToIndex(r.currentIdx); });
-  setActiveMonthBox(r.currentIdx);
-}
-function applyRoadmapScroll(px){
-  document.querySelectorAll('[data-rm-inner]').forEach(function(el){ el.style.transform = 'translateX(-' + px + 'px)'; });
+  renderMonthBoxes(r.currentIdx);
 }
 
-/* Fenetre actuellement affichee a l'ecran (6 mois max, ancree sur la position du curseur) */
+function applyRoadmapScroll(px){
+  roadmapCurrentPanPx = px;
+  document.querySelectorAll('[data-rm-inner]').forEach(function(el){ el.style.transform = 'translateX(-' + px + 'px)'; });
+  updateBarLabelPositions();
+}
+
+/* Le titre d'une tache reste lisible : il se cale sur le bord visible de la fenetre,
+   sans jamais depasser la fin de la barre. */
+function updateBarLabelPositions(){
+  document.querySelectorAll('.rm-timeline-scroll').forEach(function(scrollEl){
+    var viewportWidth = scrollEl.clientWidth;
+    scrollEl.querySelectorAll('.rm-bar').forEach(function(bar){
+      var barLeft = parseFloat(bar.dataset.rmBarLeft) || 0;
+      var barWidth = parseFloat(bar.dataset.rmBarWidth) || 0;
+      var label = bar.querySelector('.rm-bar-label');
+      if (!label) return;
+      var visLeft = barLeft - roadmapCurrentPanPx;
+      var visRight = visLeft + barWidth;
+      if (visRight <= 0 || visLeft >= viewportWidth) return; // barre hors champ, inutile de calculer
+      var clampLeft = Math.max(visLeft, 0);
+      var offsetWithinBar = clampLeft - visLeft;
+      var maxOffset = Math.max(0, barWidth - (label.offsetWidth || 40) - 10);
+      offsetWithinBar = Math.min(offsetWithinBar, maxOffset);
+      label.style.transform = offsetWithinBar > 0 ? ('translateX(' + offsetWithinBar + 'px)') : '';
+    });
+  });
+}
+
+/* Fenetre actuellement affichee a l'ecran (roadmapWindowSize mois, ancree sur la position du curseur) */
 function currentVisibleWindow(){
   var r = roadmapRange;
   var slider = document.getElementById('roadmapNavSlider');
   var idx = slider ? parseInt(slider.value, 10) : r.currentIdx;
   var visStart = r.monthDates[idx];
-  var endIdx = idx + 6;
+  var endIdx = idx + roadmapWindowSize;
   var visEnd = endIdx < r.monthDates.length ? r.monthDates[endIdx] : new Date(r.maxD.getTime() + 86400000);
   return {start: visStart, end: visEnd};
 }
@@ -1176,8 +1252,7 @@ function bindRoadmapInteractions(){
   document.querySelectorAll('.rm-domaine-head').forEach(function(head){
     head.addEventListener('click', function(){
       head.closest('.rm-domaine').classList.toggle('collapsed');
-      var slider = document.getElementById('roadmapNavSlider');
-      if (slider) applyRoadmapScroll(roadmapRange.monthStarts[parseInt(slider.value, 10)]);
+      applyRoadmapScroll(roadmapCurrentPanPx);
     });
   });
   document.querySelectorAll('[data-rm-task]').forEach(function(bar){
@@ -1187,6 +1262,7 @@ function bindRoadmapInteractions(){
       var popup = document.getElementById('rmTaskPopup');
       var periodeTxt = d.debut ? ('Du ' + d.debut + ' ' + (d.fin ? 'au ' + d.fin : '(en continu)')) : '';
       popup.innerHTML = '<h5>' + escapeHtml(d.titre) + '</h5>' +
+        (d.maj ? '<div class="rm-task-updated">Dernière mise à jour : ' + escapeHtml(d.maj) + '</div>' : '') +
         (d.texte ? '<div>' + richText(d.texte) + '</div>' : '') +
         (periodeTxt ? '<div class="rm-task-dates">' + escapeHtml(periodeTxt) + '</div>' : '');
       popup.classList.add('open');
