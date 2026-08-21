@@ -11,6 +11,8 @@
 <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script defer src="firebase-config.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 @font-face{font-family:'Marianne';src:url('fonts/Marianne-Light.woff2') format('woff2');font-weight:300;font-display:swap}
 @font-face{font-family:'Marianne';src:url('fonts/Marianne-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
@@ -186,6 +188,14 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .roadmap-legend-dot{width:11px;height:11px;border-radius:3px;flex:none}
 .roadmap-body{flex:1;overflow:auto;padding:16px 24px 40px}
 
+.roadmap-nav{display:flex;align-items:center;gap:12px;padding:10px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;background:var(--ft-sable)}
+.roadmap-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;flex-wrap:wrap}
+.roadmap-filter-label{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--ft-fg-2)}
+.rm-domaine-count{color:var(--ft-fg-3);font-weight:400;font-size:11.5px}
+.rm-domaine-count.rm-count-active{color:var(--ft-indigo);font-weight:700}
+.roadmap-nav input[type=range]{flex:1;max-width:420px;accent-color:var(--ft-indigo)}
+#roadmapNavLabel{font-weight:700;color:var(--ft-navy);min-width:90px}
+
 .rm-epic{border:1px solid var(--ft-border);border-radius:8px;margin-bottom:14px;overflow:hidden}
 .rm-epic-head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--ft-sable);cursor:pointer;font-weight:700;color:var(--ft-navy);font-size:14.5px}
 .rm-epic-head .rm-toggle{transition:transform .15s;flex:none}
@@ -201,13 +211,16 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-domaine.collapsed .rm-domaine-body{display:none}
 .rm-domaine-body{padding-left:6px}
 
-.rm-timeline-scroll{overflow-x:auto;border:1px solid var(--ft-border);border-radius:6px;background:#fff}
+.rm-timeline-scroll{overflow-x:auto;border:1px solid var(--ft-border);border-radius:6px;background:#fff;max-width:920px}
 .rm-timeline-months{display:flex;border-bottom:1px solid var(--ft-border);position:sticky;top:0;background:var(--ft-sable);z-index:1}
 .rm-timeline-month{flex:none;font-size:10.5px;font-weight:700;color:var(--ft-fg-3);text-align:center;padding:5px 0;border-right:1px solid var(--ft-border)}
+.rm-timeline-month--current{background:var(--ft-jaune-light);color:var(--ft-navy)}
 .rm-timeline-rows{position:relative}
 .rm-timeline-row{position:relative;height:34px;border-bottom:1px solid var(--ft-border)}
 .rm-timeline-row:last-child{border-bottom:none}
+.rm-timeline-today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--ft-rouge);z-index:2;pointer-events:none}
 .rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;display:flex;align-items:center;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.rm-bar--open{background-image:linear-gradient(to right,transparent calc(100% - 14px),rgba(255,255,255,.5) 100%)}
 .rm-bar:hover{filter:brightness(1.1)}
 .rm-no-date{font-size:12px;color:var(--ft-fg-3);padding:6px 0;font-style:italic}
 .rm-task-popup{display:none;position:fixed;z-index:3100;background:#fff;border:1px solid var(--ft-border);border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.2);padding:14px 16px;max-width:320px;font-size:12.5px}
@@ -316,6 +329,11 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
     <button type="button" class="roadmap-close" id="roadmapClose" aria-label="Fermer">✕ Fermer</button>
   </div>
   <div class="roadmap-legend" id="roadmapLegend"></div>
+  <div class="roadmap-nav" id="roadmapNav"></div>
+  <div class="roadmap-toolbar">
+    <label class="roadmap-filter-label"><input type="checkbox" id="roadmapFilterActive"> N'afficher que les travaux en cours sur la période affichée (6 mois max)</label>
+    <button type="button" class="btn btn--secondary btn--sm" id="roadmapExportPdf">📄 Exporter en PDF (paysage)</button>
+  </div>
   <div class="roadmap-body" id="roadmapBody">
     <div class="empty-hint">Chargement...</div>
   </div>
@@ -957,11 +975,6 @@ function rmParseDMY(s){
   var d = new Date(parseInt(y,10), parseInt(m[2],10) - 1, parseInt(m[1],10));
   return isNaN(d.getTime()) ? null : d;
 }
-function rmFmt(d){
-  if (!d) return '';
-  var mois = ['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
-  return d.getDate() + ' ' + mois[d.getMonth()];
-}
 
 function renderRoadmapLegend(){
   document.getElementById('roadmapLegend').innerHTML = ROADMAP_TYPOLOGIES.map(function(t){
@@ -969,61 +982,141 @@ function renderRoadmapLegend(){
   }).join('');
 }
 
+var ROADMAP_PX_PER_DAY = 5;
+var roadmapRange = null; // calculee une fois par ouverture : plage fixe M-12 a M+12
+
+function rmComputeRange(){
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  var minD = new Date(today.getFullYear(), today.getMonth() - 12, 1);
+  var maxD = new Date(today.getFullYear(), today.getMonth() + 13, 0); // dernier jour du mois M+12
+  var totalDays = Math.round((maxD - minD) / 86400000) + 1;
+  var totalWidth = totalDays * ROADMAP_PX_PER_DAY;
+  var moisAbbr = ['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var monthStarts = [];
+  var monthLabels = [];
+  var monthDates = [];
+  var currentIdx = 12;
+  var cur = new Date(minD.getFullYear(), minD.getMonth(), 1);
+  var idx = 0;
+  while (cur <= maxD) {
+    monthStarts.push(Math.round((cur - minD) / 86400000) * ROADMAP_PX_PER_DAY);
+    monthLabels.push(moisAbbr[cur.getMonth()] + ' ' + cur.getFullYear());
+    monthDates.push(new Date(cur.getFullYear(), cur.getMonth(), 1));
+    if (cur.getFullYear() === today.getFullYear() && cur.getMonth() === today.getMonth()) currentIdx = idx;
+    idx++;
+    cur = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+  }
+  return {
+    today: today, minD: minD, maxD: maxD, totalWidth: totalWidth,
+    monthStarts: monthStarts, monthLabels: monthLabels, monthDates: monthDates, currentIdx: currentIdx,
+    todayOffsetPx: Math.round((today - minD) / 86400000) * ROADMAP_PX_PER_DAY
+  };
+}
+
 function renderTimelineForDomaine(taches){
-  var withDates = taches.filter(function(t){ return rmParseDMY(t.devDebut) || rmParseDMY(t.recetteFin) || rmParseDMY(t.dateLivraison); });
+  var withDates = taches.filter(function(t){ return rmParseDMY(t.dateDebut); });
   if (!withDates.length) return '<div class="rm-no-date">Aucune date renseignée pour ces travaux.</div>';
 
-  var allDates = [];
-  withDates.forEach(function(t){
-    [t.devDebut, t.devFin, t.recetteDebut, t.recetteFin, t.dateLivraison].forEach(function(s){
-      var d = rmParseDMY(s);
-      if (d) allDates.push(d);
-    });
-  });
-  var minD = new Date(Math.min.apply(null, allDates));
-  var maxD = new Date(Math.max.apply(null, allDates));
-  minD = new Date(minD.getFullYear(), minD.getMonth(), 1);
-  maxD = new Date(maxD.getFullYear(), maxD.getMonth() + 1, 0);
-  var totalDays = Math.max(1, Math.round((maxD - minD) / 86400000));
-  var pxPerDay = 6;
-  var totalWidth = totalDays * pxPerDay;
-
-  var monthsHtml = '';
-  var cur = new Date(minD.getFullYear(), minD.getMonth(), 1);
-  var moisAbbr = ['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
-  while (cur <= maxD) {
-    var nextMonth = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
-    var daysInMonth = Math.round((Math.min(nextMonth, new Date(maxD.getTime() + 86400000)) - cur) / 86400000);
-    monthsHtml += '<div class="rm-timeline-month" style="width:' + (daysInMonth * pxPerDay) + 'px">' + moisAbbr[cur.getMonth()] + ' ' + cur.getFullYear() + '</div>';
-    cur = nextMonth;
-  }
-
-  var rowsHtml = withDates.map(function(t, idx){
-    var devD = rmParseDMY(t.devDebut), devF = rmParseDMY(t.devFin);
-    var recD = rmParseDMY(t.recetteDebut), recF = rmParseDMY(t.recetteFin);
-    var livr = rmParseDMY(t.dateLivraison);
-    var segStart = devD || recD || livr;
-    var segEnd = recF || devF || livr || segStart;
-    if (!segStart) return '';
-    var left = Math.round((segStart - minD) / 86400000) * pxPerDay;
-    var width = Math.max(18, Math.round((segEnd - segStart) / 86400000) * pxPerDay + pxPerDay);
-    var color = ROADMAP_COLORS[t.typologie] || 'var(--ft-indigo)';
-    var popupData = {titre: t.typologie || 'Tâche', texte: t.texte || '', dev: [t.devDebut, t.devFin], rec: [t.recetteDebut, t.recetteFin], livr: t.dateLivraison};
-    return '<div class="rm-timeline-row"><div class="rm-bar" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '">' + escapeHtml((t.texte || t.typologie || '').slice(0, 60)) + '</div></div>';
+  var r = roadmapRange;
+  var monthsHtml = r.monthLabels.map(function(label, i){
+    var w = (i < r.monthLabels.length - 1 ? r.monthStarts[i+1] : r.totalWidth) - r.monthStarts[i];
+    var isCurrent = i === r.currentIdx;
+    return '<div class="rm-timeline-month' + (isCurrent ? ' rm-timeline-month--current' : '') + '" style="width:' + w + 'px">' + label + '</div>';
   }).join('');
 
-  return '<div class="rm-timeline-scroll"><div style="width:' + totalWidth + 'px">' +
+  var rowsHtml = withDates.map(function(t){
+    var start = rmParseDMY(t.dateDebut);
+    var end = rmParseDMY(t.dateFin);
+    var openEnded = !end;
+    var segStart = start < r.minD ? r.minD : start;
+    var segEnd = end && end < r.maxD ? end : r.maxD;
+    var left = Math.round((segStart - r.minD) / 86400000) * ROADMAP_PX_PER_DAY;
+    var width = Math.max(18, Math.round((segEnd - segStart) / 86400000) * ROADMAP_PX_PER_DAY + ROADMAP_PX_PER_DAY);
+    var color = ROADMAP_COLORS[t.typologie] || 'var(--ft-indigo)';
+    var popupData = {titre: t.typologie || 'Tâche', texte: t.texte || '', debut: t.dateDebut || '', fin: t.dateFin || ''};
+    return '<div class="rm-timeline-row"><div class="rm-bar' + (openEnded ? ' rm-bar--open' : '') + '" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '">' + escapeHtml((t.texte || t.typologie || '').slice(0, 60)) + '</div></div>';
+  }).join('');
+
+  return '<div class="rm-timeline-scroll" data-rm-scroll><div style="width:' + r.totalWidth + 'px;position:relative">' +
+    '<div class="rm-timeline-today-line" style="left:' + r.todayOffsetPx + 'px"></div>' +
     '<div class="rm-timeline-months">' + monthsHtml + '</div>' +
     '<div class="rm-timeline-rows">' + rowsHtml + '</div>' +
   '</div></div>';
 }
 
+function renderRoadmapNav(){
+  var r = roadmapRange;
+  var nav = document.getElementById('roadmapNav');
+  nav.innerHTML = '<span>Navigation : </span><input type="range" id="roadmapNavSlider" min="0" max="' + (r.monthStarts.length - 1) + '" step="1" value="' + r.currentIdx + '">' +
+    '<span id="roadmapNavLabel">' + r.monthLabels[r.currentIdx] + '</span>' +
+    '<button type="button" class="btn btn--secondary btn--sm" id="roadmapNavToday">Aujourd\'hui</button>';
+  document.getElementById('roadmapNavSlider').addEventListener('input', function(ev){
+    var idx = parseInt(ev.target.value, 10);
+    document.getElementById('roadmapNavLabel').textContent = r.monthLabels[idx];
+    applyRoadmapScroll(r.monthStarts[idx]);
+    updateRoadmapCounters();
+  });
+  document.getElementById('roadmapNavToday').addEventListener('click', function(){
+    document.getElementById('roadmapNavSlider').value = r.currentIdx;
+    document.getElementById('roadmapNavLabel').textContent = r.monthLabels[r.currentIdx];
+    applyRoadmapScroll(r.monthStarts[r.currentIdx]);
+    updateRoadmapCounters();
+  });
+}
+function applyRoadmapScroll(px){
+  document.querySelectorAll('[data-rm-scroll]').forEach(function(el){ el.scrollLeft = px; });
+}
+
+/* Fenetre actuellement affichee a l'ecran (6 mois max, ancree sur la position du curseur) */
+function currentVisibleWindow(){
+  var r = roadmapRange;
+  var slider = document.getElementById('roadmapNavSlider');
+  var idx = slider ? parseInt(slider.value, 10) : r.currentIdx;
+  var visStart = r.monthDates[idx];
+  var endIdx = idx + 6;
+  var visEnd = endIdx < r.monthDates.length ? r.monthDates[endIdx] : new Date(r.maxD.getTime() + 86400000);
+  return {start: visStart, end: visEnd};
+}
+function taskOverlapsWindow(t, visStart, visEnd){
+  var start = rmParseDMY(t.dateDebut);
+  if (!start) return false;
+  var end = rmParseDMY(t.dateFin) || roadmapRange.maxD;
+  return start < visEnd && end >= visStart;
+}
+/* Filtre "travaux en cours sur la periode affichee" + compteur actifs/total par domaine */
+function updateRoadmapCounters(){
+  var win = currentVisibleWindow();
+  var filterOn = document.getElementById('roadmapFilterActive').checked;
+  var epics = (roadmapData && roadmapData.epics) || [];
+  epics.forEach(function(epic, ei){
+    var epicHasActive = false;
+    (epic.domaines || []).forEach(function(dom, di){
+      var taches = dom.taches || [];
+      var activeCount = taches.filter(function(t){ return taskOverlapsWindow(t, win.start, win.end); }).length;
+      if (activeCount > 0) epicHasActive = true;
+      var domEl = document.querySelector('[data-rm-domaine="' + ei + '-' + di + '"]');
+      if (!domEl) return;
+      var countEl = domEl.querySelector('.rm-domaine-count');
+      if (countEl) {
+        countEl.textContent = activeCount + ' actif' + (activeCount > 1 ? 's' : '') + ' sur la période / ' + taches.length + ' au total';
+        countEl.classList.toggle('rm-count-active', activeCount > 0);
+      }
+      domEl.style.display = (filterOn && activeCount === 0) ? 'none' : '';
+    });
+    var epicEl = document.querySelector('[data-rm-epic="' + ei + '"]');
+    if (epicEl) epicEl.style.display = (filterOn && !epicHasActive) ? 'none' : '';
+  });
+}
+
 function renderRoadmapBody(){
+  roadmapRange = rmComputeRange();
+  renderRoadmapNav();
   var epics = (roadmapData && roadmapData.epics) || [];
   var html = epics.map(function(epic, ei){
     var domainesHtml = (epic.domaines || []).map(function(dom, di){
       return '<div class="rm-domaine" data-rm-domaine="' + ei + '-' + di + '">' +
-        '<div class="rm-domaine-head"><span class="rm-toggle">▾</span>' + escapeHtml(dom.nom) + ' <span style="color:var(--ft-fg-3);font-weight:400">(' + (dom.taches||[]).length + ' travaux)</span></div>' +
+        '<div class="rm-domaine-head"><span class="rm-toggle">▾</span>' + escapeHtml(dom.nom) + ' <span class="rm-domaine-count"></span></div>' +
         '<div class="rm-domaine-body">' + renderTimelineForDomaine(dom.taches || []) + '</div>' +
       '</div>';
     }).join('');
@@ -1034,6 +1127,8 @@ function renderRoadmapBody(){
   }).join('');
   document.getElementById('roadmapBody').innerHTML = html || '<div class="empty-hint">Aucun élément dans la feuille de route.</div>';
   bindRoadmapInteractions();
+  applyRoadmapScroll(roadmapRange.monthStarts[roadmapRange.currentIdx]);
+  updateRoadmapCounters();
 }
 
 function bindRoadmapInteractions(){
@@ -1041,19 +1136,21 @@ function bindRoadmapInteractions(){
     head.addEventListener('click', function(){ head.closest('.rm-epic').classList.toggle('collapsed'); });
   });
   document.querySelectorAll('.rm-domaine-head').forEach(function(head){
-    head.addEventListener('click', function(){ head.closest('.rm-domaine').classList.toggle('collapsed'); });
+    head.addEventListener('click', function(){
+      head.closest('.rm-domaine').classList.toggle('collapsed');
+      var slider = document.getElementById('roadmapNavSlider');
+      if (slider) applyRoadmapScroll(roadmapRange.monthStarts[parseInt(slider.value, 10)]);
+    });
   });
   document.querySelectorAll('[data-rm-task]').forEach(function(bar){
     bar.addEventListener('mouseenter', function(){
       var d;
       try { d = JSON.parse(bar.getAttribute('data-rm-task')); } catch(e){ return; }
       var popup = document.getElementById('rmTaskPopup');
-      var devTxt = d.dev[0] ? ('Dev : ' + d.dev[0] + (d.dev[1] ? ' → ' + d.dev[1] : '')) : '';
-      var recTxt = d.rec[0] ? ('Recette : ' + d.rec[0] + (d.rec[1] ? ' → ' + d.rec[1] : '')) : '';
-      var livrTxt = d.livr ? ('Livraison estimée : ' + d.livr) : '';
+      var periodeTxt = d.debut ? ('Du ' + d.debut + ' ' + (d.fin ? 'au ' + d.fin : '(en continu)')) : '';
       popup.innerHTML = '<h5>' + escapeHtml(d.titre) + '</h5>' +
         (d.texte ? '<div>' + richText(d.texte) + '</div>' : '') +
-        '<div class="rm-task-dates">' + [devTxt, recTxt, livrTxt].filter(Boolean).map(escapeHtml).join('<br>') + '</div>';
+        (periodeTxt ? '<div class="rm-task-dates">' + escapeHtml(periodeTxt) + '</div>' : '');
       var rect = bar.getBoundingClientRect();
       popup.style.top = (rect.bottom + 8) + 'px';
       popup.style.left = Math.min(rect.left, window.innerWidth - 340) + 'px';
@@ -1083,6 +1180,60 @@ function closeRoadmap(){
 }
 document.getElementById('roadmapClose').addEventListener('click', closeRoadmap);
 document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') closeRoadmap(); });
+document.getElementById('roadmapFilterActive').addEventListener('change', updateRoadmapCounters);
+
+function exportRoadmapPdf(){
+  if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
+    alert("Le module d'export PDF n'a pas pu se charger. Vérifiez votre connexion et réessayez.");
+    return;
+  }
+  var btn = document.getElementById('roadmapExportPdf');
+  var filterCheckbox = document.getElementById('roadmapFilterActive');
+  var wasFilterOn = filterCheckbox.checked;
+  var collapsedEpics = Array.prototype.slice.call(document.querySelectorAll('.rm-epic.collapsed'));
+  var collapsedDomaines = Array.prototype.slice.call(document.querySelectorAll('.rm-domaine.collapsed'));
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Génération du PDF...';
+  filterCheckbox.checked = true;
+  updateRoadmapCounters();
+  collapsedEpics.forEach(function(el){ el.classList.remove('collapsed'); });
+  collapsedDomaines.forEach(function(el){ el.classList.remove('collapsed'); });
+
+  setTimeout(function(){
+    html2canvas(document.getElementById('roadmapBody'), {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
+      var jsPDF = window.jspdf.jsPDF;
+      var pdf = new jsPDF({orientation: 'landscape', unit: 'pt', format: 'a4'});
+      var pageWidth = pdf.internal.pageSize.getWidth();
+      var pageHeight = pdf.internal.pageSize.getHeight();
+      var imgWidth = pageWidth;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      var position = 0;
+      var imgData = canvas.toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      pdf.save('roadmap-rpe-' + new Date().toISOString().slice(0, 10) + '.pdf');
+    }).catch(function(){
+      alert("Une erreur est survenue pendant la génération du PDF.");
+    }).finally(function(){
+      filterCheckbox.checked = wasFilterOn;
+      collapsedEpics.forEach(function(el){ el.classList.add('collapsed'); });
+      collapsedDomaines.forEach(function(el){ el.classList.add('collapsed'); });
+      updateRoadmapCounters();
+      btn.disabled = false;
+      btn.textContent = '📄 Exporter en PDF (paysage)';
+    });
+  }, 50);
+}
+document.getElementById('roadmapExportPdf').addEventListener('click', exportRoadmapPdf);
+
 (function(){
   var popup = document.createElement('div');
   popup.id = 'rmTaskPopup';

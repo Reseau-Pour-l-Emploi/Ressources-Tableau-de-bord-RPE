@@ -284,7 +284,8 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
       <button class="btn btn--sm btn-save-floating" id="btnSaveRoadmap">💾 Enregistrer <span id="roadmapStatusFloating"></span></button>
       <div class="card" style="max-width:1100px">
         <h3 style="margin:0 0 10px">Feuille de route (roadmap)</h3>
-        <p class="form-hint" style="margin-top:0">Organisée en Epics (grands domaines), chacun divisé en sous-domaines, chacun contenant les travaux (tâches) en cours. Chaque tâche affiche une barre sur la frise chronologique publique si au moins une date est renseignée (JJ-MM-AAAA). Ajoutez, modifiez, supprimez ou réordonnez (▲/▼) à tous les niveaux.</p>
+        <p class="form-hint" style="margin-top:0">Organisée en Epics (grands domaines), chacun divisé en sous-domaines, chacun contenant les travaux (tâches) en cours. Ajoutez, modifiez, supprimez ou réordonnez (▲/▼) à tous les niveaux.</p>
+        <p class="form-hint" style="margin-top:0">Chaque tâche affiche une barre sur la frise chronologique publique dès qu'une <strong>date de début</strong> est renseignée (JJ-MM-AAAA). La <strong>date de fin</strong> peut être laissée vide : la tâche est alors considérée "en continu" et sa barre s'étend jusqu'au bord de la période affichée (12 mois avant / 12 mois après le mois en cours).</p>
         <div id="roadmapStatus" style="font-size:12.5px;margin:8px 0"></div>
         <div id="roadmapEditorRoot"></div>
         <button type="button" class="btn btn--secondary btn--sm" id="btnAddEpic" style="margin-top:10px">+ Ajouter un epic</button>
@@ -294,15 +295,6 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         </div>
       </div>
     </div>
-
-    <datalist id="rmTypologieList">
-      <option value="Cadrage / Conception">
-      <option value="Fonctionnalité / Évolution">
-      <option value="Interface utilisateur / Design">
-      <option value="Données / Ingénierie">
-      <option value="Sécurité &amp; Droits">
-      <option value="Accompagnement au changement">
-    </datalist>
   </div>
 </main>
 
@@ -1504,6 +1496,14 @@ document.getElementById('btnSaveSite2').addEventListener('click', saveSiteConten
 
 /* ==== Feuille de route (roadmap) : editeur imbrique Epic > Domaine > Tache ==== */
 function rmDomaine(nom){ return {nom: nom, taches: []}; }
+var ROADMAP_TYPOLOGIES = [
+  "Cadrage / Conception",
+  "Fonctionnalité / Évolution",
+  "Interface utilisateur / Design",
+  "Données / Ingénierie",
+  "Sécurité & Droits",
+  "Accompagnement au changement"
+];
 var DEFAULT_ROADMAP_ADMIN = {
   epics: [
     {nom: "Fiches action & Feuilles de route", domaines: [rmDomaine("Interface de saisie"), rmDomaine("Interface de consultation")]},
@@ -1555,12 +1555,11 @@ function renderRoadmapEditor(){
         var base = ei + '.domaines.' + di + '.taches.' + ti;
         return '<div class="rm-admin-tache">' +
           '<div class="rm-admin-tache-grid">' +
-            '<input class="edit-input" list="rmTypologieList" data-rpath="' + base + '.typologie" placeholder="Typologie" value="' + escapeHtml(t.typologie || '') + '">' +
-            rmField(base + '.dateLivraison', t.dateLivraison, 'Livraison estimée (JJ-MM-AAAA)') +
-            rmField(base + '.devDebut', t.devDebut, 'Début dev (JJ-MM-AAAA)') +
-            rmField(base + '.devFin', t.devFin, 'Fin dev (JJ-MM-AAAA)') +
-            rmField(base + '.recetteDebut', t.recetteDebut, 'Début recette (JJ-MM-AAAA)') +
-            rmField(base + '.recetteFin', t.recetteFin, 'Fin recette (JJ-MM-AAAA)') +
+            '<select class="edit-input" data-rpath="' + base + '.typologie">' +
+              ROADMAP_TYPOLOGIES.map(function(ty){ return '<option value="' + escapeHtml(ty) + '"' + (t.typologie === ty ? ' selected' : '') + '>' + escapeHtml(ty) + '</option>'; }).join('') +
+            '</select>' +
+            rmField(base + '.dateDebut', t.dateDebut, 'Date de début (JJ-MM-AAAA)') +
+            rmField(base + '.dateFin', t.dateFin, 'Date de fin (vide = en continu)') +
           '</div>' +
           rmField(base + '.texte', t.texte, 'Détail libre de la tâche...', 'textarea') +
           '<div class="rm-admin-row" style="margin-top:6px">' +
@@ -1626,7 +1625,7 @@ function bindRoadmapEditorEvents(root){
       var p = btn.dataset.rmAddTache.split(':').map(Number);
       var dom = roadmapAdminState.epics[p[0]].domaines[p[1]];
       dom.taches = dom.taches || [];
-      dom.taches.push({typologie: '', texte: '', dateLivraison: '', devDebut: '', devFin: '', recetteDebut: '', recetteFin: ''});
+      dom.taches.push({typologie: ROADMAP_TYPOLOGIES[0], texte: '', dateDebut: '', dateFin: ''});
       renderRoadmapEditor();
     });
   });
