@@ -154,7 +154,9 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 @media (max-width:600px){.filmstrip{padding:0}}
 .filmstrip-grid{padding:2px;align-items:start}
 .kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
-.kiosque-card{min-height:135px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:13px 15px;background:#fff;display:flex;flex-direction:column}
+.kiosque-card{min-height:135px;border:1px solid var(--ft-border);border-radius:5px 5px 0 0;border-bottom:none;padding:13px 15px;background:#fff;display:flex;flex-direction:column;position:relative}
+.kiosque-card--latest{border:2px solid var(--ft-jaune-dark);border-bottom:none;padding-top:19px}
+.kiosque-latest-tag{position:absolute;top:-11px;left:12px;background:var(--ft-jaune-dark);color:#fff;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 9px;border-radius:999px}
 .kiosque-card .kiosque-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex:none}
 .kiosque-card .item-date{font-size:10.5px;color:var(--ft-fg-3);font-weight:600}
 .kiosque-type{font-size:9.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;color:var(--ft-violet);background:var(--ft-violet-light);padding:1px 7px;border-radius:3px}
@@ -561,9 +563,10 @@ function kiosquePassedItems(items){
   });
 }
 
-function kiosqueCardHtml(it){
+function kiosqueCardHtml(it, isLatest){
   var data = {titre: it.titre, desc: it.description || '', liens: it.liens || [], meta: [it.date, it.type].filter(Boolean).join(' · ')};
-  return '<div class="tile-unit"><div class="kiosque-card">' +
+  return '<div class="tile-unit"><div class="kiosque-card' + (isLatest ? ' kiosque-card--latest' : '') + '">' +
+    (isLatest ? '<span class="kiosque-latest-tag">Dernier ajout</span>' : '') +
     '<div class="kiosque-top">' +
       (it.date ? '<span class="item-date">' + escapeHtml(it.date) + '</span>' : '<span></span>') +
       (it.type ? '<span class="kiosque-type">' + escapeHtml(it.type) + '</span>' : '') +
@@ -644,7 +647,9 @@ function renderKiosqueGrid(){
   if (kiosqueState.batch < 0) kiosqueState.batch = 0;
   var start = kiosqueState.batch * KIOSQUE_BATCH;
   var pageItems = filtered.slice(start, start + KIOSQUE_BATCH);
-  grid.innerHTML = pageItems.length ? pageItems.map(kiosqueCardHtml).join('') : '<div class="empty-hint">Rien à afficher pour ce filtre.</div>';
+  grid.innerHTML = pageItems.length
+    ? pageItems.map(function(it, idx){ return kiosqueCardHtml(it, start === 0 && idx === 0); }).join('')
+    : '<div class="empty-hint">Rien à afficher pour ce filtre.</div>';
   renderFilmstripNav('kiosque', totalBatches, kiosqueState.batch, function(page){ kiosqueState.batch = page; renderKiosqueGrid(); });
 }
 
