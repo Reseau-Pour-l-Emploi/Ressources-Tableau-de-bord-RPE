@@ -1193,6 +1193,23 @@ var DEFAULT_SITE_CONTENT = {
    champs titre/description des vignettes. Insere une syntaxe legere (**gras**, *italique*,
    __souligne__, "- " en debut de ligne = puce) interpretee a l'affichage public (voir richText
    dans index.html). */
+function parseDMYAdmin(dateStr){
+  var m = /^(\d{1,2})[-\/](\d{1,2})[-\/](\d{2,4})$/.exec((dateStr || '').trim());
+  if (!m) return null;
+  var y = m[3].length === 2 ? '20' + m[3] : m[3];
+  var d = new Date(parseInt(y,10), parseInt(m[2],10) - 1, parseInt(m[1],10));
+  return isNaN(d.getTime()) ? null : d;
+}
+function sortByDateDesc(items){
+  return items.slice().sort(function(a, b){
+    var da = parseDMYAdmin(a.date), db = parseDMYAdmin(b.date);
+    if (!da && !db) return 0;
+    if (!da) return 1;
+    if (!db) return -1;
+    return db - da;
+  });
+}
+
 function attachFormatToolbar(fieldEl, withLineBreakAndBullet){
   function wrapSelection(marker){
     var start = fieldEl.selectionStart || 0;
@@ -1390,7 +1407,7 @@ function loadSiteContent(){
     repeaters.textes = createRepeater('rep_textes', (c.intro && c.intro.textes) || [], ['titre','url']);
     repeaters.agenda = createRepeater('rep_agenda', c.agenda || [], ['titre','date','description','liens']);
     repeaters.actualites = createRepeater('rep_actualites', c.actualites || [], ['titre','date','description','liens']);
-    repeaters.kiosque = createRepeater('rep_kiosque', c.kiosque || [], ['titre','date','type','description','liens']);
+    repeaters.kiosque = createRepeater('rep_kiosque', sortByDateDesc(c.kiosque || []), ['titre','date','type','description','liens']);
     repeaters.ressources = createRepeater('rep_ressources', c.ressources || [], ['titre','description','liens']);
     repeaters.footer_liens = createRepeater('rep_footer_liens', c.footer_liens || [], ['titre','url','colonne']);
 
@@ -1412,7 +1429,7 @@ function saveSiteContent(){
     },
     agenda: repeaters.agenda.collect(),
     actualites: repeaters.actualites.collect(),
-    kiosque: repeaters.kiosque.collect(),
+    kiosque: sortByDateDesc(repeaters.kiosque.collect()),
     ressources: repeaters.ressources.collect(),
     contact: {
       texte: document.getElementById('site_contact_texte').value.trim(),
@@ -1434,6 +1451,7 @@ function saveSiteContent(){
   db.collection('site_content').doc('homepage').set({data: content}).then(function(){
     s1.textContent = s2.textContent = '✅ Contenu enregistré.';
     if (s3) s3.textContent = '✅';
+    repeaters.kiosque = createRepeater('rep_kiosque', content.kiosque, ['titre','date','type','description','liens']);
     setTimeout(function(){ s1.textContent = s2.textContent = ''; if (s3) s3.textContent = ''; }, 2500);
   }).catch(function(err){
     s1.textContent = s2.textContent = '❌ Échec : ' + (err.message || err);
