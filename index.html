@@ -189,14 +189,14 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .roadmap-body{flex:1;overflow:auto;padding:16px 24px 40px}
 
 .roadmap-nav{display:flex;flex-direction:column;gap:8px;padding:12px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;background:var(--ft-sable)}
-.rm-nav-months{display:flex;gap:4px}
+.rm-nav-row{display:flex;align-items:center;gap:10px}
+.rm-nav-months{display:flex;gap:4px;flex:1}
 .rm-nav-month-box{flex:1;font-family:inherit;font-size:11px;font-weight:600;color:var(--ft-fg-2);background:#fff;border:1px solid var(--ft-border);border-radius:5px;padding:7px 4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rm-nav-month-box--today{background:var(--ft-jaune-light);border-color:var(--ft-jaune-dark);color:var(--ft-navy);font-weight:700}
-.rm-nav-toggle-row{display:flex;justify-content:flex-end}
-.rm-nav-track{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:999px;background:var(--ft-gray-300);outline:none;cursor:pointer;margin:2px 0}
-.rm-nav-track::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:var(--ft-indigo);border:2px solid #fff;box-shadow:0 0 0 1px var(--ft-indigo);cursor:pointer}
-.rm-nav-track::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:var(--ft-indigo);border:2px solid #fff;box-shadow:0 0 0 1px var(--ft-indigo);cursor:pointer}
-.rm-nav-track::-moz-range-track{height:4px;border-radius:999px;background:var(--ft-gray-300)}
+.rm-nav-arrow{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--ft-border);background:#fff;color:var(--ft-navy);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.rm-nav-arrow:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
+.rm-nav-arrow:disabled{opacity:.35;cursor:default;pointer-events:none}
+.rm-nav-toggle-row{display:flex;justify-content:flex-end;margin-top:8px}
 .roadmap-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;flex-wrap:wrap}
 .roadmap-filter-label{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--ft-fg-2)}
 .rm-domaine-count{color:var(--ft-fg-3);font-weight:400;font-size:11.5px}
@@ -1117,11 +1117,16 @@ function renderRoadmapNav(){
   var r = roadmapRange;
   var nav = document.getElementById('roadmapNav');
   nav.innerHTML =
-    '<div class="rm-nav-months" id="rmNavMonths"></div>' +
-    '<input type="range" class="rm-nav-track" id="roadmapNavSlider" min="0" max="' + r.maxIdx + '" step="1" value="' + r.currentIdx + '">' +
+    '<div class="rm-nav-row">' +
+      '<button type="button" class="rm-nav-arrow" id="roadmapNavPrev" aria-label="Mois précédent">‹</button>' +
+      '<div class="rm-nav-months" id="rmNavMonths"></div>' +
+      '<button type="button" class="rm-nav-arrow" id="roadmapNavNext" aria-label="Mois suivant">›</button>' +
+    '</div>' +
     '<div class="rm-nav-toggle-row">' +
       '<button type="button" class="btn btn--secondary btn--sm" id="roadmapWindowToggle">Vue ' + (roadmapWindowSize === 6 ? '12 mois' : '6 mois') + '</button>' +
     '</div>';
+
+  var currentStart = r.currentIdx;
 
   function renderMonthBoxes(idx){
     var boxesHtml = '';
@@ -1131,21 +1136,22 @@ function renderRoadmapNav(){
       boxesHtml += '<div class="rm-nav-month-box' + (mIdx === r.currentIdx ? ' rm-nav-month-box--today' : '') + '">' + r.monthLabels[mIdx] + '</div>';
     }
     document.getElementById('rmNavMonths').innerHTML = boxesHtml;
+    document.getElementById('roadmapNavPrev').disabled = idx <= 0;
+    document.getElementById('roadmapNavNext').disabled = idx >= r.maxIdx;
   }
   function goToIndex(idx){
-    document.getElementById('roadmapNavSlider').value = idx;
-    renderMonthBoxes(idx);
-    applyRoadmapScroll(r.monthStarts[idx]);
+    currentStart = Math.max(0, Math.min(idx, r.maxIdx));
+    renderMonthBoxes(currentStart);
+    applyRoadmapScroll(r.monthStarts[currentStart]);
     updateRoadmapCounters();
   }
-  document.getElementById('roadmapNavSlider').addEventListener('input', function(ev){
-    goToIndex(parseInt(ev.target.value, 10));
-  });
+  document.getElementById('roadmapNavPrev').addEventListener('click', function(){ goToIndex(currentStart - 1); });
+  document.getElementById('roadmapNavNext').addEventListener('click', function(){ goToIndex(currentStart + 1); });
   document.getElementById('roadmapWindowToggle').addEventListener('click', function(){
     roadmapWindowSize = roadmapWindowSize === 6 ? 12 : 6;
     renderRoadmapBody();
   });
-  renderMonthBoxes(r.currentIdx);
+  goToIndex(r.currentIdx);
 }
 
 function applyRoadmapScroll(px){
