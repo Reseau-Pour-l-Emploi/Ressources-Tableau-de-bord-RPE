@@ -1145,6 +1145,7 @@ function renderRoadmapNav(){
     applyRoadmapScroll(r.monthStarts[currentStart]);
     updateRoadmapCounters();
   }
+  roadmapStepMonth = function(delta){ goToIndex(currentStart + delta); };
   document.getElementById('roadmapNavPrev').addEventListener('click', function(){ goToIndex(currentStart - 1); });
   document.getElementById('roadmapNavNext').addEventListener('click', function(){ goToIndex(currentStart + 1); });
   document.getElementById('roadmapWindowToggle').addEventListener('click', function(){
@@ -1308,6 +1309,31 @@ function closeRoadmap(){
   document.getElementById('rmTaskPopup').classList.remove('open');
 }
 document.getElementById('roadmapClose').addEventListener('click', closeRoadmap);
+
+/* Navigation tactile mobile : glisser horizontalement sur la page fait avancer/reculer d'un mois.
+   Ne se declenche que pour un geste nettement horizontal, pour ne jamais gener le defilement
+   vertical normal du corps de la roadmap ni les taps sur les boutons/barres/liens. */
+var roadmapStepMonth = null;
+(function(){
+  var touchStartX = 0, touchStartY = 0, touchHandled = false;
+  var SWIPE_THRESHOLD = 55;
+  var overlay = document.getElementById('roadmapOverlay');
+  overlay.addEventListener('touchstart', function(ev){
+    if (ev.touches.length !== 1) return;
+    touchStartX = ev.touches[0].clientX;
+    touchStartY = ev.touches[0].clientY;
+    touchHandled = false;
+  }, {passive: true});
+  overlay.addEventListener('touchend', function(ev){
+    if (touchHandled || !roadmapStepMonth) return;
+    var dx = ev.changedTouches[0].clientX - touchStartX;
+    var dy = ev.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+      touchHandled = true;
+      roadmapStepMonth(dx < 0 ? 1 : -1);
+    }
+  }, {passive: true});
+})();
 document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') closeRoadmap(); });
 document.getElementById('roadmapFilterActive').addEventListener('change', updateRoadmapCounters);
 
