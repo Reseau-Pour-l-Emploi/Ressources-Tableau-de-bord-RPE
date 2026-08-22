@@ -95,7 +95,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 @media (max-width:960px){.side-col{position:static}}
 
 /* ==== Sections generiques : sobre, sans ombre, bordure fine ==== */
-.section{background:var(--ft-white);border:1px solid var(--ft-border);border-radius:10px;padding:22px 24px;margin-bottom:22px;box-shadow:var(--sh-sm)}
+.section{background:var(--ft-white);border:1px solid var(--ft-border);border-radius:10px;padding:22px 16px;margin-bottom:22px;box-shadow:var(--sh-sm)}
 .section-tinted-actu{background:var(--ft-bleu-light)}
 .section-tinted-kiosque{background:var(--ft-violet-light)}
 .section-tinted-res{background:var(--ft-jaune-light)}
@@ -152,7 +152,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 /* ==== Le Kiosque : filtre + carrousel style SharePoint (fleches laterales + points) ==== */
 .filmstrip-filter{display:block;margin-bottom:14px;max-width:260px;padding:8px 10px;font:inherit;font-size:12.5px;border:1px solid var(--ft-border);border-radius:4px;background:#fff}
-.filmstrip{position:relative;padding:0 40px}
+.filmstrip{position:relative;padding:0 28px}
 @media (max-width:600px){.filmstrip{padding:0}}
 .filmstrip-grid{padding:2px}
 .kiosque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -250,7 +250,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .section-head-row h3{margin:0}
 .section-head-row .filmstrip-filter{margin-bottom:0;max-width:220px}
 
-.tile-unit{display:flex;flex-direction:column;height:100%}
+.tile-unit{display:flex;flex-direction:column;height:100%;width:100%;min-width:0}
 [data-tile]{cursor:pointer}
 .tile-roadmap-btn{align-self:flex-start;margin-top:8px;background:var(--ft-navy);border:none;color:#fff;font-weight:600;font-size:11px;padding:6px 13px;border-radius:999px;cursor:pointer;font-family:inherit}
 .tile-roadmap-btn:hover{background:var(--ft-indigo-dark)}
