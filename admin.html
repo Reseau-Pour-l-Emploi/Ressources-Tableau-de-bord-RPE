@@ -561,6 +561,8 @@ function readForm(div){
         var idx = l.indexOf(':');
         return idx === -1 ? {valeur:l, regle:''} : {valeur:l.slice(0,idx).trim(), regle:l.slice(idx+1).trim()};
       }) : null;
+    } else if (key === 'definitions_par_page') {
+      champs[key] = parseDefinitionsParPageCell(val);
     } else {
       champs[key] = val;
     }
@@ -1402,7 +1404,13 @@ function createRepeater(containerId, itemsInitial, fields){
   render();
 
   return {
-    addItem: function(){ syncAllRows(); state.push({titre:'', date:'', type:'', description:'', url:'', liens: fields.indexOf('liens') > -1 ? [] : undefined}); render(); },
+    addItem: function(){
+      syncAllRows();
+      var item = {titre: '', date: '', type: '', description: '', url: ''};
+      if (fields.indexOf('liens') > -1) item.liens = [];
+      state.push(item);
+      render();
+    },
     collect: function(){
       var rows = container.querySelectorAll('.repeater-row');
       rows.forEach(function(row, idx){
@@ -1842,6 +1850,10 @@ function renderEditForm(id){
 
   html += '<div class="edit-section-label">Définition</div>' +
     '<textarea class="edit-textarea" data-f="definition" placeholder="Définition en langage non technique">' + escapeHtml(fmt(c.definition)) + '</textarea>';
+
+  html += '<div class="edit-section-label">Définitions par page (si différentes selon la page - une par ligne, format "Page : définition")</div>' +
+    '<textarea class="edit-textarea" data-f="definitions_par_page" placeholder="Accueil : définition spécifique à la page Accueil&#10;Fiches action : définition spécifique à cette page...">' + escapeHtml(formatDefinitionsParPageForExport(c)) + '</textarea>' +
+    '<p class="form-hint" style="margin-top:0">Laissez vide si la définition générale ci-dessus s\'applique partout. Une ligne = une page ; tout ce qui suit le premier ":" est la définition de cette page.</p>';
 
   html += '<div class="edit-section-label" data-role="modalites-label">Modalités (Valeur : règle, une par ligne)</div>' +
     '<textarea class="edit-textarea" data-f="modalites" data-role="modalites">' + escapeHtml(fmt(c.modalites)) + '</textarea>';

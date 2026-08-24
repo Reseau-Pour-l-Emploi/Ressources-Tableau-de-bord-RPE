@@ -300,6 +300,10 @@ form.contrib textarea{min-height:64px;resize:vertical}
       <label for="f_definition">Définition (en langage non technique)</label>
       <textarea  id="f_definition" required></textarea>
 
+      <label for="f_definitions_par_page">Définitions par page (si différentes selon la page - facultatif, une par ligne, format "Page : définition")</label>
+      <textarea id="f_definitions_par_page" placeholder="Accueil : définition spécifique à la page Accueil"></textarea>
+      <div class="form-hint" style="margin-top:-8px">Laissez vide si la définition ci-dessus s'applique partout.</div>
+
       <div id="block_modalites">
         <label for="f_modalites">Modalités (dimension à valeurs fixes) - une par ligne, format "Valeur : explication" (facultatif)</label>
         <textarea  id="f_modalites"></textarea>
@@ -1219,6 +1223,7 @@ function openForm(id){
   document.getElementById('f_categorie').value = e ? (e.categorie||'') : '';
   document.getElementById('f_libelle').value = e ? e.libelle : '';
   document.getElementById('f_definition').value = e ? (e.definition||'') : '';
+  document.getElementById('f_definitions_par_page').value = e ? formatDefinitionsParPageForExport(e) : '';
   document.getElementById('f_modalites').value = e && e.modalites ? e.modalites.map(function(m){ return m.valeur + ' : ' + (m.regle||''); }).join('\n') : '';
   document.getElementById('f_periode').value = e ? (e.periode_calcul||'') : '';
   document.getElementById('f_cas_usage').value = e ? (e.cas_usage||'') : '';
@@ -1247,6 +1252,18 @@ function parseModalites(text){
     if (idx === -1) return {valeur: l, regle: ''};
     return {valeur: l.slice(0, idx).trim(), regle: l.slice(idx+1).trim()};
   });
+}
+
+function parseDefinitionsParPage(text){
+  var lines = String(text || '').split('\n').map(function(l){ return l.trim(); }).filter(Boolean);
+  if (!lines.length) return null;
+  var out = {};
+  lines.forEach(function(l){
+    var idx = l.indexOf(':');
+    if (idx === -1) return;
+    out[l.slice(0, idx).trim()] = l.slice(idx+1).trim();
+  });
+  return Object.keys(out).length ? out : null;
 }
 
 function showToast(msg){
@@ -1599,6 +1616,7 @@ document.getElementById('contribForm').addEventListener('submit', function(ev){
   var champs = {
     libelle: document.getElementById('f_libelle').value.trim(),
     definition: document.getElementById('f_definition').value.trim(),
+    definitions_par_page: parseDefinitionsParPage(document.getElementById('f_definitions_par_page').value),
     modalites: type === 'mesure' ? null : parseModalites(document.getElementById('f_modalites').value),
     cas_usage: document.getElementById('f_cas_usage').value.trim(),
     pages: selectedValues(document.getElementById('f_pages')),
