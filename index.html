@@ -139,6 +139,12 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .contact-note a{color:#fff}
 
 /* ==== Actualites : grille de 3 vignettes ==== */
+.actu-featured{position:relative;overflow:hidden;white-space:nowrap;background:linear-gradient(135deg,var(--ft-navy),var(--ft-indigo));color:#fff;border-radius:8px;padding:12px 18px;margin-bottom:12px;font-size:13.5px;font-weight:600;box-shadow:0 3px 10px rgba(13,20,64,.25)}
+.actu-featured-inner{display:inline-block}
+.actu-featured a{color:var(--ft-jaune);text-decoration:underline}
+.actu-featured.rm-scrolling .actu-featured-inner{padding-left:100%;animation-name:actu-marquee;animation-timing-function:linear;animation-iteration-count:infinite}
+.actu-featured.rm-scrolling:hover .actu-featured-inner{animation-play-state:paused}
+@keyframes actu-marquee{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 .actu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media (max-width:760px){.actu-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.actu-grid{grid-template-columns:1fr}}
@@ -427,6 +433,10 @@ var DEFAULT_CONTENT = {
     {titre: "⚠️ Anomalies détectées", date: "", description: "", liens: []},
     {titre: "🗺️ Roadmap produit", date: "", description: "Consultez le détail des travaux en cours et à venir sur le tableau de bord RPE.", liens: []}
   ],
+  actualite_une: {
+    active: true,
+    texte: "📣 Actualité à la une : participez à l'enrichissement du glossaire en quelques secondes, c'est possible. Rendez-vous dans le [Glossaire](https://reseau-pour-l-emploi.github.io/Ressources-Tableau-de-bord-RPE/glossaire.html)..."
+  },
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
     {titre: "Evolutions", date: "10-07-2026", type: "Webinaire", liens: [{label: "🎬 Replay", url: "https://tube.numerique.gouv.fr/w/69gCz8buZNhi1vdicYsrNz"}, {label: "📝 Synthèse", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -554,6 +564,7 @@ function richInline(s){
   esc = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   esc = esc.replace(/__(.+?)__/g, '<u>$1</u>');
   esc = esc.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  esc = esc.replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   return esc;
 }
 function richText(s){
@@ -633,6 +644,22 @@ function isRoadmapCard(titre){
   var t = (titre || '').toLowerCase();
   return t.indexOf('roadmap') > -1 || t.indexOf('backlog') > -1;
 }
+function renderActualiteUne(une){
+  if (!une || !une.active || !une.texte) return '';
+  return '<div class="actu-featured" id="actuFeatured"><span class="actu-featured-inner" id="actuFeaturedInner">' + richText(une.texte) + '</span></div>';
+}
+function initActuFeaturedMarquee(){
+  var wrap = document.getElementById('actuFeatured');
+  var inner = document.getElementById('actuFeaturedInner');
+  if (!wrap || !inner) return;
+  if (inner.scrollWidth > wrap.clientWidth) {
+    var speedPxPerSec = 70;
+    var duration = (wrap.clientWidth + inner.scrollWidth) / speedPxPerSec;
+    inner.style.animationDuration = duration.toFixed(1) + 's';
+    wrap.classList.add('rm-scrolling');
+  }
+}
+
 function renderActualites(items){
   if (!items || !items.length) return '<div class="empty-hint">Rien à afficher pour le moment.</div>';
   var cards = items.map(function(it){
@@ -943,7 +970,7 @@ function renderPage(content){
 
   // Colonne principale
   html += '<div class="main-col">';
-  html += '<div class="section section-tinted-actu"><h3>📢 Actualités</h3>' + renderActualites(c.actualites) + '</div>';
+  html += '<div class="section section-tinted-actu"><h3>📢 Actualités</h3>' + renderActualiteUne(c.actualite_une) + renderActualites(c.actualites) + '</div>';
   html += '<div class="section section-tinted-kiosque" id="sec-kiosque"><div class="section-head-row"><h3>🗞️ Le Kiosque</h3>' + renderKiosqueFilter(c.kiosque) + '</div>' + renderKiosque(c.kiosque) + '</div>';
   html += '<div class="section section-tinted-res"><h3>📚 Ressources complémentaires</h3>' + renderRessources(c.ressources) + '</div>';
   html += '</div>';
@@ -994,6 +1021,7 @@ function renderPage(content){
   bindKiosque(main);
   bindRessources(main);
   bindNewsletterForm(main);
+  initActuFeaturedMarquee();
 }
 
 /* ==== Roadmap : popup plein ecran, arborescence Epic > Domaine > Tache + frise chronologique ==== */

@@ -233,6 +233,13 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <div id="rep_agenda"></div>
         <button type="button" class="btn btn--secondary btn--sm" id="add_agenda">+ Ajouter un élément d'agenda</button>
 
+        <div class="edit-section-label">Actualité à la une (bandeau défilant en pleine largeur, au-dessus des 3 vignettes)</div>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;margin-bottom:6px">
+          <input type="checkbox" id="site_une_active"> Afficher le bandeau
+        </label>
+        <textarea class="edit-textarea" id="site_une_texte" placeholder="📣 Actualité à la une : ..."></textarea>
+        <p class="form-hint" style="margin-top:0">Pour insérer un lien : <code>[texte du lien](https://...)</code>. Cette vignette tient sur une seule ligne ; si le texte est trop long pour la largeur de la page, il défile automatiquement (sans retour à la ligne).</p>
+
         <div class="edit-section-label">Actualités (fil d'actualité)</div>
         <div id="rep_actualites"></div>
         <button type="button" class="btn btn--secondary btn--sm" id="add_actualites">+ Ajouter une actualité</button>
@@ -1182,6 +1189,10 @@ var DEFAULT_SITE_CONTENT = {
     {titre: "⚠️ Anomalies détectées", date: "", description: "", liens: []},
     {titre: "🗺️ Roadmap produit", date: "", description: "Consultez le détail des travaux en cours et à venir sur le tableau de bord RPE.", liens: []}
   ],
+  actualite_une: {
+    active: true,
+    texte: "📣 Actualité à la une : participez à l'enrichissement du glossaire en quelques secondes, c'est possible. Rendez-vous dans le [Glossaire](https://reseau-pour-l-emploi.github.io/Ressources-Tableau-de-bord-RPE/glossaire.html)..."
+  },
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
     {titre: "Evolutions", date: "10-07-2026", type: "Webinaire", liens: [{label: "🎬 Replay", url: "https://tube.numerique.gouv.fr/w/69gCz8buZNhi1vdicYsrNz"}, {label: "📝 Synthèse", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -1246,7 +1257,7 @@ function sortByDateDesc(items){
   });
 }
 
-function attachFormatToolbar(fieldEl, withLineBreakAndBullet){
+function attachFormatToolbar(fieldEl, withLineBreakAndBullet, withLink){
   function wrapSelection(marker){
     var start = fieldEl.selectionStart || 0;
     var end = fieldEl.selectionEnd || 0;
@@ -1265,6 +1276,22 @@ function attachFormatToolbar(fieldEl, withLineBreakAndBullet){
     btn.addEventListener('click', function(){ wrapSelection(b[2]); });
     toolbar.appendChild(btn);
   });
+  if (withLink) {
+    var linkBtn = document.createElement('button');
+    linkBtn.type = 'button'; linkBtn.className = 'format-btn'; linkBtn.title = 'Insérer un lien'; linkBtn.textContent = '🔗';
+    linkBtn.addEventListener('click', function(){
+      var start = fieldEl.selectionStart || 0;
+      var end = fieldEl.selectionEnd || 0;
+      var val = fieldEl.value;
+      var selected = val.slice(start, end) || 'texte du lien';
+      var inserted = '[' + selected + '](https://...)';
+      fieldEl.value = val.slice(0, start) + inserted + val.slice(end);
+      fieldEl.focus();
+      fieldEl.selectionStart = start + selected.length + 3;
+      fieldEl.selectionEnd = fieldEl.selectionStart + 8;
+    });
+    toolbar.appendChild(linkBtn);
+  }
   if (withLineBreakAndBullet) {
     var brBtn = document.createElement('button');
     brBtn.type = 'button'; brBtn.className = 'format-btn'; brBtn.title = 'Saut de ligne'; brBtn.textContent = '↵';
@@ -1444,6 +1471,12 @@ function loadSiteContent(){
     document.getElementById('site_contact_email').value = (c.contact && c.contact.email_support) || '';
     document.getElementById('site_eco_lettre').value = (c.ecoindex && c.ecoindex.lettre) || '';
     document.getElementById('site_eco_url').value = (c.ecoindex && c.ecoindex.url) || '';
+    document.getElementById('site_une_active').checked = !!(c.actualite_une && c.actualite_une.active);
+    document.getElementById('site_une_texte').value = (c.actualite_une && c.actualite_une.texte) || '';
+    if (!document.getElementById('site_une_texte').dataset.toolbarAttached) {
+      attachFormatToolbar(document.getElementById('site_une_texte'), false, true);
+      document.getElementById('site_une_texte').dataset.toolbarAttached = '1';
+    }
 
     repeaters.videos = createRepeater('rep_videos', (c.intro && c.intro.videos) || [], ['titre','url']);
     repeaters.textes = createRepeater('rep_textes', (c.intro && c.intro.textes) || [], ['titre','url']);
@@ -1471,6 +1504,10 @@ function saveSiteContent(){
     },
     agenda: repeaters.agenda.collect(),
     actualites: repeaters.actualites.collect(),
+    actualite_une: {
+      active: document.getElementById('site_une_active').checked,
+      texte: document.getElementById('site_une_texte').value.trim()
+    },
     kiosque: sortByDateDesc(repeaters.kiosque.collect()),
     ressources: repeaters.ressources.collect(),
     contact: {
