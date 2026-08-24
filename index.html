@@ -214,6 +214,25 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-nav-arrow:disabled{opacity:.35;cursor:default;pointer-events:none}
 .rm-nav-toggle-row{display:flex;justify-content:flex-end;margin-top:8px}
 .roadmap-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 24px;border-bottom:1px solid var(--ft-border);flex:none;font-size:12px;flex-wrap:wrap}
+
+.rm-export-dialog-overlay{position:fixed;inset:0;background:rgba(13,20,64,.55);z-index:3200;display:flex;align-items:center;justify-content:center;padding:20px}
+.rm-export-dialog{background:#fff;border-radius:8px;padding:22px;max-width:420px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:var(--sh-md)}
+.rm-export-dialog h4{margin:0 0 6px;font-size:15px;color:var(--ft-navy)}
+.rm-export-checklist{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.rm-export-check{display:flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer}
+.rm-export-dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+
+/* Mise en page dediee a l'export PDF (hors ecran, non affectee par le panoramique) */
+.rm-print-root{position:fixed;left:-99999px;top:0;width:1100px;background:#fff;padding:28px;font-family:var(--ft-font);color:var(--ft-fg-1)}
+.rm-print-root h2{margin:0 0 4px;font-size:20px;color:var(--ft-navy)}
+.rm-print-period{margin:0 0 20px;font-size:12.5px;color:var(--ft-fg-3)}
+.rm-print-epic{margin-bottom:22px}
+.rm-print-epic h3{font-size:15px;color:var(--ft-navy);border-bottom:2px solid var(--ft-indigo);padding-bottom:5px;margin:0 0 10px}
+.rm-print-domaine{margin-bottom:14px}
+.rm-print-domaine-title{display:flex;align-items:center;gap:7px;font-weight:700;font-size:13px;margin-bottom:6px}
+.rm-print-table{width:100%;border-collapse:collapse;font-size:12px}
+.rm-print-table th{text-align:left;background:var(--ft-sable);padding:6px 8px;border:1px solid var(--ft-border)}
+.rm-print-table td{padding:6px 8px;border:1px solid var(--ft-border)}
 .roadmap-filter-label{display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--ft-fg-2)}
 .rm-domaine-count{color:var(--ft-fg-3);font-weight:400;font-size:11.5px}
 .rm-domaine-count.rm-count-active{color:var(--ft-indigo);font-weight:700}
@@ -244,6 +263,13 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-timeline-today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--ft-rouge);z-index:2;pointer-events:none}
 .rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;overflow:hidden;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15);z-index:2}
 .rm-bar-label{display:inline-block;white-space:nowrap;padding:0 8px;line-height:24px;transition:transform .1s linear}
+.rm-bar-edge-arrow{display:none;position:absolute;top:0;height:24px;line-height:24px;font-size:9px;color:#fff;padding:0 3px;z-index:3;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.rm-bar-edge-arrow--start{left:1px}
+.rm-bar-priority{position:absolute;top:-7px;right:4px;font-size:8.5px;font-weight:700;color:#fff;padding:1px 5px;border-radius:999px;z-index:3;line-height:1.3}
+.rm-bar-priority--1{background:var(--ft-rouge)}
+.rm-bar-priority--2{background:var(--ft-orange)}
+.rm-bar-priority--3{background:#6B7280}
+.rm-bar-edge-arrow--end{right:1px}
 .rm-bar--open{background-image:linear-gradient(to right,transparent calc(100% - 14px),rgba(255,255,255,.5) 100%)}
 .rm-bar:hover{filter:brightness(1.1)}
 .rm-no-date{font-size:12px;color:var(--ft-fg-3);padding:6px 0;font-style:italic}
@@ -1144,9 +1170,12 @@ function renderTimelineForDomaine(dom){
     var left = Math.round((segStart - r.minD) / 86400000 * r.pxPerDay);
     var width = Math.max(24, Math.round((segEnd - segStart) / 86400000 * r.pxPerDay) + Math.round(r.pxPerDay));
     var titre = t.titre || 'Tâche';
-    var popupData = {titre: titre, texte: t.texte || '', debut: t.dateDebut || '', fin: t.dateFin || '', maj: t.derniereMaj || ''};
+    var popupData = {titre: titre, texte: t.texte || '', debut: t.dateDebut || '', fin: t.dateFin || '', maj: t.derniereMaj || '', priorite: t.priorite || ''};
     return '<div class="rm-timeline-row"><div class="rm-bar' + (openEnded ? ' rm-bar--open' : '') + '" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '" data-rm-bar-left="' + left + '" data-rm-bar-width="' + width + '">' +
+      (t.priorite ? '<span class="rm-bar-priority rm-bar-priority--' + escapeHtml(String(t.priorite)) + '" title="Priorité ' + escapeHtml(String(t.priorite)) + '">P' + escapeHtml(String(t.priorite)) + '</span>' : '') +
+      '<span class="rm-bar-edge-arrow rm-bar-edge-arrow--start">◀</span>' +
       '<span class="rm-bar-label">' + escapeHtml(titre.slice(0, 60)) + '</span>' +
+      '<span class="rm-bar-edge-arrow rm-bar-edge-arrow--end">▶</span>' +
     '</div></div>';
   }).join('');
 
@@ -1207,18 +1236,23 @@ function applyRoadmapScroll(px){
 }
 
 /* Le titre d'une tache reste lisible : il se cale sur le bord visible de la fenetre,
-   sans jamais depasser la fin de la barre. */
+   sans jamais depasser la fin de la barre. Des fleches signalent qu'une tache demarre
+   avant ou se termine apres la fenetre actuellement affichee a l'ecran. */
 function updateBarLabelPositions(){
   document.querySelectorAll('.rm-timeline-scroll').forEach(function(scrollEl){
     var viewportWidth = scrollEl.clientWidth;
     scrollEl.querySelectorAll('.rm-bar').forEach(function(bar){
       var barLeft = parseFloat(bar.dataset.rmBarLeft) || 0;
       var barWidth = parseFloat(bar.dataset.rmBarWidth) || 0;
+      var startArrow = bar.querySelector('.rm-bar-edge-arrow--start');
+      var endArrow = bar.querySelector('.rm-bar-edge-arrow--end');
       var label = bar.querySelector('.rm-bar-label');
-      if (!label) return;
       var visLeft = barLeft - roadmapCurrentPanPx;
       var visRight = visLeft + barWidth;
-      if (visRight <= 0 || visLeft >= viewportWidth) return; // barre hors champ, inutile de calculer
+      var offScreen = visRight <= 0 || visLeft >= viewportWidth;
+      if (startArrow) startArrow.style.display = (!offScreen && visLeft < 0) ? 'inline-block' : 'none';
+      if (endArrow) endArrow.style.display = (!offScreen && visRight > viewportWidth) ? 'inline-block' : 'none';
+      if (!label || offScreen) return;
       var clampLeft = Math.max(visLeft, 0);
       var offsetWithinBar = clampLeft - visLeft;
       var maxOffset = Math.max(0, barWidth - (label.offsetWidth || 40) - 10);
@@ -1244,7 +1278,8 @@ function taskOverlapsWindow(t, visStart, visEnd){
   var end = rmParseDMY(t.dateFin) || roadmapRange.maxD;
   return start < visEnd && end >= visStart;
 }
-/* Filtre "travaux en cours sur la periode affichee" + compteur actifs/total par domaine */
+/* Filtre "travaux en cours sur la periode affichee" + compteur actifs/total par domaine.
+   Masque individuellement les LIGNES de taches finies ou non demarrees (pas seulement le bloc entier). */
 function updateRoadmapCounters(){
   var win = currentVisibleWindow();
   var filterOn = document.getElementById('roadmapFilterActive').checked;
@@ -1252,16 +1287,23 @@ function updateRoadmapCounters(){
   epics.forEach(function(epic, ei){
     var epicHasActive = false;
     (epic.domaines || []).forEach(function(dom, di){
-      var taches = dom.taches || [];
-      var activeCount = taches.filter(function(t){ return taskOverlapsWindow(t, win.start, win.end); }).length;
+      var tachesAvecDate = (dom.taches || []).filter(function(t){ return rmParseDMY(t.dateDebut); });
+      var activeCount = tachesAvecDate.filter(function(t){ return taskOverlapsWindow(t, win.start, win.end); }).length;
       if (activeCount > 0) epicHasActive = true;
       var domEl = document.querySelector('[data-rm-domaine="' + ei + '-' + di + '"]');
       if (!domEl) return;
       var countEl = domEl.querySelector('.rm-domaine-count');
       if (countEl) {
-        countEl.textContent = activeCount + ' actif' + (activeCount > 1 ? 's' : '') + ' sur la période / ' + taches.length + ' au total';
+        countEl.textContent = activeCount + ' actif' + (activeCount > 1 ? 's' : '') + ' sur la période / ' + tachesAvecDate.length + ' au total';
         countEl.classList.toggle('rm-count-active', activeCount > 0);
       }
+      var rows = domEl.querySelectorAll('.rm-timeline-row');
+      rows.forEach(function(row, ti){
+        var t = tachesAvecDate[ti];
+        if (!t) return;
+        var active = taskOverlapsWindow(t, win.start, win.end);
+        row.style.display = (filterOn && !active) ? 'none' : '';
+      });
       domEl.style.display = (filterOn && activeCount === 0) ? 'none' : '';
     });
     var epicEl = document.querySelector('[data-rm-epic="' + ei + '"]');
@@ -1314,6 +1356,7 @@ function bindRoadmapInteractions(){
       var popup = document.getElementById('rmTaskPopup');
       var periodeTxt = d.debut ? ('Du ' + d.debut + ' ' + (d.fin ? 'au ' + d.fin : '(en continu)')) : '';
       popup.innerHTML = '<h5>' + escapeHtml(d.titre) + '</h5>' +
+        (d.priorite ? '<span class="rm-bar-priority rm-bar-priority--' + escapeHtml(String(d.priorite)) + '" style="position:static;display:inline-block;margin-bottom:8px">Priorité ' + escapeHtml(String(d.priorite)) + '</span>' : '') +
         (d.maj ? '<div class="rm-task-updated">Dernière mise à jour : ' + escapeHtml(d.maj) + '</div>' : '') +
         (d.texte ? '<div>' + richText(d.texte) + '</div>' : '') +
         (periodeTxt ? '<div class="rm-task-dates">' + escapeHtml(periodeTxt) + '</div>' : '');
@@ -1423,26 +1466,88 @@ var roadmapGoToIndex = null;
 document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') closeRoadmap(); });
 document.getElementById('roadmapFilterActive').addEventListener('change', updateRoadmapCounters);
 
-function exportRoadmapPdf(){
+function openRoadmapExportDialog(){
+  var epics = (roadmapData && roadmapData.epics) || [];
+  var checksHtml = epics.map(function(epic, ei){
+    return '<label class="rm-export-check"><input type="checkbox" checked data-rm-export-epic="' + ei + '"> ' + escapeHtml(epic.nom) + '</label>';
+  }).join('');
+  var dialog = document.createElement('div');
+  dialog.className = 'rm-export-dialog-overlay';
+  dialog.innerHTML =
+    '<div class="rm-export-dialog">' +
+      '<h4>Choisir les Epics à imprimer</h4>' +
+      '<p class="form-hint">Seules les tâches en cours sur la période actuellement affichée seront incluses.</p>' +
+      '<div class="rm-export-checklist">' + checksHtml + '</div>' +
+      '<div class="rm-export-dialog-actions">' +
+        '<button type="button" class="btn btn--secondary btn--sm" id="rmExportCancel">Annuler</button>' +
+        '<button type="button" class="btn btn--sm" id="rmExportConfirm">📄 Générer le PDF</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(dialog);
+  dialog.querySelector('#rmExportCancel').addEventListener('click', function(){ dialog.remove(); });
+  dialog.querySelector('#rmExportConfirm').addEventListener('click', function(){
+    var selectedIdx = Array.prototype.slice.call(dialog.querySelectorAll('[data-rm-export-epic]'))
+      .filter(function(cb){ return cb.checked; })
+      .map(function(cb){ return parseInt(cb.dataset.rmExportEpic, 10); });
+    dialog.remove();
+    generateRoadmapPdf(selectedIdx);
+  });
+}
+
+/* Construit un rendu propre (hors ecran, non affecte par le panoramique/decoupage visuel) listant,
+   pour chaque Epic selectionne, les taches actuellement en cours sur la periode affichee. */
+function generateRoadmapPdf(selectedEpicIdx){
   if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
     alert("Le module d'export PDF n'a pas pu se charger. Vérifiez votre connexion et réessayez.");
     return;
   }
   var btn = document.getElementById('roadmapExportPdf');
-  var filterCheckbox = document.getElementById('roadmapFilterActive');
-  var wasFilterOn = filterCheckbox.checked;
-  var collapsedEpics = Array.prototype.slice.call(document.querySelectorAll('.rm-epic.collapsed'));
-  var collapsedDomaines = Array.prototype.slice.call(document.querySelectorAll('.rm-domaine.collapsed'));
-
   btn.disabled = true;
   btn.textContent = '⏳ Génération du PDF...';
-  filterCheckbox.checked = true;
-  updateRoadmapCounters();
-  collapsedEpics.forEach(function(el){ el.classList.remove('collapsed'); });
-  collapsedDomaines.forEach(function(el){ el.classList.remove('collapsed'); });
+
+  var win = currentVisibleWindow();
+  var periodeLabel = roadmapRange.monthLabels[parseInt(document.getElementById('roadmapNavSlider').value, 10)] +
+    ' → ' + roadmapRange.monthLabels[Math.min(parseInt(document.getElementById('roadmapNavSlider').value, 10) + roadmapWindowSize - 1, roadmapRange.monthLabels.length - 1)];
+
+  var epics = (roadmapData && roadmapData.epics) || [];
+  var bodyHtml = '';
+  selectedEpicIdx.forEach(function(ei){
+    var epic = epics[ei];
+    if (!epic) return;
+    var domainesHtml = (epic.domaines || []).map(function(dom){
+      var taches = (dom.taches || []).filter(function(t){
+        return rmParseDMY(t.dateDebut) && taskOverlapsWindow(t, win.start, win.end);
+      });
+      if (!taches.length) return '';
+      var rowsHtml = taches.map(function(t){
+        return '<tr>' +
+          '<td>' + escapeHtml(t.titre || 'Tâche') + '</td>' +
+          '<td>' + escapeHtml(t.dateDebut || '') + '</td>' +
+          '<td>' + escapeHtml(t.dateFin || 'En continu') + '</td>' +
+          '<td>' + (t.priorite ? 'P' + escapeHtml(String(t.priorite)) : '') + '</td>' +
+        '</tr>';
+      }).join('');
+      return '<div class="rm-print-domaine">' +
+        '<div class="rm-print-domaine-title"><span class="rm-domaine-dot" style="background:' + (dom.couleur || '#293378') + '"></span>' + escapeHtml(dom.nom) + '</div>' +
+        '<table class="rm-print-table"><thead><tr><th>Tâche</th><th>Début</th><th>Fin</th><th>Priorité</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+      '</div>';
+    }).join('');
+    if (!domainesHtml) return;
+    bodyHtml += '<div class="rm-print-epic"><h3>' + escapeHtml(epic.nom) + '</h3>' + domainesHtml + '</div>';
+  });
+
+  if (!bodyHtml) bodyHtml = '<p>Aucune tâche en cours sur la période affichée pour les Epics sélectionnés.</p>';
+
+  var printRoot = document.createElement('div');
+  printRoot.className = 'rm-print-root';
+  printRoot.innerHTML =
+    '<h2>Feuille de route - Tableau de bord RPE</h2>' +
+    '<p class="rm-print-period">Période observée : ' + escapeHtml(periodeLabel) + '</p>' +
+    bodyHtml;
+  document.body.appendChild(printRoot);
 
   setTimeout(function(){
-    html2canvas(document.getElementById('roadmapBody'), {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
+    html2canvas(printRoot, {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
       var jsPDF = window.jspdf.jsPDF;
       var pdf = new jsPDF({orientation: 'landscape', unit: 'pt', format: 'a4'});
       var pageWidth = pdf.internal.pageSize.getWidth();
@@ -1464,16 +1569,13 @@ function exportRoadmapPdf(){
     }).catch(function(){
       alert("Une erreur est survenue pendant la génération du PDF.");
     }).finally(function(){
-      filterCheckbox.checked = wasFilterOn;
-      collapsedEpics.forEach(function(el){ el.classList.add('collapsed'); });
-      collapsedDomaines.forEach(function(el){ el.classList.add('collapsed'); });
-      updateRoadmapCounters();
+      printRoot.remove();
       btn.disabled = false;
       btn.textContent = '📄 Exporter en PDF (paysage)';
     });
   }, 50);
 }
-document.getElementById('roadmapExportPdf').addEventListener('click', exportRoadmapPdf);
+document.getElementById('roadmapExportPdf').addEventListener('click', openRoadmapExportDialog);
 
 (function(){
   var popup = document.createElement('div');
