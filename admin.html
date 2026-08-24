@@ -77,7 +77,8 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-admin-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
 .rm-admin-row .edit-input{flex:1;margin-bottom:0}
 .rm-admin-handle{font-size:11px;font-weight:700;color:var(--ft-gray-500);text-transform:uppercase;white-space:nowrap}
-.rm-admin-tache-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px}
+.rm-admin-tache-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:6px}
+.rm-admin-color{flex:none;width:34px;height:34px;padding:2px;border:1px solid var(--ft-gray-300);border-radius:5px;cursor:pointer;background:#fff}
 .rm-admin-tache-grid input{margin-bottom:0}
 @media (max-width:700px){.rm-admin-tache-grid{grid-template-columns:1fr 1fr}}
 .edit-card{background:#fff;border:1px solid var(--ft-gray-200);border-radius:8px;padding:24px;margin-bottom:16px}
@@ -284,7 +285,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
       <button class="btn btn--sm btn-save-floating" id="btnSaveRoadmap">💾 Enregistrer <span id="roadmapStatusFloating"></span></button>
       <div class="card" style="max-width:1100px">
         <h3 style="margin:0 0 10px">Feuille de route (roadmap)</h3>
-        <p class="form-hint" style="margin-top:0">Organisée en Epics (grands domaines), chacun divisé en sous-domaines, chacun contenant les travaux (tâches) en cours. Ajoutez, modifiez, supprimez ou réordonnez (▲/▼) à tous les niveaux.</p>
+        <p class="form-hint" style="margin-top:0">Organisée en Epics (grands domaines), chacun divisé en sous-domaines, chacun contenant les travaux (tâches) en cours. Ajoutez, modifiez, supprimez ou réordonnez (▲/▼) à tous les niveaux. Chaque <strong>domaine</strong> a sa propre couleur (pastille à gauche de son nom) : elle détermine automatiquement la couleur de toutes ses tâches sur la frise publique.</p>
         <p class="form-hint" style="margin-top:0">Chaque tâche affiche une barre sur la frise chronologique publique dès qu'une <strong>date de début</strong> est renseignée (JJ-MM-AAAA). La <strong>date de fin</strong> peut être laissée vide : la tâche est alors considérée "en continu" et sa barre s'étend jusqu'au bord de la période affichée (12 mois avant / 12 mois après le mois en cours).</p>
         <div id="roadmapStatus" style="font-size:12.5px;margin:8px 0"></div>
         <div id="roadmapEditorRoot"></div>
@@ -1503,28 +1504,21 @@ document.getElementById('btnSaveSite').addEventListener('click', saveSiteContent
 document.getElementById('btnSaveSite2').addEventListener('click', saveSiteContent);
 
 /* ==== Feuille de route (roadmap) : editeur imbrique Epic > Domaine > Tache ==== */
-function rmDomaine(nom){ return {nom: nom, taches: []}; }
-var ROADMAP_TYPOLOGIES = [
-  "Cadrage / Conception",
-  "Fonctionnalité / Évolution",
-  "Interface utilisateur / Design",
-  "Données / Ingénierie",
-  "Sécurité & Droits",
-  "Accompagnement au changement"
-];
+var ROADMAP_PALETTE = ["#293378", "#7E58A0", "#406BDE", "#1E7A3D", "#D96B00", "#D92424", "#5C0F38", "#0D7A87"];
+function rmDomaine(nom, idx){ return {nom: nom, couleur: ROADMAP_PALETTE[idx % ROADMAP_PALETTE.length], taches: []}; }
 var DEFAULT_ROADMAP_ADMIN = {
   epics: [
-    {nom: "Fiches action & Feuilles de route", domaines: [rmDomaine("Interface de saisie"), rmDomaine("Interface de consultation")]},
-    {nom: "Pilotage territorial sur mesure", domaines: [rmDomaine("Catalogue d'indicateurs"), rmDomaine("Interface de sélection")]},
-    {nom: "Socle Data & Modélisation", domaines: [rmDomaine("Acquisition & Données externes"), rmDomaine("Historisation & Volumétrie"), rmDomaine("Architecture & Règles de gestion")]},
+    {nom: "Fiches action & Feuilles de route", domaines: [rmDomaine("Interface de saisie", 0), rmDomaine("Interface de consultation", 1)]},
+    {nom: "Pilotage territorial sur mesure", domaines: [rmDomaine("Catalogue d'indicateurs", 2), rmDomaine("Interface de sélection", 3)]},
+    {nom: "Socle Data & Modélisation", domaines: [rmDomaine("Acquisition & Données externes", 4), rmDomaine("Historisation & Volumétrie", 5), rmDomaine("Architecture & Règles de gestion", 6)]},
     {nom: "Dashboard / Vues Métiers", domaines: [
-      rmDomaine("Page : Accueil"), rmDomaine("Page : Accès / Présence en emploi"), rmDomaine("Page : Description des publics"),
-      rmDomaine("Page : Entrants en formation"), rmDomaine("Page : Fiches action"), rmDomaine("Page : Satisfaction DE"),
-      rmDomaine("Page : Sortants de formation"), rmDomaine("Page : Taux / Délai de pourvoi"), rmDomaine("Page : Taux de recours"),
-      rmDomaine("Page : Analyse par public"), rmDomaine("Cas d'usage formation")
+      rmDomaine("Page : Accueil", 0), rmDomaine("Page : Accès / Présence en emploi", 1), rmDomaine("Page : Description des publics", 2),
+      rmDomaine("Page : Entrants en formation", 3), rmDomaine("Page : Fiches action", 4), rmDomaine("Page : Satisfaction DE", 5),
+      rmDomaine("Page : Sortants de formation", 6), rmDomaine("Page : Taux / Délai de pourvoi", 7), rmDomaine("Page : Taux de recours", 0),
+      rmDomaine("Page : Analyse par public", 1), rmDomaine("Cas d'usage formation", 2)
     ]},
-    {nom: "Ressources documentaires", domaines: [rmDomaine("Glossaire"), rmDomaine("Communication")]},
-    {nom: "Administration & Sécurité", domaines: [rmDomaine("Gestion des habilitations")]}
+    {nom: "Ressources documentaires", domaines: [rmDomaine("Glossaire", 0), rmDomaine("Communication", 1)]},
+    {nom: "Administration & Sécurité", domaines: [rmDomaine("Gestion des habilitations", 0)]}
   ]
 };
 
@@ -1564,9 +1558,6 @@ function renderRoadmapEditor(){
         return '<div class="rm-admin-tache">' +
           rmField(base + '.titre', t.titre, 'Titre de la tâche (affiché sur la barre)') +
           '<div class="rm-admin-tache-grid">' +
-            '<select class="edit-input" data-rpath="' + base + '.typologie">' +
-              ROADMAP_TYPOLOGIES.map(function(ty){ return '<option value="' + escapeHtml(ty) + '"' + (t.typologie === ty ? ' selected' : '') + '>' + escapeHtml(ty) + '</option>'; }).join('') +
-            '</select>' +
             rmField(base + '.dateDebut', t.dateDebut, 'Date de début (JJ-MM-AAAA)') +
             rmField(base + '.dateFin', t.dateFin, 'Date de fin (vide = en continu)') +
           '</div>' +
@@ -1581,6 +1572,7 @@ function renderRoadmapEditor(){
       return '<div class="rm-admin-domaine">' +
         '<div class="rm-admin-row">' +
           '<span class="rm-admin-handle">Domaine</span>' +
+          '<input type="color" class="rm-admin-color" data-rpath="' + ei + '.domaines.' + di + '.couleur" value="' + escapeHtml(dom.couleur || '#293378') + '" title="Couleur des tâches de ce domaine">' +
           rmField(ei + '.domaines.' + di + '.nom', dom.nom, 'Nom du domaine') +
           rmMoveButtons('dom', ei + ':' + di, (epic.domaines || []).length) +
           '<button type="button" class="btn btn--danger btn--sm" data-rm-remove-dom="' + ei + ':' + di + '">🗑️</button>' +
@@ -1618,7 +1610,8 @@ function bindRoadmapEditorEvents(root){
       syncRoadmapDom();
       var ei = parseInt(btn.dataset.rmAddDom, 10);
       roadmapAdminState.epics[ei].domaines = roadmapAdminState.epics[ei].domaines || [];
-      roadmapAdminState.epics[ei].domaines.push({nom: '', taches: []});
+      var idx = roadmapAdminState.epics[ei].domaines.length;
+      roadmapAdminState.epics[ei].domaines.push({nom: '', couleur: ROADMAP_PALETTE[idx % ROADMAP_PALETTE.length], taches: []});
       renderRoadmapEditor();
     });
   });
@@ -1636,7 +1629,7 @@ function bindRoadmapEditorEvents(root){
       var p = btn.dataset.rmAddTache.split(':').map(Number);
       var dom = roadmapAdminState.epics[p[0]].domaines[p[1]];
       dom.taches = dom.taches || [];
-      dom.taches.push({typologie: ROADMAP_TYPOLOGIES[0], titre: '', texte: '', dateDebut: '', dateFin: '', derniereMaj: ''});
+      dom.taches.push({titre: '', texte: '', dateDebut: '', dateFin: '', derniereMaj: ''});
       renderRoadmapEditor();
     });
   });
@@ -1697,7 +1690,7 @@ function rmTodayStr(){
   return pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear();
 }
 function rmTacheSignature(t){
-  return JSON.stringify({typologie: t.typologie || '', titre: t.titre || '', texte: t.texte || '', dateDebut: t.dateDebut || '', dateFin: t.dateFin || ''});
+  return JSON.stringify({titre: t.titre || '', texte: t.texte || '', dateDebut: t.dateDebut || '', dateFin: t.dateFin || ''});
 }
 /* Horodate automatiquement chaque tache dont le contenu a change depuis le chargement
    (comparaison par position epic/domaine/tache), sans intervention manuelle de l'admin. */
