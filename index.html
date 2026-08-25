@@ -226,7 +226,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-export-dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
 
 /* Mise en page dediee a l'export PDF (hors ecran, non affectee par le panoramique) */
-.rm-print-root{position:fixed;left:-99999px;top:0;width:1100px;background:#fff;padding:28px;font-family:var(--ft-font);color:var(--ft-fg-1)}
+.rm-print-root{position:fixed;left:-99999px;top:0;width:760px;background:#fff;padding:28px;font-family:var(--ft-font);color:var(--ft-fg-1)}
 .rm-print-root h2{margin:0 0 4px;font-size:20px;color:var(--ft-navy)}
 .rm-print-period{margin:0 0 20px;font-size:12.5px;color:var(--ft-fg-3)}
 .rm-print-epic{margin-bottom:22px}
@@ -234,11 +234,17 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-print-domaine{margin-bottom:14px}
 .rm-print-domaine-title{display:flex;align-items:center;gap:7px;font-weight:700;font-size:13px;margin-bottom:6px}
 .rm-print-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:12px}
-.rm-print-table col.rm-col-tache{width:46%}
-.rm-print-table col.rm-col-date{width:16%}
-.rm-print-table col.rm-col-prio{width:10%}
+.rm-print-table col.rm-col-tache{width:40%}
+.rm-print-table col.rm-col-date-p{width:24%}
+.rm-print-table col.rm-col-prio-p{width:12%}
 .rm-print-table td,.rm-print-table th{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rm-print-table th{text-align:left;background:var(--ft-sable);padding:6px 8px;border:1px solid var(--ft-border)}
+.rm-print-prio{display:inline-block;font-size:10.5px;font-weight:700;color:#fff;padding:2px 8px;border-radius:999px}
+.rm-print-prio--1{background:var(--ft-rouge)}
+.rm-print-prio--2{background:var(--ft-orange)}
+.rm-print-prio--3{background:#6B7280}
+.rm-print-legend{margin-top:24px;padding-top:12px;border-top:1px solid var(--ft-border);font-size:11px;color:var(--ft-fg-2);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.rm-print-legend-title{font-weight:700;color:var(--ft-navy);margin-right:6px}
 .rm-print-table td{padding:6px 8px;border:1px solid var(--ft-border)}
 .rm-domaine-count{color:var(--ft-fg-3);font-weight:400;font-size:11.5px}
 .rm-domaine-count.rm-count-active{color:var(--ft-indigo);font-weight:700}
@@ -269,6 +275,8 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-timeline-today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--ft-rouge);z-index:2;pointer-events:none}
 .rm-bar{position:absolute;top:5px;height:24px;border-radius:5px;font-size:10.5px;color:#fff;overflow:hidden;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.15);z-index:2}
 .rm-bar-label{display:inline-block;white-space:nowrap;padding:0 8px;line-height:24px;transition:transform .1s linear}
+.rm-bar--has-start-arrow .rm-bar-label{margin-left:16px}
+.rm-bar--has-end-arrow .rm-bar-label{margin-right:16px}
 .rm-bar-edge-arrow{display:none;position:absolute;top:50%;transform:translateY(-50%);width:14px;height:14px;line-height:14px;text-align:center;font-size:9px;font-weight:700;color:#fff;background:rgba(0,0,0,.5);border-radius:50%;z-index:5}
 .rm-bar-edge-arrow--start{left:2px}
 .rm-bar-priority{position:absolute;top:0;font-size:8.5px;font-weight:700;color:#fff;padding:1px 5px;border-radius:999px;z-index:4;line-height:1.3}
@@ -406,7 +414,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
       <label><input type="checkbox" checked data-rm-prio="2"> <span class="rm-priority-swatch rm-bar-priority--2">P2</span></label>
       <label><input type="checkbox" checked data-rm-prio="3"> <span class="rm-priority-swatch rm-bar-priority--3">P3</span></label>
     </div>
-    <button type="button" class="btn btn--secondary btn--sm" id="roadmapExportPdf">📄 Exporter en PDF (paysage)</button>
+    <button type="button" class="btn btn--secondary btn--sm" id="roadmapExportPdf">📄 Exporter en PDF (portrait)</button>
   </div>
   <div class="roadmap-body" id="roadmapBody">
     <div class="empty-hint">Chargement...</div>
@@ -1286,6 +1294,8 @@ function updateBarLabelPositions(){
       }
       if (startArrow) startArrow.style.display = showStart ? 'inline-block' : 'none';
       if (endArrow) endArrow.style.display = showEnd ? 'inline-block' : 'none';
+      bar.classList.toggle('rm-bar--has-start-arrow', showStart);
+      bar.classList.toggle('rm-bar--has-end-arrow', showEnd);
 
       // Titre "collant" : reste positionnement en pixels (uniquement visuel, sans impact sur les fleches)
       if (!label) return;
@@ -1294,7 +1304,9 @@ function updateBarLabelPositions(){
       if (visRight <= 0 || visLeft >= viewportWidth) return;
       var clampLeft = Math.max(visLeft, 0);
       var offsetWithinBar = clampLeft - visLeft;
-      var maxOffset = Math.max(0, barWidth - (label.offsetWidth || 40) - 10);
+      if (showStart) offsetWithinBar = Math.max(offsetWithinBar, 16); // ne jamais passer sous la fleche gauche
+      var reserveRight = showEnd ? 16 : 0;
+      var maxOffset = Math.max(0, barWidth - (label.offsetWidth || 40) - 10 - reserveRight);
       offsetWithinBar = Math.min(offsetWithinBar, maxOffset);
       label.style.transform = offsetWithinBar > 0 ? ('translateX(' + offsetWithinBar + 'px)') : '';
     });
@@ -1566,12 +1578,12 @@ function generateRoadmapPdf(selectedEpicIdx){
           '<td>' + escapeHtml(t.titre || 'Tâche') + '</td>' +
           '<td>' + escapeHtml(t.dateDebut || '') + '</td>' +
           '<td>' + escapeHtml(t.dateFin || 'En continu') + '</td>' +
-          '<td>' + (t.priorite ? 'P' + escapeHtml(String(t.priorite)) : '') + '</td>' +
+          '<td>' + (t.priorite ? '<span class="rm-print-prio rm-print-prio--' + escapeHtml(String(t.priorite)) + '">P' + escapeHtml(String(t.priorite)) + '</span>' : '') + '</td>' +
         '</tr>';
       }).join('');
       return '<div class="rm-print-domaine">' +
         '<div class="rm-print-domaine-title"><span class="rm-domaine-dot" style="background:' + (dom.couleur || '#293378') + '"></span>' + escapeHtml(dom.nom) + '</div>' +
-        '<table class="rm-print-table"><colgroup><col class="rm-col-tache"><col class="rm-col-date"><col class="rm-col-date"><col class="rm-col-prio"></colgroup><thead><tr><th>Tâche</th><th>Début</th><th>Fin</th><th>Priorité</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+        '<table class="rm-print-table"><colgroup><col class="rm-col-tache"><col class="rm-col-date-p"><col class="rm-col-date-p"><col class="rm-col-prio-p"></colgroup><thead><tr><th>Tâche</th><th>Début</th><th>Fin</th><th>Priorité</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
       '</div>';
     }).join('');
     if (!domainesHtml) return;
@@ -1580,19 +1592,25 @@ function generateRoadmapPdf(selectedEpicIdx){
 
   if (!bodyHtml) bodyHtml = '<p>Aucune tâche en cours sur la période affichée pour les Epics sélectionnés.</p>';
 
+  var legendHtml = '<div class="rm-print-legend">' +
+    '<span class="rm-print-legend-title">Légende priorité :</span>' +
+    [1, 2, 3].map(function(p){ return '<span class="rm-print-prio rm-print-prio--' + p + '">P' + p + '</span> Priorité ' + p; }).join('&nbsp;&nbsp;&nbsp;') +
+  '</div>';
+
   var printRoot = document.createElement('div');
   printRoot.className = 'rm-print-root';
   printRoot.innerHTML =
     '<h2>Feuille de route - Tableau de bord RPE</h2>' +
     '<p class="rm-print-period">Période observée : ' + escapeHtml(periodeLabel) + '</p>' +
-    bodyHtml;
+    bodyHtml +
+    legendHtml;
   document.body.appendChild(printRoot);
 
   setTimeout(function(){
-    // Points de coupe "surs" : jamais au milieu d'une ligne de tableau ou d'un bloc domaine/epic.
+    // Points de coupe "surs" : jamais au milieu d'une ligne de tableau ou d'un bloc domaine/epic/legende.
     var rootTop = printRoot.getBoundingClientRect().top;
     var breakPoints = [0];
-    printRoot.querySelectorAll('tr, .rm-print-domaine, .rm-print-epic').forEach(function(el){
+    printRoot.querySelectorAll('tr, .rm-print-domaine, .rm-print-epic, .rm-print-legend').forEach(function(el){
       breakPoints.push(el.getBoundingClientRect().top - rootTop);
       breakPoints.push(el.getBoundingClientRect().bottom - rootTop);
     });
@@ -1601,7 +1619,7 @@ function generateRoadmapPdf(selectedEpicIdx){
 
     html2canvas(printRoot, {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
       var jsPDF = window.jspdf.jsPDF;
-      var pdf = new jsPDF({orientation: 'landscape', unit: 'pt', format: 'a4'});
+      var pdf = new jsPDF({orientation: 'portrait', unit: 'pt', format: 'a4'});
       var pageWidthPt = pdf.internal.pageSize.getWidth();
       var pageHeightPt = pdf.internal.pageSize.getHeight();
       var scale = canvas.width / printRoot.offsetWidth; // px canvas par px CSS (2, cf. option scale)
@@ -1636,7 +1654,7 @@ function generateRoadmapPdf(selectedEpicIdx){
     }).finally(function(){
       printRoot.remove();
       btn.disabled = false;
-      btn.textContent = '📄 Exporter en PDF (paysage)';
+      btn.textContent = '📄 Exporter en PDF (portrait)';
     });
   }, 50);
 }
