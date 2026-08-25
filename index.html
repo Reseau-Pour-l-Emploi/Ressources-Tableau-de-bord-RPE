@@ -1113,6 +1113,7 @@ function renderRoadmapLegend(){
 var roadmapRange = null; // plage fixe M-12 a M+12, calculee a chaque ouverture / changement de fenetre
 var roadmapWindowSize = 6; // 6 ou 12 mois visibles simultanement, occupant toute la largeur
 var roadmapCurrentPanPx = 0;
+var roadmapCurrentWindowStart = 0;
 
 function rmAvailableWidth(){
   var ref = document.getElementById('roadmapBody');
@@ -1222,9 +1223,12 @@ function renderRoadmapNav(){
   }
   function goToIndex(idx){
     currentStart = Math.max(0, Math.min(idx, r.maxIdx));
+    roadmapCurrentWindowStart = currentStart;
     renderMonthBoxes(currentStart);
     applyRoadmapScroll(r.monthStarts[currentStart]);
     updateRoadmapCounters();
+    applyPriorityFilter();
+    requestAnimationFrame(function(){ updateBarLabelPositions(); });
   }
   roadmapStepMonth = function(delta){ goToIndex(currentStart + delta); };
   roadmapGoToIndex = goToIndex;
@@ -1247,6 +1251,8 @@ function applyRoadmapScroll(px){
    sans jamais depasser la fin de la barre. Des fleches signalent qu'une tache demarre
    avant ou se termine apres la fenetre actuellement affichee a l'ecran. */
 function updateBarLabelPositions(){
+  if (!roadmapRange) return;
+  var win = currentVisibleWindow();
   document.querySelectorAll('.rm-timeline-scroll').forEach(function(scrollEl){
     var viewportWidth = scrollEl.clientWidth;
     scrollEl.querySelectorAll('.rm-bar').forEach(function(bar){
@@ -1255,12 +1261,28 @@ function updateBarLabelPositions(){
       var startArrow = bar.querySelector('.rm-bar-edge-arrow--start');
       var endArrow = bar.querySelector('.rm-bar-edge-arrow--end');
       var label = bar.querySelector('.rm-bar-label');
+
+      // Fleches : comparaison de DATES pures (fenetre d'observation choisie par l'utilisateur),
+      // jamais de calcul en pixels - insensible aux arrondis dus aux mois de longueurs differentes.
+      var showStart = false, showEnd = false;
+      var taskData = null;
+      try { taskData = JSON.parse(bar.getAttribute('data-rm-task')); } catch(e){}
+      if (taskData) {
+        var tStart = rmParseDMY(taskData.debut);
+        var tEnd = rmParseDMY(taskData.fin) || roadmapRange.maxD;
+        if (tStart && tStart < win.end && tEnd >= win.start) { // la tache est bien active sur la fenetre
+          showStart = tStart < win.start;
+          showEnd = tEnd >= win.end;
+        }
+      }
+      if (startArrow) startArrow.style.display = showStart ? 'inline-block' : 'none';
+      if (endArrow) endArrow.style.display = showEnd ? 'inline-block' : 'none';
+
+      // Titre "collant" : reste positionnement en pixels (uniquement visuel, sans impact sur les fleches)
+      if (!label) return;
       var visLeft = barLeft - roadmapCurrentPanPx;
       var visRight = visLeft + barWidth;
-      var offScreen = visRight <= 0 || visLeft >= viewportWidth;
-      if (startArrow) startArrow.style.display = (!offScreen && visLeft < 0) ? 'inline-block' : 'none';
-      if (endArrow) endArrow.style.display = (!offScreen && visRight > viewportWidth) ? 'inline-block' : 'none';
-      if (!label || offScreen) return;
+      if (visRight <= 0 || visLeft >= viewportWidth) return;
       var clampLeft = Math.max(visLeft, 0);
       var offsetWithinBar = clampLeft - visLeft;
       var maxOffset = Math.max(0, barWidth - (label.offsetWidth || 40) - 10);
@@ -1273,8 +1295,7 @@ function updateBarLabelPositions(){
 /* Fenetre actuellement affichee a l'ecran (roadmapWindowSize mois, ancree sur la position du curseur) */
 function currentVisibleWindow(){
   var r = roadmapRange;
-  var slider = document.getElementById('roadmapNavSlider');
-  var idx = slider ? parseInt(slider.value, 10) : r.currentIdx;
+  var idx = roadmapCurrentWindowStart || 0;
   var visStart = r.monthDates[idx];
   var endIdx = idx + roadmapWindowSize;
   var visEnd = endIdx < r.monthDates.length ? r.monthDates[endIdx] : new Date(r.maxD.getTime() + 86400000);
@@ -1518,8 +1539,8 @@ function generateRoadmapPdf(selectedEpicIdx){
   btn.textContent = '⏳ Génération du PDF...';
 
   var win = currentVisibleWindow();
-  var periodeLabel = roadmapRange.monthLabels[parseInt(document.getElementById('roadmapNavSlider').value, 10)] +
-    ' → ' + roadmapRange.monthLabels[Math.min(parseInt(document.getElementById('roadmapNavSlider').value, 10) + roadmapWindowSize - 1, roadmapRange.monthLabels.length - 1)];
+  var periodeLabel = roadmapRange.monthLabels[roadmapCurrentWindowStart] +
+    ' → ' + roadmapRange.monthLabels[Math.min(roadmapCurrentWindowStart + roadmapWindowSize - 1, roadmapRange.monthLabels.length - 1)];
 
   var epics = (roadmapData && roadmapData.epics) || [];
   var bodyHtml = '';
