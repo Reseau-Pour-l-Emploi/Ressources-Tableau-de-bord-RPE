@@ -1292,19 +1292,33 @@ function updateBarLabelPositions(){
           showEnd = tEnd >= win.end;
         }
       }
-      if (startArrow) startArrow.style.display = showStart ? 'inline-block' : 'none';
-      if (endArrow) endArrow.style.display = showEnd ? 'inline-block' : 'none';
       bar.classList.toggle('rm-bar--has-start-arrow', showStart);
       bar.classList.toggle('rm-bar--has-end-arrow', showEnd);
 
-      // Titre "collant" : reste positionnement en pixels (uniquement visuel, sans impact sur les fleches)
-      if (!label) return;
+      // Position de la portion REELLEMENT visible a l'ecran, dans le referentiel local de la barre
+      // (0 = bord gauche de la barre, barWidth = bord droit) : les fleches et le titre s'y calent,
+      // jamais sur le bord reel (souvent hors champ) de la tache.
       var visLeft = barLeft - roadmapCurrentPanPx;
       var visRight = visLeft + barWidth;
-      if (visRight <= 0 || visLeft >= viewportWidth) return;
-      var clampLeft = Math.max(visLeft, 0);
-      var offsetWithinBar = clampLeft - visLeft;
-      if (showStart) offsetWithinBar = Math.max(offsetWithinBar, 16); // ne jamais passer sous la fleche gauche
+      var barVisible = visRight > 0 && visLeft < viewportWidth;
+      var localVisibleLeft = Math.max(visLeft, 0) - visLeft;   // 0 si la barre demarre a l'ecran, sinon decalage positif
+      var localVisibleRight = Math.min(visRight, viewportWidth) - visLeft; // idem cote droit
+
+      if (startArrow) {
+        var showStartNow = showStart && barVisible;
+        startArrow.style.display = showStartNow ? 'inline-block' : 'none';
+        if (showStartNow) startArrow.style.left = Math.min(Math.max(localVisibleLeft + 2, 2), barWidth - 16) + 'px';
+      }
+      if (endArrow) {
+        var showEndNow = showEnd && barVisible;
+        endArrow.style.display = showEndNow ? 'inline-block' : 'none';
+        if (showEndNow) endArrow.style.right = Math.min(Math.max(barWidth - localVisibleRight + 2, 2), barWidth - 16) + 'px';
+      }
+
+      // Titre "collant" : reste cale sur la meme portion visible, sans jamais passer sous une fleche
+      if (!label || !barVisible) return;
+      var offsetWithinBar = localVisibleLeft;
+      if (showStart) offsetWithinBar = Math.max(offsetWithinBar, 16);
       var reserveRight = showEnd ? 16 : 0;
       var maxOffset = Math.max(0, barWidth - (label.offsetWidth || 40) - 10 - reserveRight);
       offsetWithinBar = Math.min(offsetWithinBar, maxOffset);
