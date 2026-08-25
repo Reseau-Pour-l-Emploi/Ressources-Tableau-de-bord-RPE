@@ -233,7 +233,11 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .rm-print-epic h3{font-size:15px;color:var(--ft-navy);border-bottom:2px solid var(--ft-indigo);padding-bottom:5px;margin:0 0 10px}
 .rm-print-domaine{margin-bottom:14px}
 .rm-print-domaine-title{display:flex;align-items:center;gap:7px;font-weight:700;font-size:13px;margin-bottom:6px}
-.rm-print-table{width:100%;border-collapse:collapse;font-size:12px}
+.rm-print-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:12px}
+.rm-print-table col.rm-col-tache{width:46%}
+.rm-print-table col.rm-col-date{width:16%}
+.rm-print-table col.rm-col-prio{width:10%}
+.rm-print-table td,.rm-print-table th{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rm-print-table th{text-align:left;background:var(--ft-sable);padding:6px 8px;border:1px solid var(--ft-border)}
 .rm-print-table td{padding:6px 8px;border:1px solid var(--ft-border)}
 .rm-domaine-count{color:var(--ft-fg-3);font-weight:400;font-size:11.5px}
@@ -1562,7 +1566,7 @@ function generateRoadmapPdf(selectedEpicIdx){
       }).join('');
       return '<div class="rm-print-domaine">' +
         '<div class="rm-print-domaine-title"><span class="rm-domaine-dot" style="background:' + (dom.couleur || '#293378') + '"></span>' + escapeHtml(dom.nom) + '</div>' +
-        '<table class="rm-print-table"><thead><tr><th>Tâche</th><th>Début</th><th>Fin</th><th>Priorité</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+        '<table class="rm-print-table"><colgroup><col class="rm-col-tache"><col class="rm-col-date"><col class="rm-col-date"><col class="rm-col-prio"></colgroup><thead><tr><th>Tâche</th><th>Début</th><th>Fin</th><th>Priorité</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
       '</div>';
     }).join('');
     if (!domainesHtml) return;
@@ -1580,23 +1584,46 @@ function generateRoadmapPdf(selectedEpicIdx){
   document.body.appendChild(printRoot);
 
   setTimeout(function(){
+    // Points de coupe "surs" : jamais au milieu d'une ligne de tableau ou d'un bloc domaine/epic.
+    var rootTop = printRoot.getBoundingClientRect().top;
+    var breakPoints = [0];
+    printRoot.querySelectorAll('tr, .rm-print-domaine, .rm-print-epic').forEach(function(el){
+      breakPoints.push(el.getBoundingClientRect().top - rootTop);
+      breakPoints.push(el.getBoundingClientRect().bottom - rootTop);
+    });
+    breakPoints.push(printRoot.scrollHeight);
+    breakPoints = breakPoints.filter(function(v){ return v >= 0; }).sort(function(a, b){ return a - b; });
+
     html2canvas(printRoot, {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
       var jsPDF = window.jspdf.jsPDF;
       var pdf = new jsPDF({orientation: 'landscape', unit: 'pt', format: 'a4'});
-      var pageWidth = pdf.internal.pageSize.getWidth();
-      var pageHeight = pdf.internal.pageSize.getHeight();
-      var imgWidth = pageWidth;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-      var position = 0;
-      var imgData = canvas.toDataURL('image/png');
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+      var pageWidthPt = pdf.internal.pageSize.getWidth();
+      var pageHeightPt = pdf.internal.pageSize.getHeight();
+      var scale = canvas.width / printRoot.offsetWidth; // px canvas par px CSS (2, cf. option scale)
+      var ptPerCanvasPx = pageWidthPt / canvas.width;
+      var pageHeightCanvasPx = pageHeightPt / ptPerCanvasPx;
+      var breakPointsPx = breakPoints.map(function(v){ return v * scale; });
+
+      var sy = 0;
+      var pageIdx = 0;
+      while (sy < canvas.height - 1) {
+        var maxEnd = Math.min(sy + pageHeightCanvasPx, canvas.height);
+        // Le plus grand point de coupe sur <= maxEnd et strictement > sy (evite de couper une ligne en 2)
+        var cut = maxEnd;
+        for (var i = breakPointsPx.length - 1; i >= 0; i--) {
+          if (breakPointsPx[i] <= maxEnd && breakPointsPx[i] > sy) { cut = breakPointsPx[i]; break; }
+        }
+        var sliceHeight = Math.max(1, Math.round(cut - sy));
+        var pageCanvas = document.createElement('canvas');
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = sliceHeight;
+        pageCanvas.getContext('2d').drawImage(canvas, 0, sy, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight);
+        var imgData = pageCanvas.toDataURL('image/png');
+        var imgHeightPt = sliceHeight * ptPerCanvasPx;
+        if (pageIdx > 0) pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, 0, pageWidthPt, imgHeightPt);
+        sy = cut;
+        pageIdx++;
       }
       pdf.save('roadmap-rpe-' + new Date().toISOString().slice(0, 10) + '.pdf');
     }).catch(function(){
