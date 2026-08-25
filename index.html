@@ -1111,19 +1111,12 @@ function rmParseDMY(s){
 }
 
 function renderRoadmapLegend(){
-  var itemsHtml = '';
-  ((roadmapData && roadmapData.epics) || []).forEach(function(epic){
-    (epic.domaines || []).forEach(function(dom){
-      itemsHtml += '<div class="roadmap-legend-item"><span class="roadmap-legend-dot" style="background:' + (dom.couleur || 'var(--ft-indigo)') + '"></span>' + escapeHtml(dom.nom) + '</div>';
-    });
-  });
   var block = document.getElementById('roadmapLegend');
   block.innerHTML =
     '<button type="button" class="roadmap-legend-toggle" id="roadmapLegendToggle"><span class="rm-toggle">▾</span> Légende</button>' +
     '<div class="roadmap-legend-body">' +
       '<p><strong>Epic</strong> : un grand domaine fonctionnel du tableau de bord RPE (ex. "Dashboard / Vues Métiers").</p>' +
-      '<p><strong>Domaine</strong> : une sous-partie de l\'Epic, plus précise (ex. une page ou une fonctionnalité particulière). Chaque domaine a sa propre couleur, reprise par les tâches de sa frise :</p>' +
-      '<div class="roadmap-legend-types">' + (itemsHtml || '<span class="empty-hint">Aucun domaine pour le moment.</span>') + '</div>' +
+      '<p><strong>Domaine</strong> : une sous-partie de l\'Epic, plus précise (ex. une page ou une fonctionnalité particulière). Chaque domaine a sa propre couleur, reprise par les tâches de sa frise.</p>' +
       '<p style="margin-top:14px"><strong>Priorité</strong> : visible au survol d\'une tâche, dans l\'infobulle de détail.</p>' +
       '<div class="roadmap-legend-types">' +
         '<div class="roadmap-legend-item"><span class="roadmap-legend-dot" style="background:var(--ft-rouge)"></span>P1 - priorité haute</div>' +
