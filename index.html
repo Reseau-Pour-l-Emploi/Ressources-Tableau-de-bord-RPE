@@ -1190,7 +1190,6 @@ function renderTimelineForDomaine(dom){
     var titre = t.titre || 'Tâche';
     var popupData = {titre: titre, texte: t.texte || '', debut: t.dateDebut || '', fin: t.dateFin || '', maj: t.derniereMaj || '', priorite: t.priorite || ''};
     return '<div class="rm-timeline-row" data-rm-priorite="' + escapeHtml(String(t.priorite || '')) + '">' +
-      (t.priorite ? '<span class="rm-bar-priority rm-bar-priority--' + escapeHtml(String(t.priorite)) + '" style="left:' + left + 'px" title="Priorité ' + escapeHtml(String(t.priorite)) + '">P' + escapeHtml(String(t.priorite)) + '</span>' : '') +
       '<div class="rm-bar' + (openEnded ? ' rm-bar--open' : '') + '" style="left:' + left + 'px;width:' + width + 'px;background:' + color + '" data-rm-task="' + escapeHtml(JSON.stringify(popupData)) + '" data-rm-bar-left="' + left + '" data-rm-bar-width="' + width + '">' +
       '<span class="rm-bar-edge-arrow rm-bar-edge-arrow--start">◀</span>' +
       '<span class="rm-bar-label">' + escapeHtml(titre.slice(0, 60)) + '</span>' +
@@ -1276,7 +1275,7 @@ function updateBarLabelPositions(){
       // jamais de calcul en pixels - insensible aux arrondis dus aux mois de longueurs differentes.
       var showStart = false, showEnd = false;
       var taskData = null;
-      try { taskData = JSON.parse(bar.getAttribute('data-rm-task')); } catch(e){}
+      try { taskData = JSON.parse(bar.getAttribute('data-rm-task')); } catch(e){ console.warn('Roadmap: data-rm-task illisible', bar.getAttribute('data-rm-task')); }
       if (taskData) {
         var tStart = rmParseDMY(taskData.debut);
         var tEnd = rmParseDMY(taskData.fin) || roadmapRange.maxD;
