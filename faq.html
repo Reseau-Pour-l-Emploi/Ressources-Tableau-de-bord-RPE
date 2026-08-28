@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ - Ressources Tableau de bord RPE</title>
+<link rel="icon" type="image/svg+xml" href="assets/tdb-rpe-icon.svg">
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script defer src="firebase-config.js"></script>
+<script data-goatcounter="https://denisft.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<style>
+/* ==== En-tete/pied de page : identiques a tout projet RPE ==== */
+@font-face{font-family:'Marianne';src:url('fonts/Marianne-Light.woff2') format('woff2');font-weight:300;font-display:swap}
+@font-face{font-family:'Marianne';src:url('fonts/Marianne-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Marianne';src:url('fonts/Marianne-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Marianne';src:url('fonts/Marianne-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+:root{
+  --ft-navy:#0D1440; --ft-indigo:#293378; --ft-indigo-dark:#1C2456; --ft-indigo-light:#E3E5F1;
+  --ft-violet:#7E58A0; --ft-violet-light:#ECE6F2;
+  --ft-jaune:#FFCC52; --ft-jaune-dark:#E0A800; --ft-jaune-light:#FFF4D6;
+  --ft-bleu:#406BDE; --ft-bleu-light:#E2E8FB;
+  --ft-orange:#D96B00; --ft-orange-light:#FCEADB;
+  --ft-rouge:#D92424; --ft-bordeaux:#5C0F38; --ft-bordeaux-light:#EFDCE6;
+  --ft-vert:#1E7A3D; --ft-vert-light:#E1F0E6;
+  --ft-sable:#F5F2EE; --ft-sable-dark:#E6E1DB;
+  --ft-gray-200:#E5E7EB; --ft-gray-300:#D1D5DB; --ft-gray-400:#9CA3AF; --ft-gray-500:#6B7280; --ft-gray-700:#374151;
+  --ft-white:#FFFFFF;
+  --ft-fg-1:var(--ft-navy); --ft-fg-2:var(--ft-gray-700); --ft-fg-3:var(--ft-gray-500);
+  --ft-border:var(--ft-gray-200);
+  --ft-font:'Marianne',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  --sh-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --sh-md:0 4px 10px rgba(0,0,0,.08);
+  --header-h:67px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--ft-font);font-size:14px;line-height:1.5;color:var(--ft-fg-1);background:var(--ft-sable)}
+a{color:var(--ft-indigo)}
+header.site{background:var(--ft-white);border-bottom:1px solid var(--ft-border);position:sticky;top:0;z-index:1200}
+.site-inner{max-width:1500px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.site-inner img{height:42px}
+.site-title{flex:1}
+.site-title h1{font-size:18px;font-weight:700;margin:0;line-height:1.25}
+.site-title .sub{font-size:12px;color:var(--ft-fg-3)}
+.admin-link{font-size:12px;font-weight:600;color:var(--ft-indigo);text-decoration:none;border:1px solid var(--ft-indigo);border-radius:4px;padding:6px 12px;white-space:nowrap}
+.admin-link:hover{background:var(--ft-indigo-light)}
+.site-nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.nav-link{font-size:14px;font-weight:600;color:var(--ft-fg-2);text-decoration:none;padding:6px 2px;border-bottom:2px solid transparent}
+.nav-link:hover{color:var(--ft-indigo)}
+.nav-link.active{color:var(--ft-indigo);border-bottom-color:var(--ft-indigo)}
+.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--ft-indigo);text-decoration:none;padding:9px 16px;border-radius:999px;white-space:nowrap}
+.nav-cta:hover{background:var(--ft-indigo-dark)}
+main{max-width:1100px;margin:0 auto;padding:20px 24px 56px}
+footer.site{border-top:1px solid var(--ft-border);background:var(--ft-white);margin-top:24px}
+footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12px;color:var(--ft-fg-3);display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center}
+.footer-icon{height:20px}
+.footer-ft-logo{height:20px}
+.footer-title{font-weight:600;color:var(--ft-fg-2)}
+
+/* ==== Contenu propre a la page FAQ ==== */
+.faq-banner{background:linear-gradient(135deg,var(--ft-navy),var(--ft-indigo));color:#fff;border-radius:10px;padding:20px 24px;margin-bottom:20px;box-shadow:var(--sh-md)}
+.faq-banner h2{margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:8px}
+.faq-banner ul{margin:0;padding-left:20px;font-size:12.5px;line-height:1.7}
+.faq-banner li{margin-bottom:2px}
+.faq-banner .faq-contact{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.25);font-size:12.5px}
+.faq-banner .faq-contact a{color:var(--ft-jaune);font-weight:700}
+
+.faq-toolbar{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+
+.faq-cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:22px}
+.faq-cat-card{background:#fff;border:1.5px solid var(--ft-border);border-radius:10px;padding:14px 16px;cursor:pointer;text-align:left;font-family:inherit;box-shadow:var(--sh-sm);transition:border-color .15s,transform .1s}
+.faq-cat-card:hover{border-color:var(--ft-indigo);transform:translateY(-1px)}
+.faq-cat-card.active{border-color:var(--ft-indigo);background:var(--ft-indigo-light)}
+.faq-cat-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.faq-cat-nom{font-size:12.5px;font-weight:700;color:var(--ft-navy);line-height:1.35}
+.faq-cat-count{flex:none;font-size:13px;font-weight:700;color:var(--ft-indigo);background:var(--ft-indigo-light);border-radius:999px;min-width:24px;height:24px;display:flex;align-items:center;justify-content:center;padding:0 8px}
+.faq-cat-count.faq-cat-count--new{background:var(--ft-jaune);color:var(--ft-navy);font-size:10px;padding:0 9px}
+.faq-cat-sub{font-size:11px;color:var(--ft-fg-3)}
+.faq-search{flex:1;min-width:220px;position:relative}
+.faq-search input{width:100%;padding:11px 14px 11px 38px;border:1px solid var(--ft-border);border-radius:999px;font-family:inherit;font-size:14px;background:#fff}
+.faq-search input:focus{outline:2px solid var(--ft-indigo);outline-offset:1px}
+.faq-search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ft-fg-3);pointer-events:none}
+.btn{font-family:inherit;font-size:13px;font-weight:700;border-radius:999px;padding:11px 20px;cursor:pointer;border:none;white-space:nowrap}
+.btn--primary{background:var(--ft-indigo);color:#fff}
+.btn--primary:hover{background:var(--ft-indigo-dark)}
+.btn--secondary{background:#fff;border:1px solid var(--ft-border);color:var(--ft-fg-2)}
+.btn--secondary:hover{background:var(--ft-sable)}
+.btn--sm{padding:7px 14px;font-size:12px}
+.btn:disabled{opacity:.5;cursor:default}
+
+.faq-count{font-size:12.5px;color:var(--ft-fg-3);margin-bottom:12px}
+.faq-list{display:flex;flex-direction:column;gap:14px}
+.faq-card{background:#fff;border:1px solid var(--ft-border);border-radius:10px;padding:18px 20px;box-shadow:var(--sh-sm)}
+.faq-card-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.faq-tag{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--ft-indigo-light);color:var(--ft-indigo)}
+.faq-tag--perimetre{background:var(--ft-violet-light);color:var(--ft-violet)}
+.faq-date{font-size:11px;color:var(--ft-fg-3);margin-left:auto}
+.faq-question{font-size:14.5px;font-weight:700;color:var(--ft-navy);margin:0 0 6px}
+.faq-desc{font-size:13px;color:var(--ft-fg-2);margin:0 0 10px;white-space:pre-wrap}
+.faq-like-row{display:flex;align-items:center;gap:8px}
+.faq-like-btn{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--ft-border);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--ft-fg-2);cursor:pointer;font-family:inherit}
+.faq-like-btn:hover{border-color:var(--ft-indigo);color:var(--ft-indigo)}
+.faq-like-btn.liked{background:var(--ft-indigo-light);border-color:var(--ft-indigo);color:var(--ft-indigo)}
+.faq-answer{margin-top:14px;padding:14px 16px;background:var(--ft-vert-light);border-left:3px solid var(--ft-vert);border-radius:0 6px 6px 0}
+.faq-answer-label{font-size:11px;font-weight:700;color:var(--ft-vert);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
+.faq-answer-text{font-size:13px;color:var(--ft-fg-1);white-space:pre-wrap;margin-bottom:10px}
+.empty-hint{font-size:13px;color:var(--ft-fg-3);padding:24px;text-align:center;background:#fff;border:1px dashed var(--ft-border);border-radius:10px}
+
+/* Modal formulaire */
+.overlay{display:none;position:fixed;inset:0;background:rgba(13,20,64,.55);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:10px;padding:26px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;position:relative;box-shadow:var(--sh-md)}
+.modal h3{margin:0 0 4px;font-size:17px;color:var(--ft-navy)}
+.modal .modal-sub{font-size:12.5px;color:var(--ft-fg-3);margin-bottom:18px}
+.close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--ft-fg-3);width:30px;height:30px;border-radius:50%}
+.close:hover{background:var(--ft-sable);color:var(--ft-navy)}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--ft-fg-2);margin:14px 0 4px}
+label .opt{font-weight:400;color:var(--ft-fg-3)}
+input[type=text],input[type=email],input[type=url],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--ft-border);border-radius:6px;font-family:inherit;font-size:13.5px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--ft-indigo);outline-offset:1px}
+.form-hint{font-size:11.5px;color:var(--ft-fg-3);margin-top:3px}
+.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.form-status{font-size:12.5px;margin-top:10px}
+.form-status.ok{color:var(--ft-vert)}
+.form-status.err{color:var(--ft-rouge)}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-inner">
+    <img src="assets/republique-francaise-rpe.png" alt="République Française - Réseau Pour l'Emploi">
+    <div class="site-title">
+      <h1>Ressources Tableau de bord RPE</h1>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="glossaire.html" class="nav-link">Glossaire</a>
+      <a href="faq.html" class="nav-link active">FAQ</a>
+      <a href="http://pilotage-rpe.francetravail.org/rpe" class="nav-cta" target="_blank" rel="noopener">Accéder au Tableau de Bord RPE</a>
+    </nav>
+    <a class="admin-link" href="admin.html">Connexion administrateur</a>
+  </div>
+</header>
+
+<main>
+  <div class="faq-banner" id="faqBanner"></div>
+
+  <div class="faq-cat-grid" id="faqCatGrid"></div>
+
+  <div class="faq-toolbar">
+    <div class="faq-search">
+      <span class="faq-search-icon">🔍</span>
+      <input type="text" id="faqSearchInput" placeholder="Rechercher dans les questions et réponses...">
+    </div>
+    <button type="button" class="btn btn--primary" id="btnAskQuestion">+ Poser une question</button>
+  </div>
+
+  <div class="faq-count" id="faqCount"></div>
+  <div class="faq-list" id="faqList"><div class="empty-hint">Chargement...</div></div>
+</main>
+
+<footer class="site">
+  <div class="inner">
+    <img class="footer-icon" src="assets/tdb-rpe-icon.svg" alt="">
+    <span class="footer-title">FAQ - Ressources Tableau de bord RPE</span>
+    <img class="footer-ft-logo" src="assets/logo-france-travail.svg" alt="France Travail">
+    <span class="footer-copy">© 2026 France Travail dans le cadre de sa mission d'appui au Réseau Pour l'Emploi</span>
+  </div>
+</footer>
+
+<!-- Modal formulaire "Poser une question" -->
+<div class="overlay" id="overlayForm">
+  <div class="modal">
+    <button class="close" id="btnCloseForm" aria-label="Fermer">&times;</button>
+    <h3>Poser une question</h3>
+    <p class="modal-sub">Votre question apparaîtra publiquement sur cette page dès qu'un administrateur y aura répondu.</p>
+    <form id="faqForm">
+      <label for="f_pseudo">Pseudo / Identifiant <span class="opt">(obligatoire)</span></label>
+      <input type="text" id="f_pseudo" required>
+
+      <label for="f_email">Adresse e-mail <span class="opt">(obligatoire - pour le suivi et la notification de réponse)</span></label>
+      <input type="email" id="f_email" required>
+
+      <label for="f_type">Type de demande <span class="opt">(obligatoire)</span></label>
+      <select id="f_type" required></select>
+
+      <label for="f_perimetre" id="f_perimetre_label">Périmètre concerné <span class="opt">(obligatoire)</span></label>
+      <select id="f_perimetre" required></select>
+
+      <div id="f_precision_block" style="display:none">
+        <label for="f_precision" id="f_precision_label">Précision <span class="opt">(obligatoire)</span></label>
+        <select id="f_precision"></select>
+      </div>
+
+      <label for="f_sujet">Sujet <span class="opt">(obligatoire - intitulé synthétique du besoin)</span></label>
+      <input type="text" id="f_sujet" required>
+
+      <label for="f_description">Description <span class="opt">(obligatoire)</span></label>
+      <textarea id="f_description" required placeholder="Détaillez votre question, la règle de calcul à éclaircir ou le besoin d'évolution métier..."></textarea>
+
+      <label for="f_impact">Impact métier <span class="opt">(facultatif)</span></label>
+      <select id="f_impact">
+        <option value="">- Non renseigné -</option>
+        <option value="Bloquant au quotidien">Bloquant au quotidien</option>
+        <option value="Gain de temps / Lisibilité">Gain de temps / Lisibilité</option>
+        <option value="Simple suggestion">Simple suggestion</option>
+      </select>
+
+      <label for="f_lien">Lien utile <span class="opt">(facultatif - capture d'écran, document partagé...)</span></label>
+      <input type="url" id="f_lien" placeholder="https://...">
+
+      <div class="form-actions">
+        <button type="button" class="btn btn--secondary" id="btnCancelForm">Annuler</button>
+        <button type="submit" class="btn btn--primary" id="btnSubmitForm">Envoyer ma question</button>
+      </div>
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+firebase.initializeApp(FIREBASE_CONFIG);
+var db = firebase.firestore();
+var auth = firebase.auth();
+
+/* ==== Referentiels et arborescence par defaut (utilises tant que rien n'a ete
+   enregistre dans Firestore, et comme structure de reference pour l'admin) ==== */
+var PAGES_TDB = [
+  "Accueil", "Nombre d'inscrits", "Accès / Présence en emploi",
+  "Délai de démarrage de l'accompagnement", "Taux de satisfaction des demandeurs d'emploi pour leur accompagnement",
+  "Entrées en formation", "Sortants de formation", "Taux de présence en emploi après une formation",
+  "Taux de recours", "Taux de satisfaction des entreprises", "Taux / délai de pourvoi des offres",
+  "Analyse par public", "Cas d'usage", "Feuilles de route & Fiches action"
+];
+var OBJETS_TECHNIQUES = [
+  "Fonctionnalité du tableau de bord RPE (navigation, filtre, tableau personnalisé, export, carte…)",
+  "Indicateurs stratégiques territoriaux (sélection, catalogue, habilitation…)",
+  "Feuilles de route & Fiches action (consultation, saisie, export…)"
+];
+var DEFAULT_REFERENTIELS = {
+  pages: {nom: "Pages du tableau de bord", items: PAGES_TDB},
+  objets_techniques: {nom: "Objets techniques", items: OBJETS_TECHNIQUES}
+};
+var DEFAULT_ARBRE = {
+  types: [
+    {
+      nom: "Compréhension d'une donnée / Règle de calcul",
+      perimetre_label: "Précisez la page concernée",
+      perimetre_source: "referentiel:pages",
+      perimetre_extra: [],
+      precision: null
+    },
+    {
+      nom: "Question technique / Prise en main",
+      perimetre_label: "Précisez l'objet concerné par votre demande",
+      perimetre_source: "referentiel:objets_techniques",
+      perimetre_extra: [],
+      precision: null
+    },
+    {
+      nom: "Souhait ajout de donnée",
+      perimetre_label: "Précisez la page concernée",
+      perimetre_source: "referentiel:pages",
+      perimetre_extra: ["Nouvelle page"],
+      precision: null
+    },
+    {
+      nom: "Suggestion d'évolution",
+      perimetre_label: "Précisez l'objet concerné par votre demande",
+      perimetre_source: "referentiel:objets_techniques",
+      perimetre_extra: ["Une page en particulier ?"],
+      precision: {trigger: "Une page en particulier ?", label: "Précisez la page concernée", source: "referentiel:pages"}
+    },
+    {
+      nom: "Signalement d'anomalie / Bug",
+      perimetre_label: "Précisez l'objet concerné par votre demande",
+      perimetre_source: "referentiel:objets_techniques",
+      perimetre_extra: ["Une page en particulier ?"],
+      precision: {trigger: "Une page en particulier ?", label: "Précisez la page concernée", source: "referentiel:pages"}
+    }
+  ]
+};
+var DEFAULT_FAQ_CONTENT = {
+  contact_email: "rpe.contact@francetravail.fr",
+  intro: "Cette FAQ centralise les questions les plus utiles au collectif. Vous trouverez ci-dessous quelques repères avant de poser la vôtre."
+};
+
+var referentiels = null;
+var arbre = null;
+var faqContent = null;
+var allQuestions = []; // uniquement les questions publiees, chargees une fois
+var selectedCategoryType = null; // type de demande selectionne via les cartes du haut (filtre + pre-selection formulaire)
+
+function escapeHtml(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function resolveReferentielItems(sourceKey){
+  if (!sourceKey) return [];
+  var key = sourceKey.replace('referentiel:', '');
+  return (referentiels[key] && referentiels[key].items) || [];
+}
+function perimetreOptionsForType(type){
+  return resolveReferentielItems(type.perimetre_source).concat(type.perimetre_extra || []);
+}
+
+/* ==== Chargement des donnees de configuration (referentiels, arbre, bandeau) ==== */
+function loadFaqConfig(){
+  return Promise.all([
+    db.collection('faq_referentiels').doc('config').get().catch(function(){ return null; }),
+    db.collection('faq_arbre').doc('config').get().catch(function(){ return null; }),
+    db.collection('faq_content').doc('config').get().catch(function(){ return null; })
+  ]).then(function(res){
+    referentiels = (res[0] && res[0].exists && res[0].data().data) ? res[0].data().data : DEFAULT_REFERENTIELS;
+    arbre = (res[1] && res[1].exists && res[1].data().data) ? res[1].data().data : DEFAULT_ARBRE;
+    faqContent = (res[2] && res[2].exists && res[2].data().data) ? res[2].data().data : DEFAULT_FAQ_CONTENT;
+    renderBanner();
+    buildTypeSelect();
+  });
+}
+
+function renderBanner(){
+  document.getElementById('faqBanner').innerHTML =
+    '<h2>ℹ️ Comment fonctionne cette FAQ ?</h2>' +
+    '<ul>' +
+      '<li>Chaque question est <strong>relue par un administrateur</strong> avant publication ; elle n\'apparaît sur cette page qu\'une fois la réponse rédigée.</li>' +
+      '<li>Cet espace n\'a d\'intérêt que pour des questions <strong>utiles à plusieurs utilisateurs</strong> : merci de vérifier qu\'une réponse similaire n\'existe pas déjà avant de poser la vôtre.</li>' +
+      '<li>Aucun engagement de délai n\'est pris sur les réponses apportées via ce canal.</li>' +
+    '</ul>' +
+    '<div class="faq-contact">📧 Pour une demande individuelle ou spécifique, contactez directement <a href="mailto:' + escapeHtml(faqContent.contact_email) + '">' + escapeHtml(faqContent.contact_email) + '</a>.</div>';
+}
+
+/* ==== Cartes par Type de demande : compteur de questions publiees (badge "Nouveaute"
+   si < 3), clic = filtre la liste ci-dessous et pre-selectionne ce type dans le formulaire. ==== */
+function renderCategoryCards(){
+  var grid = document.getElementById('faqCatGrid');
+  grid.innerHTML = arbre.types.map(function(type, i){
+    var count = allQuestions.filter(function(q){ return q.type === type.nom; }).length;
+    var isNew = count < 3;
+    var countHtml = isNew
+      ? '<span class="faq-cat-count faq-cat-count--new">Nouveauté</span>'
+      : '<span class="faq-cat-count">' + count + '</span>';
+    var isActive = selectedCategoryType === type.nom;
+    return '<button type="button" class="faq-cat-card' + (isActive ? ' active' : '') + '" data-cat-type="' + escapeHtml(type.nom) + '">' +
+      '<div class="faq-cat-card-top">' +
+        '<span class="faq-cat-nom">' + escapeHtml(type.nom) + '</span>' +
+        countHtml +
+      '</div>' +
+      '<span class="faq-cat-sub">' + (isNew ? 'Peu de questions pour le moment' : count + ' question' + (count > 1 ? 's' : '') + ' publiée' + (count > 1 ? 's' : '')) + '</span>' +
+    '</button>';
+  }).join('');
+  grid.querySelectorAll('[data-cat-type]').forEach(function(card){
+    card.addEventListener('click', function(){
+      var type = card.dataset.catType;
+      selectedCategoryType = (selectedCategoryType === type) ? null : type; // reclic = desactive le filtre
+      renderCategoryCards();
+      applyFilters();
+    });
+  });
+}
+
+/* Combine le filtre de categorie (cartes du haut) et la recherche textuelle en cours. */
+function applyFilters(){
+  var term = document.getElementById('faqSearchInput').value.trim().toLowerCase();
+  var base = selectedCategoryType ? allQuestions.filter(function(q){ return q.type === selectedCategoryType; }) : allQuestions;
+  if (!term) { renderQuestionList(base); return; }
+  var scored = base
+    .map(function(q){ return {q: q, score: searchScore(q, term)}; })
+    .filter(function(s){ return s.score > 0; })
+    .sort(function(a, b){ return b.score - a.score; })
+    .map(function(s){ return s.q; });
+  renderQuestionList(scored);
+}
+
+/* ==== Cascade du formulaire : Type -> Perimetre -> Precision ==== */
+function buildTypeSelect(){
+  var sel = document.getElementById('f_type');
+  sel.innerHTML = '<option value="">- Sélectionnez -</option>' +
+    arbre.types.map(function(t, i){ return '<option value="' + i + '">' + escapeHtml(t.nom) + '</option>'; }).join('');
+}
+document.getElementById('f_type').addEventListener('change', function(){
+  var idx = this.value;
+  var perimSel = document.getElementById('f_perimetre');
+  var precBlock = document.getElementById('f_precision_block');
+  precBlock.style.display = 'none';
+  document.getElementById('f_precision').innerHTML = '';
+  if (idx === '') {
+    perimSel.innerHTML = '<option value="">- Sélectionnez d\'abord un type -</option>';
+    return;
+  }
+  var type = arbre.types[parseInt(idx, 10)];
+  document.getElementById('f_perimetre_label').innerHTML = escapeHtml(type.perimetre_label) + ' <span class="opt">(obligatoire)</span>';
+  var opts = perimetreOptionsForType(type);
+  perimSel.innerHTML = '<option value="">- Sélectionnez -</option>' + opts.map(function(o){ return '<option value="' + escapeHtml(o) + '">' + escapeHtml(o) + '</option>'; }).join('');
+});
+document.getElementById('f_perimetre').addEventListener('change', function(){
+  var typeIdx = document.getElementById('f_type').value;
+  var precBlock = document.getElementById('f_precision_block');
+  var precSel = document.getElementById('f_precision');
+  precBlock.style.display = 'none';
+  precSel.innerHTML = '';
+  if (typeIdx === '') return;
+  var type = arbre.types[parseInt(typeIdx, 10)];
+  if (type.precision && type.precision.trigger === this.value) {
+    document.getElementById('f_precision_label').innerHTML = escapeHtml(type.precision.label) + ' <span class="opt">(obligatoire)</span>';
+    var opts = resolveReferentielItems(type.precision.source);
+    precSel.innerHTML = '<option value="">- Sélectionnez -</option>' + opts.map(function(o){ return '<option value="' + escapeHtml(o) + '">' + escapeHtml(o) + '</option>'; }).join('');
+    precSel.required = true;
+    precBlock.style.display = 'block';
+  } else {
+    precSel.required = false;
+  }
+});
+
+/* ==== Ouverture / fermeture du formulaire ==== */
+function openForm(){
+  document.getElementById('faqForm').reset();
+  document.getElementById('f_perimetre').innerHTML = '<option value="">- Sélectionnez d\'abord un type -</option>';
+  document.getElementById('f_precision_block').style.display = 'none';
+  document.getElementById('formStatus').textContent = '';
+  document.getElementById('overlayForm').classList.add('open');
+  if (selectedCategoryType) {
+    var typeIdx = arbre.types.findIndex(function(t){ return t.nom === selectedCategoryType; });
+    if (typeIdx > -1) {
+      var typeSel = document.getElementById('f_type');
+      typeSel.value = String(typeIdx);
+      typeSel.dispatchEvent(new Event('change'));
+    }
+  }
+}
+function closeForm(){ document.getElementById('overlayForm').classList.remove('open'); }
+document.getElementById('btnAskQuestion').addEventListener('click', openForm);
+document.getElementById('btnCloseForm').addEventListener('click', closeForm);
+document.getElementById('btnCancelForm').addEventListener('click', closeForm);
+document.getElementById('overlayForm').addEventListener('click', function(ev){ if (ev.target === this) closeForm(); });
+
+/* ==== Soumission du formulaire ==== */
+function ensureAuth(){
+  return auth.currentUser ? Promise.resolve(auth.currentUser) : auth.signInAnonymously().then(function(cred){ return cred.user; });
+}
+document.getElementById('faqForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var btn = document.getElementById('btnSubmitForm');
+  var status = document.getElementById('formStatus');
+  var typeIdx = document.getElementById('f_type').value;
+  if (typeIdx === '') { status.textContent = 'Veuillez sélectionner un type de demande.'; status.className = 'form-status err'; return; }
+  var type = arbre.types[parseInt(typeIdx, 10)];
+  var precisionRequired = !!(type.precision && type.precision.trigger === document.getElementById('f_perimetre').value);
+  var precisionValue = document.getElementById('f_precision').value;
+  if (precisionRequired && !precisionValue) { status.textContent = 'Veuillez préciser la page concernée.'; status.className = 'form-status err'; return; }
+
+  btn.disabled = true;
+  status.textContent = 'Envoi en cours...';
+  status.className = 'form-status';
+
+  ensureAuth().then(function(){
+    return db.collection('faq_questions').add({
+      pseudo: document.getElementById('f_pseudo').value.trim(),
+      email: document.getElementById('f_email').value.trim(),
+      type: type.nom,
+      perimetre: document.getElementById('f_perimetre').value,
+      precision: precisionRequired ? precisionValue : '',
+      sujet: document.getElementById('f_sujet').value.trim(),
+      description: document.getElementById('f_description').value.trim(),
+      impact: document.getElementById('f_impact').value,
+      lien: document.getElementById('f_lien').value.trim(),
+      reponse: '',
+      statut: 'en_attente',
+      date_creation: firebase.firestore.FieldValue.serverTimestamp(),
+      date_reponse: null,
+      likes_question: 0,
+      likes_reponse: 0
+    });
+  }).then(function(){
+    status.textContent = '✅ Votre question a bien été envoyée. Elle apparaîtra sur cette page dès qu\'un administrateur y aura répondu.';
+    status.className = 'form-status ok';
+    setTimeout(closeForm, 2500);
+  }).catch(function(err){
+    status.textContent = '❌ Échec de l\'envoi : ' + (err.message || err);
+    status.className = 'form-status err';
+  }).finally(function(){
+    btn.disabled = false;
+  });
+});
+
+/* ==== Chargement et affichage des questions publiees ==== */
+function loadPublishedQuestions(){
+  return db.collection('faq_questions').where('statut', '==', 'publiee').get().then(function(snap){
+    allQuestions = [];
+    snap.forEach(function(doc){ allQuestions.push(Object.assign({id: doc.id}, doc.data())); });
+    allQuestions.sort(function(a, b){
+      var da = a.date_reponse ? a.date_reponse.toMillis() : 0;
+      var db2 = b.date_reponse ? b.date_reponse.toMillis() : 0;
+      return db2 - da; // plus recemment repondu en premier
+    });
+    renderQuestionList(allQuestions);
+    renderCategoryCards();
+  });
+}
+
+function fmtDate(ts){
+  if (!ts) return '';
+  var d = ts.toDate ? ts.toDate() : new Date(ts);
+  var pad = function(n){ return n < 10 ? '0' + n : '' + n; };
+  return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear();
+}
+
+function getLikedSet(){
+  try { return JSON.parse(localStorage.getItem('faq_likes') || '[]'); } catch(e){ return []; }
+}
+function markLiked(key){
+  var s = getLikedSet();
+  if (s.indexOf(key) === -1) { s.push(key); localStorage.setItem('faq_likes', JSON.stringify(s)); }
+}
+
+function questionCardHtml(q){
+  var liked = getLikedSet();
+  var likedQ = liked.indexOf(q.id + ':q') > -1;
+  var likedR = liked.indexOf(q.id + ':r') > -1;
+  var metaTags = '<span class="faq-tag">' + escapeHtml(q.type) + '</span>' +
+    (q.perimetre ? '<span class="faq-tag faq-tag--perimetre">' + escapeHtml(q.precision || q.perimetre) + '</span>' : '') +
+    '<span class="faq-date">' + fmtDate(q.date_reponse) + '</span>';
+  return '<div class="faq-card" data-faq-id="' + q.id + '">' +
+    '<div class="faq-card-meta">' + metaTags + '</div>' +
+    '<p class="faq-question">' + escapeHtml(q.sujet) + '</p>' +
+    '<p class="faq-desc">' + escapeHtml(q.description) + '</p>' +
+    '<div class="faq-like-row">' +
+      '<button type="button" class="faq-like-btn' + (likedQ ? ' liked' : '') + '" data-like="q" data-id="' + q.id + '">👍 <span data-count="q">' + (q.likes_question || 0) + '</span></button>' +
+    '</div>' +
+    '<div class="faq-answer">' +
+      '<div class="faq-answer-label">Réponse</div>' +
+      '<div class="faq-answer-text">' + escapeHtml(q.reponse) + '</div>' +
+      '<div class="faq-like-row">' +
+        '<button type="button" class="faq-like-btn' + (likedR ? ' liked' : '') + '" data-like="r" data-id="' + q.id + '">👍 <span data-count="r">' + (q.likes_reponse || 0) + '</span></button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderQuestionList(list){
+  var container = document.getElementById('faqList');
+  var countEl = document.getElementById('faqCount');
+  countEl.textContent = list.length + ' question' + (list.length > 1 ? 's' : '') + ' publiée' + (list.length > 1 ? 's' : '');
+  container.innerHTML = list.length ? list.map(questionCardHtml).join('') : '<div class="empty-hint">Aucune question ne correspond pour le moment.</div>';
+}
+
+/* Recherche en temps reel avec tri par pertinence (nb d'occurrences du terme
+   dans le sujet, pondere plus fort, + description + reponse). */
+function searchScore(q, termLower){
+  var hay = [
+    {text: q.sujet || '', weight: 3},
+    {text: q.description || '', weight: 1},
+    {text: q.reponse || '', weight: 1}
+  ];
+  var score = 0;
+  hay.forEach(function(h){
+    var lower = h.text.toLowerCase();
+    var idx = 0, count = 0;
+    while ((idx = lower.indexOf(termLower, idx)) > -1) { count++; idx += termLower.length; }
+    score += count * h.weight;
+  });
+  return score;
+}
+document.getElementById('faqSearchInput').addEventListener('input', applyFilters);
+
+/* ==== Likes (question ou reponse), un seul like par navigateur via localStorage ==== */
+document.getElementById('faqList').addEventListener('click', function(ev){
+  var btn = ev.target.closest('[data-like]');
+  if (!btn) return;
+  var id = btn.dataset.id;
+  var kind = btn.dataset.like; // 'q' ou 'r'
+  var likeKey = id + ':' + kind;
+  if (getLikedSet().indexOf(likeKey) > -1) return; // deja like depuis ce navigateur
+  btn.disabled = true;
+  var field = kind === 'q' ? 'likes_question' : 'likes_reponse';
+  var update = {};
+  update[field] = firebase.firestore.FieldValue.increment(1);
+  ensureAuth().then(function(){
+    return db.collection('faq_questions').doc(id).update(update);
+  }).then(function(){
+    markLiked(likeKey);
+    btn.classList.add('liked');
+    var countSpan = btn.querySelector('[data-count]');
+    countSpan.textContent = parseInt(countSpan.textContent, 10) + 1;
+  }).catch(function(err){
+    console.warn('Like impossible :', err.message || err);
+  }).finally(function(){
+    btn.disabled = false;
+  });
+});
+
+/* ==== Demarrage ==== */
+loadFaqConfig().then(loadPublishedQuestions).catch(function(err){
+  document.getElementById('faqList').innerHTML = '<div class="empty-hint">Impossible de charger la FAQ pour le moment.</div>';
+  console.error(err);
+});
+</script>
+</body>
+</html>

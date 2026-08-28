@@ -133,7 +133,12 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .contact-card{background:linear-gradient(160deg,var(--ft-indigo),var(--ft-navy));color:#fff;border-radius:10px;padding:20px}
 .contact-card h3{margin:0 0 10px;font-size:14px;font-weight:700}
 .contact-card p{font-size:12.5px;color:#C9CEE8;margin:0 0 14px}
-.contact-cta{display:block;text-align:center;background:var(--ft-jaune);color:var(--ft-navy);font-weight:700;text-decoration:none;padding:11px 16px;border-radius:999px;font-size:12.5px}
+.contact-cta{display:block;text-align:center;font-weight:700;text-decoration:none;padding:11px 16px;border-radius:999px;font-size:12.5px;margin-bottom:8px}
+.contact-cta--primary{background:var(--ft-jaune);color:var(--ft-navy)}
+.contact-cta--primary:hover{background:var(--ft-jaune-dark)}
+.contact-cta--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.contact-cta--ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.contact-cta-hint{text-align:center;font-size:11px;color:#C9CEE8;margin:-2px 0 8px}
 .contact-cta:hover{background:var(--ft-jaune-dark)}
 .contact-note{background:rgba(255,255,255,.08);border-radius:4px;padding:10px 12px;font-size:11.5px;margin-top:14px;color:#C9CEE8}
 .contact-note a{color:#fff}
@@ -382,6 +387,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
     <nav class="site-nav">
       <a href="index.html" class="nav-link active">Accueil</a>
       <a href="glossaire.html" class="nav-link">Glossaire</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
       <a href="http://pilotage-rpe.francetravail.org/rpe" class="nav-cta" id="navCta" target="_blank" rel="noopener">Accéder au Tableau de Bord RPE</a>
     </nav>
     <a class="admin-link" href="admin.html">Connexion administrateur</a>
@@ -517,7 +523,6 @@ var DEFAULT_CONTENT = {
     {titre: "📑 Exemple de support de présentation de la feuille de route / structure", liens: [{label: "Consulter", url: "https://resana.numerique.gouv.fr/public/perimetre/consulter/697941?openGed=9274559"}]}
   ],
   contact: {
-    texte: "Un besoin de clarification, une idée d'amélioration, une demande d'évolution, une démo / partage d'écran / guidage...",
     booking_url: "https://outlook.office.com/bookwithme/user/0adba7d3dbe149d08220280f2f3b1bb5@francetravail.fr/meetingtype/ge0jCTI4RkiDoCsfVRaH1w2?anonymous&ismsaljsauthenabled&ep=mcard",
     consignes_erreur: "En cas d'erreur : videz le cache de votre navigateur et réessayez avant de nous contacter.",
     email_support: "contact-pilotage-rpe.00032@francetravail.fr"
@@ -1038,9 +1043,11 @@ function renderPage(content){
     '<div class="newsletter-status" id="newsletterStatus"></div>' +
   '</div>';
   html += '<div class="contact-card"><h3>💬 Contact &amp; assistance</h3>';
-  html += '<p>' + escapeHtml(contact.texte || '') + '</p>';
+  html += '<p>Un besoin de clarification, une idée d\'amélioration, une demande d\'évolution, une démo / partage d\'écran / guidage...</p>';
+  html += '<a class="contact-cta contact-cta--primary" href="faq.html">Consultez la FAQ</a>';
   if (contact.booking_url) {
-    html += '<a class="contact-cta" href="' + escapeHtml(contact.booking_url) + '" target="_blank" rel="noopener">Réservez un créneau de 15\'</a>';
+    html += '<a class="contact-cta contact-cta--ghost" href="' + escapeHtml(contact.booking_url) + '" target="_blank" rel="noopener">Réservez 15\' en visio</a>' +
+      '<div class="contact-cta-hint">Si votre réponse ne figure pas dans la FAQ</div>';
   }
   if (contact.consignes_erreur || contact.email_support) {
     html += '<div class="contact-note">' + escapeHtml(contact.consignes_erreur || '') +

@@ -144,6 +144,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
     </div>
     <a class="admin-link" href="index.html">&larr; Accueil</a>
     <a class="admin-link" href="glossaire.html">&larr; Glossaire public</a>
+    <a class="admin-link" href="faq.html">&larr; FAQ publique</a>
   </div>
 </header>
 
@@ -172,6 +173,11 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
           <div class="tab-group">
             <span class="tab-group-label">🗺️ Roadmap</span>
             <button class="btn btn--secondary btn--sm" id="tabRoadmap">Feuille de route</button>
+          </div>
+          <div class="tab-group">
+            <span class="tab-group-label">❓ FAQ</span>
+            <button class="btn btn--secondary btn--sm" id="tabFaqModeration">Modération</button>
+            <button class="btn btn--secondary btn--sm" id="tabFaqArbre">Arborescence</button>
           </div>
           <button class="btn btn--sm" id="btnLogout" style="margin-left:auto">Se déconnecter</button>
         </div>
@@ -252,9 +258,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <div id="rep_ressources"></div>
         <button type="button" class="btn btn--secondary btn--sm" id="add_ressources">+ Ajouter une ressource</button>
 
-        <div class="edit-section-label">Contact - texte</div>
-        <textarea class="edit-textarea" id="site_contact_texte"></textarea>
-        <div class="edit-section-label">Contact - lien de prise de rendez-vous</div>
+        <div class="edit-section-label">Contact - lien de prise de rendez-vous (bouton "Réservez 15' en visio")</div>
         <input class="edit-input" id="site_contact_booking">
         <div class="edit-section-label">Contact - consignes en cas d'erreur</div>
         <textarea class="edit-textarea" id="site_contact_consignes"></textarea>
@@ -301,6 +305,69 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
           <button class="btn btn--sm" id="btnSaveRoadmap2">💾 Enregistrer la feuille de route</button>
           <span id="roadmapStatus2" style="font-size:12.5px"></span>
         </div>
+      </div>
+    </div>
+
+    <div id="faqModerationSection" style="display:none">
+      <div class="card" style="max-width:1000px">
+        <h3 style="margin:0 0 10px">File de modération</h3>
+        <p class="form-hint" style="margin-top:0">Questions en attente d'une réponse. Une fois publiée, la question et sa réponse deviennent visibles sur la page FAQ publique.</p>
+        <div id="faqPendingList"><p class="form-hint">Chargement...</p></div>
+      </div>
+
+      <div class="card" style="max-width:1000px">
+        <h3 style="margin:0 0 10px">Questions publiées</h3>
+        <p class="form-hint" style="margin-top:0">Modifier la réponse ou dépublier une question déjà en ligne.</p>
+        <div id="faqPublishedList"><p class="form-hint">Chargement...</p></div>
+      </div>
+
+      <div class="card" style="max-width:1000px">
+        <h3 style="margin:0 0 10px">Ajouter une question manuellement</h3>
+        <p class="form-hint" style="margin-top:0">Publie directement un couple question/réponse sans passer par une demande utilisateur.</p>
+        <label style="display:block;font-size:12.5px;font-weight:600;margin:10px 0 4px">Type de demande</label>
+        <select class="edit-input" id="faqManual_type"></select>
+        <label style="display:block;font-size:12.5px;font-weight:600;margin:10px 0 4px">Périmètre concerné</label>
+        <select class="edit-input" id="faqManual_perimetre"></select>
+        <div id="faqManual_precision_block" style="display:none">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin:10px 0 4px" id="faqManual_precision_label">Précision</label>
+          <select class="edit-input" id="faqManual_precision"></select>
+        </div>
+        <label style="display:block;font-size:12.5px;font-weight:600;margin:10px 0 4px">Sujet</label>
+        <input type="text" class="edit-input" id="faqManual_sujet" placeholder="Intitulé synthétique">
+        <label style="display:block;font-size:12.5px;font-weight:600;margin:10px 0 4px">Question (description)</label>
+        <textarea class="edit-textarea" id="faqManual_description" placeholder="Formulation de la question..."></textarea>
+        <label style="display:block;font-size:12.5px;font-weight:600;margin:10px 0 4px">Réponse</label>
+        <textarea class="edit-textarea" id="faqManual_reponse" placeholder="Réponse à publier..."></textarea>
+        <button type="button" class="btn btn--sm" id="btnFaqManualAdd" style="margin-top:12px">+ Publier ce couple question/réponse</button>
+        <div id="faqManualStatus" style="font-size:12.5px;margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div id="faqArbreSection" style="display:none">
+      <button class="btn btn--sm btn-save-floating" id="btnSaveFaqArbre">💾 Enregistrer <span id="faqArbreStatusFloating"></span></button>
+      <div class="card" style="max-width:1000px">
+        <h3 style="margin:0 0 10px">Référentiels partagés</h3>
+        <p class="form-hint" style="margin-top:0">Ces listes sont réutilisées par plusieurs branches de l'arborescence ci-dessous. Une modification ici (ajout, renommage, suppression, réordonnancement) se répercute automatiquement partout où le référentiel est utilisé.</p>
+        <div id="faqReferentielsRoot"></div>
+      </div>
+
+      <div class="card" style="max-width:1000px">
+        <h3 style="margin:0 0 10px">Arborescence du formulaire (Type → Périmètre → Précision)</h3>
+        <p class="form-hint" style="margin-top:0">Chaque <strong>Type</strong> de demande définit comment se construit la liste "Périmètre concerné" : à partir d'un référentiel partagé ci-dessus, d'options propres à cette branche, ou des deux. Un niveau de <strong>Précision</strong> supplémentaire peut être déclenché par un choix particulier de périmètre.</p>
+        <div id="faqArbreRoot"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="btnFaqAddType" style="margin-top:10px">+ Ajouter un type de demande</button>
+        <div class="edit-footer">
+          <button class="btn btn--sm" id="btnSaveFaqArbre2">💾 Enregistrer l'arborescence</button>
+          <span id="faqArbreStatus2" style="font-size:12.5px"></span>
+        </div>
+      </div>
+
+      <div class="card" style="max-width:1000px">
+        <h3 style="margin:0 0 10px">Bandeau d'information de la page FAQ</h3>
+        <label style="display:block;font-size:12.5px;font-weight:600;margin:10px 0 4px">Adresse e-mail de contact direct</label>
+        <input type="email" class="edit-input" id="faqContact_email" placeholder="contact@francetravail.fr">
+        <button type="button" class="btn btn--sm" id="btnSaveFaqContact" style="margin-top:12px">💾 Enregistrer</button>
+        <span id="faqContactStatus" style="font-size:12.5px;margin-left:8px"></span>
       </div>
     </div>
   </div>
@@ -1124,22 +1191,30 @@ function setActiveTab(tab){
   document.getElementById('editSection').style.display = tab === 'edit' ? 'block' : 'none';
   document.getElementById('siteSection').style.display = tab === 'site' ? 'block' : 'none';
   document.getElementById('roadmapSection').style.display = tab === 'roadmap' ? 'block' : 'none';
+  document.getElementById('faqModerationSection').style.display = tab === 'faqModeration' ? 'block' : 'none';
+  document.getElementById('faqArbreSection').style.display = tab === 'faqArbre' ? 'block' : 'none';
   document.getElementById('tabProps').className = 'btn btn--sm' + (tab === 'props' ? ' tab-active' : '');
   document.getElementById('tabEdit').className = 'btn btn--secondary btn--sm' + (tab === 'edit' ? ' tab-active' : '');
   document.getElementById('tabSite').className = 'btn btn--secondary btn--sm' + (tab === 'site' ? ' tab-active' : '');
   document.getElementById('tabRoadmap').className = 'btn btn--secondary btn--sm' + (tab === 'roadmap' ? ' tab-active' : '');
+  document.getElementById('tabFaqModeration').className = 'btn btn--secondary btn--sm' + (tab === 'faqModeration' ? ' tab-active' : '');
+  document.getElementById('tabFaqArbre').className = 'btn btn--secondary btn--sm' + (tab === 'faqArbre' ? ' tab-active' : '');
   document.getElementById('panelTitle').textContent =
-    tab === 'props' ? 'Propositions en attente' : (tab === 'edit' ? 'Édition directe du glossaire' : (tab === 'roadmap' ? 'Feuille de route' : "Contenu de la page d'accueil"));
+    tab === 'props' ? 'Propositions en attente' : (tab === 'edit' ? 'Édition directe du glossaire' : (tab === 'roadmap' ? 'Feuille de route' : (tab === 'faqModeration' ? 'FAQ - Modération' : (tab === 'faqArbre' ? 'FAQ - Arborescence et référentiels' : "Contenu de la page d'accueil"))));
   document.querySelectorAll('#btnSelectAll,#btnValidateSelection,#btnRecalcCompteurs,#btnPurge,#btnExportXlsx,#btnImportXlsx').forEach(function(el){
     el.style.display = tab === 'props' ? 'inline-block' : 'none';
   });
   if (tab === 'site' && !siteContentLoaded) loadSiteContent();
   if (tab === 'roadmap' && !roadmapAdminLoaded) loadRoadmapAdmin();
+  if ((tab === 'faqModeration' || tab === 'faqArbre') && !faqAdminLoaded) loadFaqAdmin();
+  if (tab === 'faqModeration' && faqAdminLoaded) renderFaqModerationLists();
 }
 document.getElementById('tabProps').addEventListener('click', function(){ setActiveTab('props'); });
 document.getElementById('tabEdit').addEventListener('click', function(){ setActiveTab('edit'); document.getElementById('editFormHolder').innerHTML = ''; });
 document.getElementById('tabSite').addEventListener('click', function(){ setActiveTab('site'); });
 document.getElementById('tabRoadmap').addEventListener('click', function(){ setActiveTab('roadmap'); });
+document.getElementById('tabFaqModeration').addEventListener('click', function(){ setActiveTab('faqModeration'); });
+document.getElementById('tabFaqArbre').addEventListener('click', function(){ setActiveTab('faqArbre'); });
 
 /* ==== Contenu du site (page d'accueil) : editeur generique sans code ==== */
 var siteContentLoaded = false;
@@ -1220,7 +1295,6 @@ var DEFAULT_SITE_CONTENT = {
     {titre: "📑 Exemple de support de présentation de la feuille de route / structure", liens: [{label: "Consulter", url: "https://resana.numerique.gouv.fr/public/perimetre/consulter/697941?openGed=9274559"}]}
   ],
   contact: {
-    texte: "Un besoin de clarification, une idée d'amélioration, une demande d'évolution, une démo / partage d'écran / guidage...",
     booking_url: "https://outlook.office.com/bookwithme/user/0adba7d3dbe149d08220280f2f3b1bb5@francetravail.fr/meetingtype/ge0jCTI4RkiDoCsfVRaH1w2?anonymous&ismsaljsauthenabled&ep=mcard",
     consignes_erreur: "En cas d'erreur : videz le cache de votre navigateur et réessayez avant de nous contacter.",
     email_support: "contact-pilotage-rpe.00032@francetravail.fr"
@@ -1465,7 +1539,6 @@ function loadSiteContent(){
     var c = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : DEFAULT_SITE_CONTENT;
     document.getElementById('site_tdb_url').value = c.tdb_url || '';
     document.getElementById('site_intro_texte').value = (c.intro && c.intro.texte_html) || '';
-    document.getElementById('site_contact_texte').value = (c.contact && c.contact.texte) || '';
     document.getElementById('site_contact_booking').value = (c.contact && c.contact.booking_url) || '';
     document.getElementById('site_contact_consignes').value = (c.contact && c.contact.consignes_erreur) || '';
     document.getElementById('site_contact_email').value = (c.contact && c.contact.email_support) || '';
@@ -1511,7 +1584,6 @@ function saveSiteContent(){
     kiosque: sortByDateDesc(repeaters.kiosque.collect()),
     ressources: repeaters.ressources.collect(),
     contact: {
-      texte: document.getElementById('site_contact_texte').value.trim(),
       booking_url: document.getElementById('site_contact_booking').value.trim(),
       consignes_erreur: document.getElementById('site_contact_consignes').value.trim(),
       email_support: document.getElementById('site_contact_email').value.trim()
@@ -1542,6 +1614,34 @@ document.getElementById('btnSaveSite2').addEventListener('click', saveSiteConten
 
 /* ==== Feuille de route (roadmap) : editeur imbrique Epic > Domaine > Tache ==== */
 var ROADMAP_PALETTE = ["#293378", "#7E58A0", "#406BDE", "#1E7A3D", "#D96B00", "#D92424", "#5C0F38", "#0D7A87"];
+
+/* ==== FAQ : referentiels/arborescence par defaut, identiques a faq.html ==== */
+var PAGES_TDB = [
+  "Accueil", "Nombre d'inscrits", "Accès / Présence en emploi",
+  "Délai de démarrage de l'accompagnement", "Taux de satisfaction des demandeurs d'emploi pour leur accompagnement",
+  "Entrées en formation", "Sortants de formation", "Taux de présence en emploi après une formation",
+  "Taux de recours", "Taux de satisfaction des entreprises", "Taux / délai de pourvoi des offres",
+  "Analyse par public", "Cas d'usage", "Feuilles de route & Fiches action"
+];
+var OBJETS_TECHNIQUES = [
+  "Fonctionnalité du tableau de bord RPE (navigation, filtre, tableau personnalisé, export, carte…)",
+  "Indicateurs stratégiques territoriaux (sélection, catalogue, habilitation…)",
+  "Feuilles de route & Fiches action (consultation, saisie, export…)"
+];
+var DEFAULT_REFERENTIELS = {
+  pages: {nom: "Pages du tableau de bord", items: PAGES_TDB},
+  objets_techniques: {nom: "Objets techniques", items: OBJETS_TECHNIQUES}
+};
+var DEFAULT_ARBRE = {
+  types: [
+    {nom: "Compréhension d'une donnée / Règle de calcul", perimetre_label: "Précisez la page concernée", perimetre_source: "referentiel:pages", perimetre_extra: [], precision: null},
+    {nom: "Question technique / Prise en main", perimetre_label: "Précisez l'objet concerné par votre demande", perimetre_source: "referentiel:objets_techniques", perimetre_extra: [], precision: null},
+    {nom: "Souhait ajout de donnée", perimetre_label: "Précisez la page concernée", perimetre_source: "referentiel:pages", perimetre_extra: ["Nouvelle page"], precision: null},
+    {nom: "Suggestion d'évolution", perimetre_label: "Précisez l'objet concerné par votre demande", perimetre_source: "referentiel:objets_techniques", perimetre_extra: ["Une page en particulier ?"], precision: {trigger: "Une page en particulier ?", label: "Précisez la page concernée", source: "referentiel:pages"}},
+    {nom: "Signalement d'anomalie / Bug", perimetre_label: "Précisez l'objet concerné par votre demande", perimetre_source: "referentiel:objets_techniques", perimetre_extra: ["Une page en particulier ?"], precision: {trigger: "Une page en particulier ?", label: "Précisez la page concernée", source: "referentiel:pages"}}
+  ]
+};
+var DEFAULT_FAQ_CONTENT = {contact_email: "rpe.contact@francetravail.fr"};
 function rmDomaine(nom, idx){ return {nom: nom, couleur: ROADMAP_PALETTE[idx % ROADMAP_PALETTE.length], taches: []}; }
 var DEFAULT_ROADMAP_ADMIN = {
   epics: [
@@ -1973,6 +2073,421 @@ function renderEditForm(id){
       });
     });
   }
+}
+
+/* ==== Module FAQ : referentiels, arborescence, moderation, ajout manuel ==== */
+var faqReferentiels = null;
+var faqArbre = null;
+var faqAdminLoaded = false;
+var faqPendingQuestions = [];
+var faqPublishedQuestions = [];
+
+function loadFaqAdmin(){
+  faqAdminLoaded = true;
+  Promise.all([
+    db.collection('faq_referentiels').doc('config').get().catch(function(){ return null; }),
+    db.collection('faq_arbre').doc('config').get().catch(function(){ return null; })
+  ]).then(function(res){
+    faqReferentiels = (res[0] && res[0].exists && res[0].data().data) ? res[0].data().data : JSON.parse(JSON.stringify(DEFAULT_REFERENTIELS));
+    faqArbre = (res[1] && res[1].exists && res[1].data().data) ? res[1].data().data : JSON.parse(JSON.stringify(DEFAULT_ARBRE));
+    renderFaqReferentielsEditor();
+    renderFaqArbreEditor();
+    buildFaqManualTypeSelect();
+  });
+  db.collection('faq_content').doc('config').get().catch(function(){ return null; }).then(function(doc){
+    var c = (doc && doc.exists && doc.data().data) ? doc.data().data : DEFAULT_FAQ_CONTENT;
+    document.getElementById('faqContact_email').value = c.contact_email || '';
+  });
+  renderFaqModerationLists();
+}
+
+/* -- Referentiels partages -- */
+function renderFaqReferentielsEditor(){
+  var root = document.getElementById('faqReferentielsRoot');
+  var html = Object.keys(faqReferentiels).map(function(key){
+    var ref = faqReferentiels[key];
+    var itemsHtml = (ref.items || []).map(function(item, i){
+      return '<div class="rm-admin-row">' +
+        '<input class="edit-input" data-faqref="' + key + '.' + i + '" value="' + escapeHtml(item) + '">' +
+        '<button type="button" class="btn btn--secondary btn--sm" data-faqref-up="' + key + ':' + i + '"' + (i === 0 ? ' disabled' : '') + '>▲</button>' +
+        '<button type="button" class="btn btn--secondary btn--sm" data-faqref-down="' + key + ':' + i + '"' + (i === ref.items.length - 1 ? ' disabled' : '') + '>▼</button>' +
+        '<button type="button" class="btn btn--danger btn--sm" data-faqref-remove="' + key + ':' + i + '">🗑️</button>' +
+      '</div>';
+    }).join('');
+    return '<div class="rm-admin-domaine"><strong>' + escapeHtml(ref.nom) + '</strong> <span class="form-hint">(clé : ' + key + ')</span>' +
+      '<div style="margin-top:8px">' + itemsHtml + '</div>' +
+      '<button type="button" class="btn btn--secondary btn--sm" data-faqref-add="' + key + '" style="margin-top:6px">+ Ajouter un élément</button>' +
+    '</div>';
+  }).join('');
+  root.innerHTML = html;
+  bindFaqReferentielsEvents(root);
+}
+function syncFaqReferentielsDom(){
+  document.querySelectorAll('#faqReferentielsRoot [data-faqref]').forEach(function(el){
+    var parts = el.dataset.faqref.split('.');
+    faqReferentiels[parts[0]].items[parseInt(parts[1], 10)] = el.value.trim();
+  });
+}
+function bindFaqReferentielsEvents(root){
+  root.querySelectorAll('[data-faqref-add]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncFaqReferentielsDom();
+      faqReferentiels[btn.dataset.faqrefAdd].items.push('');
+      renderFaqReferentielsEditor();
+    });
+  });
+  root.querySelectorAll('[data-faqref-remove]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncFaqReferentielsDom();
+      var p = btn.dataset.faqrefRemove.split(':');
+      faqReferentiels[p[0]].items.splice(parseInt(p[1], 10), 1);
+      renderFaqReferentielsEditor();
+    });
+  });
+  root.querySelectorAll('[data-faqref-up],[data-faqref-down]').forEach(function(btn){
+    if (btn.disabled) return;
+    btn.addEventListener('click', function(){
+      syncFaqReferentielsDom();
+      var raw = btn.dataset.faqrefUp || btn.dataset.faqrefDown;
+      var p = raw.split(':');
+      var items = faqReferentiels[p[0]].items;
+      var idx = parseInt(p[1], 10);
+      var swap = btn.dataset.faqrefUp ? idx - 1 : idx + 1;
+      if (swap < 0 || swap >= items.length) return;
+      var tmp = items[idx]; items[idx] = items[swap]; items[swap] = tmp;
+      renderFaqReferentielsEditor();
+    });
+  });
+}
+
+/* -- Arborescence Type > Perimetre > Precision -- */
+var FAQ_SOURCE_OPTIONS = [
+  {value: '', label: '- Aucun référentiel (options propres uniquement) -'},
+  {value: 'referentiel:pages', label: 'Référentiel : Pages du tableau de bord'},
+  {value: 'referentiel:objets_techniques', label: 'Référentiel : Objets techniques'}
+];
+function faqSourceSelectHtml(dataAttr, current){
+  return '<select class="edit-input" ' + dataAttr + '>' +
+    FAQ_SOURCE_OPTIONS.map(function(o){ return '<option value="' + o.value + '"' + (o.value === (current || '') ? ' selected' : '') + '>' + o.label + '</option>'; }).join('') +
+  '</select>';
+}
+function renderFaqArbreEditor(){
+  var root = document.getElementById('faqArbreRoot');
+  var html = faqArbre.types.map(function(type, ti){
+    var extraHtml = (type.perimetre_extra || []).map(function(opt, oi){
+      return '<div class="rm-admin-row">' +
+        '<input class="edit-input" data-faqtype-extra="' + ti + '.' + oi + '" value="' + escapeHtml(opt) + '">' +
+        '<button type="button" class="btn btn--danger btn--sm" data-faqtype-extra-remove="' + ti + ':' + oi + '">🗑️</button>' +
+      '</div>';
+    }).join('');
+    var hasPrecision = !!type.precision;
+    return '<div class="rm-admin-epic">' +
+      '<div class="rm-admin-row">' +
+        '<span class="rm-admin-handle">Type</span>' +
+        '<input class="edit-input" data-faqtype-nom="' + ti + '" value="' + escapeHtml(type.nom) + '" placeholder="Nom du type de demande">' +
+        '<button type="button" class="btn btn--secondary btn--sm" data-faqtype-up="' + ti + '"' + (ti === 0 ? ' disabled' : '') + '>▲</button>' +
+        '<button type="button" class="btn btn--secondary btn--sm" data-faqtype-down="' + ti + '"' + (ti === faqArbre.types.length - 1 ? ' disabled' : '') + '>▼</button>' +
+        '<button type="button" class="btn btn--danger btn--sm" data-faqtype-remove="' + ti + '">🗑️</button>' +
+      '</div>' +
+      '<label style="font-size:11.5px;font-weight:600;margin:8px 0 3px">Libellé affiché pour "Périmètre concerné"</label>' +
+      '<input class="edit-input" data-faqtype-perimlabel="' + ti + '" value="' + escapeHtml(type.perimetre_label) + '">' +
+      '<label style="font-size:11.5px;font-weight:600;margin:8px 0 3px">Source du référentiel pour ce type</label>' +
+      faqSourceSelectHtml('data-faqtype-permsource="' + ti + '"', type.perimetre_source) +
+      '<label style="font-size:11.5px;font-weight:600;margin:8px 0 3px">Options propres à ce type (en plus du référentiel, le cas échéant)</label>' +
+      extraHtml +
+      '<button type="button" class="btn btn--secondary btn--sm" data-faqtype-extra-add="' + ti + '" style="margin-top:4px">+ Ajouter une option propre</button>' +
+      '<label style="font-size:11.5px;font-weight:600;margin:12px 0 3px">' +
+        '<input type="checkbox" data-faqtype-hasprec="' + ti + '"' + (hasPrecision ? ' checked' : '') + '> Ajouter un niveau de précision supplémentaire' +
+      '</label>' +
+      '<div class="rm-admin-tache" data-faqtype-precblock="' + ti + '" style="display:' + (hasPrecision ? 'block' : 'none') + '">' +
+        '<label style="font-size:11px">Se déclenche quand l\'utilisateur choisit ce périmètre :</label>' +
+        '<input class="edit-input" data-faqtype-prectrigger="' + ti + '" value="' + escapeHtml(hasPrecision ? type.precision.trigger : '') + '" placeholder="Doit correspondre exactement à une option de périmètre ci-dessus">' +
+        '<label style="font-size:11px">Libellé affiché pour ce niveau de précision :</label>' +
+        '<input class="edit-input" data-faqtype-preclabel="' + ti + '" value="' + escapeHtml(hasPrecision ? type.precision.label : '') + '">' +
+        '<label style="font-size:11px">Source du référentiel pour ce niveau :</label>' +
+        faqSourceSelectHtml('data-faqtype-precsource="' + ti + '"', hasPrecision ? type.precision.source : '') +
+      '</div>' +
+    '</div>';
+  }).join('');
+  root.innerHTML = html || '<p class="form-hint">Aucun type de demande - utilisez "+ Ajouter un type de demande" ci-dessous.</p>';
+  bindFaqArbreEvents(root);
+}
+function syncFaqArbreDom(){
+  document.querySelectorAll('#faqArbreRoot [data-faqtype-nom]').forEach(function(el){ faqArbre.types[parseInt(el.dataset.faqtypeNom, 10)].nom = el.value.trim(); });
+  document.querySelectorAll('#faqArbreRoot [data-faqtype-perimlabel]').forEach(function(el){ faqArbre.types[parseInt(el.dataset.faqtypePerimlabel, 10)].perimetre_label = el.value.trim(); });
+  document.querySelectorAll('#faqArbreRoot [data-faqtype-permsource]').forEach(function(el){ faqArbre.types[parseInt(el.dataset.faqtypePermsource, 10)].perimetre_source = el.value; });
+  document.querySelectorAll('#faqArbreRoot [data-faqtype-extra]').forEach(function(el){
+    var p = el.dataset.faqtypeExtra.split('.');
+    faqArbre.types[parseInt(p[0], 10)].perimetre_extra[parseInt(p[1], 10)] = el.value.trim();
+  });
+  document.querySelectorAll('#faqArbreRoot [data-faqtype-prectrigger]').forEach(function(el){
+    var t = faqArbre.types[parseInt(el.dataset.faqtypePrectrigger, 10)];
+    if (t.precision) t.precision.trigger = el.value.trim();
+  });
+  document.querySelectorAll('#faqArbreRoot [data-faqtype-preclabel]').forEach(function(el){
+    var t = faqArbre.types[parseInt(el.dataset.faqtypePreclabel, 10)];
+    if (t.precision) t.precision.label = el.value.trim();
+  });
+  document.querySelectorAll('#faqArbreRoot [data-faqtype-precsource]').forEach(function(el){
+    var t = faqArbre.types[parseInt(el.dataset.faqtypePrecsource, 10)];
+    if (t.precision) t.precision.source = el.value;
+  });
+}
+function bindFaqArbreEvents(root){
+  root.querySelectorAll('[data-faqtype-remove]').forEach(function(btn){
+    btn.addEventListener('click', function(){ syncFaqArbreDom(); faqArbre.types.splice(parseInt(btn.dataset.faqtypeRemove, 10), 1); renderFaqArbreEditor(); });
+  });
+  root.querySelectorAll('[data-faqtype-up],[data-faqtype-down]').forEach(function(btn){
+    if (btn.disabled) return;
+    btn.addEventListener('click', function(){
+      syncFaqArbreDom();
+      var idx = parseInt(btn.dataset.faqtypeUp || btn.dataset.faqtypeDown, 10);
+      var swap = btn.dataset.faqtypeUp ? idx - 1 : idx + 1;
+      if (swap < 0 || swap >= faqArbre.types.length) return;
+      var tmp = faqArbre.types[idx]; faqArbre.types[idx] = faqArbre.types[swap]; faqArbre.types[swap] = tmp;
+      renderFaqArbreEditor();
+    });
+  });
+  root.querySelectorAll('[data-faqtype-extra-add]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncFaqArbreDom();
+      var t = faqArbre.types[parseInt(btn.dataset.faqtypeExtraAdd, 10)];
+      t.perimetre_extra = t.perimetre_extra || [];
+      t.perimetre_extra.push('');
+      renderFaqArbreEditor();
+    });
+  });
+  root.querySelectorAll('[data-faqtype-extra-remove]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      syncFaqArbreDom();
+      var p = btn.dataset.faqtypeExtraRemove.split(':');
+      faqArbre.types[parseInt(p[0], 10)].perimetre_extra.splice(parseInt(p[1], 10), 1);
+      renderFaqArbreEditor();
+    });
+  });
+  root.querySelectorAll('[data-faqtype-hasprec]').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      syncFaqArbreDom();
+      var t = faqArbre.types[parseInt(cb.dataset.faqtypeHasprec, 10)];
+      t.precision = cb.checked ? {trigger: '', label: 'Précisez', source: ''} : null;
+      renderFaqArbreEditor();
+    });
+  });
+}
+document.getElementById('btnFaqAddType').addEventListener('click', function(){
+  syncFaqArbreDom();
+  faqArbre.types.push({nom: '', perimetre_label: 'Précisez le périmètre concerné', perimetre_source: '', perimetre_extra: [], precision: null});
+  renderFaqArbreEditor();
+});
+function saveFaqArbre(){
+  syncFaqReferentielsDom();
+  syncFaqArbreDom();
+  var s1 = document.getElementById('faqArbreStatus2');
+  var s3 = document.getElementById('faqArbreStatusFloating');
+  s1.textContent = '⏳ Enregistrement...';
+  if (s3) s3.textContent = '⏳';
+  Promise.all([
+    db.collection('faq_referentiels').doc('config').set({data: faqReferentiels}),
+    db.collection('faq_arbre').doc('config').set({data: faqArbre})
+  ]).then(function(){
+    s1.textContent = '✅ Enregistré.';
+    if (s3) s3.textContent = '✅';
+    buildFaqManualTypeSelect();
+    setTimeout(function(){ s1.textContent = ''; if (s3) s3.textContent = ''; }, 2500);
+  }).catch(function(err){
+    s1.textContent = '❌ Échec : ' + (err.message || err);
+    if (s3) s3.textContent = '❌';
+  });
+}
+document.getElementById('btnSaveFaqArbre').addEventListener('click', saveFaqArbre);
+document.getElementById('btnSaveFaqArbre2').addEventListener('click', saveFaqArbre);
+document.getElementById('btnSaveFaqContact').addEventListener('click', function(){
+  var s = document.getElementById('faqContactStatus');
+  s.textContent = '⏳';
+  db.collection('faq_content').doc('config').set({data: {contact_email: document.getElementById('faqContact_email').value.trim()}}).then(function(){
+    s.textContent = '✅ Enregistré.';
+    setTimeout(function(){ s.textContent = ''; }, 2000);
+  }).catch(function(err){ s.textContent = '❌ ' + (err.message || err); });
+});
+
+/* -- Ajout manuel (reutilise la meme cascade que le formulaire public) -- */
+function faqResolveReferentielItems(sourceKey){
+  if (!sourceKey) return [];
+  var key = sourceKey.replace('referentiel:', '');
+  return (faqReferentiels[key] && faqReferentiels[key].items) || [];
+}
+function faqPerimetreOptions(type){
+  return faqResolveReferentielItems(type.perimetre_source).concat(type.perimetre_extra || []);
+}
+function buildFaqManualTypeSelect(){
+  var sel = document.getElementById('faqManual_type');
+  sel.innerHTML = '<option value="">- Sélectionnez -</option>' + faqArbre.types.map(function(t, i){ return '<option value="' + i + '">' + escapeHtml(t.nom) + '</option>'; }).join('');
+}
+document.getElementById('faqManual_type').addEventListener('change', function(){
+  var idx = this.value;
+  var perimSel = document.getElementById('faqManual_perimetre');
+  document.getElementById('faqManual_precision_block').style.display = 'none';
+  document.getElementById('faqManual_precision').innerHTML = '';
+  if (idx === '') { perimSel.innerHTML = ''; return; }
+  var type = faqArbre.types[parseInt(idx, 10)];
+  var opts = faqPerimetreOptions(type);
+  perimSel.innerHTML = '<option value="">- Sélectionnez -</option>' + opts.map(function(o){ return '<option value="' + escapeHtml(o) + '">' + escapeHtml(o) + '</option>'; }).join('');
+});
+document.getElementById('faqManual_perimetre').addEventListener('change', function(){
+  var typeIdx = document.getElementById('faqManual_type').value;
+  var precBlock = document.getElementById('faqManual_precision_block');
+  var precSel = document.getElementById('faqManual_precision');
+  precBlock.style.display = 'none';
+  precSel.innerHTML = '';
+  if (typeIdx === '') return;
+  var type = faqArbre.types[parseInt(typeIdx, 10)];
+  if (type.precision && type.precision.trigger === this.value) {
+    document.getElementById('faqManual_precision_label').textContent = type.precision.label;
+    var opts = faqResolveReferentielItems(type.precision.source);
+    precSel.innerHTML = '<option value="">- Sélectionnez -</option>' + opts.map(function(o){ return '<option value="' + escapeHtml(o) + '">' + escapeHtml(o) + '</option>'; }).join('');
+    precBlock.style.display = 'block';
+  }
+});
+document.getElementById('btnFaqManualAdd').addEventListener('click', function(){
+  var status = document.getElementById('faqManualStatus');
+  var typeIdx = document.getElementById('faqManual_type').value;
+  var sujet = document.getElementById('faqManual_sujet').value.trim();
+  var description = document.getElementById('faqManual_description').value.trim();
+  var reponse = document.getElementById('faqManual_reponse').value.trim();
+  if (typeIdx === '' || !sujet || !description || !reponse) {
+    status.textContent = '❌ Merci de renseigner au minimum le type, le sujet, la question et la réponse.';
+    return;
+  }
+  var type = faqArbre.types[parseInt(typeIdx, 10)];
+  status.textContent = '⏳ Publication...';
+  db.collection('faq_questions').add({
+    pseudo: 'Équipe RPE',
+    email: '',
+    type: type.nom,
+    perimetre: document.getElementById('faqManual_perimetre').value,
+    precision: document.getElementById('faqManual_precision').value,
+    sujet: sujet,
+    description: description,
+    impact: '',
+    lien: '',
+    reponse: reponse,
+    statut: 'publiee',
+    date_creation: firebase.firestore.FieldValue.serverTimestamp(),
+    date_reponse: firebase.firestore.FieldValue.serverTimestamp(),
+    likes_question: 0,
+    likes_reponse: 0
+  }).then(function(){
+    status.textContent = '✅ Question publiée.';
+    ['faqManual_sujet', 'faqManual_description', 'faqManual_reponse'].forEach(function(id){ document.getElementById(id).value = ''; });
+    renderFaqModerationLists();
+  }).catch(function(err){
+    status.textContent = '❌ Échec : ' + (err.message || err);
+  });
+});
+
+/* -- File de moderation + questions publiees -- */
+function renderFaqModerationLists(){
+  db.collection('faq_questions').where('statut', '==', 'en_attente').get().then(function(snap){
+    faqPendingQuestions = [];
+    snap.forEach(function(doc){ faqPendingQuestions.push(Object.assign({id: doc.id}, doc.data())); });
+    faqPendingQuestions.sort(function(a, b){
+      var da = a.date_creation ? a.date_creation.toMillis() : 0;
+      var db2 = b.date_creation ? b.date_creation.toMillis() : 0;
+      return da - db2;
+    });
+    renderFaqPendingList();
+  });
+  db.collection('faq_questions').where('statut', '==', 'publiee').get().then(function(snap){
+    faqPublishedQuestions = [];
+    snap.forEach(function(doc){ faqPublishedQuestions.push(Object.assign({id: doc.id}, doc.data())); });
+    faqPublishedQuestions.sort(function(a, b){
+      var da = a.date_reponse ? a.date_reponse.toMillis() : 0;
+      var db2 = b.date_reponse ? b.date_reponse.toMillis() : 0;
+      return db2 - da;
+    });
+    renderFaqPublishedList();
+  });
+}
+function faqMetaLine(q){
+  return escapeHtml(q.type) + (q.perimetre ? ' › ' + escapeHtml(q.perimetre) : '') + (q.precision ? ' › ' + escapeHtml(q.precision) : '');
+}
+function renderFaqPendingList(){
+  var el = document.getElementById('faqPendingList');
+  if (!faqPendingQuestions.length) { el.innerHTML = '<p class="form-hint">Aucune question en attente.</p>'; return; }
+  el.innerHTML = faqPendingQuestions.map(function(q){
+    return '<div class="rm-admin-tache" style="margin-bottom:14px">' +
+      '<div class="form-hint">' + faqMetaLine(q) + ' · ' + escapeHtml(q.pseudo) + ' (' + escapeHtml(q.email) + ')</div>' +
+      '<p style="font-weight:700;margin:6px 0 4px">' + escapeHtml(q.sujet) + '</p>' +
+      '<p style="margin:0 0 8px;white-space:pre-wrap">' + escapeHtml(q.description) + '</p>' +
+      (q.lien ? '<p class="form-hint">Lien : <a href="' + escapeHtml(q.lien) + '" target="_blank" rel="noopener">' + escapeHtml(q.lien) + '</a></p>' : '') +
+      (q.impact ? '<p class="form-hint">Impact : ' + escapeHtml(q.impact) + '</p>' : '') +
+      '<textarea class="edit-textarea" data-faq-reponse="' + q.id + '" placeholder="Rédigez la réponse à publier..."></textarea>' +
+      '<button type="button" class="btn btn--sm" data-faq-publish="' + q.id + '">✅ Publier la réponse</button>' +
+      '<span class="form-hint" data-faq-pending-status="' + q.id + '" style="margin-left:8px"></span>' +
+    '</div>';
+  }).join('');
+  el.querySelectorAll('[data-faq-publish]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.dataset.faqPublish;
+      var textarea = el.querySelector('[data-faq-reponse="' + id + '"]');
+      var statusEl = el.querySelector('[data-faq-pending-status="' + id + '"]');
+      var reponse = textarea.value.trim();
+      if (!reponse) { statusEl.textContent = '❌ Rédigez une réponse avant de publier.'; return; }
+      statusEl.textContent = '⏳...';
+      db.collection('faq_questions').doc(id).update({
+        reponse: reponse,
+        statut: 'publiee',
+        date_reponse: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function(){
+        var q = faqPendingQuestions.find(function(x){ return x.id === id; });
+        statusEl.innerHTML = '✅ Publiée. ' + faqMailtoLinkHtml(q, reponse);
+        renderFaqModerationLists();
+      }).catch(function(err){
+        statusEl.textContent = '❌ Échec : ' + (err.message || err);
+      });
+    });
+  });
+}
+function faqMailtoLinkHtml(q, reponse){
+  if (!q || !q.email) return '';
+  var subject = 'Réponse à votre question FAQ : ' + q.sujet;
+  var body = 'Bonjour ' + q.pseudo + ',\n\n' +
+    'Votre question "' + q.sujet + '" a reçu une réponse, désormais publiée sur la FAQ du Tableau de bord RPE :\n\n' +
+    reponse + '\n\n' +
+    'Cordialement,\nL\'équipe Réseau Pour l\'Emploi';
+  var href = 'mailto:' + encodeURIComponent(q.email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  return '<a href="' + href + '" target="_blank">📧 Notifier ' + escapeHtml(q.pseudo) + ' par e-mail</a>';
+}
+function renderFaqPublishedList(){
+  var el = document.getElementById('faqPublishedList');
+  if (!faqPublishedQuestions.length) { el.innerHTML = '<p class="form-hint">Aucune question publiée.</p>'; return; }
+  el.innerHTML = faqPublishedQuestions.map(function(q){
+    return '<div class="rm-admin-tache" style="margin-bottom:14px">' +
+      '<div class="form-hint">' + faqMetaLine(q) + ' · 👍 ' + (q.likes_question || 0) + ' question / 👍 ' + (q.likes_reponse || 0) + ' réponse</div>' +
+      '<p style="font-weight:700;margin:6px 0 4px">' + escapeHtml(q.sujet) + '</p>' +
+      '<textarea class="edit-textarea" data-faq-editreponse="' + q.id + '">' + escapeHtml(q.reponse) + '</textarea>' +
+      '<button type="button" class="btn btn--secondary btn--sm" data-faq-updatereponse="' + q.id + '">💾 Mettre à jour la réponse</button>' +
+      '<button type="button" class="btn btn--danger btn--sm" data-faq-unpublish="' + q.id + '">↩️ Dépublier</button>' +
+      '<span class="form-hint" data-faq-pub-status="' + q.id + '" style="margin-left:8px"></span>' +
+    '</div>';
+  }).join('');
+  el.querySelectorAll('[data-faq-updatereponse]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.dataset.faqUpdatereponse;
+      var val = el.querySelector('[data-faq-editreponse="' + id + '"]').value.trim();
+      var statusEl = el.querySelector('[data-faq-pub-status="' + id + '"]');
+      statusEl.textContent = '⏳...';
+      db.collection('faq_questions').doc(id).update({reponse: val}).then(function(){
+        statusEl.textContent = '✅ Mise à jour.';
+      }).catch(function(err){ statusEl.textContent = '❌ ' + (err.message || err); });
+    });
+  });
+  el.querySelectorAll('[data-faq-unpublish]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (!confirm('Dépublier cette question ? Elle redeviendra invisible du public (repasse en attente).')) return;
+      db.collection('faq_questions').doc(btn.dataset.faqUnpublish).update({statut: 'en_attente'}).then(renderFaqModerationLists);
+    });
+  });
 }
 
 });

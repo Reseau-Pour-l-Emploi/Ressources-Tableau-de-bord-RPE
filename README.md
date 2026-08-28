@@ -186,6 +186,20 @@ Bouton "S'abonner à la newsletter" / "Se désabonner" sur la page d'accueil (da
 
 La barre d'outils admin distingue deux groupes d'onglets : **📚 Glossaire** (Propositions en attente / Mode édition) et **🏠 Accueil** (Contenu du site + Abonnés newsletter). Dans "Contenu du site", chaque bloc (agenda, actualités, Le Kiosque, ressources, liens de pied de page) affiche les **éléments existants pré-remplis** (pas seulement un formulaire d'ajout) : modifiez-les directement, supprimez-en avec "🗑️ Supprimer", ou ajoutez-en avec "+ Ajouter". Le contenu par défaut chargé dans cet éditeur avant toute sauvegarde est strictement identique à celui affiché publiquement (`DEFAULT_SITE_CONTENT` dans `admin.html` = `DEFAULT_CONTENT` dans `index.html`) : à maintenir synchronisé si l'un des deux est modifié directement dans le code.
 
+## Module FAQ
+
+Page publique `faq.html` : bandeau de cadrage (modération, intérêt collectif, absence d'engagement de délai, redirection e-mail), recherche en temps réel (pondérée sujet > description > réponse), bouton "Poser une question" ouvrant un formulaire dont les listes "Périmètre concerné" puis "Précision" se construisent dynamiquement selon le "Type de demande" choisi. Seules les questions publiées (répondues) sont visibles, chacune avec un bouton "j'aime" indépendant sur la question et sur la réponse (un like par question/réponse et par navigateur, via `localStorage`).
+
+Gérée depuis l'admin (❓ FAQ, deux sous-onglets) :
+- **Modération** : file d'attente (répondre puis publier, génère un lien `mailto:` pré-rempli vers l'auteur), liste des questions publiées (modifier la réponse ou dépublier), ajout manuel d'un couple question/réponse sans passer par un utilisateur.
+- **Arborescence** : les référentiels partagés ("Pages du tableau de bord", "Objets techniques") sont des listes uniques modifiables en un point ; chaque "Type de demande" pointe vers un référentiel (+ options propres à la branche) pour construire son périmètre, et peut déclencher un niveau de précision supplémentaire (référentiel + libellé) sur un choix de périmètre précis. Toute modification d'un référentiel se répercute automatiquement sur toutes les branches qui le référencent.
+
+### Modèle de données Firestore
+- `faq_referentiels/config` → `{data: {pages: {nom, items:[]}, objets_techniques: {nom, items:[]}}}`
+- `faq_arbre/config` → `{data: {types: [{nom, perimetre_label, perimetre_source, perimetre_extra:[], precision: null|{trigger, label, source}}]}}` (`perimetre_source`/`precision.source` valent `"referentiel:pages"`, `"referentiel:objets_techniques"` ou `""`)
+- `faq_content/config` → `{data: {contact_email}}`
+- `faq_questions/{id}` → pseudo, email, type, perimetre, precision, sujet, description, impact, lien, reponse, statut (`en_attente`|`publiee`), date_creation, date_reponse, likes_question, likes_reponse
+
 ## Feuille de route (roadmap)
 
 Popup plein écran (bouton "✕ Fermer"), ouverte en cliquant sur le lien "Voir la feuille de route" de l'actualité "Backlog des évolutions". Organisée en Epics > Domaines > Tâches (arborescence repliable) ; chaque tâche affiche une barre sur une frise chronologique si au moins une date est renseignée (début/fin de dev, début/fin de recette, livraison estimée), avec défilement horizontal pour parcourir tout le calendrier. Une légende de couleurs par typologie (Cadrage/Conception, Fonctionnalité/Évolution, Interface utilisateur/Design, Données/Ingénierie, Sécurité & Droits, Accompagnement au changement) est affichée en haut.

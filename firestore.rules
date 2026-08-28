@@ -55,5 +55,42 @@ service cloud.firestore {
         && request.resource.data.type in ['ajout', 'modification', 'suppression', 'groupe_lot', 'hierarchie_lot', 'groupe_suppression', 'hierarchie_suppression'];
       allow read, update, delete: if isAdmin();
     }
+
+    // ==== Module FAQ ====
+
+    // Referentiels partages (listes de pages, d'objets techniques...) et arborescence
+    // Type > Perimetre > Precision : lecture publique (necessaire au formulaire),
+    // ecriture reservee a l'admin (edites depuis admin.html).
+    match /faq_referentiels/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /faq_arbre/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    // Bandeau d'information de la page FAQ (texte de cadrage) : meme logique.
+    match /faq_content/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Questions/reponses : lecture publique UNIQUEMENT pour les questions publiees
+    // (une question en attente ne doit jamais fuiter au public avant reponse admin -
+    // email de l'auteur inclus). N'importe quel visiteur authentifie anonymement peut
+    // creer une question (statut force a 'en_attente', reponse vide) ou incrementer/
+    // decrementer un compteur de likes. Seul l'admin peut repondre/publier/supprimer,
+    // et lire les questions en attente (file de moderation).
+    match /faq_questions/{id} {
+      allow read: if isAdmin() || resource.data.statut == 'publiee';
+      allow create: if request.auth != null
+        && request.resource.data.statut == 'en_attente'
+        && request.resource.data.reponse == ''
+        && request.resource.data.email is string;
+      allow update: if isAdmin()
+        || (request.auth != null
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes_question', 'likes_reponse']));
+      allow delete: if isAdmin();
+    }
   }
 }
