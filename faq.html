@@ -79,9 +79,9 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .faq-cat-count.faq-cat-count--new{background:var(--ft-jaune);color:var(--ft-navy);font-size:10px;padding:0 9px}
 .faq-cat-sub{font-size:11px;color:var(--ft-fg-3)}
 .faq-search{flex:1;min-width:220px;position:relative}
-.faq-search input{width:100%;padding:11px 14px 11px 38px;border:1px solid var(--ft-border);border-radius:999px;font-family:inherit;font-size:14px;background:#fff}
+.faq-search input{width:100%;padding:11px 14px 11px 42px;border:1px solid var(--ft-border);border-radius:999px;font-family:inherit;font-size:14px;background:#fff}
 .faq-search input:focus{outline:2px solid var(--ft-indigo);outline-offset:1px}
-.faq-search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ft-fg-3);pointer-events:none}
+.faq-search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ft-fg-3);pointer-events:none;font-size:14px;line-height:1}
 .btn{font-family:inherit;font-size:13px;font-weight:700;border-radius:999px;padding:11px 20px;cursor:pointer;border:none;white-space:nowrap}
 .btn--primary{background:var(--ft-indigo);color:#fff}
 .btn--primary:hover{background:var(--ft-indigo-dark)}
@@ -223,6 +223,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ft-indigo);outli
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function(){
+
 firebase.initializeApp(FIREBASE_CONFIG);
 var db = firebase.firestore();
 var auth = firebase.auth();
@@ -321,6 +323,7 @@ function loadFaqConfig(){
     faqContent = (res[2] && res[2].exists && res[2].data().data) ? res[2].data().data : DEFAULT_FAQ_CONTENT;
     renderBanner();
     buildTypeSelect();
+    renderCategoryCards();
   });
 }
 
@@ -598,6 +601,8 @@ document.getElementById('faqList').addEventListener('click', function(ev){
 loadFaqConfig().then(loadPublishedQuestions).catch(function(err){
   document.getElementById('faqList').innerHTML = '<div class="empty-hint">Impossible de charger la FAQ pour le moment.</div>';
   console.error(err);
+});
+
 });
 </script>
 </body>
