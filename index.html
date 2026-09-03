@@ -55,6 +55,19 @@ footer.site{border-top:1px solid var(--ft-border);background:var(--ft-white);mar
 footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12px;color:var(--ft-fg-3);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px}
 .footer-center{grid-column:2;display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;text-align:center}
 .footer-ecoindex{grid-column:3;justify-self:end;display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ft-fg-3);white-space:nowrap}
+
+.footer-legal-link{background:none;border:none;font-family:inherit;font-size:11.5px;color:var(--ft-fg-3);text-decoration:underline;cursor:pointer;padding:0}
+.footer-legal-link:hover{color:var(--ft-indigo)}
+.legal-overlay{display:none;position:fixed;inset:0;background:rgba(13,20,64,.55);z-index:3500;align-items:flex-start;justify-content:center;overflow:auto;padding:40px 16px}
+.legal-overlay.open{display:flex}
+.legal-modal{background:#fff;border-radius:10px;max-width:680px;width:100%;padding:28px 30px;box-shadow:var(--sh-md);position:relative;font-size:13px;color:var(--ft-fg-2);line-height:1.6}
+.legal-modal h2{margin:0 0 16px;font-size:17px;color:var(--ft-navy)}
+.legal-modal h3{margin:20px 0 6px;font-size:13.5px;color:var(--ft-navy)}
+.legal-modal p{margin:0 0 8px}
+.legal-modal ul{margin:6px 0 0;padding-left:20px}
+.legal-modal li{margin-bottom:8px}
+.legal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--ft-fg-3);width:30px;height:30px;border-radius:50%}
+.legal-close:hover{background:var(--ft-sable);color:var(--ft-navy)}
 .footer-ecoindex:hover{color:var(--ft-indigo)}
 .ecoindex-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:4px;background:#2E7D32;color:#fff;font-weight:700;font-size:12px}
 .footer-icon{height:26px;width:auto;flex:none}
@@ -437,12 +450,37 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
       <span class="footer-title">Ressources Tableau de bord RPE</span>
       <img class="footer-ft-logo" src="assets/logo-france-travail.svg" alt="France Travail">
       <span class="footer-copy">© 2026 France Travail dans le cadre de sa mission d'appui au Réseau Pour l'Emploi</span>
+      <button type="button" class="footer-legal-link" id="btnOpenLegal">Mentions légales</button>
     </div>
     <a href="https://www.ecoindex.fr/resultat/?id=dd9168bf-d8db-462a-abc4-6154f15b0b12" class="footer-ecoindex" id="footerEcoindex" target="_blank" rel="noopener">
       <span class="ecoindex-badge" id="ecoindexBadge">A</span> EcoIndex
     </a>
   </div>
 </footer>
+
+<div class="legal-overlay" id="legalOverlay">
+  <div class="legal-modal">
+    <button type="button" class="legal-close" id="btnCloseLegal" aria-label="Fermer">&times;</button>
+    <h2>Mentions légales et avertissement</h2>
+
+    <h3>1. Éditeur du site et responsable de la publication</h3>
+    <p>Ce site est une initiative personnelle, indépendante et à titre individuel développée et maintenue par Denis GORCE.</p>
+    <p>Ce site ne constitue en aucun cas un canal officiel de communication ou un service d'État officiel.</p>
+
+    <h3>2. Hébergement</h3>
+    <p>Ce site est hébergé par GitHub Pages (GitHub Inc.) :<br>GitHub Inc. – 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis.</p>
+
+    <h3>3. Origine des données</h3>
+    <p>L'intégralité des données, cartes, indicateurs et ressources présentés sur ce site provient exclusivement de sources publiques officielles et de jeux de données en accès libre (Open Data).</p>
+    <p>Les dénominations, logos ou marques éventuellement cités (notamment France Travail ou Réseau pour l'emploi) le sont à titre strictement informatif et d'illustration, et demeurent la propriété exclusive de leurs déposants respectifs.</p>
+
+    <h3>4. Indépendance et exonération de responsabilité</h3>
+    <ul>
+      <li><strong>Absence de lien officiel</strong> : Ce site est édité à l'initiative exclusive de son auteur. Il n'est ni commandité, ni approuvé, ni géré par France Travail.</li>
+      <li><strong>Exclusion de responsabilité</strong> : France Travail ne saurait en aucun cas être tenu responsable du contenu, de l'exactitude, de l'actualisation ou de l'utilisation des données et outils mis à disposition sur cette plateforme. L'utilisateur exploite les contenus présentés sous sa seule et entière responsabilité.</li>
+    </ul>
+  </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
@@ -1739,6 +1777,19 @@ db.collection('site_content').doc('homepage').get().then(function(doc){
   renderPage(content);
 }).catch(function(){
   renderPage(DEFAULT_CONTENT);
+});
+
+document.getElementById('btnOpenLegal').addEventListener('click', function(){
+  document.getElementById('legalOverlay').classList.add('open');
+});
+document.getElementById('btnCloseLegal').addEventListener('click', function(){
+  document.getElementById('legalOverlay').classList.remove('open');
+});
+document.getElementById('legalOverlay').addEventListener('click', function(ev){
+  if (ev.target === this) this.classList.remove('open');
+});
+document.addEventListener('keydown', function(ev){
+  if (ev.key === 'Escape') document.getElementById('legalOverlay').classList.remove('open');
 });
 
 });
