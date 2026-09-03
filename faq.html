@@ -333,6 +333,12 @@ var faqContent = null;
 var allQuestions = []; // uniquement les questions publiees, chargees une fois
 var selectedCategoryType = null; // type de demande selectionne via les cartes du haut (filtre + pre-selection formulaire)
 
+/* Construit un lien mailto pre-rempli (objet + corps de message) vers le contact TDB RPE. */
+function tdbContactMailto(email){
+  var subject = 'Contact - Tableau de bord RPE';
+  var body = "Bonjour, je souhaite signaler un dysfonctionnement ou une anomalie présente sur le tableau de bord du Réseau  Pour l'Emploi.\nVeuillez trouver ci-dessous le détail de mon signalement :\n\n";
+  return 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+}
 function escapeHtml(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -371,7 +377,7 @@ function renderBanner(){
       '<li>Cet espace n\'a d\'intérêt que pour des questions <strong>utiles à plusieurs utilisateurs</strong> : merci de vérifier qu\'une réponse similaire n\'existe pas déjà avant de poser la vôtre.</li>' +
       '<li>Aucun engagement de délai n\'est pris sur les réponses apportées via ce canal.</li>' +
     '</ul>' +
-    '<div class="faq-contact">📧 Pour une demande individuelle ou spécifique, contactez directement <a href="mailto:' + escapeHtml(faqContent.contact_email) + '">' + escapeHtml(faqContent.contact_email) + '</a>.</div>';
+    '<div class="faq-contact">📧 Pour une demande individuelle ou spécifique, contactez directement <a href="' + tdbContactMailto(faqContent.contact_email) + '">Contact mail TDB RPE</a>.</div>';
 }
 
 /* ==== Cartes par Type de demande : compteur de questions publiees (badge "Nouveaute"

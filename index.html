@@ -576,6 +576,12 @@ var DEFAULT_CONTENT = {
   ecoindex: { lettre: "A", url: "https://www.ecoindex.fr/resultat/?id=dd9168bf-d8db-462a-abc4-6154f15b0b12" }
 };
 
+/* Construit un lien mailto pre-rempli (objet + corps de message) vers le contact TDB RPE. */
+function tdbContactMailto(email){
+  var subject = 'Contact - Tableau de bord RPE';
+  var body = "Bonjour, je souhaite signaler un dysfonctionnement ou une anomalie présente sur le tableau de bord du Réseau  Pour l'Emploi.\nVeuillez trouver ci-dessous le détail de mon signalement :\n\n";
+  return 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+}
 function escapeHtml(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -1089,7 +1095,7 @@ function renderPage(content){
   }
   if (contact.consignes_erreur || contact.email_support) {
     html += '<div class="contact-note">' + escapeHtml(contact.consignes_erreur || '') +
-      (contact.email_support ? ' <a href="mailto:' + escapeHtml(contact.email_support) + '">' + escapeHtml(contact.email_support) + '</a>' : '') + '</div>';
+      (contact.email_support ? ' <a href="' + tdbContactMailto(contact.email_support) + '">Contact mail TDB RPE</a>' : '') + '</div>';
   }
   html += '</div>';
   html += '</div>'; // /side-col
