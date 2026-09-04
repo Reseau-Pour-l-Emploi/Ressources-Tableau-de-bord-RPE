@@ -285,10 +285,16 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <p class="form-hint" style="margin-top:0">La liste des emails inscrits via le bouton "S'abonner à la newsletter" de la page d'accueil.</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
           <button class="btn btn--secondary btn--sm" id="btnExportSubs">📊 Exporter les abonnés en Excel</button>
-          <button class="btn btn--secondary btn--sm" id="btnImportSubs">📥 Importer une liste d'emails</button>
+          <button class="btn btn--secondary btn--sm" id="btnImportSubs">📥 Importer un fichier Excel</button>
           <input type="file" id="importSubsInput" accept=".xlsx" style="display:none">
           <span id="subsStatus" style="font-size:12.5px"></span>
         </div>
+
+        <div class="edit-section-label">Ajouter des abonnés par copier-coller (un email par ligne, ou séparés par virgule/point-virgule)</div>
+        <textarea class="edit-textarea" id="pasteSubsInput" placeholder="jean.dupont@francetravail.fr&#10;marie.martin@francetravail.fr&#10;..."></textarea>
+        <p class="form-hint" style="margin-top:0">Les doublons (déjà abonnés, ou répétés dans le texte collé) sont automatiquement ignorés - l'email sert d'identifiant unique.</p>
+        <button class="btn btn--sm" id="btnPasteSubs">+ Ajouter ces abonnés</button>
+        <span id="pasteSubsStatus" style="font-size:12.5px;margin-left:8px"></span>
       </div>
     </div>
 
@@ -1874,7 +1880,28 @@ function saveRoadmapContent(){
 document.getElementById('btnSaveRoadmap').addEventListener('click', saveRoadmapContent);
 document.getElementById('btnSaveRoadmap2').addEventListener('click', saveRoadmapContent);
 
-/* ==== Abonnes newsletter : export / import Excel ==== */
+/* ==== Abonnes newsletter : export / import Excel / copier-coller ====
+   L'email sert d'identifiant de document Firestore : un import (fichier ou texte colle)
+   qui contient un email deja abonne ecrase simplement le meme document (merge), sans
+   jamais creer de doublon - que ce soit par rapport a la base existante ou en interne
+   au texte colle (dedoublonnage via Set avant ecriture). */
+function importEmailsToSubscribers(emails, statusEl){
+  var uniqueEmails = Array.from(new Set(emails));
+  if (!uniqueEmails.length) { statusEl.textContent = 'Aucun email valide détecté.'; return; }
+  statusEl.textContent = 'Import de ' + uniqueEmails.length + ' email(s)...';
+  return Promise.all(uniqueEmails.map(function(email){
+    return db.collection('newsletter_subscribers').doc(email).set({email: email, subscribed: true, date: new Date().toISOString()}, {merge: true});
+  })).then(function(){
+    statusEl.textContent = '✅ ' + uniqueEmails.length + ' abonné(s) importé(s)/mis à jour (doublons ignorés automatiquement).';
+  }).catch(function(err){
+    statusEl.textContent = '❌ Échec : ' + (err.message || err);
+  });
+}
+function extractValidEmails(rawList){
+  return rawList.map(function(e){ return String(e || '').trim().toLowerCase(); })
+    .filter(function(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); });
+}
+
 document.getElementById('btnExportSubs').addEventListener('click', function(){
   var statusEl = document.getElementById('subsStatus');
   if (typeof XLSX === 'undefined') { statusEl.textContent = '❌ Bibliothèque Excel non chargée.'; return; }
@@ -1907,20 +1934,21 @@ document.getElementById('importSubsInput').addEventListener('change', function(e
     var wb = XLSX.read(new Uint8Array(e.target.result), {type: 'array'});
     var ws = wb.Sheets[wb.SheetNames[0]];
     var rows = XLSX.utils.sheet_to_json(ws, {defval: ''});
-    var emails = rows.map(function(r){
-      return (r['Email'] || r['email'] || r['EMAIL'] || '').trim().toLowerCase();
-    }).filter(function(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); });
-    if (!emails.length) { statusEl.textContent = 'Aucun email valide trouvé dans ce fichier (colonne "Email" attendue).'; return; }
-    statusEl.textContent = 'Import de ' + emails.length + ' email(s)...';
-    Promise.all(emails.map(function(email){
-      return db.collection('newsletter_subscribers').doc(email).set({email: email, subscribed: true, date: new Date().toISOString()}, {merge: true});
-    })).then(function(){
-      statusEl.textContent = '✅ ' + emails.length + ' abonné(s) importé(s)/mis à jour.';
-    }).catch(function(err){
-      statusEl.textContent = '❌ Échec : ' + (err.message || err);
-    });
+    var emails = extractValidEmails(rows.map(function(r){ return r['Email'] || r['email'] || r['EMAIL'] || ''; }));
+    importEmailsToSubscribers(emails, statusEl);
   };
   reader.readAsArrayBuffer(file);
+});
+
+document.getElementById('btnPasteSubs').addEventListener('click', function(){
+  var statusEl = document.getElementById('pasteSubsStatus');
+  var raw = document.getElementById('pasteSubsInput').value;
+  var candidates = raw.split(/[\n,;]+/);
+  var emails = extractValidEmails(candidates);
+  if (!emails.length) { statusEl.textContent = '❌ Aucun email valide détecté dans le texte collé.'; return; }
+  importEmailsToSubscribers(emails, statusEl).then(function(){
+    document.getElementById('pasteSubsInput').value = '';
+  });
 });
 
 document.getElementById('editSearch').addEventListener('input', function(){
