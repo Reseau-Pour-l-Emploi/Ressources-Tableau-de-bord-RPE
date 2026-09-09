@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Newsletter du tableau de bord RPE</title>
+<!--[if mso]>
+<noscript>
+<xml>
+<o:OfficeDocumentSettings>
+<o:PixelsPerInch>96</o:PixelsPerInch>
+</o:OfficeDocumentSettings>
+</xml>
+</noscript>
+<![endif]-->
+<style>
+  body, table, td { font-family: 'Marianne', Arial, Helvetica, sans-serif; }
+  img { border: 0; outline: none; text-decoration: none; }
+  a { color: #293378; }
+  @media screen and (max-width: 600px) {
+    .rpe-container { width: 100% !important; }
+    .rpe-px { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#F5F2EE;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">  <!--[if mso]> <img width="1" height="1" src="https://r.gem6.email.francetravail.fr/mk/op/sh/1f8JAEkBI5dysVwPLsKvF34fwN/yuN7B2ctk2lF" /> <![endif]-->
+	<!--[if !mso]> <!----> <img style="display:none" src="https://r.gem6.email.francetravail.fr/mk/op/sh/1f8JAEkBI5dysVwPLsKvF34fwN/yuN7B2ctk2lF" /> <!-- <![endif]--> 
+
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;font-size:1px;line-height:1px;color:#F5F2EE;">
+  Les ressources du tableau de bord RPE ont un nouvel espace, sans habilitation requise.
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F5F2EE;">
+<tr>
+<td align="center" style="padding:32px 16px;">
+
+<table role="presentation" class="rpe-container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background-color:#FFFFFF;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+
+  <!-- En-tete : bandeau degrade navy -> indigo, logo TDB RPE -->
+  <tr>
+    <td style="background-color:#1C2456;background:linear-gradient(135deg,#0D1440,#293378);padding:28px 32px;" class="rpe-px">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td valign="middle" style="width:56px;">
+            <img src="https://img.gem6.email.francetravail.fr/im/sh/V7Ji_egQO0b9.png?u=SyGgH01HHg313zSuQ2j3oJqedxNn" width="44" alt="Tableau de bord RPE" style="display:block;width:44px;height:auto;" sib_img_id="2">
+          </td>
+          <td valign="middle" style="padding-left:16px;">
+            <span style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:19px;line-height:1.3;color:#FFFFFF;font-weight:700;">Tableau de bord du Réseau Pour l'Emploi</span><br>
+            <span style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;color:#FFCC52;font-weight:700;letter-spacing:.02em;">La newsletter</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Bandeau date -->
+  <tr>
+    <td style="background-color:#FFF4D6;padding:14px 32px;" class="rpe-px">
+      <span style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;color:#0D1440;font-weight:700;">📬 Newsletter du 4 septembre 2026</span>
+    </td>
+  </tr>
+
+  <!-- Corps du message -->
+  <tr>
+    <td style="padding:32px;" class="rpe-px">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+
+        <tr>
+          <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:14px;line-height:1.65;color:#374151;padding-bottom:18px;">
+            Si vous suivez la communauté Resana du tableau de bord RPE, vous avez peut-être remarqué que cet espace n'est plus mis à jour.<br>
+            C'est normal : l'ensemble des ressources a désormais basculé vers une nouvelle page, accessible <strong style="color:#0D1440;">sans habilitation</strong>.
+          </td>
+        </tr>
+
+        <tr>
+          <td align="center" style="padding-bottom:24px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="center" style="border-radius:999px;background-color:#293378;">
+                  <a href="https://r.gem7.email.francetravail.fr/mk/cl/f/sh/1f8JIKXwHGYowyt0kjecU2H3O3/vN2kON3io7od" target="_blank" style="display:inline-block;padding:13px 28px;font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:999px;" sib_link_id="0" templating="n">
+                    Accéder à la nouvelle page →
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="background-color:#F5F2EE;border-radius:8px;padding:20px 22px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;color:#0D1440;padding-bottom:10px;">
+                  Vous y retrouverez notamment :
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13.5px;line-height:1.9;color:#374151;">
+                  📢 &nbsp;les actualités du tableau de bord<br>
+                  🗺️ &nbsp;la feuille de route (roadmap) des évolutions en cours<br>
+                  🎥 &nbsp;les replays et synthèses des webinaires<br>
+                  🔗 &nbsp;des liens et ressources utiles<br>
+                  ❓ &nbsp;une FAQ pour retrouver rapidement une réponse<br>
+                  📖 &nbsp;un accès direct au glossaire
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:14px;line-height:1.65;color:#374151;padding-top:16px;">
+            <em>Nous vous invitons à découvrir dès maintenant cette nouvelle page, notamment le replay, la synthèse et le questions-réponses du webinaire spécial rentrée 2026.</em><br><br>
+            <a href="https://r.gem7.email.francetravail.fr/mk/cl/f/sh/1f8JIKXwHGZDuBYDhuATkPJSUB/KmFL0gGTi0eK" target="_blank" sib_link_id="1" templating="n">
+              <img src="https://img.gem6.email.francetravail.fr/im/sh/VeqZ5fPJ-Z6h.png?u=SyGgH01HHg314OQ75FgEKB71gMTv" alt="Webinaire spécial rentrée 2026" width="520" style="display:block;width:100%;max-width:520px;height:auto;" sib_img_id="3">
+            </a>
+          </td>
+        </tr>
+
+        <tr><td style="padding:24px 0 20px;border-top:1px solid #E5E7EB;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+        <tr>
+          <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:14px;line-height:1.65;color:#374151;padding-bottom:14px;">
+            <strong style="color:#0D1440;">À propos de cette newsletter.</strong> Vous pouvez désormais vous abonner ou vous désabonner directement depuis la nouvelle page, en bas de l'accueil.
+          </td>
+        </tr>
+        <tr>
+          <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:14px;line-height:1.65;color:#374151;padding-bottom:14px;">
+            En tant que membre de la communauté Resana du tableau de bord RPE, vous avez été automatiquement ajouté à cette liste de diffusion, sans démarche de votre part. Notre objectif est de limiter les envois à <strong style="color:#0D1440;">deux messages maximum par mois</strong>.
+          </td>
+        </tr>
+
+        <!-- Encart avertissement Resana -->
+        <tr>
+          <td style="background-color:#FCEADB;border-left:3px solid #D96B00;border-radius:0 8px 8px 0;padding:16px 18px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;color:#0D1440;padding-bottom:6px;">
+                  ⚠️ Concernant votre compte Resana
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;line-height:1.65;color:#374151;">
+                  La plateforme Resana ne sera plus utilisée pour le tableau de bord RPE, mais restera active quelque temps. Nous vous suggérons de <strong>désactiver les notifications e-mail automatiques</strong> qu'elle continue d'envoyer. Par ailleurs, sans connexion de votre part pendant 3 mois, votre compte Resana sera automatiquement suspendu.
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:12.5px;line-height:1.6;color:#6B7280;padding-top:10px;">
+                  Si vous êtes membre d'autres communautés Resana, aucun changement ne vous concerne : cette information ne porte que sur la communauté du tableau de bord RPE.
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr><td style="padding:24px 0 20px;border-top:1px solid #E5E7EB;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+        <!-- Rappel systematique : acceder au tableau de bord lui-meme -->
+        <tr>
+          <td style="background-color:#E3E5F1;border-radius:8px;padding:20px 22px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;color:#0D1440;padding-bottom:6px;">
+                  📊 Le Tableau de bord du Réseau Pour l'Emploi
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;color:#374151;padding-bottom:12px;">
+                  Accessible à tous et sans habilitation, il permet de :
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;line-height:1.85;color:#374151;padding-bottom:16px;">
+                  &bull;&nbsp; Fédérer les acteurs autour d'un diagnostic et d'indicateurs communs.<br>
+                  &bull;&nbsp; Piloter le déploiement des feuilles de route locales.<br>
+                  &bull;&nbsp; Renforcer l'efficience en mesurant l'impact réel sur les usagers.<br>
+                  &bull;&nbsp; Valoriser les initiatives territoriales pour favoriser le partage de bonnes pratiques.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td align="center" style="border-radius:999px;border:1.5px solid #293378;">
+                        <a href="https://r.gem7.email.francetravail.fr/mk/cl/f/sh/1f8JIKXwHGZcrODQf4gL0mLraJ/Q07WdOXzQ0Uy" target="_blank" style="display:inline-block;padding:10px 22px;font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;color:#293378;text-decoration:none;border-radius:999px;" sib_link_id="2" templating="n">
+                          Accéder au tableau de bord RPE →
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr><td style="padding:24px 0 4px;border-top:1px solid #E5E7EB;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+        <tr>
+          <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:14px;line-height:1.65;color:#374151;padding-top:20px;">
+            À très bientôt,<br>
+            <strong style="color:#0D1440;">L'équipe du Tableau de bord du Réseau Pour l'Emploi</strong>
+          </td>
+        </tr>
+
+        <tr>
+          <td align="left" style="padding-top:26px;">
+            <img src="https://img.gem6.email.francetravail.fr/im/sh/6a-bwhHOaacy.png?u=SyGgH01HHg313aVhkpltISaHbYHf" width="90" alt="République Française - Réseau Pour l'Emploi" style="display:block;width:90px;height:auto;" sib_img_id="1">
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+
+  <!-- Pied de page -->
+  <tr>
+    <td style="background-color:#0D1440;padding:22px 32px;" class="rpe-px">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="font-family:'Marianne',Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.7;color:#C9CEE8;">
+            Tableau de bord RPE<br>
+            <a href="https://r.gem7.email.francetravail.fr/mk/cl/f/sh/1f8JIKXwHGa1oasdcFCCH9OGgR/Rte-NLs6qbUi" target="_blank" style="color:#FFCC52;text-decoration:none;" sib_link_id="3" templating="n">Accéder au site</a>
+            &nbsp;&middot;&nbsp;
+            <a href="https://r.gem7.email.francetravail.fr/mk/cl/f/sh/1f8JIKXwHGaQlnXqZPi3XWQfmZ/3Z8udPdjWUIx" target="_blank" style="color:#FFCC52;text-decoration:none;" sib_link_id="4" templating="n">Ressources</a>
+            &nbsp;&middot;&nbsp;
+            <a href="https://r.gem7.email.francetravail.fr/mk/cl/f/sh/1f8JIKXwHGapj0D3WaDuntT4sh/9STJNukgnrMV" target="_blank" style="color:#FFCC52;text-decoration:none;" sib_link_id="5" templating="n">Glossaire</a>
+            &nbsp;&middot;&nbsp;
+            <a href="https://r.gem7.email.francetravail.fr/mk/cl/f/sh/1f8JIKXwHGbEgCsGTkjm4GVTyp/fn2csQU2kctk" target="_blank" style="color:#FFCC52;text-decoration:none;" sib_link_id="6" templating="n">FAQ</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+   </body>
+</html>
