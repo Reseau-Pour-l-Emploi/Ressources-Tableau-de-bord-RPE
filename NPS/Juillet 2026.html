@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synthèse enquête NPS - Tableau de bord RPE</title>
+<style>
+  :root{
+    --ft-navy:#0D1440; --ft-indigo:#293378; --ft-indigo-light:#E3E5F1;
+    --ft-violet:#7E58A0; --ft-violet-light:#ECE6F2;
+    --ft-jaune:#FFCC52; --ft-jaune-dark:#E0A800; --ft-jaune-light:#FFF4D6;
+    --ft-bleu:#406BDE; --ft-bleu-light:#E2E8FB;
+    --ft-orange:#D96B00; --ft-orange-light:#FCEADB;
+    --ft-rouge:#D92424; --ft-rouge-light:#FBE3E3;
+    --ft-sable:#F5F2EE; --ft-sable-dark:#E6E1DB;
+    --ft-success:#1B7F3B; --ft-success-bg:#E3F4E9;
+    --ft-gray-500:#6B7280; --ft-gray-700:#374151;
+    --ft-fg-1:var(--ft-navy); --ft-fg-2:#374151; --ft-fg-3:#6B7280;
+    --ft-border:#E5E7EB;
+    --ft-radius-sm:4px; --ft-radius-md:8px; --ft-radius-lg:16px;
+    --ft-shadow-sm:0 1px 2px rgba(17,24,39,.06),0 1px 3px rgba(17,24,39,.05);
+    --ft-shadow-md:0 4px 8px rgba(17,24,39,.06),0 2px 4px rgba(17,24,39,.05);
+    --ft-font: 'Marianne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:var(--ft-font); color:var(--ft-fg-1);
+    background:var(--ft-sable); line-height:1.5;
+  }
+  .page{max-width:920px; margin:0 auto; padding:0 0 64px;}
+
+  /* Bandeau entête */
+  .masthead{
+    background:linear-gradient(135deg, var(--ft-navy) 0%, var(--ft-indigo) 100%);
+    color:#fff; padding:40px 32px 36px;
+  }
+  .masthead .eyebrow{
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ft-jaune); margin-bottom:10px;
+  }
+  .masthead h1{margin:0 0 6px; font-size:28px; font-weight:700; line-height:1.25;}
+  .masthead p{margin:0; color:#C9CDE6; font-size:14px; max-width:640px;}
+
+  section{padding:32px 32px 0;}
+  h2.section-title{
+    font-size:19px; font-weight:700; color:var(--ft-navy); margin:0 0 16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  h2.section-title .bar{width:4px; height:20px; background:var(--ft-jaune); border-radius:2px; display:inline-block;}
+
+  /* Intro */
+  .intro{background:#fff; border-radius:var(--ft-radius-lg); padding:20px 24px; box-shadow:var(--ft-shadow-sm); border:1px solid var(--ft-border); font-size:14px; color:var(--ft-fg-2);}
+
+  /* KPI */
+  .kpi-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:20px;}
+  .kpi-card{
+    background:#fff; border-radius:var(--ft-radius-md); padding:18px 14px;
+    text-align:center; box-shadow:var(--ft-shadow-sm); border:1px solid var(--ft-border);
+    border-top:3px solid var(--ft-indigo);
+  }
+  .kpi-card.accent-nps{border-top-color:var(--ft-navy); background:var(--ft-indigo-light);}
+  .kpi-value{font-size:26px; font-weight:700; color:var(--ft-navy);}
+  .kpi-label{font-size:11.5px; color:var(--ft-fg-3); margin-top:4px; font-weight:500;}
+
+  .lecture-note{
+    margin-top:14px; font-size:12.5px; color:var(--ft-fg-2); background:var(--ft-bleu-light);
+    border-left:3px solid var(--ft-bleu); border-radius:0 var(--ft-radius-sm) var(--ft-radius-sm) 0;
+    padding:10px 14px;
+  }
+  .lecture-note b{color:var(--ft-navy);}
+
+  /* Distribution chart */
+  .chart-card{
+    background:#fff; border-radius:var(--ft-radius-lg); padding:24px; margin-top:24px;
+    box-shadow:var(--ft-shadow-sm); border:1px solid var(--ft-border);
+  }
+  .chart-card h3{margin:0 0 4px; font-size:15px; font-weight:700; color:var(--ft-navy);}
+  .chart-card .chart-sub{font-size:12px; color:var(--ft-fg-3); margin-bottom:16px;}
+  .legend{display:flex; gap:18px; margin-bottom:18px; font-size:12px; flex-wrap:wrap;}
+  .legend-item{display:flex; align-items:center; gap:6px; color:var(--ft-fg-2);}
+  .legend-dot{width:11px; height:11px; border-radius:3px;}
+  .bar-chart{display:flex; align-items:flex-end; justify-content:space-between; height:160px; gap:6px; border-bottom:1px solid var(--ft-border); padding-bottom:2px;}
+  .bar-col{display:flex; flex-direction:column; align-items:center; flex:1; height:100%; justify-content:flex-end;}
+  .bar-num{font-size:11px; font-weight:700; color:var(--ft-navy); margin-bottom:3px;}
+  .bar-rect{width:70%; max-width:34px; border-radius:4px 4px 0 0;}
+  .bar-labels{display:flex; margin-top:6px;}
+  .bar-labels span{flex:1; text-align:center; font-size:11.5px; color:var(--ft-fg-3); font-weight:500;}
+
+  /* Themes */
+  .theme-card{
+    background:#fff; border-radius:var(--ft-radius-lg); padding:22px 24px; margin-bottom:16px;
+    box-shadow:var(--ft-shadow-sm); border:1px solid var(--ft-border); border-left:4px solid var(--ft-indigo);
+  }
+  .theme-head{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px;}
+  .theme-title-wrap{display:flex; align-items:center; gap:12px;}
+  .theme-icon{
+    width:38px; height:38px; border-radius:10px; background:var(--ft-indigo-light);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .theme-icon svg{width:20px; height:20px; stroke:var(--ft-indigo);}
+  .theme-title{font-size:16px; font-weight:700; color:var(--ft-navy); margin:0;}
+  .theme-meta{font-size:11.5px; color:var(--ft-fg-3); margin-top:2px;}
+  .badge{
+    font-size:11px; font-weight:700; padding:4px 10px; border-radius:999px; white-space:nowrap;
+  }
+  .badge-detracteur{background:var(--ft-rouge-light); color:#A81818;}
+  .badge-mixte{background:var(--ft-orange-light); color:#A85200;}
+  .badge-promoteur{background:var(--ft-success-bg); color:var(--ft-success);}
+
+  .action-label{
+    display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700;
+    color:var(--ft-navy); text-transform:uppercase; letter-spacing:.04em; margin:14px 0 8px;
+  }
+  .action-label::before{content:""; width:16px; height:2px; background:var(--ft-jaune); display:inline-block;}
+  .theme-card p{font-size:13.5px; color:var(--ft-fg-2); margin:0 0 10px;}
+  .theme-card ul{margin:0; padding-left:18px; font-size:13.5px; color:var(--ft-fg-2);}
+  .theme-card li{margin-bottom:8px;}
+  .theme-card li:last-child{margin-bottom:0;}
+  .theme-card em.tip{
+    display:block; margin-top:10px; font-size:12.5px; color:var(--ft-fg-3);
+    background:var(--ft-sable); border-radius:var(--ft-radius-sm); padding:8px 12px; font-style:normal;
+  }
+
+  footer{
+    margin-top:28px; padding:20px 32px; text-align:center; font-size:11.5px; color:var(--ft-fg-3);
+  }
+
+  @media (max-width:640px){
+    .kpi-grid{grid-template-columns:repeat(2,1fr);}
+    section{padding:24px 16px 0;}
+    .masthead{padding:28px 16px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div class="eyebrow">Réseau Pour l'Emploi &middot; Tableau de bord RPE</div>
+    <h1>Résultats de l'enquête de satisfaction (NPS)</h1>
+    <p>Synthèse de vos retours collectés du 10/06/2026 au 14/07/2026, et des actions engagées pour faire évoluer l'outil.</p>
+  </div>
+
+  <section>
+    <div class="intro">
+      Merci à toutes et tous pour votre participation. Vos retours nous permettent d'identifier précisément les priorités d'évolution du tableau de bord. Voici ce que nous en retenons et les actions déjà engagées.
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card accent-nps">
+        <div class="kpi-value">+11,1</div>
+        <div class="kpi-label">Score NPS</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">225</div>
+        <div class="kpi-label">Réponses analysées</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">40,0 %</div>
+        <div class="kpi-label">Promoteurs (9-10)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">31,1 %</div>
+        <div class="kpi-label">Passifs (7-8)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">28,9 %</div>
+        <div class="kpi-label">Détracteurs (0-6)</div>
+      </div>
+    </div>
+
+    <div class="lecture-note">
+      <b>Guide de lecture :</b> le NPS soustrait la part de détracteurs à la part de promoteurs (les passifs sont neutres). Échelle indicative : &lt; 0 alerte &middot; 0 à +20 fragile <i>(situation actuelle)</i> &middot; +20 à +50 bon &middot; &gt; +50 excellent.
+    </div>
+
+    <div class="chart-card">
+      <h3>Distribution des notes attribuées</h3>
+      <div class="chart-sub">Nombre de répondants par note, de 0 (pas du tout recommandé) à 10 (recommandé sans réserve)</div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-dot" style="background:var(--ft-rouge)"></span>Détracteurs (0-6)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--ft-jaune)"></span>Passifs (7-8)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--ft-navy)"></span>Promoteurs (9-10)</div>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-col"><span class="bar-num">12</span><div class="bar-rect" style="height:24%;background:var(--ft-rouge)"></div></div>
+        <div class="bar-col"><span class="bar-num">6</span><div class="bar-rect" style="height:12%;background:var(--ft-rouge)"></div></div>
+        <div class="bar-col"><span class="bar-num">8</span><div class="bar-rect" style="height:16%;background:var(--ft-rouge)"></div></div>
+        <div class="bar-col"><span class="bar-num">6</span><div class="bar-rect" style="height:12%;background:var(--ft-rouge)"></div></div>
+        <div class="bar-col"><span class="bar-num">3</span><div class="bar-rect" style="height:6%;background:var(--ft-rouge)"></div></div>
+        <div class="bar-col"><span class="bar-num">21</span><div class="bar-rect" style="height:42%;background:var(--ft-rouge)"></div></div>
+        <div class="bar-col"><span class="bar-num">9</span><div class="bar-rect" style="height:18%;background:var(--ft-rouge)"></div></div>
+        <div class="bar-col"><span class="bar-num">24</span><div class="bar-rect" style="height:48%;background:var(--ft-jaune)"></div></div>
+        <div class="bar-col"><span class="bar-num">46</span><div class="bar-rect" style="height:92%;background:var(--ft-jaune)"></div></div>
+        <div class="bar-col"><span class="bar-num">40</span><div class="bar-rect" style="height:80%;background:var(--ft-navy)"></div></div>
+        <div class="bar-col"><span class="bar-num">50</span><div class="bar-rect" style="height:100%;background:var(--ft-navy)"></div></div>
+      </div>
+      <div class="bar-labels">
+        <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="bar"></span>Vos remarques et nos actions engagées</h2>
+
+    <!-- Fiabilité -->
+    <div class="theme-card" style="border-left-color:var(--ft-rouge)">
+      <div class="theme-head">
+        <div class="theme-title-wrap">
+          <div class="theme-icon" style="background:var(--ft-rouge-light)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#A81818" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>
+          </div>
+          <div>
+            <p class="theme-title">Fiabilité et cohérence des données</p>
+            <div class="theme-meta">5 mentions &middot; thème le plus critique</div>
+          </div>
+        </div>
+        <span class="badge badge-detracteur">Détracteurs</span>
+      </div>
+      <p>Des écarts sont signalés entre le tableau de bord RPE et d'autres sources (francetravail.org, portraits sectoriels), ainsi qu'une méthode d'interprétation parfois insuffisamment documentée.</p>
+      <div class="action-label">Action engagée</div>
+      <p>Des travaux sont en cours avec les différents partenaires pour fiabiliser les données à la source. Le tableau de bord RPE n'étant que le reflet de ces données, il ne peut à lui seul en améliorer la qualité. Nous allons néanmoins rendre plus visibles les alertes signalant les données à interpréter avec prudence. Un glossaire participatif a par ailleurs été livré, permettant à chacun de signaler les données nécessitant une vigilance particulière.</p>
+    </div>
+
+    <!-- Bugs -->
+    <div class="theme-card" style="border-left-color:var(--ft-rouge)">
+      <div class="theme-head">
+        <div class="theme-title-wrap">
+          <div class="theme-icon" style="background:var(--ft-rouge-light)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#A81818" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="7" width="8" height="11" rx="4"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/><path d="M12 7v11M4 11h4M16 11h4M5 15l3-1M19 15l-3-1M5 18l3-1.5M19 18l-3-1.5"/></svg>
+          </div>
+          <div>
+            <p class="theme-title">Bugs et performance technique</p>
+            <div class="theme-meta">4 mentions</div>
+          </div>
+        </div>
+        <span class="badge badge-detracteur">Détracteurs</span>
+      </div>
+      <p>Chargements incomplets ou en échec, en particulier à la maille départementale, et lenteurs récurrentes.</p>
+      <div class="action-label">Action engagée</div>
+      <p>Une montée de version et des optimisations sur la construction des pages ont permis des gains considérables en temps de réponse, alors même que le volume de données traité a plus que doublé. Nous restons attentifs aux métriques de performance du tableau de bord. Les bugs sont corrigés au fur et à mesure de leur signalement, dans la mesure du possible.</p>
+      <em class="tip">Après une montée de version, pensez à vider le cache de votre navigateur : c'est la cause la plus fréquente des dysfonctionnements rencontrés.</em>
+    </div>
+
+    <!-- Fonctionnalités manquantes -->
+    <div class="theme-card" style="border-left-color:var(--ft-orange)">
+      <div class="theme-head">
+        <div class="theme-title-wrap">
+          <div class="theme-icon" style="background:var(--ft-orange-light)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#A85200" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5a2.5 2.5 0 0 1 3.54 3.54L7 18l-4 1 1-4L14.5 3.5z"/><path d="M4 20l1-1"/><circle cx="6" cy="18" r="0"/></svg>
+          </div>
+          <div>
+            <p class="theme-title">Fonctionnalités manquantes</p>
+            <div class="theme-meta">8 mentions &middot; thème le plus fréquent : export, granularité territoriale, comparaison de périodes</div>
+          </div>
+        </div>
+        <span class="badge badge-mixte">Mixte</span>
+      </div>
+      <div class="action-label">Actions engagées</div>
+      <ul>
+        <li><b>Exports de données :</b> la limite actuelle de 500 lignes pour les tableaux personnalisés va être augmentée.</li>
+        <li><b>Granularité territoriale :</b> l'ajout d'un niveau communal croisé avec l'ensemble des dimensions ne permettrait plus de garantir le secret statistique. Pour un pilotage opérationnel fin et en temps réel, il est recommandé de s'appuyer sur les autres outils conçus à cet effet.</li>
+        <li><b>Maille départementale :</b> l'écart entre la somme des CLPE et le niveau départemental est identifié. Une correction nécessiterait des développements lourds, risquant d'impacter la navigation et la fiabilité globale : nous recherchons une alternative plus sûre.</li>
+        <li><b>Comparaison de périodes :</b> l'historique va être étendu à 25 mois, offrant deux repères de comparaison en cumul sur 12 mois.</li>
+      </ul>
+    </div>
+
+    <!-- Ergonomie -->
+    <div class="theme-card" style="border-left-color:var(--ft-orange)">
+      <div class="theme-head">
+        <div class="theme-title-wrap">
+          <div class="theme-icon" style="background:var(--ft-orange-light)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#A85200" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7 17 2.5-7L20 11 4 4z"/></svg>
+          </div>
+          <div>
+            <p class="theme-title">Ergonomie et prise en main</p>
+            <div class="theme-meta">4 mentions</div>
+          </div>
+        </div>
+        <span class="badge badge-mixte">Mixte</span>
+      </div>
+      <p>Absence de tutoriel pour les nouveaux utilisateurs, et parcours de saisie des fiches action jugé long et peu intuitif.</p>
+      <div class="action-label">Action engagée</div>
+      <p>Une solution totalement intégrée est en cours de déploiement d'ici la fin de l'année, pour faciliter la consultation, la saisie, la modification et le pilotage des fiches action et feuilles de route. Dès aujourd'hui, un glossaire détaillé et un site recensant l'ensemble des ressources pratiques (tutoriels, webinaires, newsletter) sont disponibles. Des cas d'usage seront prochainement intégrés directement dans l'outil, pour guider pas à pas vos analyses sans changer de page.</p>
+    </div>
+
+    <!-- Satisfaction -->
+    <div class="theme-card" style="border-left-color:var(--ft-success)">
+      <div class="theme-head">
+        <div class="theme-title-wrap">
+          <div class="theme-icon" style="background:var(--ft-success-bg)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1B7F3B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6L12 3z"/></svg>
+          </div>
+          <div>
+            <p class="theme-title">Satisfaction et valeur perçue</p>
+            <div class="theme-meta">6 mentions</div>
+          </div>
+        </div>
+        <span class="badge badge-promoteur">Promoteurs</span>
+      </div>
+      <p>Vos retours soulignent l'utilité de l'outil pour le pilotage quotidien et saluent le rythme des évolutions récentes.</p>
+      <div class="action-label">Notre engagement</div>
+      <p>Merci pour ces retours qui nous motivent à poursuivre nos efforts, pour un outil toujours plus performant au service du pilotage du Réseau Pour l'Emploi.</p>
+    </div>
+  </section>
+
+  <footer>
+    Tableau de bord RPE &middot; France Travail, Direction de la Performance &middot; contact-pilotage-rpe.00032@francetravail.fr
+  </footer>
+
+</div>
+</body>
+</html>
