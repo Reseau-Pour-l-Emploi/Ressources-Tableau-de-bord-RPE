@@ -10,6 +10,8 @@
 <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script defer src="firebase-config.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
 <script data-goatcounter="https://denisft.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 <style>
@@ -51,6 +53,17 @@ header.site{background:var(--ft-white);border-bottom:1px solid var(--ft-border);
 .nav-link:hover{color:var(--ft-indigo)}
 .nav-link.active{color:var(--ft-indigo);border-bottom-color:var(--ft-indigo)}
 .nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--ft-indigo);text-decoration:none;padding:9px 16px;border-radius:999px;white-space:nowrap}
+.nav-guide-btn{font-family:inherit;font-size:13px;font-weight:700;color:var(--ft-indigo);background:#fff;border:1.5px solid var(--ft-indigo);text-decoration:none;padding:7.5px 14px;border-radius:999px;white-space:nowrap;cursor:pointer}
+.nav-guide-btn:hover{background:var(--ft-indigo-light)}
+
+.driver-popover{border-radius:10px !important;box-shadow:var(--sh-md) !important;font-family:var(--ft-font) !important;max-width:340px !important}
+.driver-popover-title{color:var(--ft-navy) !important;font-size:15px !important}
+.driver-popover-description{color:var(--ft-fg-2) !important;font-size:13px !important;line-height:1.55 !important}
+.driver-popover-progress-text{color:var(--ft-fg-3) !important;font-size:11.5px !important}
+.driver-popover-footer button{font-family:inherit !important;font-size:12.5px !important;font-weight:700 !important;text-shadow:none !important;border-radius:999px !important;padding:7px 14px !important}
+.driver-popover-next-btn,.driver-popover-close-btn{background:var(--ft-indigo) !important;color:#fff !important;border:none !important}
+.driver-popover-prev-btn{background:#fff !important;color:var(--ft-indigo) !important;border:1px solid var(--ft-border) !important}
+.driver-active-element{border-radius:8px !important}
 .nav-cta:hover{background:var(--ft-indigo-dark)}
 main{max-width:1500px;margin:0 auto;padding:20px 24px 56px}
 footer.site{border-top:1px solid var(--ft-border);background:var(--ft-white);margin-top:24px}
@@ -206,6 +219,7 @@ form.contrib textarea{min-height:64px;resize:vertical}
       <a href="index.html" class="nav-link">Accueil</a>
       <a href="glossaire.html" class="nav-link active">Glossaire</a>
       <a href="faq.html" class="nav-link">FAQ</a>
+      <button type="button" class="nav-guide-btn" id="btnStartTour">🧭 Guide</button>
       <a href="http://pilotage-rpe.francetravail.org/rpe" class="nav-cta" id="navCta" target="_blank" rel="noopener">Accéder au Tableau de Bord RPE</a>
     </nav>
     <a class="admin-link" href="admin.html">Connexion administrateur</a>
@@ -1694,6 +1708,41 @@ document.getElementById('legalOverlay').addEventListener('click', function(ev){
 });
 document.addEventListener('keydown', function(ev){
   if (ev.key === 'Escape') document.getElementById('legalOverlay').classList.remove('open');
+});
+
+/* ==== Guide de navigation (Driver.js) : filtres, categories, tags, mode participatif ==== */
+document.getElementById('btnStartTour').addEventListener('click', function(){
+  if (typeof driver === 'undefined') { alert("Le guide n'a pas pu se charger. Vérifiez votre connexion et réessayez."); return; }
+  var steps = [];
+  function addStep(selector, title, description, side){
+    var el = document.querySelector(selector);
+    if (!el) return;
+    steps.push({element: selector, popover: {title: title, description: description, side: side || 'bottom', align: 'start'}});
+  }
+  steps.push({popover: {
+    title: '👋 Bienvenue dans le glossaire',
+    description: "Ce guide vous présente les deux catégories de fiches, les filtres disponibles, les différentes étiquettes, et le fonctionnement participatif du glossaire."
+  }});
+  addStep('.site-nav', 'Trois espaces à explorer', "En plus du Glossaire, retrouvez l'<strong>Accueil</strong> et la <strong>FAQ</strong> - chacun dispose de son propre guide via ce même bouton 🧭 Guide.");
+  addStep('#search', 'Recherche libre', "Recherchez une fiche par son libellé ou son nom technique.");
+  addStep('#typeFilter', 'Filtre Dimension / Mesure', "Concerne uniquement les champs de tableaux personnalisés : une <strong>dimension</strong> sert à regrouper ou filtrer, une <strong>mesure</strong> est un chiffre calculé.");
+  addStep('#sourceFilter', 'Les deux catégories de fiches', "<strong>📄 Indicateurs de synthèse</strong> : les données affichées sur les pages de restitution du tableau de bord.<br><strong>🗂️ Champs des tableaux personnalisés</strong> : les données disponibles pour construire vos propres tableaux.<br>Une troisième option affiche uniquement les <strong>🗝️ KPI</strong>, les indicateurs stratégiques définis par le Comité National pour l'Emploi.");
+  addStep('#pageFilter', 'Filtre par page', "Affiche les fiches utilisées sur une page précise du tableau de bord.");
+  addStep('#azbarHolder', 'Navigation alphabétique', "Sautez directement à une lettre pour parcourir les fiches par ordre alphabétique.");
+  addStep('.card', 'Comprendre les étiquettes', "Chaque fiche peut porter : <strong>🗝️</strong> pour un KPI, <strong>📄 Indicateur</strong> ou <strong>🗂️ Champ</strong> selon sa nature, et pour les champs uniquement, une étiquette <strong>Dimension</strong> ou <strong>Mesure</strong>. Ce bloc d'aide, à tout moment dépliable, détaille chaque notion.", 'bottom');
+  addStep('.contribute-banner', 'Un glossaire participatif', "Une donnée manque ou est incomplète ? Proposez un <strong>ajout</strong>, une <strong>modification</strong> ou une <strong>suppression</strong> directement depuis le détail d'une fiche, ou définissez en une fois un <strong>groupe</strong> ou une <strong>hiérarchie</strong> pour plusieurs champs. Chaque proposition est examinée par un administrateur avant publication.");
+  steps.push({popover: {
+    title: '🎉 Vous êtes prêt !',
+    description: "Rendez-vous sur l'<strong>Accueil</strong> ou la <strong>FAQ</strong> pour découvrir leur guide dédié, accessible depuis le même bouton 🧭 Guide en haut de chaque page."
+  }});
+  driver.js.driver({
+    showProgress: true,
+    nextBtnText: 'Suivant →',
+    prevBtnText: '← Précédent',
+    doneBtnText: 'Terminer',
+    progressText: '{{current}} / {{total}}',
+    steps: steps
+  }).drive();
 });
 
 });

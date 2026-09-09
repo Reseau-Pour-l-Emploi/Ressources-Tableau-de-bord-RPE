@@ -13,6 +13,8 @@
 <script defer src="firebase-config.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
 <style>
 @font-face{font-family:'Marianne';src:url('fonts/Marianne-Light.woff2') format('woff2');font-weight:300;font-display:swap}
 @font-face{font-family:'Marianne';src:url('fonts/Marianne-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
@@ -49,6 +51,18 @@ header.site{background:var(--ft-white);border-bottom:1px solid var(--ft-border);
 .nav-link:hover{color:var(--ft-indigo)}
 .nav-link.active{color:var(--ft-indigo);border-bottom-color:var(--ft-indigo)}
 .nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--ft-indigo);text-decoration:none;padding:9px 16px;border-radius:999px;white-space:nowrap}
+.nav-guide-btn{font-family:inherit;font-size:13px;font-weight:700;color:var(--ft-indigo);background:#fff;border:1.5px solid var(--ft-indigo);text-decoration:none;padding:7.5px 14px;border-radius:999px;white-space:nowrap;cursor:pointer}
+.nav-guide-btn:hover{background:var(--ft-indigo-light)}
+
+/* Driver.js : reprise des couleurs du site */
+.driver-popover{border-radius:10px !important;box-shadow:var(--sh-md) !important;font-family:var(--ft-font) !important;max-width:340px !important}
+.driver-popover-title{color:var(--ft-navy) !important;font-size:15px !important}
+.driver-popover-description{color:var(--ft-fg-2) !important;font-size:13px !important;line-height:1.55 !important}
+.driver-popover-progress-text{color:var(--ft-fg-3) !important;font-size:11.5px !important}
+.driver-popover-footer button{font-family:inherit !important;font-size:12.5px !important;font-weight:700 !important;text-shadow:none !important;border-radius:999px !important;padding:7px 14px !important}
+.driver-popover-next-btn,.driver-popover-close-btn{background:var(--ft-indigo) !important;color:#fff !important;border:none !important}
+.driver-popover-prev-btn{background:#fff !important;color:var(--ft-indigo) !important;border:1px solid var(--ft-border) !important}
+.driver-active-element{border-radius:8px !important}
 .nav-cta:hover{background:var(--ft-indigo-dark)}
 main{max-width:1360px;margin:0 auto;padding:0 24px 56px}
 footer.site{border-top:1px solid var(--ft-border);background:var(--ft-white);margin-top:24px}
@@ -401,6 +415,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
       <a href="index.html" class="nav-link active">Accueil</a>
       <a href="glossaire.html" class="nav-link">Glossaire</a>
       <a href="faq.html" class="nav-link">FAQ</a>
+      <button type="button" class="nav-guide-btn" id="btnStartTour">🧭 Guide</button>
       <a href="http://pilotage-rpe.francetravail.org/rpe" class="nav-cta" id="navCta" target="_blank" rel="noopener">Accéder au Tableau de Bord RPE</a>
     </nav>
     <a class="admin-link" href="admin.html">Connexion administrateur</a>
@@ -1796,6 +1811,45 @@ document.getElementById('legalOverlay').addEventListener('click', function(ev){
 });
 document.addEventListener('keydown', function(ev){
   if (ev.key === 'Escape') document.getElementById('legalOverlay').classList.remove('open');
+});
+
+/* ==== Guide de navigation (Driver.js) : presente les grands blocs de l'accueil.
+   Chaque etape ne s'ajoute que si l'element cible existe reellement dans la page
+   (le bandeau "a la une" par exemple peut etre desactive par l'admin). */
+document.getElementById('btnStartTour').addEventListener('click', function(){
+  if (typeof driver === 'undefined') { alert("Le guide n'a pas pu se charger. Vérifiez votre connexion et réessayez."); return; }
+  var steps = [];
+  function addStep(selector, title, description, side){
+    var el = document.querySelector(selector);
+    if (!el) return;
+    steps.push({element: selector, popover: {title: title, description: description, side: side || 'bottom', align: 'start'}});
+  }
+  steps.push({popover: {
+    title: '👋 Bienvenue sur le Tableau de bord RPE',
+    description: "Ce guide vous présente les grands blocs de la page d'accueil. Vous pouvez avancer avec les flèches, ou fermer à tout moment avec la croix."
+  }});
+  addStep('.site-nav', 'Trois espaces à explorer', "En plus de l'Accueil, retrouvez le <strong>Glossaire</strong> et la <strong>FAQ</strong> - chacun dispose de son propre guide, accessible via ce même bouton 🧭 Guide une fois sur la page.");
+  addStep('.hero-band', 'Présentation du tableau de bord', "Un résumé de l'outil, un accès direct au Tableau de Bord RPE, ainsi que des vidéos et textes réglementaires utiles pour prendre en main l'outil.");
+  addStep('.actu-featured', 'Actualité à la une', "Un message mis en avant, qui défile automatiquement s'il est trop long pour la largeur de l'écran.");
+  addStep('.section-tinted-actu', 'Actualités', "Les informations importantes du moment : anomalies en cours, backlog d'évolutions, annonces diverses.");
+  addStep('.section-tinted-kiosque', 'Le Kiosque', "Webinaires et newsletters passés, classés du plus récent au plus ancien - survolez ou naviguez avec les flèches pour tout parcourir.");
+  addStep('.section-tinted-res', 'Ressources complémentaires', "Des liens et documents utiles en complément du tableau de bord.");
+  addStep('.agenda-card', 'Agenda', "Les événements à venir liés au Réseau Pour l'Emploi.");
+  addStep('.newsletter-box', 'Newsletter', "Abonnez-vous ou désabonnez-vous en un clic pour recevoir les actualités par e-mail.");
+  addStep('.contact-card', 'Contact & assistance', "Un accès direct à la FAQ, ou la possibilité de réserver un créneau de 15 minutes en visio si votre question n'y trouve pas de réponse.");
+  addStep('.footer-tools', 'Autres outils du réseau', "Des raccourcis vers les autres outils utiles au Réseau Pour l'Emploi.");
+  steps.push({popover: {
+    title: '🎉 Vous êtes prêt !',
+    description: "Rendez-vous sur le <strong>Glossaire</strong> ou la <strong>FAQ</strong> pour découvrir leur guide dédié, accessible depuis le même bouton 🧭 Guide en haut de chaque page."
+  }});
+  driver.js.driver({
+    showProgress: true,
+    nextBtnText: 'Suivant →',
+    prevBtnText: '← Précédent',
+    doneBtnText: 'Terminer',
+    progressText: '{{current}} / {{total}}',
+    steps: steps
+  }).drive();
 });
 
 });
