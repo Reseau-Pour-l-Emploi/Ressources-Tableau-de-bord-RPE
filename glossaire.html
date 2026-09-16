@@ -46,8 +46,8 @@ header.site{background:var(--ft-white);border-bottom:1px solid var(--ft-border);
 .site-title{flex:1}
 .site-title h1{font-size:18px;font-weight:700;margin:0;line-height:1.25}
 .site-title .sub{font-size:12px;color:var(--ft-fg-3)}
-.admin-link{font-size:12px;font-weight:600;color:var(--ft-indigo);text-decoration:none;border:1px solid var(--ft-indigo);border-radius:4px;padding:6px 12px;white-space:nowrap}
-.admin-link:hover{background:var(--ft-indigo-light)}
+.admin-link{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;font-size:16px;text-decoration:none;border-radius:50%;background:var(--ft-indigo-light);opacity:.45;transition:opacity .15s}
+.admin-link:hover{opacity:1}
 .site-nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .nav-link{font-size:14px;font-weight:600;color:var(--ft-fg-2);text-decoration:none;padding:6px 2px;border-bottom:2px solid transparent}
 .nav-link:hover{color:var(--ft-indigo)}
@@ -195,7 +195,7 @@ form.contrib textarea{min-height:64px;resize:vertical}
   .site-nav{gap:10px}
   .nav-link{font-size:12.5px}
   .nav-cta{font-size:12px;padding:8px 12px}
-  .admin-link{font-size:11px;padding:5px 9px}
+  .admin-link{width:30px;height:30px;font-size:14px}
   main{padding:14px 12px 40px}
   .toolbar select,.toolbar input[type=search]{width:100%;min-width:0}
   .azbar{overflow-x:auto}
@@ -219,10 +219,10 @@ form.contrib textarea{min-height:64px;resize:vertical}
       <a href="index.html" class="nav-link">Accueil</a>
       <a href="glossaire.html" class="nav-link active">Glossaire</a>
       <a href="faq.html" class="nav-link">FAQ</a>
-      <button type="button" class="nav-guide-btn" id="btnStartTour">🧭 Guide</button>
       <a href="http://pilotage-rpe.francetravail.org/rpe" class="nav-cta" id="navCta" target="_blank" rel="noopener">Accéder au Tableau de Bord RPE</a>
+      <button type="button" class="nav-guide-btn" id="btnStartTour">🧭 Guide</button>
     </nav>
-    <a class="admin-link" href="admin.html">Connexion administrateur</a>
+    <a class="admin-link" href="admin.html" title="Connexion administrateur">🔒</a>
   </div>
 </header>
 

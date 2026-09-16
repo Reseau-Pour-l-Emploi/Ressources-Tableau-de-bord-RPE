@@ -44,8 +44,8 @@ header.site{background:var(--ft-white);border-bottom:1px solid var(--ft-border);
 .site-inner img{height:40px}
 .site-title{flex:1}
 .site-title h1{font-size:17px;font-weight:700;margin:0;line-height:1.25}
-.admin-link{font-size:12px;font-weight:600;color:var(--ft-indigo);text-decoration:none;border:1px solid var(--ft-indigo);border-radius:4px;padding:6px 12px;white-space:nowrap}
-.admin-link:hover{background:var(--ft-indigo-light)}
+.admin-link{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;font-size:16px;text-decoration:none;border-radius:50%;background:var(--ft-indigo-light);opacity:.45;transition:opacity .15s}
+.admin-link:hover{opacity:1}
 .site-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .nav-link{font-size:13.5px;font-weight:600;color:var(--ft-fg-2);text-decoration:none;padding:6px 2px;border-bottom:2px solid transparent}
 .nav-link:hover{color:var(--ft-indigo)}
@@ -148,7 +148,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .agenda-item:last-child{margin-bottom:0}
 .agenda-row{display:flex;gap:11px;align-items:flex-start}
 .agenda-creneau{font-size:11px;color:var(--ft-fg-3);margin-top:2px}
-.agenda-action-row{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.agenda-action-row{margin-top:8px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
 .agenda-action-btn{display:inline-block;font-family:inherit;font-size:11px;font-weight:700;border-radius:999px;padding:6px 11px;cursor:pointer;text-decoration:none;border:none;white-space:nowrap}
 .agenda-action-btn--ics{background:var(--ft-indigo);color:#fff}
 .agenda-action-btn--ics:hover{background:var(--ft-indigo-dark)}
@@ -394,7 +394,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
   .site-nav{gap:10px}
   .nav-link{font-size:12px}
   .nav-cta{font-size:11.5px;padding:7px 12px}
-  .admin-link{font-size:11px;padding:5px 9px}
+  .admin-link{width:30px;height:30px;font-size:14px}
   main{padding:0 14px 40px}
   .hero{padding:20px 16px}
   .hero h2{font-size:19px}
@@ -425,10 +425,10 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
       <a href="index.html" class="nav-link active">Accueil</a>
       <a href="glossaire.html" class="nav-link">Glossaire</a>
       <a href="faq.html" class="nav-link">FAQ</a>
-      <button type="button" class="nav-guide-btn" id="btnStartTour">🧭 Guide</button>
       <a href="http://pilotage-rpe.francetravail.org/rpe" class="nav-cta" id="navCta" target="_blank" rel="noopener">Accéder au Tableau de Bord RPE</a>
+      <button type="button" class="nav-guide-btn" id="btnStartTour">🧭 Guide</button>
     </nav>
-    <a class="admin-link" href="admin.html">Connexion administrateur</a>
+    <a class="admin-link" href="admin.html" title="Connexion administrateur">🔒</a>
   </div>
 </header>
 
@@ -760,8 +760,8 @@ function renderAgenda(items){
     var actionBtns = '';
     if (it.lien_participation && it.creneau) {
       var icsData = {titre: it.titre || '', date: it.date || '', creneau: it.creneau || '', description: it.description || '', lien_participation: it.lien_participation};
-      actionBtns = '<button type="button" class="agenda-action-btn agenda-action-btn--ics" title="Ajouter à mon agenda" data-agenda-ics="' + escapeHtml(JSON.stringify(icsData)) + '">📅 Ajouter</button>' +
-        '<a class="agenda-action-btn agenda-action-btn--join" href="' + escapeHtml(it.lien_participation) + '" target="_blank" rel="noopener">🔗 Rejoindre</a>';
+      actionBtns = '<button type="button" class="agenda-action-btn agenda-action-btn--ics" title="Ouvrez le fichier téléchargé pour l\'intégrer à votre agenda." data-agenda-ics="' + escapeHtml(JSON.stringify(icsData)) + '">📅 Ajouter</button>' +
+        '<a class="agenda-action-btn agenda-action-btn--join" href="' + escapeHtml(it.lien_participation) + '" target="_blank" rel="noopener" title="Cliquez ici pour rejoindre directement le direct le jour J.">🔗 Rejoindre</a>';
     } else if (it.lien_inscription) {
       actionBtns = '<a class="agenda-action-btn agenda-action-btn--register" href="' + escapeHtml(it.lien_inscription) + '" target="_blank" rel="noopener">✍️ S\'inscrire</a>';
     }
