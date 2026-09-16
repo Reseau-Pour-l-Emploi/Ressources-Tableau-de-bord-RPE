@@ -236,6 +236,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <button type="button" class="btn btn--secondary btn--sm" id="add_textes">+ Ajouter un texte</button>
 
         <div class="edit-section-label">Agenda (calendrier, colonne latérale)</div>
+        <p class="form-hint" style="margin-top:0">Renseignez un <strong>lien de participation</strong> + un <strong>créneau horaire</strong> pour afficher un bouton "Ajouter à mon agenda" (génère un fichier .ics compatible Outlook, Google Agenda, Apple Calendar). Pour un évènement sans horaire fixe, utilisez plutôt le <strong>lien d'inscription</strong> seul, qui affiche un simple bouton "S'inscrire".</p>
         <div id="rep_agenda"></div>
         <button type="button" class="btn btn--secondary btn--sm" id="add_agenda">+ Ajouter un élément d'agenda</button>
 
@@ -243,8 +244,9 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;margin-bottom:6px">
           <input type="checkbox" id="site_une_active"> Afficher le bandeau
         </label>
-        <textarea class="edit-textarea" id="site_une_texte" placeholder="📣 Actualité à la une : ..."></textarea>
-        <p class="form-hint" style="margin-top:0">Pour insérer un lien : <code>[texte du lien](https://...)</code>. Cette vignette tient sur une seule ligne ; si le texte est trop long pour la largeur de la page, il défile automatiquement (sans retour à la ligne).</p>
+        <p class="form-hint" style="margin-top:0">Plusieurs messages défilent à la suite, séparés par un point (façon bandeau d'actualité TV). Pour insérer un lien dans un message : <code>[texte du lien](https://...)</code>.</p>
+        <div id="site_une_messages"></div>
+        <button type="button" class="btn btn--secondary btn--sm" id="btnAddUneMessage">+ Ajouter un message</button>
 
         <div class="edit-section-label">Actualités (fil d'actualité)</div>
         <div id="rep_actualites"></div>
@@ -1272,7 +1274,9 @@ var DEFAULT_SITE_CONTENT = {
   ],
   actualite_une: {
     active: true,
-    texte: "📣 Actualité à la une : participez à l'enrichissement du glossaire en quelques secondes, c'est possible. Rendez-vous dans le [Glossaire](https://reseau-pour-l-emploi.github.io/Ressources-Tableau-de-bord-RPE/glossaire.html)..."
+    messages: [
+      "📣 Actualité à la une : participez à l'enrichissement du glossaire en quelques secondes, c'est possible. Rendez-vous dans le [Glossaire](https://reseau-pour-l-emploi.github.io/Ressources-Tableau-de-bord-RPE/glossaire.html)..."
+    ]
   },
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -1415,6 +1419,9 @@ function createRepeater(containerId, itemsInitial, fields){
       if (fields.indexOf('colonne') > -1) fieldsHtml += '<input class="edit-input" data-field="colonne" placeholder="Colonne thématique (ex. Réseau Pour l\'Emploi)" value="' + escapeHtml(item.colonne||'') + '">';
       if (fields.indexOf('description') > -1) fieldsHtml += '<textarea class="edit-textarea" data-field="description" placeholder="Description (facultatif)">' + escapeHtml(item.description||'') + '</textarea>';
       if (fields.indexOf('url') > -1) fieldsHtml += '<input class="edit-input" data-field="url" placeholder="Lien" value="' + escapeHtml(item.url||'') + '">';
+      if (fields.indexOf('creneau') > -1) fieldsHtml += '<input class="edit-input" data-field="creneau" placeholder="Créneau horaire (ex. 14h00 - 15h00)" value="' + escapeHtml(item.creneau||'') + '">';
+      if (fields.indexOf('lien_participation') > -1) fieldsHtml += '<input class="edit-input" data-field="lien_participation" placeholder="Lien de participation (visio, ex. Teams) - avec un créneau, affiche un bouton \'Ajouter à mon agenda\'" value="' + escapeHtml(item.lien_participation||'') + '">';
+      if (fields.indexOf('lien_inscription') > -1) fieldsHtml += '<input class="edit-input" data-field="lien_inscription" placeholder="Lien d\'inscription (pour un évènement sans créneau fixe)" value="' + escapeHtml(item.lien_inscription||'') + '">';
       row.innerHTML = fieldsHtml;
       row.querySelectorAll('[data-field="titre"]').forEach(function(el){ attachFormatToolbar(el, true); });
       row.querySelectorAll('[data-field="description"]').forEach(function(el){ attachFormatToolbar(el, true); });
@@ -1514,7 +1521,7 @@ function createRepeater(containerId, itemsInitial, fields){
   return {
     addItem: function(){
       syncAllRows();
-      var item = {titre: '', date: '', type: '', description: '', url: ''};
+      var item = {titre: '', date: '', type: '', description: '', url: '', creneau: '', lien_participation: '', lien_inscription: ''};
       if (fields.indexOf('liens') > -1) item.liens = [];
       state.push(item);
       render();
@@ -1540,6 +1547,44 @@ function createRepeater(containerId, itemsInitial, fields){
   };
 }
 
+var uneMessages = [];
+function renderUneMessages(){
+  var root = document.getElementById('site_une_messages');
+  root.innerHTML = uneMessages.map(function(msg, i){
+    return '<div class="rm-admin-row" style="align-items:flex-start">' +
+      '<textarea class="edit-textarea" data-une-msg="' + i + '" placeholder="📣 Message..." style="margin-bottom:0">' + escapeHtml(msg) + '</textarea>' +
+      '<button type="button" class="btn btn--secondary btn--sm" data-une-up="' + i + '"' + (i === 0 ? ' disabled' : '') + '>▲</button>' +
+      '<button type="button" class="btn btn--secondary btn--sm" data-une-down="' + i + '"' + (i === uneMessages.length - 1 ? ' disabled' : '') + '>▼</button>' +
+      '<button type="button" class="btn btn--danger btn--sm" data-une-remove="' + i + '">🗑️</button>' +
+    '</div>';
+  }).join('') || '<p class="form-hint">Aucun message pour le moment.</p>';
+  root.querySelectorAll('[data-une-msg]').forEach(function(el){ attachFormatToolbar(el, false, true); });
+  root.querySelectorAll('[data-une-remove]').forEach(function(btn){
+    btn.addEventListener('click', function(){ syncUneMessagesDom(); uneMessages.splice(parseInt(btn.dataset.uneRemove, 10), 1); renderUneMessages(); });
+  });
+  root.querySelectorAll('[data-une-up],[data-une-down]').forEach(function(btn){
+    if (btn.disabled) return;
+    btn.addEventListener('click', function(){
+      syncUneMessagesDom();
+      var idx = parseInt(btn.dataset.uneUp || btn.dataset.uneDown, 10);
+      var swap = btn.dataset.uneUp ? idx - 1 : idx + 1;
+      if (swap < 0 || swap >= uneMessages.length) return;
+      var tmp = uneMessages[idx]; uneMessages[idx] = uneMessages[swap]; uneMessages[swap] = tmp;
+      renderUneMessages();
+    });
+  });
+}
+function syncUneMessagesDom(){
+  document.querySelectorAll('#site_une_messages [data-une-msg]').forEach(function(el){
+    uneMessages[parseInt(el.dataset.uneMsg, 10)] = el.value.trim();
+  });
+}
+document.getElementById('btnAddUneMessage').addEventListener('click', function(){
+  syncUneMessagesDom();
+  uneMessages.push('');
+  renderUneMessages();
+});
+
 function loadSiteContent(){
   db.collection('site_content').doc('homepage').get().then(function(doc){
     var c = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : DEFAULT_SITE_CONTENT;
@@ -1551,15 +1596,14 @@ function loadSiteContent(){
     document.getElementById('site_eco_lettre').value = (c.ecoindex && c.ecoindex.lettre) || '';
     document.getElementById('site_eco_url').value = (c.ecoindex && c.ecoindex.url) || '';
     document.getElementById('site_une_active').checked = !!(c.actualite_une && c.actualite_une.active);
-    document.getElementById('site_une_texte').value = (c.actualite_une && c.actualite_une.texte) || '';
-    if (!document.getElementById('site_une_texte').dataset.toolbarAttached) {
-      attachFormatToolbar(document.getElementById('site_une_texte'), false, true);
-      document.getElementById('site_une_texte').dataset.toolbarAttached = '1';
-    }
+    uneMessages = (c.actualite_une && c.actualite_une.messages && c.actualite_une.messages.length)
+      ? c.actualite_une.messages.slice()
+      : ((c.actualite_une && c.actualite_une.texte) ? [c.actualite_une.texte] : []);
+    renderUneMessages();
 
     repeaters.videos = createRepeater('rep_videos', (c.intro && c.intro.videos) || [], ['titre','url']);
     repeaters.textes = createRepeater('rep_textes', (c.intro && c.intro.textes) || [], ['titre','url']);
-    repeaters.agenda = createRepeater('rep_agenda', c.agenda || [], ['titre','date','description','liens']);
+    repeaters.agenda = createRepeater('rep_agenda', c.agenda || [], ['titre','date','description','creneau','lien_participation','lien_inscription','liens']);
     repeaters.actualites = createRepeater('rep_actualites', c.actualites || [], ['titre','date','description','liens']);
     repeaters.kiosque = createRepeater('rep_kiosque', sortByDateDesc(c.kiosque || []), ['titre','date','type','description','liens']);
     repeaters.ressources = createRepeater('rep_ressources', c.ressources || [], ['titre','description','liens']);
@@ -1585,7 +1629,7 @@ function saveSiteContent(){
     actualites: repeaters.actualites.collect(),
     actualite_une: {
       active: document.getElementById('site_une_active').checked,
-      texte: document.getElementById('site_une_texte').value.trim()
+      messages: (function(){ syncUneMessagesDom(); return uneMessages.filter(function(m){ return m; }); })()
     },
     kiosque: sortByDateDesc(repeaters.kiosque.collect()),
     ressources: repeaters.ressources.collect(),

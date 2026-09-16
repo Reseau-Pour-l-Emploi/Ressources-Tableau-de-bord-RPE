@@ -147,6 +147,13 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .agenda-item{background:var(--ft-sable);border:1px solid var(--ft-border);border-radius:8px;padding:10px 12px;margin-bottom:10px}
 .agenda-item:last-child{margin-bottom:0}
 .agenda-row{display:flex;gap:11px;align-items:flex-start}
+.agenda-creneau{font-size:11px;color:var(--ft-fg-3);margin-top:2px}
+.agenda-action-row{margin-top:8px}
+.agenda-action-btn{display:inline-block;font-family:inherit;font-size:11.5px;font-weight:700;border-radius:999px;padding:6px 13px;cursor:pointer;text-decoration:none;border:none}
+.agenda-action-btn--ics{background:var(--ft-indigo);color:#fff}
+.agenda-action-btn--ics:hover{background:var(--ft-indigo-dark)}
+.agenda-action-btn--register{background:var(--ft-bleu);color:#fff}
+.agenda-action-btn--register:hover{filter:brightness(.92)}
 .agenda-body{flex:1;min-width:0}
 .cal-tile{flex:none;width:46px;text-align:center;border:1px solid var(--ft-border);border-radius:5px;overflow:hidden}
 .cal-tile .cal-mois{background:var(--ft-indigo);color:#fff;font-size:9px;font-weight:700;padding:2px 0;letter-spacing:.03em}
@@ -172,6 +179,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 
 /* ==== Actualites : grille de 3 vignettes ==== */
 .actu-featured{position:relative;overflow:hidden;white-space:nowrap;background:linear-gradient(135deg,var(--ft-navy),var(--ft-indigo));color:#fff;border-radius:8px;padding:12px 18px;margin-bottom:12px;font-size:13.5px;font-weight:600;box-shadow:0 3px 10px rgba(13,20,64,.25)}
+.actu-featured-sep{color:var(--ft-jaune);font-size:9px;vertical-align:middle}
 .actu-featured-inner{display:inline-block}
 .actu-featured a{color:var(--ft-jaune);text-decoration:underline}
 .actu-featured.rm-scrolling .actu-featured-inner{padding-left:100%;animation-name:actu-marquee;animation-timing-function:linear;animation-iteration-count:infinite}
@@ -547,7 +555,9 @@ var DEFAULT_CONTENT = {
   ],
   actualite_une: {
     active: true,
-    texte: "📣 Actualité à la une : participez à l'enrichissement du glossaire en quelques secondes, c'est possible. Rendez-vous dans le [Glossaire](https://reseau-pour-l-emploi.github.io/Ressources-Tableau-de-bord-RPE/glossaire.html)..."
+    messages: [
+      "📣 Actualité à la une : participez à l'enrichissement du glossaire en quelques secondes, c'est possible. Rendez-vous dans le [Glossaire](https://reseau-pour-l-emploi.github.io/Ressources-Tableau-de-bord-RPE/glossaire.html)..."
+    ]
   },
   kiosque: [
     {titre: "Juillet 2026", date: "01-07-2026", type: "Newsletter", liens: [{label: "Lire la newsletter", url: "https://pad.numerique.gouv.fr/s/75ZHOKEiO"}]},
@@ -744,12 +754,75 @@ function renderAgenda(items){
     var dateLine = (!d && it.date) ? '<div class="item-desc">' + escapeHtml(it.date) + '</div>' : '';
     var data = {titre: it.titre, desc: it.description || '', liens: it.liens || []};
     var titreLigne = tileTitleHtml(it, data, 'item-titre') + dateLine;
+    var creneauLine = it.creneau ? '<div class="agenda-creneau">🕐 ' + escapeHtml(it.creneau) + '</div>' : '';
+    var actionBtn = '';
+    if (it.lien_participation && it.creneau) {
+      var icsData = {titre: it.titre || '', date: it.date || '', creneau: it.creneau || '', description: it.description || '', lien_participation: it.lien_participation};
+      actionBtn = '<button type="button" class="agenda-action-btn agenda-action-btn--ics" data-agenda-ics="' + escapeHtml(JSON.stringify(icsData)) + '">📅 Ajouter à mon agenda</button>';
+    } else if (it.lien_inscription) {
+      actionBtn = '<a class="agenda-action-btn agenda-action-btn--register" href="' + escapeHtml(it.lien_inscription) + '" target="_blank" rel="noopener">✍️ S\'inscrire</a>';
+    }
     return '<div class="agenda-item">' +
-      '<div class="agenda-row">' + tile + '<div class="agenda-body">' + titreLigne + tileDescPreviewHtml(it, data) + '</div></div>' +
+      '<div class="agenda-row">' + tile + '<div class="agenda-body">' + titreLigne + creneauLine + tileDescPreviewHtml(it, data) + '</div></div>' +
+      (actionBtn ? '<div class="agenda-action-row">' + actionBtn + '</div>' : '') +
       renderLinkBar(it.liens) +
     '</div>';
   }).join('');
 }
+
+/* Genere un fichier .ics telechargeable (compatible Outlook/Google Agenda/Apple Calendar)
+   a partir de la date + du creneau horaire renseignes par l'admin pour un evenement. */
+function rmIcsEscape(s){
+  return String(s || '').replace(/[\\;,]/g, function(c){ return '\\' + c; }).replace(/\n/g, '\\n');
+}
+function rmParseCreneau(creneau){
+  var m = String(creneau || '').match(/(\d{1,2})[h:](\d{2})?\s*(?:-|à|a)\s*(\d{1,2})[h:](\d{2})?/i);
+  if (m) return {sh: parseInt(m[1], 10), sm: parseInt(m[2] || '0', 10), eh: parseInt(m[3], 10), em: parseInt(m[4] || '0', 10)};
+  var single = String(creneau || '').match(/(\d{1,2})[h:](\d{2})?/);
+  if (single) {
+    var sh = parseInt(single[1], 10), sm = parseInt(single[2] || '0', 10);
+    return {sh: sh, sm: sm, eh: (sh + 1) % 24, em: sm};
+  }
+  return null;
+}
+function downloadAgendaIcs(item){
+  var d = parseDMY(item.date);
+  if (!d) { alert("Impossible de générer l'évènement : date invalide."); return; }
+  var range = rmParseCreneau(item.creneau) || {sh: 9, sm: 0, eh: 10, em: 0};
+  var pad = function(n){ return n < 10 ? '0' + n : '' + n; };
+  var dstr = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+  var desc = item.description || '';
+  if (item.lien_participation) desc += (desc ? '\n\n' : '') + 'Lien de participation : ' + item.lien_participation;
+  var lines = [
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Reseau Pour l\'Emploi//TDB RPE//FR', 'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    'UID:rpe-' + dstr + '-' + Math.random().toString(36).slice(2) + '@reseau-pour-l-emploi',
+    'DTSTAMP:' + dstr + 'T000000Z',
+    'DTSTART:' + dstr + 'T' + pad(range.sh) + pad(range.sm) + '00',
+    'DTEND:' + dstr + 'T' + pad(range.eh) + pad(range.em) + '00',
+    'SUMMARY:' + rmIcsEscape(item.titre || 'Évènement RPE'),
+    'DESCRIPTION:' + rmIcsEscape(desc),
+    item.lien_participation ? 'LOCATION:' + rmIcsEscape(item.lien_participation) : '',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].filter(Boolean);
+  var blob = new Blob([lines.join('\r\n')], {type: 'text/calendar;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = (item.titre || 'evenement').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) + '.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+}
+document.addEventListener('click', function(ev){
+  var btn = ev.target.closest('[data-agenda-ics]');
+  if (!btn) return;
+  var item;
+  try { item = JSON.parse(btn.getAttribute('data-agenda-ics')); } catch(e){ return; }
+  downloadAgendaIcs(item);
+});
 
 /* actualites : bandeaux discrets selon mot-cle du titre */
 function actuClass(titre){
@@ -762,8 +835,12 @@ function isRoadmapCard(titre){
   return t.indexOf('roadmap') > -1 || t.indexOf('backlog') > -1;
 }
 function renderActualiteUne(une){
-  if (!une || !une.active || !une.texte) return '';
-  return '<div class="actu-featured" id="actuFeatured"><span class="actu-featured-inner" id="actuFeaturedInner">' + richText(une.texte) + '</span></div>';
+  if (!une || !une.active) return '';
+  var messages = (une.messages && une.messages.length) ? une.messages : (une.texte ? [une.texte] : []);
+  messages = messages.filter(Boolean);
+  if (!messages.length) return '';
+  var combined = messages.map(function(m){ return richText(m); }).join('&nbsp;&nbsp;&nbsp;<span class="actu-featured-sep">&#9679;</span>&nbsp;&nbsp;&nbsp;');
+  return '<div class="actu-featured" id="actuFeatured"><span class="actu-featured-inner" id="actuFeaturedInner">' + combined + '</span></div>';
 }
 function initActuFeaturedMarquee(){
   var wrap = document.getElementById('actuFeatured');
