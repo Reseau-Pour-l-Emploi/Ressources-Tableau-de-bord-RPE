@@ -148,10 +148,12 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .agenda-item:last-child{margin-bottom:0}
 .agenda-row{display:flex;gap:11px;align-items:flex-start}
 .agenda-creneau{font-size:11px;color:var(--ft-fg-3);margin-top:2px}
-.agenda-action-row{margin-top:8px}
+.agenda-action-row{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
 .agenda-action-btn{display:inline-block;font-family:inherit;font-size:11.5px;font-weight:700;border-radius:999px;padding:6px 13px;cursor:pointer;text-decoration:none;border:none}
 .agenda-action-btn--ics{background:var(--ft-indigo);color:#fff}
 .agenda-action-btn--ics:hover{background:var(--ft-indigo-dark)}
+.agenda-action-btn--join{background:#fff;color:var(--ft-indigo);border:1.5px solid var(--ft-indigo)}
+.agenda-action-btn--join:hover{background:var(--ft-indigo-light)}
 .agenda-action-btn--register{background:var(--ft-bleu);color:#fff}
 .agenda-action-btn--register:hover{filter:brightness(.92)}
 .agenda-body{flex:1;min-width:0}
@@ -755,16 +757,17 @@ function renderAgenda(items){
     var data = {titre: it.titre, desc: it.description || '', liens: it.liens || []};
     var titreLigne = tileTitleHtml(it, data, 'item-titre') + dateLine;
     var creneauLine = it.creneau ? '<div class="agenda-creneau">🕐 ' + escapeHtml(it.creneau) + '</div>' : '';
-    var actionBtn = '';
+    var actionBtns = '';
     if (it.lien_participation && it.creneau) {
       var icsData = {titre: it.titre || '', date: it.date || '', creneau: it.creneau || '', description: it.description || '', lien_participation: it.lien_participation};
-      actionBtn = '<button type="button" class="agenda-action-btn agenda-action-btn--ics" data-agenda-ics="' + escapeHtml(JSON.stringify(icsData)) + '">📅 Ajouter à mon agenda</button>';
+      actionBtns = '<button type="button" class="agenda-action-btn agenda-action-btn--ics" data-agenda-ics="' + escapeHtml(JSON.stringify(icsData)) + '">📅 Ajouter à mon agenda</button>' +
+        '<a class="agenda-action-btn agenda-action-btn--join" href="' + escapeHtml(it.lien_participation) + '" target="_blank" rel="noopener">🔗 Rejoindre</a>';
     } else if (it.lien_inscription) {
-      actionBtn = '<a class="agenda-action-btn agenda-action-btn--register" href="' + escapeHtml(it.lien_inscription) + '" target="_blank" rel="noopener">✍️ S\'inscrire</a>';
+      actionBtns = '<a class="agenda-action-btn agenda-action-btn--register" href="' + escapeHtml(it.lien_inscription) + '" target="_blank" rel="noopener">✍️ S\'inscrire</a>';
     }
     return '<div class="agenda-item">' +
       '<div class="agenda-row">' + tile + '<div class="agenda-body">' + titreLigne + creneauLine + tileDescPreviewHtml(it, data) + '</div></div>' +
-      (actionBtn ? '<div class="agenda-action-row">' + actionBtn + '</div>' : '') +
+      (actionBtns ? '<div class="agenda-action-row">' + actionBtns + '</div>' : '') +
       renderLinkBar(it.liens) +
     '</div>';
   }).join('');

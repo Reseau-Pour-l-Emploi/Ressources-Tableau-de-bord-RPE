@@ -91,6 +91,24 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .edit-badge-select.source{background:#E2E8FB;color:#406BDE}
 .edit-badge-select.kpi{background:#FFF4D6;color:#8A6400}
 .edit-section-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ft-gray-500);font-weight:700;margin:16px 0 4px}
+
+.admin-block{border:1px solid var(--ft-border);border-radius:8px;margin-bottom:12px;overflow:hidden}
+.admin-block-header{width:100%;display:flex;align-items:center;gap:9px;padding:12px 16px;background:var(--ft-sable);border:none;cursor:pointer;font-family:inherit;text-align:left}
+.admin-block-toggle{transition:transform .15s;flex:none;font-size:12px;color:var(--ft-gray-500)}
+.admin-block.collapsed .admin-block-toggle{transform:rotate(-90deg)}
+.admin-block.collapsed .admin-block-body{display:none}
+.admin-block-title{font-size:13.5px;font-weight:700;color:var(--ft-navy)}
+.admin-block-body{padding:14px 16px 18px}
+.admin-add-row{display:flex;gap:8px;margin-top:6px}
+
+.admin-block--indigo .admin-block-header{background:var(--ft-indigo-light)}
+.admin-block--sable .admin-block-header{background:var(--ft-sable)}
+.admin-block--bleu .admin-block-header{background:var(--ft-bleu-light)}
+.admin-block--violet .admin-block-header{background:var(--ft-violet-light)}
+.admin-block--jaune .admin-block-header{background:var(--ft-jaune-light)}
+.admin-block--navy .admin-block-header{background:var(--ft-navy)}
+.admin-block--navy .admin-block-title{color:#fff}
+.admin-block--navy .admin-block-toggle{color:#C9CEE8}
 .edit-input,.edit-textarea,.edit-select{width:100%;padding:8px 10px;font:inherit;font-size:13.5px;border:1px solid var(--ft-gray-200);border-radius:4px;background:#fff;color:var(--ft-navy)}
 .edit-input:hover,.edit-textarea:hover,.edit-select:hover{border-color:var(--ft-indigo)}
 .edit-textarea{min-height:64px;resize:vertical}
@@ -218,63 +236,124 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
           <h3 style="margin:0">Page d'accueil (index.html)</h3>
         </div>
         <div id="siteStatus" style="font-size:12.5px;margin:8px 0"></div>
-        <p class="form-hint" style="margin-top:0">Chaque bloc ci-dessous liste les éléments actuellement affichés sur la page d'accueil : modifiez-les directement dans les champs, réordonnez-les avec ▲/▼, cliquez "🗑️ Supprimer" pour en retirer un, ou "+ Ajouter" pour en créer un nouveau. N'oubliez pas d'enregistrer.</p>
+        <p class="form-hint" style="margin-top:0">Chaque bloc ci-dessous correspond à ce que vous voyez sur la page d'accueil (couleur assortie) et se plie/déplie en cliquant sur son titre. Modifiez les champs, réordonnez avec ▲/▼, "🗑️ Supprimer" pour retirer un élément, "+ Ajouter" pour en créer un nouveau en début ou en fin de liste. N'oubliez pas d'enregistrer.</p>
         <p class="form-hint" style="margin-top:0">Mise en forme du texte des vignettes : utilisez les boutons <b>G</b>/<i>I</i>/<u>S</u> au-dessus des champs, ou tapez directement <code>**gras**</code>, <code>*italique*</code>, <code>__souligné__</code>, "<code>- </code>" en début de ligne pour une puce, et Entrée pour un saut de ligne.</p>
+        <button type="button" class="btn btn--secondary btn--sm" id="btnToggleAllBlocks" style="margin-bottom:10px">🗂️ Tout déplier</button>
 
-        <div class="edit-section-label">Lien du bouton "Accéder au Tableau de Bord RPE" (utilisé sur toutes les pages)</div>
-        <input class="edit-input" id="site_tdb_url">
+        <div class="admin-block admin-block--indigo collapsed" data-block="intro">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">🏠 Introduction (bandeau d'accueil)</span></button>
+          <div class="admin-block-body">
+            <div class="edit-section-label">Lien du bouton "Accéder au Tableau de Bord RPE" (utilisé sur toutes les pages)</div>
+            <input class="edit-input" id="site_tdb_url">
 
-        <div class="edit-section-label">Texte d'introduction (HTML autorisé : &lt;p&gt;, &lt;ul&gt;&lt;li&gt;, &lt;strong&gt;)</div>
-        <textarea class="edit-textarea" id="site_intro_texte" style="min-height:160px"></textarea>
+            <div class="edit-section-label">Texte d'introduction (HTML autorisé : &lt;p&gt;, &lt;ul&gt;&lt;li&gt;, &lt;strong&gt;)</div>
+            <textarea class="edit-textarea" id="site_intro_texte" style="min-height:160px"></textarea>
 
-        <div class="edit-section-label">Vidéos d'introduction</div>
-        <div id="rep_videos"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="add_videos">+ Ajouter une vidéo</button>
+            <div class="edit-section-label">Vidéos d'introduction</div>
+            <div id="rep_videos"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" data-add-start="videos">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="add_videos">+ Ajouter à la fin</button>
+            </div>
 
-        <div class="edit-section-label">Textes réglementaires</div>
-        <div id="rep_textes"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="add_textes">+ Ajouter un texte</button>
+            <div class="edit-section-label">Textes réglementaires</div>
+            <div id="rep_textes"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" data-add-start="textes">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="add_textes">+ Ajouter à la fin</button>
+            </div>
+          </div>
+        </div>
 
-        <div class="edit-section-label">Agenda (calendrier, colonne latérale)</div>
-        <p class="form-hint" style="margin-top:0">Renseignez un <strong>lien de participation</strong> + un <strong>créneau horaire</strong> pour afficher un bouton "Ajouter à mon agenda" (génère un fichier .ics compatible Outlook, Google Agenda, Apple Calendar). Pour un évènement sans horaire fixe, utilisez plutôt le <strong>lien d'inscription</strong> seul, qui affiche un simple bouton "S'inscrire".</p>
-        <div id="rep_agenda"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="add_agenda">+ Ajouter un élément d'agenda</button>
+        <div class="admin-block admin-block--sable collapsed" data-block="agenda">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">🗓️ Agenda (colonne latérale)</span></button>
+          <div class="admin-block-body">
+            <p class="form-hint" style="margin-top:0">Renseignez un <strong>lien de participation</strong> + un <strong>créneau horaire</strong> pour afficher un bouton "Ajouter à mon agenda" (génère un fichier .ics compatible Outlook, Google Agenda, Apple Calendar). Pour un évènement sans horaire fixe, utilisez plutôt le <strong>lien d'inscription</strong> seul, qui affiche un simple bouton "S'inscrire".</p>
+            <div id="rep_agenda"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" data-add-start="agenda">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="add_agenda">+ Ajouter à la fin</button>
+            </div>
+          </div>
+        </div>
 
-        <div class="edit-section-label">Actualité à la une (bandeau défilant en pleine largeur, au-dessus des 3 vignettes)</div>
-        <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;margin-bottom:6px">
-          <input type="checkbox" id="site_une_active"> Afficher le bandeau
-        </label>
-        <p class="form-hint" style="margin-top:0">Plusieurs messages défilent à la suite, séparés par un point (façon bandeau d'actualité TV). Pour insérer un lien dans un message : <code>[texte du lien](https://...)</code>.</p>
-        <div id="site_une_messages"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="btnAddUneMessage">+ Ajouter un message</button>
+        <div class="admin-block admin-block--navy collapsed" data-block="une">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">📣 Actualité à la une (bandeau défilant)</span></button>
+          <div class="admin-block-body">
+            <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;margin-bottom:6px">
+              <input type="checkbox" id="site_une_active"> Afficher le bandeau
+            </label>
+            <p class="form-hint" style="margin-top:0">Plusieurs messages défilent à la suite, séparés par un point (façon bandeau d'actualité TV). Pour insérer un lien dans un message : <code>[texte du lien](https://...)</code>.</p>
+            <div id="site_une_messages"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" id="btnAddUneMessageStart">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="btnAddUneMessage">+ Ajouter à la fin</button>
+            </div>
+          </div>
+        </div>
 
-        <div class="edit-section-label">Actualités (fil d'actualité)</div>
-        <div id="rep_actualites"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="add_actualites">+ Ajouter une actualité</button>
+        <div class="admin-block admin-block--bleu collapsed" data-block="actualites">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">📢 Actualités</span></button>
+          <div class="admin-block-body">
+            <div id="rep_actualites"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" data-add-start="actualites">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="add_actualites">+ Ajouter à la fin</button>
+            </div>
+          </div>
+        </div>
 
-        <div class="edit-section-label">Le Kiosque (webinaires, newsletters et autres événements passés - triés automatiquement du plus récent au plus ancien)</div>
-        <div id="rep_kiosque"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="add_kiosque">+ Ajouter un événement au Kiosque</button>
+        <div class="admin-block admin-block--violet collapsed" data-block="kiosque">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">🎪 Le Kiosque (webinaires, newsletters...)</span></button>
+          <div class="admin-block-body">
+            <p class="form-hint" style="margin-top:0">Triés automatiquement du plus récent au plus ancien : l'ordre d'ajout n'a pas d'importance.</p>
+            <div id="rep_kiosque"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" data-add-start="kiosque">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="add_kiosque">+ Ajouter à la fin</button>
+            </div>
+          </div>
+        </div>
 
-        <div class="edit-section-label">Ressources complémentaires (carrousel)</div>
-        <div id="rep_ressources"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="add_ressources">+ Ajouter une ressource</button>
+        <div class="admin-block admin-block--jaune collapsed" data-block="ressources">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">🧰 Ressources complémentaires (carrousel)</span></button>
+          <div class="admin-block-body">
+            <div id="rep_ressources"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" data-add-start="ressources">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="add_ressources">+ Ajouter à la fin</button>
+            </div>
+          </div>
+        </div>
 
-        <div class="edit-section-label">Contact - lien de prise de rendez-vous (bouton "Réservez 15' en visio")</div>
-        <input class="edit-input" id="site_contact_booking">
-        <div class="edit-section-label">Contact - consignes en cas d'erreur</div>
-        <textarea class="edit-textarea" id="site_contact_consignes"></textarea>
-        <div class="edit-section-label">Contact - email support</div>
-        <input class="edit-input" id="site_contact_email">
+        <div class="admin-block admin-block--indigo collapsed" data-block="contact">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">💬 Contact & assistance</span></button>
+          <div class="admin-block-body">
+            <div class="edit-section-label">Lien de prise de rendez-vous (bouton "Réservez 15' en visio")</div>
+            <input class="edit-input" id="site_contact_booking">
+            <div class="edit-section-label">Consignes en cas d'erreur</div>
+            <textarea class="edit-textarea" id="site_contact_consignes"></textarea>
+            <div class="edit-section-label">Email support</div>
+            <input class="edit-input" id="site_contact_email">
+          </div>
+        </div>
 
-        <div class="edit-section-label">Outils du Réseau Pour l'Emploi (liens en pied de page)</div>
-        <div id="rep_footer_liens"></div>
-        <button type="button" class="btn btn--secondary btn--sm" id="add_footer_liens">+ Ajouter un outil</button>
+        <div class="admin-block admin-block--navy collapsed" data-block="footer">
+          <button type="button" class="admin-block-header"><span class="admin-block-toggle">▾</span><span class="admin-block-title">🔗 Pied de page (outils du réseau, EcoIndex)</span></button>
+          <div class="admin-block-body">
+            <div class="edit-section-label">Outils du Réseau Pour l'Emploi (liens en pied de page)</div>
+            <div id="rep_footer_liens"></div>
+            <div class="admin-add-row">
+              <button type="button" class="btn btn--secondary btn--sm" data-add-start="footer_liens">+ Ajouter au début</button>
+              <button type="button" class="btn btn--secondary btn--sm" id="add_footer_liens">+ Ajouter à la fin</button>
+            </div>
 
-        <div class="edit-section-label">Score EcoIndex (lettre A à G, affichée en bas de page à droite)</div>
-        <input class="edit-input" id="site_eco_lettre" placeholder="ex. A" maxlength="1">
-        <div class="edit-section-label">Lien vers le détail du résultat EcoIndex</div>
-        <input class="edit-input" id="site_eco_url" placeholder="https://www.ecoindex.fr/resultat/?id=...">
+            <div class="edit-section-label">Score EcoIndex (lettre A à G, affichée en bas de page à droite)</div>
+            <input class="edit-input" id="site_eco_lettre" placeholder="ex. A" maxlength="1">
+            <div class="edit-section-label">Lien vers le détail du résultat EcoIndex</div>
+            <input class="edit-input" id="site_eco_url" placeholder="https://www.ecoindex.fr/resultat/?id=...">
+          </div>
+        </div>
 
         <div class="edit-footer">
           <button class="btn btn--sm" id="btnSaveSite2">💾 Enregistrer le contenu du site</button>
@@ -1519,11 +1598,11 @@ function createRepeater(containerId, itemsInitial, fields){
   render();
 
   return {
-    addItem: function(){
+    addItem: function(atStart){
       syncAllRows();
       var item = {titre: '', date: '', type: '', description: '', url: '', creneau: '', lien_participation: '', lien_inscription: ''};
       if (fields.indexOf('liens') > -1) item.liens = [];
-      state.push(item);
+      if (atStart) state.unshift(item); else state.push(item);
       render();
     },
     collect: function(){
@@ -1584,6 +1663,11 @@ document.getElementById('btnAddUneMessage').addEventListener('click', function()
   uneMessages.push('');
   renderUneMessages();
 });
+document.getElementById('btnAddUneMessageStart').addEventListener('click', function(){
+  syncUneMessagesDom();
+  uneMessages.unshift('');
+  renderUneMessages();
+});
 
 function loadSiteContent(){
   db.collection('site_content').doc('homepage').get().then(function(doc){
@@ -1614,7 +1698,29 @@ function loadSiteContent(){
 }
 
 ['videos','textes','agenda','actualites','kiosque','ressources','footer_liens'].forEach(function(key){
-  document.getElementById('add_' + key).addEventListener('click', function(){ repeaters[key].addItem(); });
+  document.getElementById('add_' + key).addEventListener('click', function(){ repeaters[key].addItem(false); });
+});
+document.querySelectorAll('[data-add-start]').forEach(function(btn){
+  btn.addEventListener('click', function(){ repeaters[btn.dataset.addStart].addItem(true); });
+});
+
+/* Pliage/depliage des blocs de la page d'accueil (couleur assortie a la page publique) */
+function updateToggleAllLabel(){
+  var blocks = document.querySelectorAll('.admin-block');
+  var anyExpanded = Array.prototype.some.call(blocks, function(b){ return !b.classList.contains('collapsed'); });
+  document.getElementById('btnToggleAllBlocks').textContent = anyExpanded ? '🗂️ Tout plier' : '🗂️ Tout déplier';
+}
+document.querySelectorAll('.admin-block-header').forEach(function(header){
+  header.addEventListener('click', function(){
+    header.closest('.admin-block').classList.toggle('collapsed');
+    updateToggleAllLabel();
+  });
+});
+document.getElementById('btnToggleAllBlocks').addEventListener('click', function(){
+  var blocks = document.querySelectorAll('.admin-block');
+  var anyExpanded = Array.prototype.some.call(blocks, function(b){ return !b.classList.contains('collapsed'); });
+  blocks.forEach(function(b){ b.classList.toggle('collapsed', anyExpanded); });
+  updateToggleAllLabel();
 });
 
 function saveSiteContent(){
