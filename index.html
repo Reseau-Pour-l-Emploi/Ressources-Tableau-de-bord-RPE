@@ -761,7 +761,7 @@ function renderAgenda(items){
     if (it.lien_participation && it.creneau) {
       var icsData = {titre: it.titre || '', date: it.date || '', creneau: it.creneau || '', description: it.description || '', lien_participation: it.lien_participation};
       actionBtns = '<button type="button" class="agenda-action-btn agenda-action-btn--ics" title="Ouvrez le fichier téléchargé pour l\'intégrer à votre agenda." data-agenda-ics="' + escapeHtml(JSON.stringify(icsData)) + '">📅 Ajouter</button>' +
-        '<a class="agenda-action-btn agenda-action-btn--join" href="' + escapeHtml(it.lien_participation) + '" target="_blank" rel="noopener" title="Cliquez ici pour rejoindre directement le direct le jour J.">🔗 Rejoindre</a>';
+        '<a class="agenda-action-btn agenda-action-btn--join" href="' + escapeHtml(it.lien_participation) + '" target="_blank" rel="noopener" title="Cliquez ici pour rejoindre le direct.">🔗 Rejoindre</a>';
     } else if (it.lien_inscription) {
       actionBtns = '<a class="agenda-action-btn agenda-action-btn--register" href="' + escapeHtml(it.lien_inscription) + '" target="_blank" rel="noopener">✍️ S\'inscrire</a>';
     }
