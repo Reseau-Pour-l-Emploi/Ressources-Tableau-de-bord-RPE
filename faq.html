@@ -232,7 +232,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ft-indigo);outli
       <label for="f_pseudo">Pseudo / Identifiant <span class="opt">(obligatoire)</span></label>
       <input type="text" id="f_pseudo" required>
 
-      <label for="f_email">Adresse e-mail <span class="opt">(obligatoire - pour le suivi et la notification de réponse)</span></label>
+      <label for="f_email">Adresse e-mail <span class="opt">(obligatoire - visible uniquement par l'équipe RPE, jamais publié)</span></label>
       <input type="email" id="f_email" required>
 
       <label for="f_type">Type de demande <span class="opt">(obligatoire)</span></label>
@@ -518,9 +518,10 @@ document.getElementById('faqForm').addEventListener('submit', function(ev){
   status.className = 'form-status';
 
   ensureAuth().then(function(){
-    return db.collection('faq_questions').add({
+    var qRef = db.collection('faq_questions').doc();
+    var batch = db.batch();
+    batch.set(qRef, {
       pseudo: document.getElementById('f_pseudo').value.trim(),
-      email: document.getElementById('f_email').value.trim(),
       type: type.nom,
       perimetre: document.getElementById('f_perimetre').value,
       precision: precisionRequired ? precisionValue : '',
@@ -535,6 +536,9 @@ document.getElementById('faqForm').addEventListener('submit', function(ev){
       likes_question: 0,
       likes_reponse: 0
     });
+    // Email stocke a part (collection lisible uniquement par l'admin)
+    batch.set(db.collection('faq_emails').doc(qRef.id), {email: document.getElementById('f_email').value.trim()});
+    return batch.commit();
   }).then(function(){
     status.textContent = '✅ Votre question a bien été envoyée. Elle apparaîtra sur cette page dès qu\'un administrateur y aura répondu.';
     status.className = 'form-status ok';

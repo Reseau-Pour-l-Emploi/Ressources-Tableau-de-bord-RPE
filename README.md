@@ -198,7 +198,8 @@ Gérée depuis l'admin (❓ FAQ, deux sous-onglets) :
 - `faq_referentiels/config` → `{data: {pages: {nom, items:[]}, objets_techniques: {nom, items:[]}}}`
 - `faq_arbre/config` → `{data: {types: [{nom, perimetre_label, perimetre_source, perimetre_extra:[], precision: null|{trigger, label, source}}]}}` (`perimetre_source`/`precision.source` valent `"referentiel:pages"`, `"referentiel:objets_techniques"` ou `""`)
 - `faq_content/config` → `{data: {contact_email}}`
-- `faq_questions/{id}` → pseudo, email, type, perimetre, precision, sujet, description, impact, lien, reponse, statut (`en_attente`|`publiee`), date_creation, date_reponse, likes_question, likes_reponse
+- `faq_emails/{id}` → `{email}` (même id que la question ; lecture réservée à l'admin)
+- `faq_questions/{id}` → pseudo, type, perimetre, precision, sujet, description, impact, lien, reponse, statut (`en_attente`|`publiee`), date_creation, date_reponse, likes_question, likes_reponse
 
 ## Feuille de route (roadmap)
 

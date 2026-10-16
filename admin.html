@@ -2570,7 +2570,6 @@ document.getElementById('btnFaqManualAdd').addEventListener('click', function(){
   status.textContent = '⏳ Publication...';
   db.collection('faq_questions').add({
     pseudo: 'Équipe RPE',
-    email: '',
     type: type.nom,
     perimetre: document.getElementById('faqManual_perimetre').value,
     precision: document.getElementById('faqManual_precision').value,
@@ -2594,7 +2593,15 @@ document.getElementById('btnFaqManualAdd').addEventListener('click', function(){
 });
 
 /* -- File de moderation + questions publiees -- */
+var faqEmails = {};
 function renderFaqModerationLists(){
+  db.collection('faq_emails').get().then(function(snap){
+    faqEmails = {};
+    snap.forEach(function(d){ faqEmails[d.id] = d.data().email || ''; });
+  }).catch(function(){ faqEmails = {}; }).then(renderFaqModerationLists2);
+}
+function faqEmailOf(q){ return (q && (faqEmails[q.id] || q.email)) || ''; }
+function renderFaqModerationLists2(){
   db.collection('faq_questions').where('statut', '==', 'en_attente').get().then(function(snap){
     faqPendingQuestions = [];
     snap.forEach(function(doc){ faqPendingQuestions.push(Object.assign({id: doc.id}, doc.data())); });
@@ -2619,21 +2626,66 @@ function renderFaqModerationLists(){
 function faqMetaLine(q){
   return escapeHtml(q.type) + (q.perimetre ? ' › ' + escapeHtml(q.perimetre) : '') + (q.precision ? ' › ' + escapeHtml(q.precision) : '');
 }
+function faqEditBlockHtml(q){
+  return '<div class="faq-edit-box" data-faq-editbox="' + q.id + '" style="display:none;margin:8px 0;padding:10px;border:1px dashed #ccc;border-radius:6px">' +
+    '<label class="form-hint">Sujet</label><input class="edit-input" data-faq-editsujet="' + q.id + '" value="' + escapeHtml(q.sujet) + '">' +
+    '<label class="form-hint">Question (description)</label><textarea class="edit-textarea" data-faq-editdesc="' + q.id + '">' + escapeHtml(q.description) + '</textarea>' +
+    '<button type="button" class="btn btn--sm" data-faq-savequestion="' + q.id + '">💾 Enregistrer la question</button>' +
+  '</div>';
+}
+function faqActionButtons(q){
+  return '<button type="button" class="btn btn--secondary btn--sm" data-faq-toggleedit="' + q.id + '">✏️ Modifier la question</button>' +
+    '<button type="button" class="btn btn--danger btn--sm" data-faq-delete="' + q.id + '">🗑️ Supprimer</button>';
+}
+function bindFaqEditDelete(el, statusSel){
+  el.querySelectorAll('[data-faq-toggleedit]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var box = el.querySelector('[data-faq-editbox="' + btn.dataset.faqToggleedit + '"]');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+  el.querySelectorAll('[data-faq-savequestion]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.dataset.faqSavequestion;
+      var sujet = el.querySelector('[data-faq-editsujet="' + id + '"]').value.trim();
+      var desc = el.querySelector('[data-faq-editdesc="' + id + '"]').value.trim();
+      var st = el.querySelector('[' + statusSel + '="' + id + '"]');
+      if (!sujet || !desc) { st.textContent = '❌ Sujet et question obligatoires.'; return; }
+      st.textContent = '⏳...';
+      db.collection('faq_questions').doc(id).update({sujet: sujet, description: desc}).then(function(){
+        renderFaqModerationLists();
+      }).catch(function(err){ st.textContent = '❌ ' + (err.message || err); });
+    });
+  });
+  el.querySelectorAll('[data-faq-delete]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (!confirm('Supprimer définitivement cette question (et son email) ? Action irréversible.')) return;
+      var id = btn.dataset.faqDelete;
+      var batch = db.batch();
+      batch.delete(db.collection('faq_questions').doc(id));
+      batch.delete(db.collection('faq_emails').doc(id));
+      batch.commit().then(renderFaqModerationLists).catch(function(err){ alert('Échec : ' + (err.message || err)); });
+    });
+  });
+}
 function renderFaqPendingList(){
   var el = document.getElementById('faqPendingList');
   if (!faqPendingQuestions.length) { el.innerHTML = '<p class="form-hint">Aucune question en attente.</p>'; return; }
   el.innerHTML = faqPendingQuestions.map(function(q){
     return '<div class="rm-admin-tache" style="margin-bottom:14px">' +
-      '<div class="form-hint">' + faqMetaLine(q) + ' · ' + escapeHtml(q.pseudo) + ' (' + escapeHtml(q.email) + ')</div>' +
+      '<div class="form-hint">' + faqMetaLine(q) + ' · ' + escapeHtml(q.pseudo) + ' (' + escapeHtml(faqEmailOf(q) || 'email non renseigné') + ')</div>' +
       '<p style="font-weight:700;margin:6px 0 4px">' + escapeHtml(q.sujet) + '</p>' +
       '<p style="margin:0 0 8px;white-space:pre-wrap">' + escapeHtml(q.description) + '</p>' +
       (q.lien ? '<p class="form-hint">Lien : <a href="' + escapeHtml(q.lien) + '" target="_blank" rel="noopener">' + escapeHtml(q.lien) + '</a></p>' : '') +
       (q.impact ? '<p class="form-hint">Impact : ' + escapeHtml(q.impact) + '</p>' : '') +
+      faqEditBlockHtml(q) +
       '<textarea class="edit-textarea" data-faq-reponse="' + q.id + '" placeholder="Rédigez la réponse à publier..."></textarea>' +
       '<button type="button" class="btn btn--sm" data-faq-publish="' + q.id + '">✅ Publier la réponse</button>' +
+      faqActionButtons(q) +
       '<span class="form-hint" data-faq-pending-status="' + q.id + '" style="margin-left:8px"></span>' +
     '</div>';
   }).join('');
+  bindFaqEditDelete(el, 'data-faq-pending-status');
   el.querySelectorAll('[data-faq-publish]').forEach(function(btn){
     btn.addEventListener('click', function(){
       var id = btn.dataset.faqPublish;
@@ -2657,13 +2709,13 @@ function renderFaqPendingList(){
   });
 }
 function faqMailtoLinkHtml(q, reponse){
-  if (!q || !q.email) return '';
+  if (!q || !faqEmailOf(q)) return '';
   var subject = 'Réponse à votre question FAQ : ' + q.sujet;
   var body = 'Bonjour ' + q.pseudo + ',\n\n' +
     'Votre question "' + q.sujet + '" a reçu une réponse, désormais publiée sur la FAQ du Tableau de bord RPE :\n\n' +
     reponse + '\n\n' +
     'Cordialement,\nL\'équipe Réseau Pour l\'Emploi';
-  var href = 'mailto:' + encodeURIComponent(q.email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  var href = 'mailto:' + encodeURIComponent(faqEmailOf(q)) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   return '<a href="' + href + '" target="_blank">📧 Notifier ' + escapeHtml(q.pseudo) + ' par e-mail</a>';
 }
 function renderFaqPublishedList(){
@@ -2673,12 +2725,16 @@ function renderFaqPublishedList(){
     return '<div class="rm-admin-tache" style="margin-bottom:14px">' +
       '<div class="form-hint">' + faqMetaLine(q) + ' · 👍 ' + (q.likes_question || 0) + ' question / 👍 ' + (q.likes_reponse || 0) + ' réponse</div>' +
       '<p style="font-weight:700;margin:6px 0 4px">' + escapeHtml(q.sujet) + '</p>' +
+      (faqEmailOf(q) ? '<div class="form-hint">' + escapeHtml(q.pseudo) + ' (' + escapeHtml(faqEmailOf(q)) + ')</div>' : '') +
+      faqEditBlockHtml(q) +
       '<textarea class="edit-textarea" data-faq-editreponse="' + q.id + '">' + escapeHtml(q.reponse) + '</textarea>' +
       '<button type="button" class="btn btn--secondary btn--sm" data-faq-updatereponse="' + q.id + '">💾 Mettre à jour la réponse</button>' +
       '<button type="button" class="btn btn--danger btn--sm" data-faq-unpublish="' + q.id + '">↩️ Dépublier</button>' +
+      faqActionButtons(q) +
       '<span class="form-hint" data-faq-pub-status="' + q.id + '" style="margin-left:8px"></span>' +
     '</div>';
   }).join('');
+  bindFaqEditDelete(el, 'data-faq-pub-status');
   el.querySelectorAll('[data-faq-updatereponse]').forEach(function(btn){
     btn.addEventListener('click', function(){
       var id = btn.dataset.faqUpdatereponse;
