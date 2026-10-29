@@ -10,10 +10,7 @@ glossaire.html                  Glossaire public (ex-index.html)
 admin.html                      back-office : propositions, édition directe, contenu du site, export/import
 firebase-config.js              config Firebase + email(s) admin (A COMPLETER)
 firestore.rules                 règles de sécurité à publier dans Firebase
-data/glossary.json                  glossaire généré (ne pas éditer à la main)
-data/pages_sources.json             liste des pages, générée par le script
-sources/glossaire_source.json   source unique du glossaire : une entrée par page, à éditer directement
-scripts/build_glossary.py       génère data/ depuis sources/glossaire_source.json
+data/, sources/, scripts/       ancien modèle du glossaire : lus une seule fois par la migration, supprimables ensuite
 assets/, fonts/                 identité visuelle RPE
 ```
 
@@ -36,56 +33,39 @@ Connexion ensuite sur `admin.html` avec l'email et le mot de passe choisis à l'
 
 Pousser le dépôt sur GitHub, activer GitHub Pages (branche `main`, racine).
 
-## Modifier le contenu
+## Stockage et mise à jour du glossaire
 
-Tout part d'un seul fichier : `sources/glossaire_source.json`. Structure :
+Le glossaire est stocké **uniquement dans Firestore** :
+- `glossaire_entrees/{id}` : une fiche complète par document (libellé, type, source, pages, définition, groupe, hiérarchie, cas d'usage...). `cle_import` relie une fiche de tableau personnalisé à son champ dans le tableau de bord ; `retire_par_import` signale une fiche archivée par un import.
+- `glossaire_meta/referentiel` : `{pages, sources, page_definitions}`.
+- `glossaire_imports/{auto}` : journal des imports (admin uniquement).
 
-```json
-{
-  "pages": [
-    {
-      "page": "Nom de la page",
-      "definition_page": "...",
-      "indicateurs": [
-        {"libelle": "...", "definition": "...", "kpi": true}
-      ],
-      "champs_tableau": [
-        {"type": "Dimension", "categorie": "...", "champ": "...", "niveau_hierarchique": null,
-         "definition": "...", "modalites": ["...", "..."], "noms_techniques": ["..."], "sources": ["..."]}
-      ]
-    }
-  ]
-}
-```
+**Migration (une seule fois)** : admin > 📚 Glossaire > "🔄 Mise à jour depuis le TdB" > "Migrer le glossaire vers Firebase". Fusionne `data/glossary.json` et les contributions (`glossaire_overrides`, `glossaire_ajouts`) dans `glossaire_entrees`. Tant que la migration n'est pas faite, le site lit l'ancien modèle. Ensuite, `data/`, `sources/`, `scripts/` et les collections `glossaire_overrides` / `glossaire_ajouts` ne sont plus utilisés.
 
-- `definition`, `modalites`, `noms_techniques`, `sources` sont facultatifs sur chaque indicateur/champ (laisser vide si inconnu).
-- Un champ Dimension au même nom sur plusieurs pages (ex. "Territoire") est automatiquement fusionné en une seule fiche listant toutes ses pages.
-- `niveau_hierarchique` renseigné plusieurs fois pour un même champ crée automatiquement une variable hiérarchique (niveaux navigables).
+**Mise à jour depuis le tableau de bord** (même onglet) : coller ou déposer le HTML du panneau "Dimensions / Mesures" de chaque tableau personnalisé (un ou plusieurs). La page est détectée automatiquement (modifiable). "Analyser" affiche l'aperçu sans rien écrire, "Appliquer" enregistre :
+- nouveau champ → nouvelle fiche à compléter ;
+- champ existant apparu sur une page → page ajoutée à la fiche ;
+- champ disparu d'une page → page retirée ; s'il n'est plus sur aucune page, la fiche est archivée (masquée, contenu conservé) puis réactivée automatiquement s'il revient ;
+- définitions, groupes, hiérarchies, cas d'usage, sources, noms techniques : jamais modifiés.
+- Les variantes de libellé d'une page à l'autre (ex. "Top contrainte Famille" / "Familiale") sont rapprochées via `GLOSS_ALIASES` dans `admin.html`.
+- Un même import relancé ne produit aucune modification.
 
-Après modification, régénérer :
-
-```
-python3 scripts/build_glossary.py
-```
-
-(depuis la racine du dépôt). Régénère `data/glossary.json` et `data/pages_sources.json`.
+**Suivi des descriptions** (admin > ✏️ Mode édition, en haut) : champs des tableaux personnalisés classés en 🆕 Nouvelles (créées par un import, `nouvelle_import`), ✍️ En attente (sans description ou description automatique non validée, signalée 🤖) et ✅ Saisies (`description_saisie: true`), avec taux d'avancement. Une définition modifiée dans l'admin (édition, proposition validée, import Excel) passe la fiche en "Saisies" ; la case "Description rédigée ou validée par moi" permet aussi de valider un texte automatique tel quel. Colonne "Statut description" dans l'export Excel.
 
 ## Notions clés
 
-- **Pages** : ne sont pas des fiches du glossaire, uniquement un filtre. Sélectionner une page dans le filtre affiche sa définition sous l'en-tête ; l'étiquette d'une page révèle cette même définition au survol (infobulle), partout où elle apparaît. Ces définitions sont exportées dans `data/pages_sources.json` (`page_definitions`).
+- **Pages** : ne sont pas des fiches du glossaire, uniquement un filtre. Sélectionner une page dans le filtre affiche sa définition sous l'en-tête ; l'étiquette d'une page révèle cette même définition au survol (infobulle), partout où elle apparaît. Ces définitions sont stockées dans `glossaire_meta/referentiel` (`page_definitions`).
 - **Mesure/Dimension** : cette étiquette n'apparaît que sur les fiches "champ de tableau personnalisé" - jamais sur les indicateurs de page.
 - **Indicateur de page** (`source: "indicateur"`) vs **champ de tableau personnalisé** (`source: "champ_tableau"`) : deux natures de fiches distinctes, jamais fusionnées même à libellé identique ; tags visuels différents (📄 vs 🗂️). Filtrable via "Nature de fiche".
 - **KPI** (`kpi: true`) : indicateur clé mis en avant sur une page, identifié par 🗝️.
 - **Catégorie** : regroupement fonctionnel d'un champ de tableau personnalisé (ex. "3. Public") - à ne pas confondre avec le **groupe** (données aux définitions proches, ex. "Accès à l'emploi", consolidées en une fiche).
 - **Variable hiérarchique** : mêmes données à différents niveaux d'agrégation (`hierarchie: {nom, niveau}`, niveau 0 = plus détaillé), avec ex æquo possibles.
 - **Compteurs** (`compteurs/{id}`) : nombre de demandes en attente par fiche. En cas d'incohérence, bouton "🔄 Réparer les compteurs" dans `admin.html`.
-- **Propositions** : `ajout`, `modification`, `suppression`, `groupe_lot`, `hierarchie_lot`, `groupe_suppression`, `hierarchie_suppression`. Chacune est visible et éditable par l'admin avant validation, qui écrit dans `glossaire_ajouts`/`glossaire_overrides`.
+- **Propositions** : `ajout`, `modification`, `suppression`, `groupe_lot`, `hierarchie_lot`, `groupe_suppression`, `hierarchie_suppression`. Chacune est visible et éditable par l'admin avant validation, qui écrit dans `glossaire_entrees`.
 
-## Purge Firebase après une refonte du contenu
+## Purge des propositions
 
-Chaque fois que `data/glossary.json` change de modèle de données ou d'identifiants (ex. refonte du contenu, changement de schéma), les documents déjà présents dans Firestore (`glossaire_overrides`, `glossaire_ajouts`, `compteurs`, `propositions`) référencent d'anciens id devenus incohérents avec le nouveau glossaire.
-
-Bouton **"🧹 Purger la base"** dans `admin.html` (barre d'outils, à côté de "Réparer les compteurs") : supprime tous les documents de ces 4 collections après confirmation (affiche d'abord le nombre de documents concernés). Le glossaire de base (`data/glossary.json`) n'est jamais touché. À utiliser après chaque refonte de contenu, avant de laisser de nouvelles contributions arriver.
+Bouton **"🧹 Purger la base"** dans `admin.html` : supprime toutes les propositions et les compteurs de demandes (`propositions`, `compteurs`) après confirmation. Le glossaire (`glossaire_entrees`) n'est jamais touché.
 
 ## Vue "Tout"
 
@@ -105,7 +85,7 @@ Quand un indicateur de la page "Accueil" porte exactement le même libellé qu'u
 
 ## Mode édition directe (admin)
 
-Bouton **"✏️ Mode édition"** dans `admin.html` : bascule vers un onglet permettant de chercher n'importe quelle fiche publiée par libellé, de la modifier (tous les champs, y compris groupe/hiérarchie/pages/sources) et d'enregistrer **directement** dans `glossaire_overrides`/`glossaire_ajouts`, sans passer par une proposition ni attendre de validation. Un bouton "🗑️ Supprimer cette fiche" permet aussi la suppression immédiate. Le bouton "+ Nouvelle fiche" ouvre un formulaire vierge pour créer une fiche de toutes pièces (écrite dans `glossaire_ajouts`).
+Bouton **"✏️ Mode édition"** dans `admin.html` : bascule vers un onglet permettant de chercher n'importe quelle fiche publiée par libellé, de la modifier (tous les champs, y compris groupe/hiérarchie/pages/sources) et d'enregistrer **directement** dans `glossaire_entrees`, sans passer par une proposition ni attendre de validation. Un bouton "🗑️ Supprimer cette fiche" permet aussi la suppression immédiate. Le bouton "+ Nouvelle fiche" ouvre un formulaire vierge pour créer une fiche de toutes pièces (écrite dans `glossaire_entrees`).
 
 À utiliser pour les corrections rapides côté admin ; le circuit normal (proposition → validation) reste recommandé pour les contributions d'utilisateurs.
 
@@ -163,8 +143,8 @@ La colonne **ID** est l'identifiant technique de la fiche : c'est elle qui perme
 ## Import Excel : mise à jour globale (admin)
 
 Bouton **"📥 Importer un Excel"** dans `admin.html` : accepte un fichier au même format que l'export (onglets "Indicateurs"/"Champs", mêmes colonnes). Pour chaque ligne :
-- **ID renseigné et existant** → met à jour la fiche correspondante (écrit dans `glossaire_overrides`).
-- **ID vide ou inconnu** → crée une nouvelle fiche (écrit dans `glossaire_ajouts`), avec un id dérivé du libellé.
+- **ID renseigné et existant** → met à jour la fiche correspondante.
+- **ID vide ou inconnu** → crée une nouvelle fiche, avec un id dérivé du libellé.
 
 Une confirmation (nombre de lignes par onglet) est affichée avant toute écriture. Permet de corriger en masse le glossaire dans Excel (définitions, groupes, hiérarchie...) puis de réimporter en un clic, sans repasser par le mode édition fiche par fiche.
 
@@ -199,6 +179,7 @@ Gérée depuis l'admin (❓ FAQ, deux sous-onglets) :
 - `faq_arbre/config` → `{data: {types: [{nom, perimetre_label, perimetre_source, perimetre_extra:[], precision: null|{trigger, label, source}}]}}` (`perimetre_source`/`precision.source` valent `"referentiel:pages"`, `"referentiel:objets_techniques"` ou `""`)
 - `faq_content/config` → `{data: {contact_email}}`
 - `faq_emails/{id}` → `{email}` (même id que la question ; lecture réservée à l'admin)
+- Lien direct vers une question publiée : `faq.html#q=<id>` (utilisé par le bouton "📧 Préparer la réponse" de la modération, qui ouvre un e-mail prérempli à l'auteur).
 - `faq_questions/{id}` → pseudo, type, perimetre, precision, sujet, description, impact, lien, reponse, statut (`en_attente`|`publiee`), date_creation, date_reponse, likes_question, likes_reponse
 
 ## Feuille de route (roadmap)
@@ -214,4 +195,3 @@ Badge lettre (A à G, fond vert) affiché en bas à droite du pied de page sur `
 ## Notes
 
 - Aucune donnée personnelle stockée côté client : l'email des contributeurs n'est lisible que par l'admin (règles Firestore).
-- `data/glossary.json` n'est pas rechargé avec anti-cache : après régénération, un Ctrl+Shift+R peut être nécessaire pour voir la nouvelle version.

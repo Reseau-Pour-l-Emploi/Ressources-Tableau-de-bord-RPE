@@ -623,28 +623,43 @@ function init(){
     }
   }).catch(function(){});
 
-  var pJson = fetch('data/glossary.json').then(function(r){ return r.json(); });
-  var pRef = fetch('data/pages_sources.json').then(function(r){ return r.json(); }).catch(function(){ return {pages:[], sources:[]}; });
-  var pOverrides = db.collection('glossaire_overrides').get().catch(function(){ return null; });
-  var pAjouts = db.collection('glossaire_ajouts').get().catch(function(){ return null; });
+  // Source unique : Firestore (glossaire_entrees + glossaire_meta/referentiel).
+  // Repli sur l'ancien modele (data/*.json + overrides/ajouts) tant que la migration n'a pas ete faite.
+  var pSource = db.collection('glossaire_entrees').get().then(function(snap){
+    if (!snap.empty) {
+      var entries = [];
+      snap.forEach(function(d){ var x = d.data(); x.id = d.id; entries.push(x); });
+      return db.collection('glossaire_meta').doc('referentiel').get().then(function(m){
+        return {entries: entries, ref: (m.exists && m.data()) || {}, overrides: {}, additions: []};
+      });
+    }
+    return Promise.all([
+      fetch('data/glossary.json').then(function(r){ return r.json(); }),
+      fetch('data/pages_sources.json').then(function(r){ return r.json(); }).catch(function(){ return {}; }),
+      db.collection('glossaire_overrides').get().catch(function(){ return null; }),
+      db.collection('glossaire_ajouts').get().catch(function(){ return null; })
+    ]).then(function(res){
+      var ov = {}, adds = [];
+      if (res[2]) res[2].forEach(function(doc){ ov[doc.id] = doc.data(); });
+      if (res[3]) res[3].forEach(function(doc){ var d = doc.data(); d.id = doc.id; adds.push(d); });
+      return {entries: res[0], ref: res[1] || {}, overrides: ov, additions: adds};
+    });
+  });
   var pCompteurs = db.collection('compteurs').get().catch(function(){ return null; });
 
-  Promise.all([pJson, pRef, pOverrides, pAjouts, pCompteurs]).then(function(results){
-    baseGlossary = results[0];
-    refPages = results[1].pages || [];
-    refSources = results[1].sources || [];
-    pageDefinitions = results[1].page_definitions || {};
+  Promise.all([pSource, pCompteurs]).then(function(results){
+    var src = results[0];
+    baseGlossary = src.entries;
+    refPages = src.ref.pages || [];
+    refSources = src.ref.sources || [];
+    pageDefinitions = src.ref.page_definitions || {};
     populateRefSelect('f_pages', refPages);
     populateRefSelect('f_sources', refSources);
-
-    overrides = {};
-    if (results[2]) results[2].forEach(function(doc){ overrides[doc.id] = doc.data(); });
-
-    additions = [];
-    if (results[3]) results[3].forEach(function(doc){ var d = doc.data(); d.id = doc.id; additions.push(d); });
+    overrides = src.overrides;
+    additions = src.additions;
 
     pendingCounts = {};
-    if (results[4]) results[4].forEach(function(doc){
+    if (results[1]) results[1].forEach(function(doc){
       var n = (doc.data().en_attente || 0);
       if (n > 0) pendingCounts[doc.id] = n;
     });

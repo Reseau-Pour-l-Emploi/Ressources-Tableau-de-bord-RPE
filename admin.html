@@ -191,6 +191,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
             <span class="tab-group-label">📚 Glossaire</span>
             <button class="btn btn--sm" id="tabProps">Propositions en attente</button>
             <button class="btn btn--secondary btn--sm" id="tabEdit">✏️ Mode édition</button>
+            <button class="btn btn--secondary btn--sm" id="tabGlossImport">🔄 Mise à jour depuis le TdB</button>
           </div>
           <div class="tab-group">
             <span class="tab-group-label">🏠 Accueil</span>
@@ -215,7 +216,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
           <button class="btn btn--secondary btn--sm" id="btnExportXlsx" title="Exporte le glossaire actuellement publié (base + contributions validées) en Excel, un onglet par nature">📊 Exporter en Excel</button>
           <button class="btn btn--secondary btn--sm" id="btnImportXlsx" title="Met à jour le glossaire depuis un fichier Excel au même format que l'export (onglets Indicateurs / Champs)">📥 Importer un Excel</button>
           <input type="file" id="importFileInput" accept=".xlsx" style="display:none">
-          <button class="btn btn--danger btn--sm" id="btnPurge" title="Supprime toutes les contributions (ajouts, modifications, compteurs, propositions) - à utiliser après une refonte du contenu de base">🧹 Purger la base</button>
+          <button class="btn btn--danger btn--sm" id="btnPurge" title="Supprime toutes les propositions et les compteurs de demandes (le glossaire lui-même n'est pas affecté)">🧹 Purger la base</button>
         </div>
       </div>
     </div>
@@ -224,6 +225,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
     <div id="propList"></div>
 
     <div id="editSection" style="display:none">
+      <div class="card" id="descSuiviCard"></div>
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
           <div style="flex:1;min-width:220px">
@@ -235,6 +237,27 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
         <div id="editResults" style="margin-top:12px"></div>
       </div>
       <div id="editFormHolder"></div>
+    </div>
+
+    <div id="glossImportSection" style="display:none">
+      <div class="card" id="glossMigrationCard"></div>
+      <div class="card" id="glossImportCard" style="display:none">
+        <h3 style="margin:0 0 8px">Importer une extraction des tableaux personnalisés</h3>
+        <div class="form-hint" style="font-style:normal;margin-bottom:10px;line-height:1.6">
+          <b>Comment extraire :</b> dans le tableau de bord, ouvrez le tableau personnalisé d'une page, clic droit sur le panneau "Dimensions / Mesures" &gt; <i>Inspecter</i>,
+          clic droit sur la ligne <code>&lt;div class="editToolbar" ...&gt;</code> &gt; <i>Copier &gt; Copier l'élément (outerHTML)</i>.
+          Collez-le ci-dessous ou enregistrez-le dans un fichier .html / .txt (un fichier par page, plusieurs fichiers possibles).<br>
+          <b>Ce qui est mis à jour :</b> uniquement la présence des champs sur chaque page (ajout, retrait, nouvelles fiches).
+          Définitions, groupes, hiérarchies, cas d'usage, sources et noms techniques déjà saisis ne sont jamais modifiés.
+          Une fiche qui n'apparaît plus sur aucune page est archivée (masquée, définitions conservées) et réactivée automatiquement si elle revient.
+        </div>
+        <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:4px">Fichiers d'extraction</label>
+        <input type="file" id="glossImportFiles" accept=".html,.htm,.txt" multiple style="margin-bottom:10px">
+        <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:4px">ou HTML collé</label>
+        <textarea class="edit-textarea" id="glossImportText" rows="4" placeholder="&lt;div class=&quot;editToolbar&quot; ...&gt;...&lt;/div&gt;"></textarea>
+        <button class="btn btn--sm" id="btnGlossAnalyse" style="margin-top:8px">🔍 Analyser (aucune écriture)</button>
+        <div id="glossImportPreview" style="margin-top:14px"></div>
+      </div>
     </div>
 
     <div id="siteSection" style="display:none">
@@ -509,28 +532,47 @@ function groupCount(groupName){
   return n;
 }
 
-function loadPublished(cb){
-  var pJson = fetch('data/glossary.json').then(function(r){ return r.json(); });
-  var pRef = fetch('data/pages_sources.json').then(function(r){ return r.json(); }).catch(function(){ return {pages:[],sources:[]}; });
-  var pOverrides = db.collection('glossaire_overrides').get();
-  var pAjouts = db.collection('glossaire_ajouts').get();
-  var pCompteurs = db.collection('compteurs').get();
-
-  Promise.all([pJson, pRef, pOverrides, pAjouts, pCompteurs]).then(function(results){
-    var base = results[0];
-    refPages = results[1].pages || [];
-    refSources = results[1].sources || [];
-    var overrides = {};
-    results[2].forEach(function(doc){ overrides[doc.id] = doc.data(); });
-    var additions = [];
-    results[3].forEach(function(doc){ var d = doc.data(); d.id = doc.id; additions.push(d); });
-    var all = base.concat(additions);
-    all.forEach(function(e){
-      var ov = overrides[e.id];
-      publishedById[e.id] = ov ? Object.assign({}, e, ov) : e;
+// Glossaire : source unique = Firestore (glossaire_entrees + glossaire_meta/referentiel).
+// Tant que la migration n'a pas ete faite, lecture de l'ancien modele (data/*.json + overrides/ajouts).
+var glossaireMigre = false;
+function glossColl(existing){
+  return glossaireMigre ? 'glossaire_entrees' : (existing ? 'glossaire_overrides' : 'glossaire_ajouts');
+}
+function loadGlossarySource(){
+  return db.collection('glossaire_entrees').get().then(function(snap){
+    if (!snap.empty) {
+      var entries = [];
+      snap.forEach(function(d){ var x = d.data(); x.id = d.id; entries.push(x); });
+      return db.collection('glossaire_meta').doc('referentiel').get().then(function(m){
+        return {entries: entries, ref: (m.exists && m.data()) || {}, migre: true};
+      });
+    }
+    return Promise.all([
+      fetch('data/glossary.json').then(function(r){ return r.json(); }),
+      fetch('data/pages_sources.json').then(function(r){ return r.json(); }).catch(function(){ return {}; }),
+      db.collection('glossaire_overrides').get(),
+      db.collection('glossaire_ajouts').get()
+    ]).then(function(res){
+      var ov = {};
+      res[2].forEach(function(d){ ov[d.id] = d.data(); });
+      var adds = [];
+      res[3].forEach(function(d){ var x = d.data(); x.id = d.id; adds.push(x); });
+      var entries = res[0].concat(adds).map(function(e){ return ov[e.id] ? Object.assign({}, e, ov[e.id]) : e; });
+      return {entries: entries, ref: res[1] || {}, migre: false};
     });
+  });
+}
+
+function loadPublished(cb){
+  Promise.all([loadGlossarySource(), db.collection('compteurs').get()]).then(function(results){
+    var src = results[0];
+    glossaireMigre = src.migre;
+    refPages = src.ref.pages || [];
+    refSources = src.ref.sources || [];
+    publishedById = {};
+    src.entries.forEach(function(e){ publishedById[e.id] = e; });
     pendingCountsAdmin = {};
-    results[4].forEach(function(doc){
+    results[1].forEach(function(doc){
       var n = doc.data().en_attente || 0;
       if (n > 0) pendingCountsAdmin[doc.id] = n;
     });
@@ -792,7 +834,7 @@ function validateOne(div){
   var ptype = div.dataset.ptype;
   var cibleId = div.dataset.cible;
   if (ptype === 'suppression') {
-    return db.collection('glossaire_overrides').doc(cibleId).set({supprime:true}, {merge:true}).then(function(){
+    return db.collection(glossColl(true)).doc(cibleId).set({supprime:true}, {merge:true}).then(function(){
       return db.collection('propositions').doc(propId).update({statut:'validee'});
     }).then(function(){ return decrementCounter(cibleId); }).then(function(){
       sendPrefilledEmail(div, 'validée');
@@ -803,7 +845,7 @@ function validateOne(div){
     var nom = champsOrig.groupe;
     var ids = Object.keys(publishedById).filter(function(id){ return publishedById[id].groupe === nom; });
     return Promise.all(ids.map(function(id){
-      return db.collection('glossaire_overrides').doc(id).set({groupe: null}, {merge:true});
+      return db.collection(glossColl(true)).doc(id).set({groupe: null}, {merge:true});
     })).then(function(){
       return db.collection('propositions').doc(propId).update({statut:'validee'});
     }).then(function(){
@@ -819,7 +861,7 @@ function validateOne(div){
       return publishedById[id].hierarchie && publishedById[id].hierarchie.nom === nomH;
     });
     return Promise.all(idsH.map(function(id){
-      return db.collection('glossaire_overrides').doc(id).set({hierarchie: null}, {merge:true});
+      return db.collection(glossColl(true)).doc(id).set({hierarchie: null}, {merge:true});
     })).then(function(){
       return db.collection('propositions').doc(propId).update({statut:'validee'});
     }).then(function(){
@@ -832,7 +874,7 @@ function validateOne(div){
     var nomGroupe = div.querySelector('[data-f="groupe"]').value.trim();
     var membresIds = readFieldPicker(div, 'membres');
     return Promise.all(membresIds.map(function(id){
-      return db.collection('glossaire_overrides').doc(id).set({groupe: nomGroupe}, {merge:true});
+      return db.collection(glossColl(true)).doc(id).set({groupe: nomGroupe}, {merge:true});
     })).then(function(){
       return db.collection('propositions').doc(propId).update({statut:'validee'});
     }).then(function(){
@@ -850,7 +892,7 @@ function validateOne(div){
       var niveauValue = nbNiveaux - 1 - i;
       readFieldPicker(div, 'niveau_' + i).forEach(function(id){
         affectedHierIds.push(id);
-        writes.push(db.collection('glossaire_overrides').doc(id).set({hierarchie: {nom: nomHier, niveau: niveauValue}}, {merge:true}));
+        writes.push(db.collection(glossColl(true)).doc(id).set({hierarchie: {nom: nomHier, niveau: niveauValue}}, {merge:true}));
       });
     }
     return Promise.all(writes).then(function(){
@@ -864,8 +906,13 @@ function validateOne(div){
   var champs = readForm(div);
   var orig = JSON.parse(div.dataset.origChamps || '{}');
   var statusWord = fieldsDiffer(orig, champs) ? 'modifiée' : 'validée';
+  var prevDef = cibleId && publishedById[cibleId] ? String(publishedById[cibleId].definition || '').trim() : '';
+  if (String(champs.definition || '').trim() && String(champs.definition || '').trim() !== prevDef) {
+    champs.description_saisie = true;
+    champs.nouvelle_import = false;
+  }
   var targetId = cibleId || slugify(champs.libelle);
-  var coll = ptype === 'modification' ? 'glossaire_overrides' : 'glossaire_ajouts';
+  var coll = glossColl(ptype === 'modification');
   return db.collection(coll).doc(targetId).set(champs, {merge:true}).then(function(){
     return db.collection('propositions').doc(propId).update({statut:'validee'});
   }).then(function(){ return decrementCounter(cibleId); }).then(function(){
@@ -1010,6 +1057,7 @@ function buildExportRows(entries){
     .map(function(e){
       return {
         'ID': e.id,
+        'Statut description': ({nouvelle: 'Nouvelle', a_decrire: 'En attente', saisie: 'Saisie'})[glossDescStatut(e)],
         'Libellé': e.libelle,
         'Type': e.type === 'mesure' ? 'Mesure' : 'Dimension',
         'Catégorie': e.categorie || '',
@@ -1187,6 +1235,12 @@ function showImportConfirm(rowsInd, rowsChamps){
   });
 }
 
+// Une definition modifiee par rapport a celle en place compte comme "saisie".
+function glossMarkSaisieIfChanged(id, champs){
+  var prev = publishedById[id] ? String(publishedById[id].definition || '').trim() : '';
+  var next = String(champs.definition || '').trim();
+  if (next && next !== prev) { champs.description_saisie = true; champs.nouvelle_import = false; }
+}
 function runImport(rowsInd, rowsChamps, statusEl){
   var writes = [];
   var n = 0;
@@ -1194,7 +1248,8 @@ function runImport(rowsInd, rowsChamps, statusEl){
     var champs = rowToChampsIndicateur(row);
     if (!champs.libelle) return;
     var id = (row['ID'] || '').trim() || ('indicateur--' + slugify(champs.libelle));
-    var coll = publishedById[id] ? 'glossaire_overrides' : 'glossaire_ajouts';
+    var coll = glossColl(!!publishedById[id]);
+    glossMarkSaisieIfChanged(id, champs);
     writes.push(db.collection(coll).doc(id).set(champs, {merge:true}));
     n++;
   });
@@ -1202,7 +1257,8 @@ function runImport(rowsInd, rowsChamps, statusEl){
     var champs = rowToChampsChamp(row);
     if (!champs.libelle) return;
     var id = (row['ID'] || '').trim() || ('champ--' + slugify(champs.libelle));
-    var coll = publishedById[id] ? 'glossaire_overrides' : 'glossaire_ajouts';
+    var coll = glossColl(!!publishedById[id]);
+    glossMarkSaisieIfChanged(id, champs);
     writes.push(db.collection(coll).doc(id).set(champs, {merge:true}));
     n++;
   });
@@ -1210,6 +1266,8 @@ function runImport(rowsInd, rowsChamps, statusEl){
   return Promise.all(writes).then(function(){ return n; });
 }
 
+// Le glossaire (glossaire_entrees) n'est jamais concerne par la purge.
+var PURGE_COLLECTIONS = ['propositions', 'compteurs'];
 function countDocs(){
   return Promise.all(PURGE_COLLECTIONS.map(function(name){
     return db.collection(name).get().then(function(snap){ return {name: name, n: snap.size}; });
@@ -1238,10 +1296,10 @@ document.getElementById('btnPurge').addEventListener('click', function(){
   var confirmBox = document.createElement('div');
   confirmBox.className = 'purge-confirm';
   confirmBox.innerHTML =
-    '<b>⚠️ Purger la base ?</b> Cette action supprime définitivement toutes les contributions ' +
-    '(ajouts, modifications, compteurs, demandes en attente ou traitées) des collections ' +
+    '<b>⚠️ Purger la base ?</b> Cette action supprime définitivement les propositions ' +
+    '(en attente ou traitées) et les compteurs de demandes des collections ' +
     PURGE_COLLECTIONS.map(function(n){ return '<code>' + n + '</code>'; }).join(', ') + '. ' +
-    'Le glossaire de base (data/glossary.json) n\'est pas affecté.<br><br>' +
+    'Le glossaire lui-même n\'est pas affecté.<br><br>' +
     '<span id="purgeCounts">Comptage en cours...</span><br><br>' +
     '<button class="btn btn--danger btn--sm" id="btnConfirmPurge">Confirmer la purge</button> ' +
     '<button class="btn btn--secondary btn--sm" id="btnCancelPurge">Annuler</button>' +
@@ -1284,32 +1342,512 @@ function setActiveTab(tab){
   document.getElementById('propList').style.display = tab === 'props' ? 'block' : 'none';
   document.getElementById('purgeConfirm').style.display = tab === 'props' ? 'block' : 'none';
   document.getElementById('editSection').style.display = tab === 'edit' ? 'block' : 'none';
+  document.getElementById('glossImportSection').style.display = tab === 'glossImport' ? 'block' : 'none';
   document.getElementById('siteSection').style.display = tab === 'site' ? 'block' : 'none';
   document.getElementById('roadmapSection').style.display = tab === 'roadmap' ? 'block' : 'none';
   document.getElementById('faqModerationSection').style.display = tab === 'faqModeration' ? 'block' : 'none';
   document.getElementById('faqArbreSection').style.display = tab === 'faqArbre' ? 'block' : 'none';
   document.getElementById('tabProps').className = 'btn btn--sm' + (tab === 'props' ? ' tab-active' : '');
   document.getElementById('tabEdit').className = 'btn btn--secondary btn--sm' + (tab === 'edit' ? ' tab-active' : '');
+  document.getElementById('tabGlossImport').className = 'btn btn--secondary btn--sm' + (tab === 'glossImport' ? ' tab-active' : '');
   document.getElementById('tabSite').className = 'btn btn--secondary btn--sm' + (tab === 'site' ? ' tab-active' : '');
   document.getElementById('tabRoadmap').className = 'btn btn--secondary btn--sm' + (tab === 'roadmap' ? ' tab-active' : '');
   document.getElementById('tabFaqModeration').className = 'btn btn--secondary btn--sm' + (tab === 'faqModeration' ? ' tab-active' : '');
   document.getElementById('tabFaqArbre').className = 'btn btn--secondary btn--sm' + (tab === 'faqArbre' ? ' tab-active' : '');
   document.getElementById('panelTitle').textContent =
-    tab === 'props' ? 'Propositions en attente' : (tab === 'edit' ? 'Édition directe du glossaire' : (tab === 'roadmap' ? 'Feuille de route' : (tab === 'faqModeration' ? 'FAQ - Modération' : (tab === 'faqArbre' ? 'FAQ - Arborescence et référentiels' : "Contenu de la page d'accueil"))));
+    tab === 'props' ? 'Propositions en attente' : (tab === 'edit' ? 'Édition directe du glossaire' : tab === 'glossImport' ? 'Mise à jour du glossaire depuis les tableaux personnalisés' : (tab === 'roadmap' ? 'Feuille de route' : (tab === 'faqModeration' ? 'FAQ - Modération' : (tab === 'faqArbre' ? 'FAQ - Arborescence et référentiels' : "Contenu de la page d'accueil"))));
   document.querySelectorAll('#btnSelectAll,#btnValidateSelection,#btnRecalcCompteurs,#btnPurge,#btnExportXlsx,#btnImportXlsx').forEach(function(el){
     el.style.display = tab === 'props' ? 'inline-block' : 'none';
   });
+  if (tab === 'glossImport') renderGlossImportSection();
   if (tab === 'site' && !siteContentLoaded) loadSiteContent();
   if (tab === 'roadmap' && !roadmapAdminLoaded) loadRoadmapAdmin();
   if ((tab === 'faqModeration' || tab === 'faqArbre') && !faqAdminLoaded) loadFaqAdmin();
   if (tab === 'faqModeration' && faqAdminLoaded) renderFaqModerationLists();
 }
 document.getElementById('tabProps').addEventListener('click', function(){ setActiveTab('props'); });
-document.getElementById('tabEdit').addEventListener('click', function(){ setActiveTab('edit'); document.getElementById('editFormHolder').innerHTML = ''; });
+document.getElementById('tabEdit').addEventListener('click', function(){ setActiveTab('edit'); document.getElementById('editFormHolder').innerHTML = ''; renderDescSuivi(); });
 document.getElementById('tabSite').addEventListener('click', function(){ setActiveTab('site'); });
 document.getElementById('tabRoadmap').addEventListener('click', function(){ setActiveTab('roadmap'); });
 document.getElementById('tabFaqModeration').addEventListener('click', function(){ setActiveTab('faqModeration'); });
 document.getElementById('tabFaqArbre').addEventListener('click', function(){ setActiveTab('faqArbre'); });
+document.getElementById('tabGlossImport').addEventListener('click', function(){ setActiveTab('glossImport'); });
+
+/* ==== GLOSS-IMPORT-START : stockage unique Firestore + mise a jour depuis les tableaux personnalises ==== */
+// Libelles de champs quasi-identiques (variantes d'une page a l'autre) designant la meme donnee.
+var GLOSS_ALIASES = {
+  'Top 50 ans et +': 'Top 50 ans et plus',
+  'Top 55 ans et +': 'Top 55 ans et plus',
+  'Top contrainte Famille': 'Top contrainte Familiale',
+  'Top contrainte Finance': 'Top contrainte Financière',
+  'Top contrainte Savoirs de Base': 'Top contrainte Savoir de base'
+};
+function glossSlug(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+function glossClean(s){ return String(s||'').replace(/ /g,' ').replace(/\s+/g,' ').trim(); }
+function glossCleanChamp(s){
+  var c = glossClean(s).replace(/\.+$/,'').trim();
+  return GLOSS_ALIASES[c] || c;
+}
+function glossNextSub(el){
+  var n = el.nextElementSibling;
+  while (n && !(n.classList && n.classList.contains('editToolSubDiv'))) n = n.nextElementSibling;
+  return n;
+}
+// Lit le HTML copie depuis le panneau "Dimensions / Mesures" d'un tableau personnalise.
+// Un meme collage peut contenir plusieurs tableaux.
+function glossParseExtractions(html){
+  var doc = new DOMParser().parseFromString(html, 'text/html');
+  var roots = doc.querySelectorAll('[id^="subdivdims_"]');
+  return Array.prototype.map.call(roots, function(root){
+    var items = [];
+    Array.prototype.forEach.call(root.querySelectorAll('.editToolCategoryTitle'), function(cat){
+      var categorie = glossClean(cat.getAttribute('title'));
+      var sub = glossNextSub(cat);
+      if (!sub) return;
+      var cur = null;
+      Array.prototype.forEach.call(sub.children, function(ch){
+        if (ch.classList.contains('editToolIconDim')) {
+          cur = glossClean(ch.getAttribute('title'));
+          items.push({type: 'dimension', categorie: categorie, champ: cur, niveau: null});
+        } else if (ch.classList.contains('editToolSubDiv') && cur) {
+          Array.prototype.forEach.call(ch.querySelectorAll('.editToolIconHierarchy'), function(h){
+            items.push({type: 'dimension', categorie: categorie, champ: cur, niveau: glossClean(h.getAttribute('title'))});
+          });
+        }
+      });
+    });
+    var content = root.closest('.editToolbarContent') || doc;
+    var mt = content.querySelector('.editToolTitle1[title="Mesures"]');
+    var msub = mt && glossNextSub(mt);
+    if (msub) Array.prototype.forEach.call(msub.querySelectorAll('.editToolIconMeasure'), function(m){
+      items.push({type: 'mesure', categorie: 'Mesures', champ: glossClean(m.getAttribute('title')), niveau: null});
+    });
+    return {frameId: root.id.replace(/^subdivdims_/, ''), items: items};
+  });
+}
+function glossDetectPage(frameId, pages){
+  var f = '-' + glossSlug(frameId) + '-';
+  var best = '';
+  pages.forEach(function(p){
+    var k = '-' + glossSlug(p) + '-';
+    if (f.indexOf(k) > -1 && k.length > glossSlug(best).length + 2) best = p;
+  });
+  return best;
+}
+function glossToday(){
+  var d = new Date(), p = function(n){ return n < 10 ? '0' + n : '' + n; };
+  return p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear();
+}
+function glossUniqueId(W, id, page){
+  if (!W[id]) return id;
+  var rid = id + '--' + glossSlug(page), n = 2;
+  while (W[rid]) { rid = id + '--' + glossSlug(page) + '-' + n; n++; }
+  return rid;
+}
+// Calcule la mise a jour sans rien ecrire. entriesById = toutes les fiches (y compris supprimees).
+// Regles : seuls pages / hierarchie / supprime sont modifies sur une fiche existante ;
+// definitions, groupes, cas d'usage, sources... ne sont jamais touches.
+function glossComputeImport(entriesById, extractions){
+  var W = JSON.parse(JSON.stringify(entriesById));
+  var dirty = {};
+  var reports = [];
+  var lastRemoval = {};
+  function indexByCle(){
+    var byCle = {};
+    Object.keys(W).forEach(function(id){
+      var e = W[id];
+      if (e.cle_import) (byCle[e.cle_import] = byCle[e.cle_import] || []).push(e);
+    });
+    return byCle;
+  }
+  function indicDefinition(libelle){
+    var k = glossSlug(libelle), found = '';
+    Object.keys(W).forEach(function(id){
+      var e = W[id];
+      if (!found && e.source === 'indicateur' && !e.supprime && e.definition && glossSlug(e.libelle) === k) found = e.definition;
+    });
+    return found;
+  }
+  extractions.forEach(function(ex){
+    var page = ex.page;
+    var rep = {page: page, created: [], pageAdded: [], pageRemoved: [], archived: [], restored: [], ignored: [], unchanged: 0};
+    reports.push(rep);
+    if (!page) return;
+    var byCle = indexByCle();
+    var seen = {};
+    ex.items.forEach(function(it){
+      var champ = glossCleanChamp(it.champ);
+      var libelle = it.niveau ? champ + ' - ' + it.niveau : champ;
+      var cle = it.type + ':' + glossSlug(libelle);
+      var cands = byCle[cle] || [];
+      if (!cands.length) {
+        // Fiche creee a la main avec le meme libelle : on la rattache plutot que de creer un doublon
+        Object.keys(W).forEach(function(id){
+          var e = W[id];
+          if (!e.cle_import && e.source === 'champ_tableau' && e.type === it.type && glossSlug(e.libelle) === glossSlug(libelle)) cands.push(e);
+        });
+        if (cands.length) { cands.forEach(function(e){ e.cle_import = cle; dirty[e.id] = true; }); byCle[cle] = cands; }
+      }
+      var e = cands.filter(function(c){ return !c.supprime && (c.pages || []).indexOf(page) > -1; })[0]
+        || cands.filter(function(c){ return !c.supprime; })[0] || cands[0];
+      if (!e) {
+        var base = null, rec;
+        if (it.type === 'dimension' && it.niveau) {
+          base = (byCle['dimension:' + glossSlug(champ)] || [])[0];
+          if (!base) return;
+          var prefix = base.id + '-niv', maxN = 0, maxNiv = 0;
+          Object.keys(W).forEach(function(id){
+            if (id.indexOf(prefix) === 0 && /^\d+$/.test(id.slice(prefix.length))) {
+              maxN = Math.max(maxN, parseInt(id.slice(prefix.length), 10));
+              if (W[id].hierarchie) maxNiv = Math.max(maxNiv, W[id].hierarchie.niveau || 0);
+            }
+          });
+          if (!base.hierarchie) { base.hierarchie = {nom: base.libelle, niveau: 0}; dirty[base.id] = true; }
+          rec = {id: glossUniqueId(W, prefix + (maxN + 1), page), libelle: libelle, type: 'dimension', source: 'champ_tableau',
+            kpi: false, categorie: it.categorie, definition: '', cas_usage: '', modalites: null, periode_calcul: null,
+            pages: [page], sources: [], noms_techniques: [], hierarchie: {nom: base.hierarchie.nom, niveau: Math.max(maxN, maxNiv) + 1}};
+        } else {
+          var idBase = (it.type === 'dimension' ? 'champ--' : 'mesure--') + glossSlug(champ);
+          rec = {id: glossUniqueId(W, idBase, page), libelle: champ, type: it.type, source: 'champ_tableau',
+            kpi: false, categorie: it.categorie, definition: indicDefinition(champ), cas_usage: '', modalites: null,
+            periode_calcul: it.type === 'mesure' ? '' : null, pages: [page], sources: [], noms_techniques: [], hierarchie: null};
+        }
+        rec.cle_import = cle;
+        rec.description_saisie = false;
+        rec.nouvelle_import = true;
+        rec.date_import = glossToday();
+        W[rec.id] = rec;
+        byCle[cle] = [rec];
+        dirty[rec.id] = true;
+        seen[rec.id] = true;
+        rep.created.push(libelle);
+        return;
+      }
+      seen[e.id] = true;
+      if (e.supprime) {
+        if (!e.retire_par_import) { rep.ignored.push(e.libelle); return; }
+        e.supprime = false;
+        e.retire_par_import = false;
+        e.pages = [page];
+        dirty[e.id] = true;
+        rep.restored.push(e.libelle);
+        return;
+      }
+      if ((e.pages || []).indexOf(page) === -1) {
+        e.pages = (e.pages || []).concat([page]);
+        dirty[e.id] = true;
+        rep.pageAdded.push(e.libelle);
+      } else {
+        rep.unchanged++;
+      }
+    });
+    // Retraits : fiches issues des tableaux personnalises qui ne figurent plus dans l'extraction de cette page
+    Object.keys(W).forEach(function(id){
+      var e = W[id];
+      if (!e.cle_import || e.supprime || seen[id] || (e.pages || []).indexOf(page) === -1) return;
+      e.pages = e.pages.filter(function(p){ return p !== page; });
+      dirty[id] = true;
+      lastRemoval[id] = rep;
+      rep.pageRemoved.push(e.libelle);
+    });
+  });
+  // Archivage en fin de traitement seulement : une fiche retiree d'une page mais presente
+  // sur une autre page importee dans le meme lot n'est pas archivee.
+  Object.keys(lastRemoval).forEach(function(id){
+    var e = W[id];
+    if (e.supprime || (e.pages || []).length) return;
+    e.supprime = true;
+    e.retire_par_import = true;
+    var rep = lastRemoval[id];
+    rep.pageRemoved.splice(rep.pageRemoved.indexOf(e.libelle), 1);
+    rep.archived.push(e.libelle);
+  });
+  return {entries: W, dirty: Object.keys(dirty), reports: reports};
+}
+/* ==== GLOSS-IMPORT-PURE-END ==== */
+
+function glossWriteDocs(docsById, ids, statusEl){
+  var chunks = [];
+  for (var i = 0; i < ids.length; i += 400) chunks.push(ids.slice(i, i + 400));
+  return chunks.reduce(function(chain, chunk, ci){
+    return chain.then(function(){
+      if (statusEl) statusEl.textContent = '⏳ Écriture ' + Math.min((ci + 1) * 400, ids.length) + ' / ' + ids.length + '...';
+      var batch = db.batch();
+      chunk.forEach(function(id){
+        var d = JSON.parse(JSON.stringify(docsById[id]));
+        d.id = id;
+        batch.set(db.collection('glossaire_entrees').doc(id), d);
+      });
+      return batch.commit();
+    });
+  }, Promise.resolve());
+}
+
+// Migration unique : glossaire de base (data/glossary.json) + contributions (glossaire_overrides /
+// glossaire_ajouts) fusionnes dans glossaire_entrees. Les anciennes collections ne sont pas supprimees.
+function glossMigrate(statusEl){
+  statusEl.textContent = '⏳ Lecture du glossaire actuel...';
+  return Promise.all([
+    fetch('data/glossary.json?v=' + Date.now()).then(function(r){ return r.json(); }),
+    fetch('data/pages_sources.json?v=' + Date.now()).then(function(r){ return r.json(); }).catch(function(){ return {}; }),
+    db.collection('glossaire_overrides').get(),
+    db.collection('glossaire_ajouts').get()
+  ]).then(function(res){
+    var ov = {};
+    res[2].forEach(function(d){ ov[d.id] = d.data(); });
+    var docs = {};
+    res[0].forEach(function(b){
+      var e = Object.assign({}, b, ov[b.id] || {});
+      if (b.source === 'champ_tableau') e.cle_import = b.type + ':' + glossSlug(b.libelle);
+      e.description_saisie = glossSaisieFromOverride(b, ov[b.id]);
+      docs[b.id] = e;
+    });
+    res[3].forEach(function(d){
+      var e = Object.assign({}, d.data(), ov[d.id] || {});
+      if (e.description_saisie === undefined) e.description_saisie = !!String(e.definition || '').trim();
+      docs[d.id] = e;
+    });
+    var ids = Object.keys(docs);
+    return glossWriteDocs(docs, ids, statusEl).then(function(){
+      var ref = res[1] || {};
+      return db.collection('glossaire_meta').doc('referentiel').set({
+        pages: ref.pages || [], sources: ref.sources || [], page_definitions: ref.page_definitions || {}
+      });
+    }).then(function(){ return ids.length; });
+  });
+}
+
+// Une description est "saisie" uniquement si elle a ete modifiee dans l'admin par rapport au
+// texte d'origine (genere automatiquement ou repris d'un indicateur).
+function glossSaisieFromOverride(base, ov){
+  if (!ov) return false;
+  if (ov.description_saisie !== undefined) return !!ov.description_saisie;
+  var d = String(ov.definition == null ? '' : ov.definition).trim();
+  if (d && d !== String(base.definition || '').trim()) return true;
+  if (ov.definitions_par_page && JSON.stringify(ov.definitions_par_page) !== JSON.stringify(base.definitions_par_page || null)) return true;
+  return false;
+}
+function glossIsNiveau(e){ return /-niv\d+$/.test(e.id || ''); }
+function glossDescStatut(e){
+  if (e.description_saisie) return 'saisie';
+  if (e.nouvelle_import) return 'nouvelle';
+  return 'a_decrire';
+}
+// Rattrapage pour un glossaire migre avant la mise en place du suivi : recalcule les statuts depuis
+// l'ancien modele (data/glossary.json + glossaire_overrides) et le journal des imports.
+function glossInitSuivi(statusEl){
+  statusEl.textContent = '⏳ Calcul...';
+  return Promise.all([
+    fetch('data/glossary.json?v=' + Date.now()).then(function(r){ return r.json(); }).catch(function(){ return []; }),
+    db.collection('glossaire_overrides').get().catch(function(){ return null; }),
+    db.collection('glossaire_imports').get().catch(function(){ return null; })
+  ]).then(function(res){
+    var base = {}, ov = {}, nouvelles = {};
+    res[0].forEach(function(b){ base[b.id] = b; });
+    if (res[1]) res[1].forEach(function(d){ ov[d.id] = d.data(); });
+    if (res[2]) res[2].forEach(function(d){
+      (d.data().resume || []).forEach(function(r){ (r.nouvelles_fiches || []).forEach(function(l){ nouvelles[l] = true; }); });
+    });
+    var docs = {}, ids = [];
+    Object.keys(publishedById).forEach(function(id){
+      var e = publishedById[id];
+      if (e.description_saisie !== undefined) return;
+      var d = Object.assign({}, e);
+      d.description_saisie = base[id] ? glossSaisieFromOverride(base[id], ov[id]) : !!String(e.definition || '').trim() && !nouvelles[e.libelle];
+      if (!d.description_saisie && nouvelles[e.libelle]) d.nouvelle_import = true;
+      docs[id] = d; ids.push(id);
+    });
+    return glossWriteDocs(docs, ids, statusEl).then(function(){ return ids.length; });
+  });
+}
+
+var descSuiviFilter = 'nouvelle';
+function renderDescSuivi(){
+  var card = document.getElementById('descSuiviCard');
+  if (!card) return;
+  if (!glossaireMigre) {
+    card.innerHTML = '<p style="margin:0;font-size:13px">📋 Le suivi des descriptions sera disponible après la migration du glossaire vers Firebase (onglet "🔄 Mise à jour depuis le TdB").</p>';
+    return;
+  }
+  var inclNiveaux = !!(document.getElementById('descInclNiveaux') || {}).checked;
+  var all = Object.keys(publishedById).map(function(id){ return publishedById[id]; })
+    .filter(function(e){ return !e.supprime && e.source === 'champ_tableau' && (inclNiveaux || !glossIsNiveau(e)); });
+  var nonInit = all.filter(function(e){ return e.description_saisie === undefined; }).length;
+  var counts = {nouvelle: 0, a_decrire: 0, saisie: 0};
+  all.forEach(function(e){ counts[glossDescStatut(e)]++; });
+  var labels = {nouvelle: '🆕 Nouvelles', a_decrire: '✍️ En attente de description', saisie: '✅ Saisies'};
+  var list = all.filter(function(e){ return glossDescStatut(e) === descSuiviFilter; })
+    .sort(function(a, b){ return a.libelle.localeCompare(b.libelle, 'fr'); });
+  var pct = all.length ? Math.round(counts.saisie * 100 / all.length) : 0;
+  card.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">' +
+      '<b>📋 Suivi des descriptions - champs des tableaux personnalisés</b>' +
+      '<label style="font-size:12.5px"><input type="checkbox" id="descInclNiveaux"' + (inclNiveaux ? ' checked' : '') + '> Inclure les niveaux de hiérarchie</label>' +
+    '</div>' +
+    '<div style="height:8px;background:var(--ft-gray-100,#EEF0F5);border-radius:99px;overflow:hidden;margin-bottom:4px"><div style="height:100%;width:' + pct + '%;background:#1E7B4F"></div></div>' +
+    '<div class="form-hint" style="margin-bottom:10px">' + counts.saisie + ' / ' + all.length + ' décrites (' + pct + ' %)</div>' +
+    '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">' +
+      ['nouvelle', 'a_decrire', 'saisie'].map(function(k){
+        return '<button type="button" class="btn btn--sm ' + (k === descSuiviFilter ? 'tab-active' : 'btn--secondary') + '" data-desc-filter="' + k + '">' + labels[k] + ' (' + counts[k] + ')</button>';
+      }).join('') +
+    '</div>' +
+    '<div class="form-hint" style="font-style:normal;margin-bottom:8px;line-height:1.5">' +
+      '<b>🆕 Nouvelles</b> : créées par un import, jamais décrites. <b>✍️ En attente</b> : sans description, ou avec une description automatique (générée ou reprise d\'un indicateur, signalée 🤖) non encore validée. ' +
+      '<b>✅ Saisies</b> : description rédigée ou validée par vous. Cliquez sur une fiche pour la compléter ; enregistrer une définition modifiée la passe en "Saisies".' +
+    '</div>' +
+    (nonInit ? '<div class="purge-confirm" style="background:#FFF4D6;border-left-color:#D96B00">' + nonInit + ' fiche(s) migrée(s) avant la mise en place du suivi. ' +
+      '<button type="button" class="btn btn--sm" id="btnDescInit">Initialiser le suivi</button> <span id="descInitStatus" style="font-size:12.5px"></span></div>' : '') +
+    '<div style="max-height:360px;overflow:auto;border:1px solid var(--ft-border);border-radius:6px">' +
+      (list.length ? list.map(function(e){
+        var auto = String(e.definition || '').trim() && !e.description_saisie;
+        return '<div class="edit-result-row" data-desc-open="' + escapeHtml(e.id) + '">' +
+          '<span>' + escapeHtml(e.libelle) + (auto ? ' <span title="Description automatique, à valider ou réécrire">🤖</span>' : '') + '</span>' +
+          '<span class="edit-result-meta">' + escapeHtml(e.type || '') + ' · ' + escapeHtml((e.pages || []).join(', ')) + (e.date_import ? ' · importée le ' + escapeHtml(e.date_import) : '') + '</span>' +
+        '</div>';
+      }).join('') : '<div class="empty" style="padding:10px">Aucune fiche.</div>') +
+    '</div>';
+  card.querySelectorAll('[data-desc-filter]').forEach(function(b){
+    b.addEventListener('click', function(){ descSuiviFilter = b.dataset.descFilter; renderDescSuivi(); });
+  });
+  card.querySelectorAll('[data-desc-open]').forEach(function(r){
+    r.addEventListener('click', function(){ renderEditForm(r.dataset.descOpen); });
+  });
+  document.getElementById('descInclNiveaux').addEventListener('change', renderDescSuivi);
+  var bi = document.getElementById('btnDescInit');
+  if (bi) bi.addEventListener('click', function(){
+    var st = document.getElementById('descInitStatus');
+    bi.disabled = true;
+    glossInitSuivi(st).then(function(n){
+      st.textContent = '✅ ' + n + ' fiche(s) initialisée(s).';
+      loadPublished(function(){ loadPropositions(); renderDescSuivi(); });
+    }).catch(function(err){ st.textContent = '❌ ' + (err.message || err); bi.disabled = false; });
+  });
+}
+
+var glossImportState = null;
+function renderGlossImportSection(){
+  var mig = document.getElementById('glossMigrationCard');
+  var nb = Object.keys(publishedById).filter(function(id){ return !publishedById[id].supprime; }).length;
+  if (!glossaireMigre) {
+    mig.innerHTML = '<h3 style="margin:0 0 8px">1. Migration vers Firebase (une seule fois)</h3>' +
+      '<p style="margin:0 0 10px;font-size:13px">Le glossaire est encore réparti entre <code>data/glossary.json</code> (GitHub) et vos contributions (Firebase). ' +
+      'La migration fusionne les deux dans Firebase : définitions, groupes, hiérarchies et cas d\'usage déjà saisis sont conservés. ' +
+      'Ensuite, le site ne lit plus que Firebase.</p>' +
+      '<button class="btn btn--sm" id="btnGlossMigrate">🚚 Migrer le glossaire vers Firebase</button> <span id="glossMigrateStatus" style="font-size:12.5px"></span>';
+    document.getElementById('btnGlossMigrate').addEventListener('click', function(){
+      var st = document.getElementById('glossMigrateStatus');
+      this.disabled = true;
+      glossMigrate(st).then(function(n){
+        st.textContent = '✅ ' + n + ' fiches migrées.';
+        loadPublished(function(){ loadPropositions(); renderGlossImportSection(); });
+      }).catch(function(err){ st.textContent = '❌ Échec : ' + (err.message || err); });
+    });
+    document.getElementById('glossImportCard').style.display = 'none';
+    return;
+  }
+  mig.innerHTML = '<p style="margin:0;font-size:13px">✅ Glossaire stocké dans Firebase : <b>' + nb + '</b> fiches publiées. ' +
+    'Les fichiers <code>data/glossary.json</code>, <code>data/pages_sources.json</code>, <code>sources/</code> et <code>scripts/</code> ne sont plus utilisés.</p>';
+  document.getElementById('glossImportCard').style.display = 'block';
+}
+
+function glossKnownPages(){
+  var pages = (refPages || []).slice();
+  Object.keys(publishedById).forEach(function(id){
+    (publishedById[id].pages || []).forEach(function(p){ if (pages.indexOf(p) === -1) pages.push(p); });
+  });
+  return pages;
+}
+function glossAllEntries(){
+  var out = {};
+  Object.keys(publishedById).forEach(function(id){ out[id] = publishedById[id]; });
+  return out;
+}
+function glossRunAnalysis(){
+  var res = glossComputeImport(glossAllEntries(), glossImportState.extractions);
+  glossImportState.result = res;
+  var html = '';
+  res.reports.forEach(function(r, i){
+    var ex = glossImportState.extractions[i];
+    var opts = '<option value="">- Choisir la page -</option>' + glossKnownPages().map(function(p){
+      return '<option value="' + escapeHtml(p) + '"' + (p === ex.page ? ' selected' : '') + '>' + escapeHtml(p) + '</option>';
+    }).join('');
+    function list(title, arr, color){
+      if (!arr.length) return '';
+      return '<details style="margin:4px 0"><summary style="cursor:pointer;color:' + color + '"><b>' + title + ' (' + arr.length + ')</b></summary>' +
+        '<ul style="margin:4px 0 0 18px;font-size:12.5px">' + arr.map(function(l){ return '<li>' + escapeHtml(l) + '</li>'; }).join('') + '</ul></details>';
+    }
+    var nbChanges = r.created.length + r.pageAdded.length + r.pageRemoved.length + r.archived.length + r.restored.length;
+    html += '<div class="card" style="padding:14px 16px">' +
+      '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px">' +
+        '<b>Tableau ' + (i + 1) + '</b> <select data-gloss-page="' + i + '" class="edit-input" style="width:auto">' + opts + '</select>' +
+        '<span class="form-hint">' + ex.items.length + ' champs lus · ' + r.unchanged + ' inchangés</span>' +
+      '</div>' +
+      (!ex.page ? '<p style="color:var(--ft-rouge);margin:4px 0">Page non reconnue : choisissez-la dans la liste.</p>' :
+        (nbChanges ? '' : '<p style="margin:4px 0">Aucun changement.</p>')) +
+      list('➕ Nouvelles fiches (à compléter)', r.created, '#1E7B4F') +
+      list('📄 Fiches existantes ajoutées à cette page', r.pageAdded, '#293378') +
+      list('♻️ Fiches réactivées', r.restored, '#293378') +
+      list('➖ Fiches retirées de cette page (restent sur leurs autres pages)', r.pageRemoved, '#B45309') +
+      list('📦 Fiches archivées (plus présentes sur aucune page, définitions conservées)', r.archived, '#B91C1C') +
+      list('⚠️ Ignorées (supprimées manuellement dans l\'admin)', r.ignored, '#6B7280') +
+    '</div>';
+  });
+  html += '<button class="btn btn--sm" id="btnGlossApply"' + (res.dirty.length ? '' : ' disabled') + '>✅ Appliquer la mise à jour (' + res.dirty.length + ' fiche(s) modifiée(s))</button> ' +
+    '<span id="glossApplyStatus" style="font-size:12.5px"></span>';
+  var holder = document.getElementById('glossImportPreview');
+  holder.innerHTML = html;
+  holder.querySelectorAll('[data-gloss-page]').forEach(function(sel){
+    sel.addEventListener('change', function(){
+      glossImportState.extractions[parseInt(sel.dataset.glossPage, 10)].page = sel.value;
+      glossRunAnalysis();
+    });
+  });
+  document.getElementById('btnGlossApply').addEventListener('click', function(){
+    var st = document.getElementById('glossApplyStatus');
+    var btn = this;
+    if (glossImportState.extractions.some(function(x){ return !x.page; })) { st.textContent = '❌ Choisissez la page de chaque tableau.'; return; }
+    btn.disabled = true;
+    glossWriteDocs(res.entries, res.dirty, st).then(function(){
+      return db.collection('glossaire_imports').add({
+        date: firebase.firestore.FieldValue.serverTimestamp(),
+        resume: res.reports.map(function(r){
+          return {page: r.page, ajouts: r.created.length, pages_ajoutees: r.pageAdded.length, reactivees: r.restored.length,
+            retraits: r.pageRemoved.length, archivees: r.archived.length, nouvelles_fiches: r.created};
+        })
+      });
+    }).then(function(){
+      st.textContent = '✅ Mise à jour appliquée. Les nouvelles fiches sont à compléter dans ✏️ Mode édition > 🆕 Nouvelles.';
+      glossImportState = null;
+      document.getElementById('glossImportText').value = '';
+      document.getElementById('glossImportFiles').value = '';
+      loadPublished(function(){ loadPropositions(); renderGlossImportSection(); });
+    }).catch(function(err){
+      st.textContent = '❌ Échec : ' + (err.message || err);
+      btn.disabled = false;
+    });
+  });
+}
+document.getElementById('btnGlossAnalyse').addEventListener('click', function(){
+  var preview = document.getElementById('glossImportPreview');
+  var files = Array.prototype.slice.call(document.getElementById('glossImportFiles').files || []);
+  var pasted = document.getElementById('glossImportText').value;
+  Promise.all(files.map(function(f){ return f.text(); })).then(function(texts){
+    if (pasted.trim()) texts.push(pasted);
+    var extractions = [];
+    texts.forEach(function(t){ extractions = extractions.concat(glossParseExtractions(t)); });
+    if (!extractions.length) {
+      preview.innerHTML = '<p style="color:var(--ft-rouge)">❌ Aucun tableau personnalisé reconnu. Copiez l\'élément HTML du panneau "Dimensions / Mesures" (div <code>editToolbar</code>).</p>';
+      return;
+    }
+    extractions.forEach(function(x){ x.page = glossDetectPage(x.frameId, glossKnownPages()); });
+    glossImportState = {extractions: extractions};
+    glossRunAnalysis();
+  });
+});
+/* ==== GLOSS-IMPORT-END ==== */
+
 
 /* ==== Contenu du site (page d'accueil) : editeur generique sans code ==== */
 var siteContentLoaded = false;
@@ -2189,8 +2727,12 @@ function renderEditForm(id){
   html += '<div class="edit-section-label" data-role="categorie-label">Catégorie</div>' +
     '<input class="edit-input" data-f="categorie" data-role="categorie" value="' + escapeHtml(fmt(c.categorie)) + '" placeholder="ex. 3. Public">';
 
-  html += '<div class="edit-section-label">Définition</div>' +
-    '<textarea class="edit-textarea" data-f="definition" placeholder="Définition en langage non technique">' + escapeHtml(fmt(c.definition)) + '</textarea>';
+  var statutDesc = e ? glossDescStatut(e) : 'a_decrire';
+  var saisieInit = e ? !!e.description_saisie : true;
+  html += '<div class="edit-section-label">Définition ' +
+    '<span class="form-hint" style="font-style:normal">' + ({nouvelle: '🆕 nouvelle fiche, à décrire', a_decrire: (e && String(e.definition || '').trim() ? '🤖 description automatique, à valider ou réécrire' : '✍️ en attente de description'), saisie: '✅ description saisie'})[statutDesc] + '</span></div>' +
+    '<textarea class="edit-textarea" data-f="definition" placeholder="Définition en langage non technique">' + escapeHtml(fmt(c.definition)) + '</textarea>' +
+    '<label style="display:block;font-size:12.5px;margin:-4px 0 10px"><input type="checkbox" data-role="desc-saisie"' + (saisieInit ? ' checked' : '') + '> ✅ Description rédigée ou validée par moi (cochée automatiquement si vous modifiez la définition)</label>';
 
   html += '<div class="edit-section-label">Définitions par page (si différentes selon la page - une par ligne, format "Page : définition")</div>' +
     '<textarea class="edit-textarea" data-f="definitions_par_page" placeholder="Accueil : définition spécifique à la page Accueil&#10;Fiches action : définition spécifique à cette page...">' + escapeHtml(formatDefinitionsParPageForExport(c)) + '</textarea>' +
@@ -2248,6 +2790,9 @@ function renderEditForm(id){
     div.querySelector('[data-role="categorie"]').style.display = isChampTableau ? 'block' : 'none';
   }
   applyTypeVisibility();
+  div.querySelectorAll('[data-f="definition"],[data-f="definitions_par_page"]').forEach(function(t){
+    t.addEventListener('input', function(){ div.querySelector('[data-role="desc-saisie"]').checked = true; });
+  });
   div.querySelector('[data-role="type"]').addEventListener('change', applyTypeVisibility);
   div.querySelector('[data-role="source"]').addEventListener('change', applyTypeVisibility);
 
@@ -2255,14 +2800,17 @@ function renderEditForm(id){
 
   document.getElementById('btnSaveEdit').addEventListener('click', function(){
     var champs = readForm(div);
+    champs.description_saisie = div.querySelector('[data-role="desc-saisie"]').checked;
+    if (champs.description_saisie) champs.nouvelle_import = false;
     var statusEl = document.getElementById('editStatus');
     var targetId = id || slugify(champs.libelle);
     if (!targetId) { statusEl.textContent = 'Renseignez au moins un libellé.'; return; }
-    var coll = id ? 'glossaire_overrides' : 'glossaire_ajouts';
+    var coll = glossColl(!!id);
     statusEl.textContent = 'Enregistrement...';
     db.collection(coll).doc(targetId).set(champs, {merge:true}).then(function(){
       statusEl.textContent = '✅ Enregistré.';
       publishedById[targetId] = Object.assign({}, publishedById[targetId] || {id: targetId}, champs);
+      renderDescSuivi();
       setTimeout(function(){ holder.innerHTML = ''; }, 900);
     }).catch(function(err){
       statusEl.textContent = '❌ Échec : ' + (err.message || err);
@@ -2273,7 +2821,7 @@ function renderEditForm(id){
     document.getElementById('btnDeleteEdit').addEventListener('click', function(){
       var statusEl = document.getElementById('editStatus');
       statusEl.textContent = 'Suppression...';
-      db.collection('glossaire_overrides').doc(id).set({supprime:true}, {merge:true}).then(function(){
+      db.collection(glossColl(true)).doc(id).set({supprime:true}, {merge:true}).then(function(){
         statusEl.textContent = '✅ Fiche supprimée du glossaire public.';
         setTimeout(function(){ holder.innerHTML = ''; }, 900);
       }).catch(function(err){
@@ -2700,7 +3248,7 @@ function renderFaqPendingList(){
         date_reponse: firebase.firestore.FieldValue.serverTimestamp()
       }).then(function(){
         var q = faqPendingQuestions.find(function(x){ return x.id === id; });
-        statusEl.innerHTML = '✅ Publiée. ' + faqMailtoLinkHtml(q, reponse);
+        statusEl.innerHTML = '✅ Publiée. ' + faqMailtoLinkHtml(q);
         renderFaqModerationLists();
       }).catch(function(err){
         statusEl.textContent = '❌ Échec : ' + (err.message || err);
@@ -2708,15 +3256,19 @@ function renderFaqPendingList(){
     });
   });
 }
-function faqMailtoLinkHtml(q, reponse){
+// Lien direct vers la question publiee (faq.html#q=<id>, ouvre et met en evidence la question).
+function faqQuestionUrl(q){
+  return location.href.split('#')[0].split('?')[0].replace(/[^\/]*$/, '') + 'faq.html#q=' + q.id;
+}
+function faqMailtoLinkHtml(q){
   if (!q || !faqEmailOf(q)) return '';
-  var subject = 'Réponse à votre question FAQ : ' + q.sujet;
-  var body = 'Bonjour ' + q.pseudo + ',\n\n' +
-    'Votre question "' + q.sujet + '" a reçu une réponse, désormais publiée sur la FAQ du Tableau de bord RPE :\n\n' +
-    reponse + '\n\n' +
-    'Cordialement,\nL\'équipe Réseau Pour l\'Emploi';
-  var href = 'mailto:' + encodeURIComponent(faqEmailOf(q)) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  return '<a href="' + href + '" target="_blank">📧 Notifier ' + escapeHtml(q.pseudo) + ' par e-mail</a>';
+  var subject = 'Réponse à votre question : ' + q.sujet;
+  var body = 'Bonjour ' + (q.pseudo || '') + ',\n\n' +
+    'Une réponse a été apportée à votre question "' + q.sujet + '", vous pouvez la consulter ici :\n' +
+    faqQuestionUrl(q) + '\n\n' +
+    'Cordialement,\nL\'équipe du Tableau de bord RPE';
+  var href = 'mailto:' + faqEmailOf(q) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  return '<a class="btn btn--secondary btn--sm" href="' + href + '" title="Ouvre un e-mail prérempli dans votre messagerie, avec le lien direct vers la question">📧 Préparer la réponse à ' + escapeHtml(q.pseudo || 'l\'auteur') + '</a>';
 }
 function renderFaqPublishedList(){
   var el = document.getElementById('faqPublishedList');
@@ -2730,7 +3282,7 @@ function renderFaqPublishedList(){
       '<textarea class="edit-textarea" data-faq-editreponse="' + q.id + '">' + escapeHtml(q.reponse) + '</textarea>' +
       '<button type="button" class="btn btn--secondary btn--sm" data-faq-updatereponse="' + q.id + '">💾 Mettre à jour la réponse</button>' +
       '<button type="button" class="btn btn--danger btn--sm" data-faq-unpublish="' + q.id + '">↩️ Dépublier</button>' +
-      faqActionButtons(q) +
+      faqActionButtons(q) + ' ' + faqMailtoLinkHtml(q) +
       '<span class="form-hint" data-faq-pub-status="' + q.id + '" style="margin-left:8px"></span>' +
     '</div>';
   }).join('');
