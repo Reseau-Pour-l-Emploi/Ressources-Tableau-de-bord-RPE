@@ -124,6 +124,9 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 .repeater-row-body{padding:0 12px 12px}
 .repeater-row--collapsed .repeater-row-body{display:none}
 .format-toolbar{display:flex;gap:4px;margin-bottom:3px}
+.rich-preview{border:1px dashed var(--ft-gray-300);border-radius:4px;padding:8px 10px;margin:-4px 0 10px;font-size:13px;background:#FAFAFC}
+.rich-preview:empty{display:none}
+.rich-li{display:inline-block;padding-left:1.1em;text-indent:-1.1em}
 .format-btn{font-family:inherit;font-size:11px;width:24px;height:22px;border:1px solid var(--ft-gray-300);background:#fff;border-radius:3px;cursor:pointer;color:var(--ft-navy);padding:0;line-height:1}
 .format-btn:hover{background:var(--ft-indigo-light);border-color:var(--ft-indigo)}
 .edit-titre-area{min-height:34px;resize:vertical;font-family:inherit}
@@ -512,6 +515,24 @@ var pendingCountsAdmin = {};
 var refPages = [];
 var refSources = [];
 
+/* Mise en forme legere des descriptions : **gras**, *italique*, __souligne__, [lien](https://...),
+   retour a la ligne conserve, "- " en debut de ligne = puce. Texte toujours echappe (pas d'injection HTML). */
+function richInline(s){
+  var esc = escapeHtml(s);
+  esc = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  esc = esc.replace(/__(.+?)__/g, '<u>$1</u>');
+  esc = esc.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  esc = esc.replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  return esc;
+}
+function richText(s){
+  if (!s) return '';
+  return String(s).split('\n').map(function(line){
+    var m = /^\s*-\s+(.*)$/.exec(line);
+    var out = richInline(m ? m[1] : line);
+    return m ? '<span class="rich-li">&bull;&nbsp;' + out + '</span>' : out;
+  }).join('<br>');
+}
 function escapeHtml(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -2745,7 +2766,8 @@ function renderEditForm(id){
   var saisieInit = e ? !!e.description_saisie : true;
   html += '<div class="edit-section-label">Définition ' +
     '<span class="form-hint" style="font-style:normal">' + ({nouvelle: '🆕 nouvelle fiche, à décrire', a_decrire: (e && String(e.definition || '').trim() ? '🤖 description automatique, à valider ou réécrire' : '✍️ en attente de description'), saisie: '✅ description saisie'})[statutDesc] + '</span></div>' +
-    '<textarea class="edit-textarea" data-f="definition" placeholder="Définition en langage non technique">' + escapeHtml(fmt(c.definition)) + '</textarea>' +
+    '<textarea class="edit-textarea" data-f="definition" rows="5" placeholder="Définition en langage non technique">' + escapeHtml(fmt(c.definition)) + '</textarea>' +
+    '<div class="rich-preview" data-preview-for="definition" title="Aperçu tel qu\'affiché dans le glossaire"></div>' +
     '<label style="display:block;font-size:12.5px;margin:-4px 0 10px"><input type="checkbox" data-role="desc-saisie"' + (saisieInit ? ' checked' : '') + '> ✅ Description rédigée ou validée par moi (cochée automatiquement si vous modifiez la définition)</label>';
 
   html += '<div class="edit-section-label">Définitions par page (si différentes selon la page - une par ligne, format "Page : définition")</div>' +
@@ -2758,7 +2780,8 @@ function renderEditForm(id){
     '<input class="edit-input" data-f="periode_calcul" data-role="periode" value="' + escapeHtml(fmt(c.periode_calcul)) + '">';
 
   html += '<div class="edit-section-label">Cas d\'usage</div>' +
-    '<textarea class="edit-textarea" data-f="cas_usage">' + escapeHtml(fmt(c.cas_usage)) + '</textarea>';
+    '<textarea class="edit-textarea" data-f="cas_usage">' + escapeHtml(fmt(c.cas_usage)) + '</textarea>' +
+    '<div class="rich-preview" data-preview-for="cas_usage"></div>';
 
   html += '<div class="edit-section-label">Page(s) du tableau de bord</div>' +
     '<select class="edit-select" multiple data-f="pages">' + optionsHtml(refPages, c.pages || []) + '</select>';
@@ -2806,6 +2829,18 @@ function renderEditForm(id){
     div.querySelector('[data-role="categorie"]').style.display = isChampTableau ? 'block' : 'none';
   }
   applyTypeVisibility();
+  // Barre de mise en forme + apercu en direct (definition, cas d'usage) ; definitions par page : une ligne par page,
+  // donc mise en forme en ligne uniquement (gras, italique, souligne, lien).
+  ['definition', 'cas_usage'].forEach(function(k){
+    var ta = div.querySelector('[data-f="' + k + '"]');
+    var pv = div.querySelector('[data-preview-for="' + k + '"]');
+    attachFormatToolbar(ta, true, true);
+    var upd = function(){ pv.innerHTML = ta.value.trim() ? richText(ta.value) : ''; };
+    ta.addEventListener('input', upd);
+    ta.previousSibling.querySelectorAll('.format-btn').forEach(function(b){ b.addEventListener('click', function(){ setTimeout(upd, 0); }); });
+    upd();
+  });
+  attachFormatToolbar(div.querySelector('[data-f="definitions_par_page"]'), false, true);
   div.querySelector('[data-role="add-source"]').addEventListener('click', function(){
     var input = div.querySelector('[data-role="new-source"]');
     var v = input.value.trim();

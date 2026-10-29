@@ -164,7 +164,9 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .modal table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0}
 .modal table th,.modal table td{border:1px solid var(--ft-border);padding:6px 8px;text-align:left}
 .modal .section-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ft-fg-3);font-weight:700;margin:16px 0 4px}
-.usecase{background:var(--ft-violet-light);border-left:4px solid var(--ft-violet);border-radius:4px;padding:10px 14px;font-size:13px;white-space:pre-line}
+.usecase{background:var(--ft-violet-light);border-left:4px solid var(--ft-violet);border-radius:4px;padding:10px 14px;font-size:13px}
+.rich-li{display:inline-block;padding-left:1.1em;text-indent:-1.1em}
+.term-def a,.rich a,.usecase a{color:var(--ft-indigo,#293378);text-decoration:underline}
 .modal-footer{margin-top:20px;padding-top:12px;border-top:1px solid var(--ft-border);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .modal-footer-left{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .modal-footer-right{display:flex;gap:8px;align-items:center}
@@ -351,6 +353,7 @@ form.contrib textarea{min-height:64px;resize:vertical}
       <input type="text"  id="f_libelle" required>
 
       <label for="f_definition">Définition (en langage non technique)</label>
+      <div class="form-hint" style="margin:-2px 0 4px">Mise en forme possible : **gras**, *italique*, __souligné__, "- " en début de ligne pour une puce, [texte](https://lien).</div>
       <textarea  id="f_definition" required></textarea>
 
       <label for="f_definitions_par_page">Définitions par page (si différentes selon la page - facultatif, une par ligne, format "Page : définition")</label>
@@ -1041,12 +1044,12 @@ function renderRow(item, contextPage){
         sourceBadge + typeBadge + kpiBadge + groupBadge + hierBadge + pendingBadge + multiDefHint +
       '</div>' +
       categorieLine +
-      '<div class="term-def">' + escapeHtml(defText) + '</div>' +
+      '<div class="term-def">' + (item.isGroup ? escapeHtml(defText) : richText(defText)) + '</div>' +
       '<div style="margin-top:6px">' + pagesBadges + '</div>' +
     '</div>' +
     '<div class="term-actions"><button data-share="1" title="Partager le lien vers cette définition" aria-label="Partager le lien vers cette définition">' + SHARE_ICON + '</button></div>';
   row.addEventListener('click', function(ev){
-    if (ev.target.closest && (ev.target.closest('[data-share]') || ev.target.dataset.page)) return;
+    if (ev.target.closest && (ev.target.closest('[data-share]') || ev.target.closest('a') || ev.target.dataset.page)) return;
     if (item.isGroup) openGroupDetail(item.id); else openDetail(item.id);
   });
   row.querySelector('[data-share]').addEventListener('click', function(ev){ ev.stopPropagation(); shareLink(item); });
@@ -1056,6 +1059,24 @@ function renderRow(item, contextPage){
   return row;
 }
 
+/* Mise en forme legere des descriptions : **gras**, *italique*, __souligne__, [lien](https://...),
+   retour a la ligne conserve, "- " en debut de ligne = puce. Texte toujours echappe (pas d'injection HTML). */
+function richInline(s){
+  var esc = escapeHtml(s);
+  esc = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  esc = esc.replace(/__(.+?)__/g, '<u>$1</u>');
+  esc = esc.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  esc = esc.replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  return esc;
+}
+function richText(s){
+  if (!s) return '';
+  return String(s).split('\n').map(function(line){
+    var m = /^\s*-\s+(.*)$/.exec(line);
+    var out = richInline(m ? m[1] : line);
+    return m ? '<span class="rich-li">&bull;&nbsp;' + out + '</span>' : out;
+  }).join('<br>');
+}
 function escapeHtml(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -1132,11 +1153,11 @@ function openDetail(id){
     html += '<div class="section-label">Définition (différente selon la page)</div>';
     html += '<table><tr><th>Page</th><th>Définition</th></tr>';
     Object.keys(e.definitions_par_page).forEach(function(pg){
-      html += '<tr><td>' + escapeHtml(pg) + '</td><td>' + escapeHtml(e.definitions_par_page[pg]) + '</td></tr>';
+      html += '<tr><td>' + escapeHtml(pg) + '</td><td>' + richText(e.definitions_par_page[pg]) + '</td></tr>';
     });
     html += '</table>';
   } else {
-    html += '<div class="section-label">Définition</div><div>' + escapeHtml(e.definition || 'Non renseignée.') + '</div>';
+    html += '<div class="section-label">Définition</div><div class="rich">' + (e.definition ? richText(e.definition) : 'Non renseignée.') + '</div>';
   }
   if (e.modalites && e.modalites.length) {
     html += '<div class="section-label">Modalités</div><table><tr><th>Valeur</th><th>Règle</th></tr>';
@@ -1144,10 +1165,10 @@ function openDetail(id){
     html += '</table>';
   }
   if (e.type === 'mesure') {
-    html += '<div class="section-label">Période de calcul</div><div>' + escapeHtml(e.periode_calcul || 'Non renseignée - proposez une précision via l\'icône 📝.') + '</div>';
+    html += '<div class="section-label">Période de calcul</div><div>' + (e.periode_calcul ? richText(e.periode_calcul) : 'Non renseignée - proposez une précision via l\'icône 📝.') + '</div>';
   }
   if (e.cas_usage) {
-    html += '<div class="section-label">Cas d\'usage</div><div class="usecase">' + escapeHtml(e.cas_usage) + '</div>';
+    html += '<div class="section-label">Cas d\'usage</div><div class="usecase">' + richText(e.cas_usage) + '</div>';
   }
   html += '<div class="section-label">Page(s) du tableau de bord</div><div>' + (pageBadgesHtml(e.pages) || 'Non renseigné') + '</div>';
   html += '<div class="section-label">Source(s)</div><div>' + escapeHtml((e.sources||[]).join(' ; ') || 'Non renseigné') + '</div>';
