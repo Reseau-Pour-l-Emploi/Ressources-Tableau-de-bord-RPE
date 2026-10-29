@@ -651,7 +651,12 @@ function init(){
     var src = results[0];
     baseGlossary = src.entries;
     refPages = src.ref.pages || [];
-    refSources = src.ref.sources || [];
+    refSources = (src.ref.sources || []).slice();
+    src.entries.concat(src.additions).forEach(function(e){
+      var ov = src.overrides[e.id];
+      ((ov && ov.sources) || e.sources || []).forEach(function(v){ if (v && refSources.indexOf(v) === -1) refSources.push(v); });
+    });
+    refSources.sort(function(a, b){ return a.localeCompare(b, 'fr'); });
     pageDefinitions = src.ref.page_definitions || {};
     populateRefSelect('f_pages', refPages);
     populateRefSelect('f_sources', refSources);

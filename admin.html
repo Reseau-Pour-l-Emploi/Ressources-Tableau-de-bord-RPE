@@ -624,6 +624,15 @@ function fieldOrderFor(type){
   return base;
 }
 
+// Sources proposees : referentiel + toutes les sources deja utilisees dans les fiches.
+function allSourcesList(extra){
+  var out = (refSources || []).slice();
+  Object.keys(publishedById).forEach(function(id){
+    (publishedById[id].sources || []).forEach(function(v){ if (v && out.indexOf(v) === -1) out.push(v); });
+  });
+  (extra || []).forEach(function(v){ if (v && out.indexOf(v) === -1) out.push(v); });
+  return out.sort(function(a, b){ return a.localeCompare(b, 'fr'); });
+}
 function optionsHtml(values, selectedList){
   return values.map(function(v){
     var sel = selectedList.indexOf(v) > -1 ? ' selected' : '';
@@ -1613,7 +1622,12 @@ function glossMigrate(statusEl){
     return glossWriteDocs(docs, ids, statusEl).then(function(){
       var ref = res[1] || {};
       return db.collection('glossaire_meta').doc('referentiel').set({
-        pages: ref.pages || [], sources: ref.sources || [], page_definitions: ref.page_definitions || {}
+        pages: ref.pages || [],
+        sources: (ref.sources && ref.sources.length) ? ref.sources : ids.reduce(function(acc, id){
+          (docs[id].sources || []).forEach(function(v){ if (v && acc.indexOf(v) === -1) acc.push(v); });
+          return acc;
+        }, []).sort(),
+        page_definitions: ref.page_definitions || {}
       });
     }).then(function(){ return ids.length; });
   });
@@ -2749,8 +2763,10 @@ function renderEditForm(id){
   html += '<div class="edit-section-label">Page(s) du tableau de bord</div>' +
     '<select class="edit-select" multiple data-f="pages">' + optionsHtml(refPages, c.pages || []) + '</select>';
 
-  html += '<div class="edit-section-label">Source(s) de la donnée</div>' +
-    '<select class="edit-select" multiple data-f="sources">' + optionsHtml(refSources, c.sources || []) + '</select>';
+  html += '<div class="edit-section-label">Source(s) de la donnée <span class="form-hint">(Ctrl + clic ou Cmd + clic pour en sélectionner plusieurs)</span></div>' +
+    '<select class="edit-select" multiple data-f="sources" data-role="sources">' + optionsHtml(allSourcesList(c.sources), c.sources || []) + '</select>' +
+    '<div style="display:flex;gap:6px;margin:6px 0 10px"><input class="edit-input" data-role="new-source" placeholder="Nouvelle source (ex. Enquête IPSOS)">' +
+    '<button type="button" class="btn btn--secondary btn--sm" data-role="add-source" style="white-space:nowrap">+ Ajouter</button></div>';
 
   html += '<div class="edit-section-label">Groupe (définitions proches)</div>' +
     '<input class="edit-input" data-f="groupe" list="' + dlGroupesId + '" value="' + escapeHtml(fmt(c.groupe)) + '" placeholder="Laisser vide si non concerné">';
@@ -2790,6 +2806,16 @@ function renderEditForm(id){
     div.querySelector('[data-role="categorie"]').style.display = isChampTableau ? 'block' : 'none';
   }
   applyTypeVisibility();
+  div.querySelector('[data-role="add-source"]').addEventListener('click', function(){
+    var input = div.querySelector('[data-role="new-source"]');
+    var v = input.value.trim();
+    if (!v) return;
+    var sel = div.querySelector('[data-role="sources"]');
+    var opt = Array.prototype.filter.call(sel.options, function(o){ return o.value === v; })[0];
+    if (!opt) { opt = document.createElement('option'); opt.value = v; opt.textContent = v; sel.appendChild(opt); }
+    opt.selected = true;
+    input.value = '';
+  });
   div.querySelectorAll('[data-f="definition"],[data-f="definitions_par_page"]').forEach(function(t){
     t.addEventListener('input', function(){ div.querySelector('[data-role="desc-saisie"]').checked = true; });
   });
