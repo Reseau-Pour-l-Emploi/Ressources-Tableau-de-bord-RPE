@@ -515,7 +515,7 @@ var db = firebase.firestore();
 var auth = firebase.auth();
 
 var INTRO_HTML =
-  '<p>Le Tableau de Bord du Réseau Pour l\'Emploi (TB RPE) est l\'outil de pilotage territorial partagé issu de la loi pour le plein emploi. Il s\'agit d\'une plateforme destinée à transformer la donnée en action collective, au-delà d\'un simple recueil de chiffres.</p>' +
+  '<p>Le Tableau de Bord du Réseau Pour l\'Emploi (TB RPE) est l\'outil de pilotage territorial partagé issu de la loi pour le plein emploi. Il s\'agit d\'une plateforme collaborative destinée à transformer la donnée en action collective, au-delà d\'un simple recueil de chiffres.</p>' +
   '<p><strong>Quatre objectifs stratégiques :</strong></p>' +
   '<ul>' +
     '<li>Fédérer les acteurs autour d\'un diagnostic et d\'indicateurs communs.</li>' +
@@ -693,7 +693,10 @@ function richInline(s){
   esc = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   esc = esc.replace(/__(.+?)__/g, '<u>$1</u>');
   esc = esc.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  esc = esc.replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Liens [texte](https://...) ou [texte](mailto:...) ; un niveau de parentheses accepte dans l'adresse.
+  esc = esc.replace(/\[(.+?)\]\(((?:https?:\/\/|mailto:)(?:[^\s()]|\([^\s()]*\))+)\)/g, function(all, txt, url){
+    return /^mailto:/i.test(url) ? '<a href="' + url + '">' + txt + '</a>' : '<a href="' + url + '" target="_blank" rel="noopener">' + txt + '</a>';
+  });
   return esc;
 }
 function richText(s){
