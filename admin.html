@@ -1926,6 +1926,12 @@ function rpeScanAssistant(){
   }
   /* Composants des pages de synthese : uniquement les composants "feuilles" avec du texte,
      sans les sous-elements techniques de DigDash (fil d'Ariane, zones de depot, attente, filtres). */
+  /* Textes sans interet pour le glossaire : cartes (WMS/WMTS/WFS), choix du niveau territorial, dates seules. */
+  function rpeNoise(t){
+    return /\b(WMS|WMTS|WFS)\b|Liste de (cartes|calques)/i.test(t) ||
+      /^\s*(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?(\s+(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?)*\s*$/i.test(t) ||
+      /^\s*(mis[e]? à jour (le|au)\s*:?\s*)?\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/i.test(t);
+  }
   function technical(id){ return /_(breadcrumb|dropzones|wait|editToolbar)$/.test(id) || /_c_[A-Za-z]/.test(id) || /Tableau_personnalis/i.test(id); }
   function captureFrames(pg, pageName){
     var kept = 0;
@@ -1933,11 +1939,13 @@ function rpeScanAssistant(){
       if (technical(f.id) || f.querySelector('[id^="subdivdims_"]')) return;
       var inner = Array.prototype.some.call(f.querySelectorAll('[id^="frame_"]'), function(x){ return !technical(x.id); });
       if (inner) return;
+      /* Ni carte, ni selecteur (territoire, periode...), ni champ de saisie */
+      if (f.querySelector('select,input,textarea,.variable-content,.ol-viewport,.leaflet-container')) return;
       function linesOf(e){ return String(e.innerText || e.textContent || '').split('\n').map(function(l){ return l.replace(/\s+/g, ' ').trim(); }).filter(Boolean); }
       var techLines = [];
       Array.prototype.forEach.call(f.querySelectorAll('[id^="frame_"]'), function(x){ techLines = techLines.concat(linesOf(x)); });
       var lines = linesOf(f).filter(function(l){ return techLines.indexOf(l) === -1 && !/^[\d\s,.%€+\-–()]*(pts?|points?)?$/i.test(l); });
-      if (!lines.length) return;
+      if (!lines.length || rpeNoise(lines.join(' '))) return;
       data.frames[pg.id + '|' + f.id] = {page: pageName, titre: (f.getAttribute('title') || '').trim() || lines[0].slice(0, 120), texte: lines.slice(0, 6).join(' | ').slice(0, 300)};
       kept++;
     });
@@ -2099,6 +2107,11 @@ function glossParseFrames(html){
   if (!el) return {};
   try { return JSON.parse(el.textContent) || {}; } catch (e) { return {}; }
 }
+function glossScanNoise(t){
+  return /\b(WMS|WMTS|WFS)\b|Liste de (cartes|calques)/i.test(t) ||
+    /^\s*(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?(\s+(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?)*\s*$/i.test(t.split(' | ')[0]) ||
+    /^\s*(mis[e]? à jour (le|au)\s*:?\s*)?\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/i.test(t.split(' | ')[0]);
+}
 function glossSynthReport(frames, pages){
   var byPage = {};
   Object.keys(frames).forEach(function(fid){
@@ -2106,7 +2119,7 @@ function glossSynthReport(frames, pages){
     if (!f.page || /_(breadcrumb|dropzones|wait)$/.test(fid)) return;
     var page = glossDetectPage(f.page, pages) || f.page;
     var nom = f.titre;
-    if (!nom) return;
+    if (!nom || glossScanNoise(nom + ' ' + (f.texte || ''))) return;
     var list = (byPage[page] = byPage[page] || []);
     if (list.some(function(c){ return c.nom === nom; })) return;
     list.push({nom: nom, cle: glossSlug(nom), texte: glossSlug(f.texte || '')});
