@@ -247,18 +247,22 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
       <div class="card" id="glossScanCard">
         <h3 style="margin:0 0 8px">🔎 Assistant de scan du tableau de bord</h3>
         <div class="form-hint" style="font-style:normal;margin-bottom:10px;line-height:1.6">
-          Capture automatiquement, pendant que vous parcourez le tableau de bord RPE, les <b>tableaux personnalisés</b> (dimensions et mesures) et les <b>composants des pages de synthèse</b>.<br>
-          <b>1. Installer (une fois) :</b> faites glisser le bouton ci-dessous dans votre barre de favoris.
-          Si le glisser-déposer est bloqué : créez un favori quelconque, modifiez-le et collez dans l'adresse le code obtenu avec "Copier le favori".<br>
-          <b>2. Scanner :</b> ouvrez le tableau de bord, cliquez sur le favori : un panneau apparaît en bas à droite. Parcourez chaque page et ouvrez son tableau personnalisé :
-          la capture est automatique (compteurs en direct). Les captures sont conservées si vous changez de page ; recliquez sur le favori si le panneau disparaît.<br>
-          <b>3. Importer :</b> "⬇️ Télécharger" dans le panneau, puis déposez le fichier ci-dessous et cliquez sur "Analyser".<br>
-          Si le favori ne fonctionne pas : F12 &gt; onglet <i>Console</i>, collez le code obtenu avec "Copier pour la console" puis Entrée.
+          Ouvre une à une toutes les pages du tableau de bord RPE et leurs tableaux personnalisés, et capture les champs pour mettre à jour le glossaire.
         </div>
-        <a id="glossScanBookmarklet" class="btn btn--sm" style="cursor:grab" title="Faites glisser ce bouton dans votre barre de favoris">🔎 Scan glossaire RPE</a>
-        <button type="button" class="btn btn--secondary btn--sm" id="btnCopyScanBookmark">📋 Copier le favori</button>
-        <button type="button" class="btn btn--secondary btn--sm" id="btnCopyScanConsole">📋 Copier pour la console</button>
-        <span id="glossScanCopyStatus" style="font-size:12.5px"></span>
+        <ol style="margin:0 0 10px 18px;padding:0;font-size:13px;line-height:1.7">
+          <li><b>Installation (une seule fois)</b> : affichez la barre de favoris (Ctrl+Maj+B), puis <b>faites glisser</b> ce bouton dessus :
+            <a id="glossScanBookmarklet" class="btn btn--sm" style="cursor:grab" title="Faites glisser ce bouton dans votre barre de favoris">🔎 Scan glossaire RPE</a></li>
+          <li><b>Scan</b> : ouvrez le tableau de bord RPE, cliquez sur le favori "🔎 Scan glossaire RPE", puis sur <b>"▶️ Scanner toutes les pages"</b> dans le panneau qui apparaît en bas à droite. Ne touchez à rien pendant le scan (quelques minutes).</li>
+          <li><b>Import</b> : à la fin, cliquez sur "⬇️ Télécharger" dans le panneau, déposez le fichier ci-dessous et cliquez sur "Analyser".</li>
+        </ol>
+        <details style="font-size:12.5px">
+          <summary style="cursor:pointer">Le bouton ne veut pas se glisser dans les favoris ?</summary>
+          <div style="margin-top:6px;line-height:1.6">
+            Cliquez sur <button type="button" class="btn btn--secondary btn--sm" id="btnCopyScanBookmark">📋 Copier le favori</button> <span id="glossScanCopyStatus"></span><br>
+            Puis : clic droit sur la barre de favoris &gt; <i>Ajouter une page</i> (ou <i>Ajouter un favori</i>), nom : <code>Scan glossaire RPE</code>, et dans le champ <b>URL / Adresse</b>, collez (Ctrl+V). Enregistrez.<br>
+            À réinstaller uniquement si la liste des pages du glossaire change.
+          </div>
+        </details>
       </div>
       <div class="card" id="glossImportCard" style="display:none">
         <h3 style="margin:0 0 8px">Importer une extraction des tableaux personnalisés</h3>
@@ -1797,11 +1801,14 @@ function renderGlossImportSection(){
       }).catch(function(err){ st.textContent = '❌ Échec : ' + (err.message || err); });
     });
     document.getElementById('glossImportCard').style.display = 'none';
+    document.getElementById('glossScanCard').style.display = 'none';
     return;
   }
   mig.innerHTML = '<p style="margin:0;font-size:13px">✅ Glossaire stocké dans Firebase : <b>' + nb + '</b> fiches publiées. ' +
     'Les fichiers <code>data/glossary.json</code>, <code>data/pages_sources.json</code>, <code>sources/</code> et <code>scripts/</code> ne sont plus utilisés.</p>';
   document.getElementById('glossImportCard').style.display = 'block';
+  document.getElementById('glossScanCard').style.display = 'block';
+  initScanAssistant();
 }
 
 function glossKnownPages(){
@@ -1883,12 +1890,13 @@ function glossRunAnalysis(){
 }
 /* ==== Assistant de scan (favori execute dans DigDash) ====
    Fonction autonome convertie en favori "javascript:" : elle ne doit utiliser aucune variable exterieure. */
-function rpeScanAssistant(){
+function rpeScanAssistant(PAGES){
   var KEY = 'rpeGlossScan', ID = 'rpeGlossScanPanel';
-  var data;
+  var data, running = false;
   try { data = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { data = {}; }
   data.tables = data.tables || {}; data.frames = data.frames || {};
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+  function norm(s){ return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
   function allDocs(){
     var out = [];
     (function walk(w){
@@ -1897,6 +1905,7 @@ function rpeScanAssistant(){
     })(window);
     return out;
   }
+  function nbTables(){ return Object.keys(data.tables).length; }
   function scan(){
     allDocs().forEach(function(d){
       Array.prototype.forEach.call(d.querySelectorAll('[id^="subdivdims_"]'), function(r){
@@ -1913,6 +1922,80 @@ function rpeScanAssistant(){
     save();
     render();
   }
+  /* Cherche l'entree de menu / l'onglet dont le texte correspond au libelle (pages et sous-fenetres). */
+  function findClickable(label){
+    var target = norm(label), best = null, bestScore = 0;
+    allDocs().forEach(function(d){
+      Array.prototype.forEach.call(d.querySelectorAll('a,button,li,span,div,td,[role="tab"],[role="menuitem"]'), function(el){
+        if (el.closest('#' + ID)) return;
+        var t = norm(el.textContent);
+        if (!t || t.length > 90) return;
+        var score = t === target ? 3 : ((target.length > 6 && (t.indexOf(target) === 0 || (t.length > 8 && target.indexOf(t) === 0))) ? 2 :
+          ((target.length > 6 && t.length < 70 && (' ' + t + ' ').indexOf(' ' + target + ' ') > -1) ? 1 : 0));
+        if (!score) return;
+        if (!(el.offsetWidth || el.offsetHeight)) return;
+        var bonus = 0;
+        if (/^(A|BUTTON|LI)$/.test(el.tagName) || /tab|menuitem/.test(el.getAttribute('role') || '')) bonus += 200;
+        try { if ((el.ownerDocument.defaultView.getComputedStyle(el).cursor || '') === 'pointer') bonus += 300; } catch (e) {}
+        var depth = 0, n = el;
+        while (n.parentNode) { depth++; n = n.parentNode; }
+        var sc = score * 1000 + bonus + depth;
+        if (sc > bestScore) { bestScore = sc; best = el; }
+      });
+    });
+    return best;
+  }
+  function clickEl(el){
+    var w = el.ownerDocument.defaultView;
+    ['mouseover', 'mousedown', 'mouseup', 'click'].forEach(function(t){
+      try { el.dispatchEvent(new w.MouseEvent(t, {bubbles: true, cancelable: true, view: w})); } catch (e) {}
+    });
+  }
+  /* Attend que la page ait fini de se construire (plus d'ajout d'elements pendant 2 s, 20 s maximum). */
+  function waitStable(){
+    return new Promise(function(res){
+      var last = Date.now(), start = Date.now(), obs = [];
+      allDocs().forEach(function(d){
+        try { var o = new MutationObserver(function(){ last = Date.now(); }); o.observe(d.documentElement, {childList: true, subtree: true}); obs.push(o); } catch (e) {}
+      });
+      var t = setInterval(function(){
+        if (Date.now() - last > 2000 || Date.now() - start > 20000) { clearInterval(t); obs.forEach(function(o){ o.disconnect(); }); res(); }
+      }, 300);
+    });
+  }
+  function log(t){ var l = document.querySelector('#' + ID + ' [data-c="log"]'); if (l) { l.insertAdjacentHTML('beforeend', '<div>' + t + '</div>'); l.scrollTop = l.scrollHeight; } }
+  function status(t){ var e = document.querySelector('#' + ID + ' [data-c="msg"]'); if (e) e.textContent = t; }
+  function runAll(){
+    if (running) return;
+    running = true;
+    var i = 0;
+    document.querySelector('#' + ID + ' [data-c="log"]').innerHTML = '';
+    (function next(){
+      if (!running) { status('⏹️ Scan interrompu.'); return; }
+      if (i >= PAGES.length) {
+        running = false;
+        status('✅ Scan terminé : ' + nbTables() + ' tableau(x) personnalisé(s). Cliquez sur "Télécharger".');
+        return;
+      }
+      var pg = PAGES[i++];
+      status('⏳ Page ' + i + ' / ' + PAGES.length + ' : ' + pg);
+      var el = findClickable(pg);
+      if (!el) { log('❌ ' + pg + ' : entrée introuvable dans le menu'); next(); return; }
+      var before = nbTables();
+      clickEl(el);
+      waitStable().then(function(){
+        scan();
+        var tp = findClickable('Tableau personnalisé');
+        if (!tp) return false;
+        clickEl(tp);
+        return waitStable().then(function(){ scan(); return true; });
+      }).then(function(tpFound){
+        var gained = nbTables() - before;
+        log((gained ? '✅ ' : (tpFound ? '⚠️ ' : 'ℹ️ ')) + pg + (gained ? ' : tableau personnalisé capturé' : (tpFound ? ' : tableau personnalisé ouvert mais non capturé' : ' : page lue, pas de tableau personnalisé')));
+        next();
+      });
+    })();
+  }
   function fileContent(){
     var html = Object.keys(data.tables).map(function(k){ return data.tables[k]; }).join('\n\n');
     return '<!-- Scan du tableau de bord RPE : ' + new Date().toLocaleString('fr-FR') + ' -->\n' + html +
@@ -1921,58 +2004,49 @@ function rpeScanAssistant(){
   function render(){
     var p = document.getElementById(ID);
     if (!p) return;
-    p.querySelector('[data-c="t"]').textContent = Object.keys(data.tables).length;
+    p.querySelector('[data-c="t"]').textContent = nbTables();
     p.querySelector('[data-c="f"]').textContent = Object.keys(data.frames).length;
   }
   var old = document.getElementById(ID);
-  if (old) { old.remove(); clearInterval(window.__rpeScanTimer); }
+  if (old) old.remove();
   var p = document.createElement('div');
   p.id = ID;
-  p.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483647;background:#0D1440;color:#fff;font:13px Arial,sans-serif;padding:12px 14px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35);width:270px;line-height:1.45';
+  p.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483647;background:#0D1440;color:#fff;font:13px Arial,sans-serif;padding:12px 14px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35);width:300px;line-height:1.45';
   var btn = 'background:#FFCC52;color:#0D1440;border:0;border-radius:6px;padding:5px 8px;margin:6px 4px 0 0;font:700 12px Arial,sans-serif;cursor:pointer';
-  p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés : <b data-c="t">0</b><br>Composants de pages : <b data-c="f">0</b><br>' +
-    '<span style="font-size:11.5px;color:#C9CEE8">Parcourez les pages et ouvrez chaque tableau personnalisé : la capture est automatique.</span><br>' +
-    '<button data-a="dl" style="' + btn + '">⬇️ Télécharger</button><button data-a="cp" style="' + btn + '">📋 Copier</button>' +
-    '<button data-a="clr" style="' + btn + ';background:#fff">🗑️ Vider</button><button data-a="x" style="' + btn + ';background:#fff">✕</button>' +
-    '<div data-c="msg" style="font-size:11.5px;margin-top:4px"></div>';
+  p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés capturés : <b data-c="t">0</b><br>Composants de pages : <b data-c="f">0</b><br>' +
+    '<button data-a="run" style="' + btn + '">▶️ Scanner toutes les pages</button><button data-a="stop" style="' + btn + ';background:#fff">⏹️ Arrêter</button><br>' +
+    '<button data-a="dl" style="' + btn + '">⬇️ Télécharger</button><button data-a="clr" style="' + btn + ';background:#fff">🗑️ Vider</button><button data-a="x" style="' + btn + ';background:#fff">✕</button>' +
+    '<div data-c="msg" style="font-size:12px;margin-top:6px"></div>' +
+    '<div data-c="log" style="font-size:11.5px;margin-top:4px;max-height:150px;overflow:auto;color:#C9CEE8"></div>';
   document.body.appendChild(p);
-  var msg = function(t){ p.querySelector('[data-c="msg"]').textContent = t; };
+  p.querySelector('[data-a="run"]').onclick = runAll;
+  p.querySelector('[data-a="stop"]').onclick = function(){ running = false; };
   p.querySelector('[data-a="dl"]').onclick = function(){
     var a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([fileContent()], {type: 'text/html'}));
     a.download = 'scan-tdb-rpe-' + new Date().toISOString().slice(0, 10) + '.html';
     document.body.appendChild(a); a.click(); a.remove();
-    msg('Fichier téléchargé : déposez-le dans l\'admin du glossaire.');
-  };
-  p.querySelector('[data-a="cp"]').onclick = function(){
-    var t = fileContent();
-    var done = function(){ msg('Copié : collez-le dans l\'admin du glossaire.'); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function(){ fallback(); });
-    else fallback();
-    function fallback(){ var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+    status('⬇️ Fichier téléchargé : déposez-le dans l\'admin du glossaire.');
   };
   p.querySelector('[data-a="clr"]').onclick = function(){
     if (!confirm('Vider toutes les captures ?')) return;
-    data = {tables: {}, frames: {}}; save(); render(); msg('Captures vidées.');
+    data = {tables: {}, frames: {}}; save(); render(); status('Captures vidées.');
   };
-  p.querySelector('[data-a="x"]').onclick = function(){ clearInterval(window.__rpeScanTimer); p.remove(); };
+  p.querySelector('[data-a="x"]').onclick = function(){ running = false; p.remove(); };
   scan();
-  window.__rpeScanTimer = setInterval(scan, 2000);
+  status(nbTables() ? 'Captures précédentes conservées. Cliquez sur "Scanner toutes les pages".' : 'Cliquez sur "Scanner toutes les pages".');
 }
-function rpeScanCode(){ return '(' + rpeScanAssistant.toString() + ')();'; }
-(function initScanAssistant(){
+function rpeScanCode(){ return '(' + rpeScanAssistant.toString() + ')(' + JSON.stringify(glossKnownPages()) + ');'; }
+function initScanAssistant(){
   var a = document.getElementById('glossScanBookmarklet');
   var href = 'javascript:' + encodeURIComponent(rpeScanCode());
   a.setAttribute('href', href);
-  a.addEventListener('click', function(ev){ ev.preventDefault(); document.getElementById('glossScanCopyStatus').textContent = 'Faites-le glisser dans la barre de favoris (il ne fonctionne que sur le tableau de bord).'; });
-  function copy(text){
+  a.onclick = function(ev){ ev.preventDefault(); document.getElementById('glossScanCopyStatus').textContent = 'Ce bouton se glisse dans la barre de favoris : il ne fonctionne que depuis le tableau de bord.'; };
+  document.getElementById('btnCopyScanBookmark').onclick = function(){
     var st = document.getElementById('glossScanCopyStatus');
-    var ok = function(){ st.textContent = '✅ Copié.'; };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, function(){ st.textContent = '❌ Copie refusée par le navigateur.'; });
-  }
-  document.getElementById('btnCopyScanBookmark').addEventListener('click', function(){ copy(href); });
-  document.getElementById('btnCopyScanConsole').addEventListener('click', function(){ copy(rpeScanCode()); });
-})();
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(href).then(function(){ st.textContent = '✅ Copié.'; }, function(){ st.textContent = '❌ Copie refusée par le navigateur.'; });
+  };
+}
 
 /* Pages de synthese : composants (frames DigDash) captures par l'assistant, rapproches des fiches
    indicateurs de la page. Detection indicative : aucune ecriture automatique. */
