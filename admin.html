@@ -253,7 +253,7 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
           <li><b>Installation (une seule fois)</b> : affichez la barre de favoris (Ctrl+Maj+B), puis <b>faites glisser</b> ce bouton dessus :
             <a id="glossScanBookmarklet" class="btn btn--sm" style="cursor:grab" title="Faites glisser ce bouton dans votre barre de favoris">🔎 Scan glossaire RPE</a></li>
           <li><b>Scan</b> : ouvrez le tableau de bord RPE, cliquez sur le favori "🔎 Scan glossaire RPE", puis sur <b>"▶️ Scanner toutes les pages"</b> dans le panneau qui apparaît en bas à droite. Les captures précédentes sont effacées automatiquement, chaque tableau en échec est retenté 2 fois. Ne touchez à rien pendant le scan (quelques minutes).</li>
-          <li><b>Import</b> : à la fin, cliquez sur "⬇️ Télécharger" dans le panneau, déposez le fichier ci-dessous et cliquez sur "Analyser".</li>
+          <li><b>Import</b> : à la fin du scan, le fichier se télécharge automatiquement. Déposez-le ci-dessous et cliquez sur "Analyser".</li>
         </ol>
         <details style="font-size:12.5px">
           <summary style="cursor:pointer">Le bouton ne veut pas se glisser dans les favoris ?</summary>
@@ -1912,7 +1912,7 @@ function rpeScanAssistant(){
       var title = titles[id] || id.slice(parent ? parent.length + 1 : 0).replace(/___/g, ' / ').replace(/_/g, ' ').trim();
       var rec = {id: id, uid: el.getAttribute('uid'), name: (path.length > 1 ? path.slice(1).join(' > ') + ' > ' : '') + title};
       if (/tableau personnalis/i.test(title + ' ' + path.join(' '))) { rec.name = (/tableau personnalis/i.test(title) && path.length ? path[path.length - 1] : (path[1] || title)); tables.push(rec); }
-      else pages.push(rec);
+      else if (/synth[eè]se/i.test(title)) { rec.name = path.length ? path[path.length - 1] : title; pages.push(rec); }
     });
     return {tables: tables, pages: pages};
   }
@@ -1924,13 +1924,24 @@ function rpeScanAssistant(){
     var r = tb.querySelector('[id^="subdivdims_"]');
     data.tables[r.id] = tb.outerHTML;
   }
-  function captureFrames(pg){
+  /* Composants des pages de synthese : uniquement les composants "feuilles" avec du texte,
+     sans les sous-elements techniques de DigDash (fil d'Ariane, zones de depot, attente, filtres). */
+  function technical(id){ return /_(breadcrumb|dropzones|wait|editToolbar)$/.test(id) || /_c_[A-Za-z]/.test(id) || /Tableau_personnalis/i.test(id); }
+  function captureFrames(pg, pageName){
+    var kept = 0;
     Array.prototype.forEach.call(pg.querySelectorAll('[id^="frame_"]'), function(f){
-      if (/_editToolbar$/.test(f.id) || f.querySelector('[id^="subdivdims_"]') || /Tableau_personnalis/i.test(f.id)) return;
-      var txt = (f.innerText || f.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 200);
-      var old = data.frames[f.id];
-      if (!old || (!old.texte && txt)) data.frames[f.id] = {titre: (f.getAttribute('title') || '').trim(), texte: txt};
+      if (technical(f.id) || f.querySelector('[id^="subdivdims_"]')) return;
+      var inner = Array.prototype.some.call(f.querySelectorAll('[id^="frame_"]'), function(x){ return !technical(x.id); });
+      if (inner) return;
+      function linesOf(e){ return String(e.innerText || e.textContent || '').split('\n').map(function(l){ return l.replace(/\s+/g, ' ').trim(); }).filter(Boolean); }
+      var techLines = [];
+      Array.prototype.forEach.call(f.querySelectorAll('[id^="frame_"]'), function(x){ techLines = techLines.concat(linesOf(x)); });
+      var lines = linesOf(f).filter(function(l){ return techLines.indexOf(l) === -1 && !/^[\d\s,.%€+\-–()]*(pts?|points?)?$/i.test(l); });
+      if (!lines.length) return;
+      data.frames[pg.id + '|' + f.id] = {page: pageName, titre: (f.getAttribute('title') || '').trim() || lines[0].slice(0, 120), texte: lines.slice(0, 6).join(' | ').slice(0, 300)};
+      kept++;
     });
+    return kept;
   }
   async function openPage(rec){
     var pg = D.getElementById(rec.id);
@@ -1956,37 +1967,62 @@ function rpeScanAssistant(){
     save(); render();
     return !!tb;
   }
+  /* Page Synthese : attend que ses composants soient affiches (nombre stable pendant 1,5 s, 20 s maximum). */
+  async function scanSynthese(rec, maxMs){
+    state[rec.id] = '⏳'; render();
+    var pg = await openPage(rec), n = 0;
+    if (pg) {
+      var last = -1, stableSince = Date.now(), t0 = Date.now();
+      while (Date.now() - t0 < maxMs) {
+        await sleep(500);
+        n = captureFrames(pg, rec.name);
+        if (n !== last) { last = n; stableSince = Date.now(); }
+        else if (n > 0 && Date.now() - stableSince > 1500) break;
+      }
+    }
+    state[rec.id] = n > 0 ? '✅' : '❌';
+    save(); render();
+    return n > 0;
+  }
+  function download(){
+    var a = D.createElement('a');
+    a.href = URL.createObjectURL(new Blob([fileContent()], {type: 'text/html'}));
+    a.download = 'scan-tdb-rpe-' + new Date().toISOString().slice(0, 10) + '.html';
+    D.body.appendChild(a); a.click(); a.remove();
+  }
   async function runAll(){
     if (running) return;
     if (!W.ddCtrl) { status('❌ Ouvrez d\'abord le tableau de bord RPE (connecté), puis relancez le scan.'); return; }
     running = true;
+    var t0 = Date.now();
     data = {tables: {}, frames: {}}; state = {}; save();
-    var L = live();
-    LV = L; render();
-    if (!L.tables.length) { status('❌ Aucun tableau personnalisé trouvé dans le menu du tableau de bord.'); running = false; return; }
-    for (var i = 0; i < L.pages.length && running; i++) {
-      status('⏳ Pages de synthèse : ' + (i + 1) + ' / ' + L.pages.length + ' (' + L.pages[i].name + ')');
-      var pg = await openPage(L.pages[i]);
-      if (pg) { await sleep(2500); captureFrames(pg); save(); render(); }
+    /* 1. Reperage rapide (lecture du menu, sans ouvrir de page) */
+    LV = live(); render();
+    var todo = LV.pages.map(function(r){ return {rec: r, kind: 'synth'}; }).concat(LV.tables.map(function(r){ return {rec: r, kind: 'table'}; }));
+    if (!todo.length) { status('❌ Aucune page Synthèse ni tableau personnalisé trouvé dans le menu.'); running = false; return; }
+    /* 2. Captures une par une */
+    for (var i = 0; i < todo.length && running; i++) {
+      status('⏳ Capture ' + (i + 1) + ' / ' + todo.length + ' : ' + todo[i].rec.name + (todo[i].kind === 'table' ? ' (tableau personnalisé)' : ' (Synthèse)'));
+      if (todo[i].kind === 'table') await scanTable(todo[i].rec, 30000); else await scanSynthese(todo[i].rec, 20000);
     }
-    for (var j = 0; j < L.tables.length && running; j++) {
-      status('⏳ Tableaux personnalisés : ' + (j + 1) + ' / ' + L.tables.length + ' (' + L.tables[j].name + ')');
-      await scanTable(L.tables[j], 30000);
-    }
-    /* Nouvelles tentatives automatiques (2 maximum, attente plus longue) pour les tableaux en echec */
+    /* 3. Nouvelles tentatives (2 maximum, attente plus longue) pour les captures en echec */
     for (var essai = 1; essai <= 2 && running; essai++) {
-      var ko = L.tables.filter(function(t){ return state[t.id] === '❌'; });
+      var ko = todo.filter(function(t){ return state[t.rec.id] === '❌'; });
       if (!ko.length) break;
       for (var k = 0; k < ko.length && running; k++) {
-        status('🔁 Nouvelle tentative ' + essai + ' / 2 : ' + ko[k].name);
-        await scanTable(ko[k], 60000);
+        status('🔁 Nouvelle tentative ' + essai + ' / 2 : ' + ko[k].rec.name);
+        if (ko[k].kind === 'table') await scanTable(ko[k].rec, 60000); else await scanSynthese(ko[k].rec, 40000);
       }
     }
-    var nbKo = L.tables.filter(function(t){ return state[t.id] === '❌'; }).length;
+    if (!running) return;
     running = false;
-    status(running === false && nbKo ?
-      '⚠️ Scan terminé : ' + nbKo + ' tableau(x) non capturé(s) après 3 essais. Ouvrez-les à la main, puis "📸 Capturer l\'écran".' :
-      '✅ Scan terminé : ' + Object.keys(data.tables).length + ' tableaux personnalisés et ' + Object.keys(data.frames).length + ' composants. Cliquez sur "⬇️ Télécharger".');
+    /* 4. Fichier genere une fois toutes les captures terminees */
+    var nbKo = todo.filter(function(t){ return state[t.rec.id] === '❌'; }).length;
+    var sec = Math.round((Date.now() - t0) / 1000);
+    download();
+    status((nbKo ? '⚠️ ' + nbKo + ' capture(s) en échec après 3 essais (ouvrez-les à la main puis "📸 Capturer l\'écran" et "⬇️ Télécharger"). ' : '✅ ') +
+      'Scan terminé en ' + Math.floor(sec / 60) + ' min ' + (sec % 60) + ' s : ' + Object.keys(data.tables).length + ' tableau(x) personnalisé(s), ' +
+      Object.keys(data.frames).length + ' composant(s). Fichier téléchargé : déposez-le dans l\'admin du glossaire.');
   }
   function fileContent(){
     var html = Object.keys(data.tables).map(function(k){ return data.tables[k]; }).join('\n\n');
@@ -2000,10 +2036,13 @@ function rpeScanAssistant(){
     if (!p) return;
     p.querySelector('[data-c="t"]').textContent = Object.keys(data.tables).length + ' / ' + LV.tables.length;
     p.querySelector('[data-c="f"]').textContent = Object.keys(data.frames).length;
-    p.querySelector('[data-c="pages"]').innerHTML = LV.tables.map(function(t){
+    function row(t){
       var st = state[t.id] || '○';
       return '<div style="color:' + (st === '✅' ? '#8FE3B0' : (st === '❌' ? '#FFB4B4' : '#C9CEE8')) + '">' + st + ' ' + t.name.replace(/</g, '&lt;') + '</div>';
-    }).join('');
+    }
+    p.querySelector('[data-c="pages"]').innerHTML =
+      '<div style="color:#FFCC52;margin-top:4px"><b>Pages Synthèse (' + LV.pages.length + ')</b></div>' + LV.pages.map(row).join('') +
+      '<div style="color:#FFCC52;margin-top:4px"><b>Tableaux personnalisés (' + LV.tables.length + ')</b></div>' + LV.tables.map(row).join('');
   }
   var old = D.getElementById(ID);
   if (old) old.remove();
@@ -2011,11 +2050,11 @@ function rpeScanAssistant(){
   p.id = ID;
   p.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483647;background:#0D1440;color:#fff;font:13px Arial,sans-serif;padding:12px 14px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35);width:310px;line-height:1.45;max-height:85vh;overflow:auto';
   var btn = 'background:#FFCC52;color:#0D1440;border:0;border-radius:6px;padding:5px 8px;margin:6px 4px 0 0;font:700 12px Arial,sans-serif;cursor:pointer';
-  p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés capturés : <b data-c="t">0</b><br>Composants des pages de synthèse : <b data-c="f">0</b><br>' +
+  p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés capturés : <b data-c="t">0</b><br>Composants des pages Synthèse : <b data-c="f">0</b><br>' +
     '<button data-a="run" style="' + btn + '">▶️ Scanner toutes les pages</button><button data-a="stop" style="' + btn + ';background:#fff">⏹️ Arrêter</button><br>' +
     '<button data-a="snap" style="' + btn + ';background:#fff" title="Capture le tableau personnalisé affiché à l\'écran">📸 Capturer l\'écran</button>' +
     '<button data-a="dl" style="' + btn + '">⬇️ Télécharger</button><button data-a="x" style="' + btn + ';background:#fff">✕</button>' +
-    '<div style="font-size:11.5px;margin-top:8px;color:#FFCC52"><b>Tableaux personnalisés</b> <span style="color:#C9CEE8">(○ à faire, ⏳ en cours, ✅ capturé, ❌ échec)</span></div>' +
+    '<div style="font-size:11.5px;margin-top:8px;color:#C9CEE8">Repérage : ○ à faire, ⏳ en cours, ✅ capturé, ❌ échec</div>' +
     '<div data-c="pages" style="font-size:11.5px;line-height:1.5"></div>' +
     '<div data-c="msg" style="font-size:12px;margin-top:6px"></div>';
   D.body.appendChild(p);
@@ -2026,20 +2065,18 @@ function rpeScanAssistant(){
     if (!tb) { status('📸 Aucun tableau personnalisé affiché à l\'écran.'); return; }
     captureTable(tb);
     var pgEl = tb.closest('.dashboard_page[uid]');
+    
     if (pgEl) state[pgEl.id] = '✅';
     save(); render();
     status('📸 Tableau personnalisé affiché capturé.');
   };
   p.querySelector('[data-a="dl"]').onclick = function(){
-    var a = D.createElement('a');
-    a.href = URL.createObjectURL(new Blob([fileContent()], {type: 'text/html'}));
-    a.download = 'scan-tdb-rpe-' + new Date().toISOString().slice(0, 10) + '.html';
-    D.body.appendChild(a); a.click(); a.remove();
+    download();
     status('⬇️ Fichier téléchargé : déposez-le dans l\'admin du glossaire.');
   };
   p.querySelector('[data-a="x"]').onclick = function(){ running = false; p.remove(); };
   render();
-  status(W.ddCtrl ? LV.tables.length + ' tableau(x) personnalisé(s) détecté(s) dans le menu. Cliquez sur "▶️ Scanner toutes les pages" (les captures précédentes sont effacées).' :
+  status(W.ddCtrl ? 'Repérage : ' + LV.pages.length + ' page(s) Synthèse et ' + LV.tables.length + ' tableau(x) personnalisé(s) à capturer. Cliquez sur "▶️ Scanner toutes les pages" : le fichier se télécharge automatiquement à la fin.' :
     '❌ Ce favori s\'utilise depuis le tableau de bord RPE ouvert dans le navigateur.');
 }
 function rpeScanCode(){ return '(' + rpeScanAssistant.toString() + ')();'; }
@@ -2065,14 +2102,14 @@ function glossParseFrames(html){
 function glossSynthReport(frames, pages){
   var byPage = {};
   Object.keys(frames).forEach(function(fid){
-    var page = glossDetectPage(fid, pages);
-    if (!page) return;
-    var slug = glossSlug(fid), ps = glossSlug(page);
-    var rest = slug.slice(slug.indexOf(ps) + ps.length).replace(/^-+/, '').replace(/-(group|groupe)-[a-z0-9]+$/, '').replace(/-[0-9a-f]{6,}$/, '');
     var f = frames[fid];
-    var nom = f.titre || rest.replace(/-/g, ' ');
+    if (!f.page || /_(breadcrumb|dropzones|wait)$/.test(fid)) return;
+    var page = glossDetectPage(f.page, pages) || f.page;
+    var nom = f.titre;
     if (!nom) return;
-    (byPage[page] = byPage[page] || []).push({nom: nom, cle: glossSlug(nom), texte: glossSlug(f.texte || '')});
+    var list = (byPage[page] = byPage[page] || []);
+    if (list.some(function(c){ return c.nom === nom; })) return;
+    list.push({nom: nom, cle: glossSlug(nom), texte: glossSlug(f.texte || '')});
   });
   return Object.keys(byPage).sort().map(function(page){
     var comps = byPage[page];
@@ -2100,7 +2137,7 @@ function renderSynthReport(rep){
     return '<details style="margin:4px 0"><summary style="cursor:pointer;color:' + color + '"><b>' + title + ' (' + arr.length + ')</b></summary>' +
       '<ul style="margin:4px 0 0 18px;font-size:12.5px">' + arr.map(function(l){ return '<li>' + escapeHtml(l) + '</li>'; }).join('') + '</ul></details>';
   }
-  holder.innerHTML = '<h3 style="margin:0 0 6px">📄 Pages de synthèse (détection indicative)</h3>' +
+  holder.innerHTML = '<h3 style="margin:0 0 6px">📄 Pages Synthèse (détection indicative)</h3>' +
     '<div class="form-hint" style="margin-bottom:8px">Composants capturés sur chaque page, rapprochés par leur nom des fiches "indicateur" de la page. ' +
     'Rien n\'est modifié automatiquement : créez ou complétez les fiches concernées dans ✏️ Mode édition. Les composants décoratifs (titres, textes, images) peuvent apparaître sans fiche.</div>' +
     rep.map(function(r){
