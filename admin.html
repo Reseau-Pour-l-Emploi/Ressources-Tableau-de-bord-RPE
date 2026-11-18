@@ -244,6 +244,22 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
 
     <div id="glossImportSection" style="display:none">
       <div class="card" id="glossMigrationCard"></div>
+      <div class="card" id="glossScanCard">
+        <h3 style="margin:0 0 8px">🔎 Assistant de scan du tableau de bord</h3>
+        <div class="form-hint" style="font-style:normal;margin-bottom:10px;line-height:1.6">
+          Capture automatiquement, pendant que vous parcourez le tableau de bord RPE, les <b>tableaux personnalisés</b> (dimensions et mesures) et les <b>composants des pages de synthèse</b>.<br>
+          <b>1. Installer (une fois) :</b> faites glisser le bouton ci-dessous dans votre barre de favoris.
+          Si le glisser-déposer est bloqué : créez un favori quelconque, modifiez-le et collez dans l'adresse le code obtenu avec "Copier le favori".<br>
+          <b>2. Scanner :</b> ouvrez le tableau de bord, cliquez sur le favori : un panneau apparaît en bas à droite. Parcourez chaque page et ouvrez son tableau personnalisé :
+          la capture est automatique (compteurs en direct). Les captures sont conservées si vous changez de page ; recliquez sur le favori si le panneau disparaît.<br>
+          <b>3. Importer :</b> "⬇️ Télécharger" dans le panneau, puis déposez le fichier ci-dessous et cliquez sur "Analyser".<br>
+          Si le favori ne fonctionne pas : F12 &gt; onglet <i>Console</i>, collez le code obtenu avec "Copier pour la console" puis Entrée.
+        </div>
+        <a id="glossScanBookmarklet" class="btn btn--sm" style="cursor:grab" title="Faites glisser ce bouton dans votre barre de favoris">🔎 Scan glossaire RPE</a>
+        <button type="button" class="btn btn--secondary btn--sm" id="btnCopyScanBookmark">📋 Copier le favori</button>
+        <button type="button" class="btn btn--secondary btn--sm" id="btnCopyScanConsole">📋 Copier pour la console</button>
+        <span id="glossScanCopyStatus" style="font-size:12.5px"></span>
+      </div>
       <div class="card" id="glossImportCard" style="display:none">
         <h3 style="margin:0 0 8px">Importer une extraction des tableaux personnalisés</h3>
         <div class="form-hint" style="font-style:normal;margin-bottom:10px;line-height:1.6">
@@ -254,12 +270,13 @@ footer.site .inner{max-width:1200px;margin:0 auto;padding:16px 24px;font-size:12
           Définitions, groupes, hiérarchies, cas d'usage, sources et noms techniques déjà saisis ne sont jamais modifiés.
           Une fiche qui n'apparaît plus sur aucune page est archivée (masquée, définitions conservées) et réactivée automatiquement si elle revient.
         </div>
-        <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:4px">Fichiers d'extraction</label>
+        <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:4px">Fichiers d'extraction (fichier de l'assistant de scan ou extractions manuelles)</label>
         <input type="file" id="glossImportFiles" accept=".html,.htm,.txt" multiple style="margin-bottom:10px">
         <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:4px">ou HTML collé</label>
         <textarea class="edit-textarea" id="glossImportText" rows="4" placeholder="&lt;div class=&quot;editToolbar&quot; ...&gt;...&lt;/div&gt;"></textarea>
         <button class="btn btn--sm" id="btnGlossAnalyse" style="margin-top:8px">🔍 Analyser (aucune écriture)</button>
         <div id="glossImportPreview" style="margin-top:14px"></div>
+        <div id="glossSynthPreview" style="margin-top:14px"></div>
       </div>
     </div>
 
@@ -1864,14 +1881,169 @@ function glossRunAnalysis(){
     });
   });
 }
+/* ==== Assistant de scan (favori execute dans DigDash) ====
+   Fonction autonome convertie en favori "javascript:" : elle ne doit utiliser aucune variable exterieure. */
+function rpeScanAssistant(){
+  var KEY = 'rpeGlossScan', ID = 'rpeGlossScanPanel';
+  var data;
+  try { data = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { data = {}; }
+  data.tables = data.tables || {}; data.frames = data.frames || {};
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+  function allDocs(){
+    var out = [];
+    (function walk(w){
+      try { if (w.document) out.push(w.document); } catch (e) { return; }
+      for (var i = 0; i < w.frames.length; i++) { try { walk(w.frames[i]); } catch (e) {} }
+    })(window);
+    return out;
+  }
+  function scan(){
+    allDocs().forEach(function(d){
+      Array.prototype.forEach.call(d.querySelectorAll('[id^="subdivdims_"]'), function(r){
+        var tb = r.closest('.editToolbar') || r.parentNode;
+        data.tables[r.id] = tb.outerHTML;
+      });
+      Array.prototype.forEach.call(d.querySelectorAll('[id^="frame_"]'), function(f){
+        if (/_editToolbar$/.test(f.id) || f.querySelector('[id^="subdivdims_"]') || /Tableau_personnalis/i.test(f.id)) return;
+        var txt = (f.innerText || f.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 200);
+        var old = data.frames[f.id];
+        if (!old || (!old.texte && txt)) data.frames[f.id] = {titre: (f.getAttribute('title') || '').trim(), texte: txt};
+      });
+    });
+    save();
+    render();
+  }
+  function fileContent(){
+    var html = Object.keys(data.tables).map(function(k){ return data.tables[k]; }).join('\n\n');
+    return '<!-- Scan du tableau de bord RPE : ' + new Date().toLocaleString('fr-FR') + ' -->\n' + html +
+      '\n<script type="application/json" id="rpe-scan-frames">' + JSON.stringify(data.frames).replace(/</g, '\\u003c') + '<\/script>\n';
+  }
+  function render(){
+    var p = document.getElementById(ID);
+    if (!p) return;
+    p.querySelector('[data-c="t"]').textContent = Object.keys(data.tables).length;
+    p.querySelector('[data-c="f"]').textContent = Object.keys(data.frames).length;
+  }
+  var old = document.getElementById(ID);
+  if (old) { old.remove(); clearInterval(window.__rpeScanTimer); }
+  var p = document.createElement('div');
+  p.id = ID;
+  p.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483647;background:#0D1440;color:#fff;font:13px Arial,sans-serif;padding:12px 14px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35);width:270px;line-height:1.45';
+  var btn = 'background:#FFCC52;color:#0D1440;border:0;border-radius:6px;padding:5px 8px;margin:6px 4px 0 0;font:700 12px Arial,sans-serif;cursor:pointer';
+  p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés : <b data-c="t">0</b><br>Composants de pages : <b data-c="f">0</b><br>' +
+    '<span style="font-size:11.5px;color:#C9CEE8">Parcourez les pages et ouvrez chaque tableau personnalisé : la capture est automatique.</span><br>' +
+    '<button data-a="dl" style="' + btn + '">⬇️ Télécharger</button><button data-a="cp" style="' + btn + '">📋 Copier</button>' +
+    '<button data-a="clr" style="' + btn + ';background:#fff">🗑️ Vider</button><button data-a="x" style="' + btn + ';background:#fff">✕</button>' +
+    '<div data-c="msg" style="font-size:11.5px;margin-top:4px"></div>';
+  document.body.appendChild(p);
+  var msg = function(t){ p.querySelector('[data-c="msg"]').textContent = t; };
+  p.querySelector('[data-a="dl"]').onclick = function(){
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([fileContent()], {type: 'text/html'}));
+    a.download = 'scan-tdb-rpe-' + new Date().toISOString().slice(0, 10) + '.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    msg('Fichier téléchargé : déposez-le dans l\'admin du glossaire.');
+  };
+  p.querySelector('[data-a="cp"]').onclick = function(){
+    var t = fileContent();
+    var done = function(){ msg('Copié : collez-le dans l\'admin du glossaire.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, function(){ fallback(); });
+    else fallback();
+    function fallback(){ var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
+  };
+  p.querySelector('[data-a="clr"]').onclick = function(){
+    if (!confirm('Vider toutes les captures ?')) return;
+    data = {tables: {}, frames: {}}; save(); render(); msg('Captures vidées.');
+  };
+  p.querySelector('[data-a="x"]').onclick = function(){ clearInterval(window.__rpeScanTimer); p.remove(); };
+  scan();
+  window.__rpeScanTimer = setInterval(scan, 2000);
+}
+function rpeScanCode(){ return '(' + rpeScanAssistant.toString() + ')();'; }
+(function initScanAssistant(){
+  var a = document.getElementById('glossScanBookmarklet');
+  var href = 'javascript:' + encodeURIComponent(rpeScanCode());
+  a.setAttribute('href', href);
+  a.addEventListener('click', function(ev){ ev.preventDefault(); document.getElementById('glossScanCopyStatus').textContent = 'Faites-le glisser dans la barre de favoris (il ne fonctionne que sur le tableau de bord).'; });
+  function copy(text){
+    var st = document.getElementById('glossScanCopyStatus');
+    var ok = function(){ st.textContent = '✅ Copié.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, function(){ st.textContent = '❌ Copie refusée par le navigateur.'; });
+  }
+  document.getElementById('btnCopyScanBookmark').addEventListener('click', function(){ copy(href); });
+  document.getElementById('btnCopyScanConsole').addEventListener('click', function(){ copy(rpeScanCode()); });
+})();
+
+/* Pages de synthese : composants (frames DigDash) captures par l'assistant, rapproches des fiches
+   indicateurs de la page. Detection indicative : aucune ecriture automatique. */
+function glossParseFrames(html){
+  var doc = new DOMParser().parseFromString(html, 'text/html');
+  var el = doc.getElementById('rpe-scan-frames');
+  if (!el) return {};
+  try { return JSON.parse(el.textContent) || {}; } catch (e) { return {}; }
+}
+function glossSynthReport(frames, pages){
+  var byPage = {};
+  Object.keys(frames).forEach(function(fid){
+    var page = glossDetectPage(fid, pages);
+    if (!page) return;
+    var slug = glossSlug(fid), ps = glossSlug(page);
+    var rest = slug.slice(slug.indexOf(ps) + ps.length).replace(/^-+/, '').replace(/-(group|groupe)-[a-z0-9]+$/, '').replace(/-[0-9a-f]{6,}$/, '');
+    var f = frames[fid];
+    var nom = f.titre || rest.replace(/-/g, ' ');
+    if (!nom) return;
+    (byPage[page] = byPage[page] || []).push({nom: nom, cle: glossSlug(nom), texte: glossSlug(f.texte || '')});
+  });
+  return Object.keys(byPage).sort().map(function(page){
+    var comps = byPage[page];
+    var indics = Object.keys(publishedById).map(function(id){ return publishedById[id]; })
+      .filter(function(e){ return !e.supprime && e.source === 'indicateur' && (e.pages || []).indexOf(page) > -1; });
+    function matches(c, e){
+      var k = glossSlug(e.libelle);
+      return k && (c.cle.indexOf(k) > -1 || k.indexOf(c.cle) > -1 || c.texte.indexOf(k) > -1);
+    }
+    var seen = {}, sansFiche = [];
+    comps.forEach(function(c){
+      var hit = indics.filter(function(e){ return matches(c, e); });
+      hit.forEach(function(e){ seen[e.id] = true; });
+      if (!hit.length && sansFiche.indexOf(c.nom) === -1) sansFiche.push(c.nom);
+    });
+    return {page: page, composants: comps.length, retrouves: Object.keys(seen).length,
+      sansFiche: sansFiche, nonVus: indics.filter(function(e){ return !seen[e.id]; }).map(function(e){ return e.libelle; })};
+  });
+}
+function renderSynthReport(rep){
+  var holder = document.getElementById('glossSynthPreview');
+  if (!rep.length) { holder.innerHTML = ''; return; }
+  function list(title, arr, color){
+    if (!arr.length) return '';
+    return '<details style="margin:4px 0"><summary style="cursor:pointer;color:' + color + '"><b>' + title + ' (' + arr.length + ')</b></summary>' +
+      '<ul style="margin:4px 0 0 18px;font-size:12.5px">' + arr.map(function(l){ return '<li>' + escapeHtml(l) + '</li>'; }).join('') + '</ul></details>';
+  }
+  holder.innerHTML = '<h3 style="margin:0 0 6px">📄 Pages de synthèse (détection indicative)</h3>' +
+    '<div class="form-hint" style="margin-bottom:8px">Composants capturés sur chaque page, rapprochés par leur nom des fiches "indicateur" de la page. ' +
+    'Rien n\'est modifié automatiquement : créez ou complétez les fiches concernées dans ✏️ Mode édition. Les composants décoratifs (titres, textes, images) peuvent apparaître sans fiche.</div>' +
+    rep.map(function(r){
+      return '<div class="card" style="padding:12px 16px"><b>' + escapeHtml(r.page) + '</b> <span class="form-hint">' + r.composants + ' composants · ' + r.retrouves + ' fiche(s) indicateur retrouvée(s)</span>' +
+        list('🆕 Composants sans fiche indicateur', r.sansFiche, '#1E7B4F') +
+        list('❔ Fiches indicateur de la page non retrouvées dans le scan', r.nonVus, '#B45309') + '</div>';
+    }).join('');
+}
+
 document.getElementById('btnGlossAnalyse').addEventListener('click', function(){
   var preview = document.getElementById('glossImportPreview');
   var files = Array.prototype.slice.call(document.getElementById('glossImportFiles').files || []);
   var pasted = document.getElementById('glossImportText').value;
   Promise.all(files.map(function(f){ return f.text(); })).then(function(texts){
     if (pasted.trim()) texts.push(pasted);
-    var extractions = [];
-    texts.forEach(function(t){ extractions = extractions.concat(glossParseExtractions(t)); });
+    var extractions = [], frames = {}, byFrame = {};
+    texts.forEach(function(t){
+      glossParseExtractions(t).forEach(function(x){ byFrame[x.frameId] = x; });
+      var f = glossParseFrames(t);
+      Object.keys(f).forEach(function(k){ frames[k] = f[k]; });
+    });
+    extractions = Object.keys(byFrame).map(function(k){ return byFrame[k]; });
+    renderSynthReport(glossSynthReport(frames, glossKnownPages()));
     if (!extractions.length) {
       preview.innerHTML = '<p style="color:var(--ft-rouge)">❌ Aucun tableau personnalisé reconnu. Copiez l\'élément HTML du panneau "Dimensions / Mesures" (div <code>editToolbar</code>).</p>';
       return;
