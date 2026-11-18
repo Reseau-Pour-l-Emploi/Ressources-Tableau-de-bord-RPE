@@ -1930,7 +1930,9 @@ function rpeScanAssistant(){
   function rpeNoise(t){
     return /\b(WMS|WMTS|WFS)\b|Liste de (cartes|calques)/i.test(t) ||
       /^\s*(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?(\s+(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?)*\s*$/i.test(t) ||
-      /^\s*(mis[e]? à jour (le|au)\s*:?\s*)?\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/i.test(t);
+      /^\s*(mis[e]? à jour (le|au)\s*:?\s*)?\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/i.test(t) ||
+      /^\s*(loading|chargement|veuillez patienter)[\s.…]*$/i.test(t) ||
+      !/[a-zà-ÿ]/i.test(t.replace(/\b(janv(ier)?|f[ée]vr?(ier)?|mars|avr(il)?|mai|juin|juil(let)?|ao[uû]t|sept(embre)?|oct(obre)?|nov(embre)?|d[ée]c(embre)?|t[1-4]|s[12]|trimestre|semestre|ann[ée]e|mois|du|au|de|à|le)\b\.?/gi, ''));
   }
   function technical(id){ return /_(breadcrumb|dropzones|wait|editToolbar)$/.test(id) || /_c_[A-Za-z]/.test(id) || /Tableau_personnalis/i.test(id); }
   function captureFrames(pg, pageName){
@@ -1940,11 +1942,15 @@ function rpeScanAssistant(){
       var inner = Array.prototype.some.call(f.querySelectorAll('[id^="frame_"]'), function(x){ return !technical(x.id); });
       if (inner) return;
       /* Ni carte, ni selecteur (territoire, periode...), ni champ de saisie */
-      if (f.querySelector('select,input,textarea,.variable-content,.ol-viewport,.leaflet-container')) return;
+      if (f.querySelector('select,input,textarea,.variable-content,.ol-viewport,.leaflet-container,.slicerComboDiv,.chzn-container,[id^="slicer_"]')) return;
+      /* Date de mise a jour des donnees (tableau "... - Date de mise a jour") */
+      if (/date de mise [àa] jour/i.test((f.getAttribute('title') || '') + ' ' + Array.prototype.map.call(f.querySelectorAll('[title]'), function(x){ return x.getAttribute('title'); }).join(' '))) return;
       function linesOf(e){ return String(e.innerText || e.textContent || '').split('\n').map(function(l){ return l.replace(/\s+/g, ' ').trim(); }).filter(Boolean); }
       var techLines = [];
       Array.prototype.forEach.call(f.querySelectorAll('[id^="frame_"]'), function(x){ techLines = techLines.concat(linesOf(x)); });
       var lines = linesOf(f).filter(function(l){ return techLines.indexOf(l) === -1 && !/^[\d\s,.%€+\-–()]*(pts?|points?)?$/i.test(l); });
+      /* Composant encore en cours de chargement (texte visible "Loading..." ou indicateur d'attente affiche) : capture au passage suivant */
+      if (lines.some(function(l){ return /^(loading|chargement)\b/i.test(l); }) || Array.prototype.some.call(f.querySelectorAll('[id$="_wait"]'), vis)) return;
       if (!lines.length || rpeNoise(lines.join(' '))) return;
       data.frames[pg.id + '|' + f.id] = {page: pageName, titre: (f.getAttribute('title') || '').trim() || lines[0].slice(0, 120), texte: lines.slice(0, 6).join(' | ').slice(0, 300)};
       kept++;
@@ -1984,7 +1990,8 @@ function rpeScanAssistant(){
       while (Date.now() - t0 < maxMs) {
         await sleep(500);
         n = captureFrames(pg, rec.name);
-        if (n !== last) { last = n; stableSince = Date.now(); }
+        var loading = String(pg.innerText || '').split('\n').some(function(l){ return /^\s*(loading|chargement)\b/i.test(l); });
+        if (n !== last || loading) { last = n; stableSince = Date.now(); }
         else if (n > 0 && Date.now() - stableSince > 1500) break;
       }
     }
@@ -2110,7 +2117,9 @@ function glossParseFrames(html){
 function glossScanNoise(t){
   return /\b(WMS|WMTS|WFS)\b|Liste de (cartes|calques)/i.test(t) ||
     /^\s*(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?(\s+(national|r[ée]gion|d[ée]partement|bassin|clpe|territoire)s?)*\s*$/i.test(t.split(' | ')[0]) ||
-    /^\s*(mis[e]? à jour (le|au)\s*:?\s*)?\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/i.test(t.split(' | ')[0]);
+    /^\s*(mis[e]? à jour (le|au)\s*:?\s*)?\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/i.test(t.split(' | ')[0]) ||
+    /^\s*(loading|chargement|veuillez patienter)[\s.…]*$/i.test(t.split(' | ')[0]) ||
+    !/[a-zà-ÿ]/i.test(t.split(' | ')[0].replace(/\b(janv(ier)?|f[ée]vr?(ier)?|mars|avr(il)?|mai|juin|juil(let)?|ao[uû]t|sept(embre)?|oct(obre)?|nov(embre)?|d[ée]c(embre)?|t[1-4]|s[12]|trimestre|semestre|ann[ée]e|mois|du|au|de|à|le)\b\.?/gi, ''));
 }
 function glossSynthReport(frames, pages){
   var byPage = {};
