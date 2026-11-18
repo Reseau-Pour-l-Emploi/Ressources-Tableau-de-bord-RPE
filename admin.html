@@ -1907,10 +1907,12 @@ function rpeScanAssistant(PAGES){
   }
   function nbTables(){ return Object.keys(data.tables).length; }
   function scan(){
+    var seenNow = [];
     allDocs().forEach(function(d){
       Array.prototype.forEach.call(d.querySelectorAll('[id^="subdivdims_"]'), function(r){
         var tb = r.closest('.editToolbar') || r.parentNode;
         data.tables[r.id] = tb.outerHTML;
+        seenNow.push(r.id);
       });
       Array.prototype.forEach.call(d.querySelectorAll('[id^="frame_"]'), function(f){
         if (/_editToolbar$/.test(f.id) || f.querySelector('[id^="subdivdims_"]') || /Tableau_personnalis/i.test(f.id)) return;
@@ -1921,13 +1923,26 @@ function rpeScanAssistant(PAGES){
     });
     save();
     render();
+    return seenNow;
   }
   /* Cherche l'entree de menu / l'onglet dont le texte correspond au libelle (pages et sous-fenetres). */
-  function findClickable(label){
-    var target = norm(label), best = null, bestScore = 0;
+  /* Profondeur de l'ancetre commun entre deux elements d'un meme document (0 si documents differents). */
+  function closeness(a, b){
+    if (!a || !b || a.ownerDocument !== b.ownerDocument) return 0;
+    var anc = [], n = a, depth = 0;
+    while (n) { anc.push(n); n = n.parentNode; }
+    n = b;
+    while (n && anc.indexOf(n) === -1) n = n.parentNode;
+    while (n && n.parentNode) { depth++; n = n.parentNode; }
+    return depth;
+  }
+  /* Cherche l'entree de menu / l'onglet dont le texte correspond au libelle (pages et sous-fenetres).
+     near : element de reference (entree de la page) pour choisir l'onglet le plus proche. */
+  function findClickable(label, near, exclude){
+    var target = norm(label), best = null, bestScore = -1;
     allDocs().forEach(function(d){
       Array.prototype.forEach.call(d.querySelectorAll('a,button,li,span,div,td,[role="tab"],[role="menuitem"]'), function(el){
-        if (el.closest('#' + ID)) return;
+        if (el.closest('#' + ID) || (exclude && exclude.indexOf(el) > -1)) return;
         var t = norm(el.textContent);
         if (!t || t.length > 90) return;
         var score = t === target ? 3 : ((target.length > 6 && (t.indexOf(target) === 0 || (t.length > 8 && target.indexOf(t) === 0))) ? 2 :
@@ -1939,11 +1954,30 @@ function rpeScanAssistant(PAGES){
         try { if ((el.ownerDocument.defaultView.getComputedStyle(el).cursor || '') === 'pointer') bonus += 300; } catch (e) {}
         var depth = 0, n = el;
         while (n.parentNode) { depth++; n = n.parentNode; }
-        var sc = score * 1000 + bonus + depth;
+        var sc = score * 100000 + (near ? closeness(near, el) * 1000 : 0) + bonus + depth;
         if (sc > bestScore) { bestScore = sc; best = el; }
       });
     });
     return best;
+  }
+  /* Attend l'apparition d'un panneau "Dimensions / Mesures" non encore vu dans cette etape (30 s maximum). */
+  function waitTable(knownIds){
+    return new Promise(function(res){
+      var start = Date.now();
+      var t = setInterval(function(){
+        var ids = scan();
+        var fresh = ids.filter(function(id){ return knownIds.indexOf(id) === -1; });
+        if (fresh.length || Date.now() - start > 30000) { clearInterval(t); res(fresh); }
+      }, 1000);
+    });
+  }
+  function diag(){
+    var tp = 0, sd = 0;
+    allDocs().forEach(function(d){
+      tp += d.querySelectorAll('[id^="frame_"][id*="Tableau_personnalis"]').length;
+      sd += d.querySelectorAll('[id^="subdivdims_"]').length;
+    });
+    return ' (diagnostic : ' + tp + ' tableau(x) personnalisé(s) affiché(s), ' + sd + ' panneau(x) Dimensions / Mesures)';
   }
   function clickEl(el){
     var w = el.ownerDocument.defaultView;
@@ -1974,24 +2008,30 @@ function rpeScanAssistant(PAGES){
       if (!running) { status('⏹️ Scan interrompu.'); return; }
       if (i >= PAGES.length) {
         running = false;
-        status('✅ Scan terminé : ' + nbTables() + ' tableau(x) personnalisé(s). Cliquez sur "Télécharger".');
+        /* Bilan : un tableau est rattache a une page par son identifiant (qui contient le nom de la page). */
+        var keys = Object.keys(data.tables).map(function(k){ return ' ' + norm(k) + ' '; });
+        log('<b style="color:#fff">Bilan par page :</b>');
+        PAGES.forEach(function(pg){
+          var ok = keys.some(function(k){ return k.indexOf(' ' + norm(pg) + ' ') > -1; });
+          log((ok ? '✅ ' : 'ℹ️ ') + pg + (ok ? ' : tableau personnalisé capturé' : ' : aucun tableau personnalisé (normal si la page n\'en a pas)'));
+        });
+        status('✅ Scan terminé : ' + nbTables() + ' tableau(x) personnalisé(s). Si une page qui en a un est en ℹ️ : ouvrez-le à la main puis "📸 Capturer l\'écran". Puis "⬇️ Télécharger".');
         return;
       }
       var pg = PAGES[i++];
       status('⏳ Page ' + i + ' / ' + PAGES.length + ' : ' + pg);
       var el = findClickable(pg);
       if (!el) { log('❌ ' + pg + ' : entrée introuvable dans le menu'); next(); return; }
-      var before = nbTables();
+      var idsBefore = scan();
       clickEl(el);
       waitStable().then(function(){
-        scan();
-        var tp = findClickable('Tableau personnalisé');
-        if (!tp) return false;
+        var idsPage = scan();
+        var tp = findClickable('Tableau personnalisé', el);
+        if (!tp) return {tp: false, fresh: []};
         clickEl(tp);
-        return waitStable().then(function(){ scan(); return true; });
-      }).then(function(tpFound){
-        var gained = nbTables() - before;
-        log((gained ? '✅ ' : (tpFound ? '⚠️ ' : 'ℹ️ ')) + pg + (gained ? ' : tableau personnalisé capturé' : (tpFound ? ' : tableau personnalisé ouvert mais non capturé' : ' : page lue, pas de tableau personnalisé')));
+        return waitStable().then(function(){ return waitTable(idsBefore.concat(idsPage)); }).then(function(fresh){ return {tp: true, fresh: fresh}; });
+      }).then(function(r){
+        log('· ' + pg + ' : page ouverte' + (r.tp ? ', onglet tableau personnalisé ouvert' : ''));
         next();
       });
     })();
@@ -2015,12 +2055,17 @@ function rpeScanAssistant(PAGES){
   var btn = 'background:#FFCC52;color:#0D1440;border:0;border-radius:6px;padding:5px 8px;margin:6px 4px 0 0;font:700 12px Arial,sans-serif;cursor:pointer';
   p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés capturés : <b data-c="t">0</b><br>Composants de pages : <b data-c="f">0</b><br>' +
     '<button data-a="run" style="' + btn + '">▶️ Scanner toutes les pages</button><button data-a="stop" style="' + btn + ';background:#fff">⏹️ Arrêter</button><br>' +
+    '<button data-a="snap" style="' + btn + ';background:#fff" title="Capture ce qui est affiché à l\'écran (tableau personnalisé ouvert à la main)">📸 Capturer l\'écran</button>' +
     '<button data-a="dl" style="' + btn + '">⬇️ Télécharger</button><button data-a="clr" style="' + btn + ';background:#fff">🗑️ Vider</button><button data-a="x" style="' + btn + ';background:#fff">✕</button>' +
     '<div data-c="msg" style="font-size:12px;margin-top:6px"></div>' +
     '<div data-c="log" style="font-size:11.5px;margin-top:4px;max-height:150px;overflow:auto;color:#C9CEE8"></div>';
   document.body.appendChild(p);
   p.querySelector('[data-a="run"]').onclick = runAll;
   p.querySelector('[data-a="stop"]').onclick = function(){ running = false; };
+  p.querySelector('[data-a="snap"]').onclick = function(){
+    var before = nbTables(), ids = scan();
+    status(ids.length ? '📸 ' + ids.length + ' tableau(x) personnalisé(s) à l\'écran capturé(s)' + (nbTables() > before ? ' (dont ' + (nbTables() - before) + ' nouveau(x))' : '') + '.' : '📸 Aucun panneau "Dimensions / Mesures" visible : ouvrez le tableau personnalisé et son panneau.' + diag());
+  };
   p.querySelector('[data-a="dl"]').onclick = function(){
     var a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([fileContent()], {type: 'text/html'}));
