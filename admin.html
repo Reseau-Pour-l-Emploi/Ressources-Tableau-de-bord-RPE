@@ -1103,14 +1103,14 @@ function buildExportRows(entries){
       };
     });
 
-  var champs = entries.filter(function(e){ return e.source === 'champ_tableau'; })
+  var champs = entries.filter(function(e){ return e.source === 'champ_tableau' || e.source === 'option'; })
     .sort(function(a,b){ return a.libelle.localeCompare(b.libelle, 'fr'); })
     .map(function(e){
       return {
         'ID': e.id,
         'Statut description': ({nouvelle: 'Nouvelle', a_decrire: 'En attente', saisie: 'Saisie'})[glossDescStatut(e)],
         'Libellé': e.libelle,
-        'Type': e.type === 'mesure' ? 'Mesure' : 'Dimension',
+        'Type': e.source === 'option' ? 'Option' : (e.type === 'mesure' ? 'Mesure' : 'Dimension'),
         'Catégorie': e.categorie || '',
         'Pages': (e.pages || []).join(', '),
         'Définition': e.definition || '',
@@ -1206,8 +1206,8 @@ function rowToChampsChamp(row){
   var hasNiveau = hierNiveauRaw !== undefined && hierNiveauRaw !== '' && !isNaN(hierNiveauRaw);
   var champs = {
     libelle: (row['Libellé'] || '').trim(),
-    type: typeRaw === 'dimension' ? 'dimension' : 'mesure',
-    source: 'champ_tableau',
+    type: typeRaw === 'mesure' ? 'mesure' : 'dimension',
+    source: typeRaw === 'option' ? 'option' : 'champ_tableau',
     kpi: false,
     categorie: (row['Catégorie'] || '').trim(),
     definition: (row['Définition'] || '').trim(),
@@ -1532,12 +1532,13 @@ function glossComputeImport(entriesById, extractions){
       var champ = glossCleanChamp(it.champ);
       var libelle = it.niveau ? champ + ' - ' + it.niveau : champ;
       var cle = it.type + ':' + glossSlug(libelle);
+      var source = it.type === 'option' ? 'option' : 'champ_tableau';
       var cands = byCle[cle] || [];
       if (!cands.length) {
         // Fiche creee a la main avec le meme libelle : on la rattache plutot que de creer un doublon
         Object.keys(W).forEach(function(id){
           var e = W[id];
-          if (!e.cle_import && e.source === 'champ_tableau' && e.type === it.type && glossSlug(e.libelle) === glossSlug(libelle)) cands.push(e);
+          if (!e.cle_import && e.source === source && (source === 'option' || e.type === it.type) && glossSlug(e.libelle) === glossSlug(libelle)) cands.push(e);
         });
         if (cands.length) { cands.forEach(function(e){ e.cle_import = cle; dirty[e.id] = true; }); byCle[cle] = cands; }
       }
@@ -1560,8 +1561,8 @@ function glossComputeImport(entriesById, extractions){
             kpi: false, categorie: it.categorie, definition: '', cas_usage: '', modalites: null, periode_calcul: null,
             pages: [page], sources: [], noms_techniques: [], hierarchie: {nom: base.hierarchie.nom, niveau: Math.max(maxN, maxNiv) + 1}};
         } else {
-          var idBase = (it.type === 'dimension' ? 'champ--' : 'mesure--') + glossSlug(champ);
-          rec = {id: glossUniqueId(W, idBase, page), libelle: champ, type: it.type, source: 'champ_tableau',
+          var idBase = (it.type === 'option' ? 'option--' : (it.type === 'dimension' ? 'champ--' : 'mesure--')) + glossSlug(champ);
+          rec = {id: glossUniqueId(W, idBase, page), libelle: champ, type: it.type === 'option' ? 'dimension' : it.type, source: source,
             kpi: false, categorie: it.categorie, definition: indicDefinition(champ), cas_usage: '', modalites: null,
             periode_calcul: it.type === 'mesure' ? '' : null, pages: [page], sources: [], noms_techniques: [], hierarchie: null};
         }
@@ -1594,10 +1595,12 @@ function glossComputeImport(entriesById, extractions){
         rep.unchanged++;
       }
     });
-    // Retraits : fiches issues des tableaux personnalises qui ne figurent plus dans l'extraction de cette page
+    // Retraits : fiches du meme perimetre (champs de tableau OU options d'affichage) absentes de l'extraction de cette page
+    var isOpt = ex.kind === 'options';
     Object.keys(W).forEach(function(id){
       var e = W[id];
       if (!e.cle_import || e.supprime || seen[id] || (e.pages || []).indexOf(page) === -1) return;
+      if ((e.cle_import.indexOf('option:') === 0) !== isOpt) return;
       e.pages = e.pages.filter(function(p){ return p !== page; });
       dirty[id] = true;
       lastRemoval[id] = rep;
@@ -1729,7 +1732,7 @@ function renderDescSuivi(){
   }
   var inclNiveaux = !!(document.getElementById('descInclNiveaux') || {}).checked;
   var all = Object.keys(publishedById).map(function(id){ return publishedById[id]; })
-    .filter(function(e){ return !e.supprime && e.source === 'champ_tableau' && (inclNiveaux || !glossIsNiveau(e)); });
+    .filter(function(e){ return !e.supprime && (e.source === 'champ_tableau' || e.source === 'option') && (inclNiveaux || !glossIsNiveau(e)); });
   var nonInit = all.filter(function(e){ return e.description_saisie === undefined; }).length;
   var counts = {nouvelle: 0, a_decrire: 0, saisie: 0};
   all.forEach(function(e){ counts[glossDescStatut(e)]++; });
@@ -1739,7 +1742,7 @@ function renderDescSuivi(){
   var pct = all.length ? Math.round(counts.saisie * 100 / all.length) : 0;
   card.innerHTML =
     '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">' +
-      '<b>📋 Suivi des descriptions - champs des tableaux personnalisés</b>' +
+      '<b>📋 Suivi des descriptions - champs des tableaux personnalisés et options d\'affichage</b>' +
       '<label style="font-size:12.5px"><input type="checkbox" id="descInclNiveaux"' + (inclNiveaux ? ' checked' : '') + '> Inclure les niveaux de hiérarchie</label>' +
     '</div>' +
     '<div style="height:8px;background:var(--ft-gray-100,#EEF0F5);border-radius:99px;overflow:hidden;margin-bottom:4px"><div style="height:100%;width:' + pct + '%;background:#1E7B4F"></div></div>' +
@@ -1840,8 +1843,8 @@ function glossRunAnalysis(){
     var nbChanges = r.created.length + r.pageAdded.length + r.pageRemoved.length + r.archived.length + r.restored.length;
     html += '<div class="card" style="padding:14px 16px">' +
       '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px">' +
-        '<b>Tableau ' + (i + 1) + '</b> <select data-gloss-page="' + i + '" class="edit-input" style="width:auto">' + opts + '</select>' +
-        '<span class="form-hint">' + ex.items.length + ' champs lus · ' + r.unchanged + ' inchangés</span>' +
+        '<b>' + (ex.kind === 'options' ? '☑️ Options d\'affichage' : 'Tableau ' + (i + 1)) + '</b> <select data-gloss-page="' + i + '" class="edit-input" style="width:auto">' + opts + '</select>' +
+        '<span class="form-hint">' + ex.items.length + (ex.kind === 'options' ? ' case(s) à cocher' : ' champs lus') + ' · ' + r.unchanged + ' inchangés</span>' +
       '</div>' +
       (!ex.page ? '<p style="color:var(--ft-rouge);margin:4px 0">Page non reconnue : choisissez-la dans la liste.</p>' :
         (nbChanges ? '' : '<p style="margin:4px 0">Aucun changement.</p>')) +
@@ -1894,7 +1897,7 @@ function rpeScanAssistant(){
   /* Meme methode que l'assistant "liens directs" : lecture en direct du menu DigDash
      ([id$="_0_menu_title_text"], .dashboard_page[uid]) et navigation par ddCtrl.changePage(uid). */
   var W = window, D = document, KEY = 'rpeGlossScan', ID = 'rpeGlossScanPanel';
-  var data = {tables: {}, frames: {}}, state = {}, running = false;
+  var data = {tables: {}, frames: {}, options: {}}, state = {}, running = false;
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
   function tx(e){ return (e.textContent || '').replace(/\s+/g, ' ').trim(); }
   function vis(e){ return !!(e && (e.offsetWidth || e.offsetHeight)); }
@@ -1957,6 +1960,15 @@ function rpeScanAssistant(){
     });
     return kept;
   }
+  /* Options d'affichage : cases a cocher DigDash (ex. "Inclure les demandeurs soumis a l'actualisation hybride") */
+  function captureOptions(pg, pageName){
+    Array.prototype.forEach.call(pg.querySelectorAll('input[type="checkbox"].custom-check'), function(c){
+      var box = c.closest('div') || c.parentNode;
+      var lab = box.querySelector('label');
+      var t = (lab ? lab.textContent : box.textContent || '').replace(/\s+/g, ' ').trim();
+      if (t) data.options[pageName + '|' + t] = {page: pageName, libelle: t};
+    });
+  }
   async function openPage(rec){
     var pg = D.getElementById(rec.id);
     if (!pg) return null;
@@ -1974,6 +1986,7 @@ function rpeScanAssistant(){
       var fr = D.getElementById(tb.id.replace(/_editToolbar$/, '')), t1 = Date.now();
       while (fr && !fr.querySelector('table.table') && Date.now() - t1 < 15000) await sleep(300);
       captureTable(tb);
+      captureOptions(pg, rec.name);
       state[rec.id] = '✅';
     } else {
       state[rec.id] = '❌';
@@ -1990,6 +2003,7 @@ function rpeScanAssistant(){
       while (Date.now() - t0 < maxMs) {
         await sleep(500);
         n = captureFrames(pg, rec.name);
+        captureOptions(pg, rec.name);
         var loading = String(pg.innerText || '').split('\n').some(function(l){ return /^\s*(loading|chargement)\b/i.test(l); });
         if (n !== last || loading) { last = n; stableSince = Date.now(); }
         else if (n > 0 && Date.now() - stableSince > 1500) break;
@@ -2010,7 +2024,7 @@ function rpeScanAssistant(){
     if (!W.ddCtrl) { status('❌ Ouvrez d\'abord le tableau de bord RPE (connecté), puis relancez le scan.'); return; }
     running = true;
     var t0 = Date.now();
-    data = {tables: {}, frames: {}}; state = {}; save();
+    data = {tables: {}, frames: {}, options: {}}; state = {}; save();
     /* 1. Reperage rapide (lecture du menu, sans ouvrir de page) */
     LV = live(); render();
     var todo = LV.pages.map(function(r){ return {rec: r, kind: 'synth'}; }).concat(LV.tables.map(function(r){ return {rec: r, kind: 'table'}; }));
@@ -2037,12 +2051,13 @@ function rpeScanAssistant(){
     download();
     status((nbKo ? '⚠️ ' + nbKo + ' capture(s) en échec après 3 essais (ouvrez-les à la main puis "📸 Capturer l\'écran" et "⬇️ Télécharger"). ' : '✅ ') +
       'Scan terminé en ' + Math.floor(sec / 60) + ' min ' + (sec % 60) + ' s : ' + Object.keys(data.tables).length + ' tableau(x) personnalisé(s), ' +
-      Object.keys(data.frames).length + ' composant(s). Fichier téléchargé : déposez-le dans l\'admin du glossaire.');
+      Object.keys(data.frames).length + ' composant(s), ' + Object.keys(data.options).length + ' option(s) d\'affichage. Fichier téléchargé : déposez-le dans l\'admin du glossaire.');
   }
   function fileContent(){
     var html = Object.keys(data.tables).map(function(k){ return data.tables[k]; }).join('\n\n');
     return '<!-- Scan du tableau de bord RPE : ' + new Date().toLocaleString('fr-FR') + ' -->\n' + html +
-      '\n<script type="application/json" id="rpe-scan-frames">' + JSON.stringify(data.frames).replace(/</g, '\\u003c') + '<\/script>\n';
+      '\n<script type="application/json" id="rpe-scan-frames">' + JSON.stringify(data.frames).replace(/</g, '\\u003c') + '<\/script>\n' +
+      '<script type="application/json" id="rpe-scan-options">' + JSON.stringify(data.options).replace(/</g, '\\u003c') + '<\/script>\n';
   }
   function status(t){ var e = D.querySelector('#' + ID + ' [data-c="msg"]'); if (e) e.textContent = t; }
   var LV = live();
@@ -2051,6 +2066,7 @@ function rpeScanAssistant(){
     if (!p) return;
     p.querySelector('[data-c="t"]').textContent = Object.keys(data.tables).length + ' / ' + LV.tables.length;
     p.querySelector('[data-c="f"]').textContent = Object.keys(data.frames).length;
+    p.querySelector('[data-c="o"]').textContent = Object.keys(data.options).length;
     function row(t){
       var st = state[t.id] || '○';
       return '<div style="color:' + (st === '✅' ? '#8FE3B0' : (st === '❌' ? '#FFB4B4' : '#C9CEE8')) + '">' + st + ' ' + t.name.replace(/</g, '&lt;') + '</div>';
@@ -2065,7 +2081,7 @@ function rpeScanAssistant(){
   p.id = ID;
   p.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483647;background:#0D1440;color:#fff;font:13px Arial,sans-serif;padding:12px 14px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35);width:310px;line-height:1.45;max-height:85vh;overflow:auto';
   var btn = 'background:#FFCC52;color:#0D1440;border:0;border-radius:6px;padding:5px 8px;margin:6px 4px 0 0;font:700 12px Arial,sans-serif;cursor:pointer';
-  p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés capturés : <b data-c="t">0</b><br>Composants des pages Synthèse : <b data-c="f">0</b><br>' +
+  p.innerHTML = '<b>🔎 Scan glossaire RPE</b><br>Tableaux personnalisés capturés : <b data-c="t">0</b><br>Composants des pages Synthèse : <b data-c="f">0</b><br>Options d\'affichage (cases à cocher) : <b data-c="o">0</b><br>' +
     '<button data-a="run" style="' + btn + '">▶️ Scanner toutes les pages</button><button data-a="stop" style="' + btn + ';background:#fff">⏹️ Arrêter</button><br>' +
     '<button data-a="snap" style="' + btn + ';background:#fff" title="Capture le tableau personnalisé affiché à l\'écran">📸 Capturer l\'écran</button>' +
     '<button data-a="dl" style="' + btn + '">⬇️ Télécharger</button><button data-a="x" style="' + btn + ';background:#fff">✕</button>' +
@@ -2080,6 +2096,8 @@ function rpeScanAssistant(){
     if (!tb) { status('📸 Aucun tableau personnalisé affiché à l\'écran.'); return; }
     captureTable(tb);
     var pgEl = tb.closest('.dashboard_page[uid]');
+    var recT = LV.tables.filter(function(t){ return pgEl && t.id === pgEl.id; })[0];
+    if (pgEl && recT) captureOptions(pgEl, recT.name);
     
     if (pgEl) state[pgEl.id] = '✅';
     save(); render();
@@ -2108,6 +2126,12 @@ function initScanAssistant(){
 
 /* Pages de synthese : composants (frames DigDash) captures par l'assistant, rapproches des fiches
    indicateurs de la page. Detection indicative : aucune ecriture automatique. */
+function glossParseOptions(html){
+  var doc = new DOMParser().parseFromString(html, 'text/html');
+  var el = doc.getElementById('rpe-scan-options');
+  if (!el) return {};
+  try { return JSON.parse(el.textContent) || {}; } catch (e) { return {}; }
+}
 function glossParseFrames(html){
   var doc = new DOMParser().parseFromString(html, 'text/html');
   var el = doc.getElementById('rpe-scan-frames');
@@ -2175,19 +2199,35 @@ document.getElementById('btnGlossAnalyse').addEventListener('click', function(){
   var pasted = document.getElementById('glossImportText').value;
   Promise.all(files.map(function(f){ return f.text(); })).then(function(texts){
     if (pasted.trim()) texts.push(pasted);
-    var extractions = [], frames = {}, byFrame = {};
+    var extractions = [], frames = {}, byFrame = {}, options = {}, hasOptions = false;
     texts.forEach(function(t){
       glossParseExtractions(t).forEach(function(x){ byFrame[x.frameId] = x; });
       var f = glossParseFrames(t);
       Object.keys(f).forEach(function(k){ frames[k] = f[k]; });
+      if (/id="rpe-scan-options"/.test(t)) hasOptions = true;
+      var o = glossParseOptions(t);
+      Object.keys(o).forEach(function(k){ options[k] = o[k]; });
     });
     extractions = Object.keys(byFrame).map(function(k){ return byFrame[k]; });
+    /* Options d'affichage : une extraction par page (uniquement si le fichier vient de l'assistant de scan) */
+    if (hasOptions) {
+      var optByPage = {};
+      Object.keys(options).forEach(function(k){
+        var o = options[k];
+        var pg = glossDetectPage(o.page, glossKnownPages()) || o.page;
+        var lst = (optByPage[pg] = optByPage[pg] || []);
+        if (!lst.some(function(it){ return it.champ === o.libelle; })) lst.push({type: 'option', categorie: 'Options d\'affichage', champ: o.libelle, niveau: null});
+      });
+      Object.keys(optByPage).forEach(function(pg){
+        extractions.push({frameId: 'options-' + pg, kind: 'options', fixedPage: pg, items: optByPage[pg]});
+      });
+    }
     renderSynthReport(glossSynthReport(frames, glossKnownPages()));
     if (!extractions.length) {
       preview.innerHTML = '<p style="color:var(--ft-rouge)">❌ Aucun tableau personnalisé reconnu. Copiez l\'élément HTML du panneau "Dimensions / Mesures" (div <code>editToolbar</code>).</p>';
       return;
     }
-    extractions.forEach(function(x){ x.page = glossDetectPage(x.frameId, glossKnownPages()); });
+    extractions.forEach(function(x){ x.page = x.fixedPage || glossDetectPage(x.frameId, glossKnownPages()); });
     glossImportState = {extractions: extractions};
     glossRunAnalysis();
   });
@@ -3061,8 +3101,9 @@ function renderEditForm(id){
       '<option value="mesure"' + (c.type !== 'dimension' ? ' selected' : '') + '>Mesure</option>' +
     '</select>' +
     '<select class="edit-badge-select source" data-f="source" data-role="source">' +
-      '<option value="indicateur"' + (c.source !== 'champ_tableau' ? ' selected' : '') + '>📄 Indicateur de synthèse</option>' +
+      '<option value="indicateur"' + (c.source !== 'champ_tableau' && c.source !== 'option' ? ' selected' : '') + '>📄 Indicateur de synthèse</option>' +
       '<option value="champ_tableau"' + (c.source === 'champ_tableau' ? ' selected' : '') + '>🗂️ Champ tableau perso.</option>' +
+      '<option value="option"' + (c.source === 'option' ? ' selected' : '') + '>☑️ Option d\'affichage</option>' +
     '</select>' +
     '<select class="edit-badge-select kpi" data-f="kpi">' +
       '<option value="false"' + (fmt(c.kpi) !== 'true' ? ' selected' : '') + '>KPI : non</option>' +
@@ -3125,7 +3166,7 @@ function renderEditForm(id){
 
   function applyTypeVisibility(){
     var isMesure = div.querySelector('[data-role="type"]').value !== 'dimension';
-    var isChampTableau = div.querySelector('[data-role="source"]').value === 'champ_tableau';
+    var isChampTableau = div.querySelector('[data-role="source"]').value !== 'indicateur';
     var periodeLabel = div.querySelector('[data-role="periode-label"]');
     var periodeInput = div.querySelector('[data-role="periode"]');
     var modalitesLabel = div.querySelector('[data-role="modalites-label"]');

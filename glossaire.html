@@ -147,6 +147,7 @@ footer.site .inner{max-width:1500px;margin:0 auto;padding:16px 24px;font-size:12
 .badge--source-indicateur{background:#DFF3E3;color:#1E7A3D}
 .badge--source-page{background:var(--ft-jaune-light);color:#8A6400}
 .badge--source-champ{background:var(--ft-bleu-light);color:var(--ft-bleu)}
+.badge--source-option{background:var(--ft-orange-light,#FCEADB);color:var(--ft-orange,#D96B00)}
 .badge--categorie{background:var(--ft-gray-200);color:var(--ft-fg-2);font-weight:500}
 .badge--pending{background:#FBE3E3;color:var(--ft-rouge)}
 .term-actions{display:flex;gap:6px;flex:none}
@@ -258,10 +259,11 @@ form.contrib textarea{min-height:64px;resize:vertical}
           <option value="mesure">Mesures</option>
         </select>
         <select id="sourceFilter" aria-label="Filtrer par nature de fiche">
-          <option value="tous">Tout (indicateurs + champs tableaux)</option>
+          <option value="tous">Tout (indicateurs, champs tableaux, options)</option>
           <option value="kpi">🗝️ KPI uniquement</option>
           <option value="indicateur">Indicateurs de synthèse (KPI inclus)</option>
           <option value="champ_tableau">Champs des tableaux personnalisés</option>
+          <option value="option">☑️ Options d'affichage (cases à cocher)</option>
         </select>
         <select id="pageFilter" aria-label="Filtrer par page">
           <option value="">Toutes les pages</option>
@@ -336,6 +338,7 @@ form.contrib textarea{min-height:64px;resize:vertical}
       <select  id="f_source">
         <option value="indicateur">Indicateur de synthèse (affiché sur une page)</option>
         <option value="champ_tableau">Champ d'un tableau personnalisé</option>
+        <option value="option">Option d'affichage (case à cocher d'une page)</option>
       </select>
 
       <div id="block_kpi">
@@ -743,13 +746,13 @@ function exportGlossaryXlsx(){
         'Noms techniques': (e.noms_techniques || []).join(', ')
       };
     });
-  var champs = allEntries.filter(function(e){ return e.source === 'champ_tableau'; })
+  var champs = allEntries.filter(function(e){ return e.source === 'champ_tableau' || e.source === 'option'; })
     .sort(function(a,b){ return a.libelle.localeCompare(b.libelle, 'fr'); })
     .map(function(e){
       return {
         'ID': e.id,
         'Libellé': e.libelle,
-        'Type': e.type === 'mesure' ? 'Mesure' : 'Dimension',
+        'Type': e.source === 'option' ? 'Option' : (e.type === 'mesure' ? 'Mesure' : 'Dimension'),
         'Catégorie': e.categorie || '',
         'Pages': (e.pages || []).join(', '),
         'Définition': e.definition || '',
@@ -847,6 +850,7 @@ function matchesSourceFilter(item, sourceFilter){
   if (sourceFilter === 'kpi') return !!item.kpi;
   if (sourceFilter === 'indicateur') return item.source === 'indicateur';
   if (sourceFilter === 'champ_tableau') return item.source === 'champ_tableau';
+  if (sourceFilter === 'option') return item.source === 'option';
   return true;
 }
 
@@ -899,10 +903,11 @@ function renderView(){
   area.appendChild(wrap);
 }
 
-var SOURCE_BLOCK_ORDER = ['indicateur', 'champ_tableau'];
+var SOURCE_BLOCK_ORDER = ['indicateur', 'champ_tableau', 'option'];
 var SOURCE_BLOCK_LABELS = {
   indicateur: '📄 Indicateurs de synthèse',
-  champ_tableau: '🗂️ Champs des tableaux personnalisés'
+  champ_tableau: '🗂️ Champs des tableaux personnalisés',
+  option: '☑️ Options d\'affichage (cases à cocher)'
 };
 
 function classifySource(item){
@@ -911,7 +916,7 @@ function classifySource(item){
 }
 
 function renderItemsBySource(container, items, groupByLetter, contextPage){
-  var buckets = {indicateur: [], champ_tableau: []};
+  var buckets = {indicateur: [], champ_tableau: [], option: []};
   items.forEach(function(item){
     var src = classifySource(item);
     (buckets[src] = buckets[src] || []).push(item);
@@ -1009,6 +1014,7 @@ var SHARE_ICON = '<svg viewBox="0 0 512 512" width="14" height="14"><g fill="non
 function sourceBadgeHtml(item){
   if (item.source === 'indicateur') return '<span class="badge badge--source-indicateur" title="Indicateur présent sur une page de synthèse">📄 Indicateur</span>';
   if (item.source === 'champ_tableau') return '<span class="badge badge--source-champ" title="Champ présent dans un tableau personnalisé">🗂️ Champ</span>';
+  if (item.source === 'option') return '<span class="badge badge--source-option" title="Case à cocher qui modifie les données affichées sur la page">☑️ Option</span>';
   return '';
 }
 
